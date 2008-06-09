@@ -286,8 +286,7 @@ $.getPosition = function($id){
 
 /**
  * Get all tags inside some especific element or use document.
- * @parameters $tag:String - Tag.
- * @parameters $id:String - Element or element ID if needed. Default: document.
+ * @parameters $tag:String - Tag. ----------------------------------------------------------------------------------
  * @return Array elements
  */
 $.tag = function ($tag, $id) {
@@ -306,52 +305,54 @@ $.tag = function ($tag, $id) {
 
 
 Pop = new function() {
-	this.errorMessage = null;
 	this.defaultMessage = 'O bloqueador de pop-up está fazendo com que o link não seja aberto, Desabilite seu bloqueador e clique novamente.';
-	this.enabled = false;
-	this.popup;
-	
-	var _win = null;
-	
+	this.popup = null;
 	_this = this;
 	
+	/* private vars */
+	var enabled = false; 
+	
 	this.isAvaliable = function(o){
-		o = o || false;
-		this._errorMsg = o.errorMessage || null;
-		this.onComplete = null;
-		if(this.enabled){
+		this.onComplete = o.onComplete || null;
+		this.onError = o.onError || null;
+		
+		if(_this.enabled){
 			if(this.onComplete) this.onComplete();
 			return;
 		}
-		var _checkPopup = window.open('about:blank','testPopup','width=1,height=1,top=-1000,left=-1000,screenX=0,screenY=0,scrollbars=no');
+		
+		var _checkPopup = window.open('about:blank','testPopup','width='+(o.w ? o.w : 1)+',height='+(o.h ? o.h : 1)+',top='+(o.t ? o.t : -1000)+',left='+(o.l ? o.l : -1000)+',screenX=0,screenY=0,scrollbars=no');
 		try {
 			_checkPopup.close();
-			this.enabled = true;
+			_this.enabled = true;
 			if(this.onComplete) this.onComplete();
 		}catch(e){
-			if(this._errorMsg){
-				alert(this._errorMsg);
-			}else{
-				alert(this.defMessage);
-			}
+			if(this.onError) this.onError();
+			else alert(_this.defaultMessage);
 		}
-		this.onComplete = null;
-	}
+		this.onError = this.onComplete = null;
+	};
 
 	this.open = function($url, $name, $width, $height, $center, $scroll, $other){
-		_linkToOpen = $url;
 		var l = 18;
 		var t = 18;
-		if ($center == false) {
+		if ($center != false) {
 			l = (screen.availWidth - $width)/2;
 			t = (screen.availHeight - $height)/2;
 		}
-		_this.isAvaliable.onComplete = function(){
-			window.open($url, $name, 'width=' + $width + ', height=' + $height + ', left=' + l + ', top=' + t + ', scrollbars=' + (($scroll) ? 'yes' : 'no') + (($other) ? ', ' + $other : ''));
-		};
-		alert(_this.isAvaliable.onComplete);
-		//_this.isAvaliable();
-	}
+		if(_this.enabled) _this.popup = window.open($url, $name, 'width=' + $width + ', height=' + $height + ', left=' + l + ', top=' + t + ', scrollbars=' + (($scroll) ? 'yes' : 'no') + (($other) ? ', ' + $other : ''));
+		else _this.isAvaliable({
+								w: $width,
+								h: $height,
+								t: t,
+								l: l,
+								onComplete:function(){
+									_this.popup = window.open($url, $name, 'width=' + $width + ', height=' + $height + ', left=' + l + ', top=' + t + ', scrollbars=' + (($scroll) ? 'yes' : 'no') + (($other) ? ', ' + $other : ''));
+									return false;
+								}
+							});
+		return false;
+	};
 }
 
 /**/
