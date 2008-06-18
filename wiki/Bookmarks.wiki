@@ -1,10 +1,9 @@
 =Páginas de consulta.=
 
 ==Assuntos==
- * [http://code.google.com/p/less-is-more/wiki/Bookmarks#css CSS]
+ * [#css CSS]
  * [E-mail]
 
-[name="css"]
 ===CSS===
 Dicas (a maioria já manjadas) de CSS: http://anthonyshort.com.au/blog/comments/how-to-get-cross-browser-compatibility-everytime/
 
