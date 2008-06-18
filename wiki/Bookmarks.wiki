@@ -1,5 +1,13 @@
 =Páginas de consulta.=
 
 ==Assuntos==
+ * [http://code.google.com/p/less-is-more/wiki/Bookmarks#css CSS]
+ * [E-mail]
+
+[name="css"]
+===CSS===
+Dicas (a maioria já manjadas) de CSS: http://anthonyshort.com.au/blog/comments/how-to-get-cross-browser-compatibility-everytime/
+
+[name="email"]
 ===E-mail===
 Guia de suporte a CSS em webmails e clientes de e-mail: http://www.campaignmonitor.com/css/
