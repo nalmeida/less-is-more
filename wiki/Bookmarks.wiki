@@ -5,3 +5,6 @@
 
 ===E-mail===
  * Guia de suporte a CSS em webmails e clientes de e-mail: http://www.campaignmonitor.com/css/
+
+===Javascript===
+ * Boas práticas e otimização de performance para Javascript: http://dev.opera.com/articles/view/efficient-javascript/
