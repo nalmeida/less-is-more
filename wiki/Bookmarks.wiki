@@ -8,3 +8,6 @@
 
 ===Javascript===
  * Boas práticas e otimização de performance para Javascript: http://dev.opera.com/articles/view/efficient-javascript/
+
+===Navegadores===
+ * Instalação de múltiplos IEs em uma máquina com o IE7 Nativo (XP): http://tredosoft.com/Multiple_IE
