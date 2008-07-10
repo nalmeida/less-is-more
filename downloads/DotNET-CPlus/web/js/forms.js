@@ -1,4 +1,4 @@
-/**
+Ôªø/**
  * @author	Nicholas Almeida
  * @version	2.1.1
  * @original http://www.javascript-coder.com
@@ -18,7 +18,7 @@ var __cAlertShow__ = true;
 function frmValidator(frmname, lang){
 	this.formobj=document.forms[frmname];
 	if(!this.formobj){
-		alert('BUG: N„o foi possÌvem acessar o formul·rio: '+frmname);
+		alert('BUG: N√£o foi poss√≠vem acessar o formul√°rio: '+frmname);
 		return;
 	};
 	if(this.formobj.onsubmit){
@@ -91,16 +91,16 @@ function form_submit_handler(){
 };
 function add_validation(itemname,descriptor,errstr){
 	if(!this.formobj){
-		alert('BUG: Formul·rio n„o definido corretamente!');
+		alert('BUG: Formul√°rio n√£o definido corretamente!');
 		return;
 	};
 	var itemobj = this.formobj[itemname];
-	if (!itemobj) alert('BUG: N„o foi possÌvel encontrar nehum campo com o name=' + itemname);
+	if (!itemobj) alert('BUG: N√£o foi poss√≠vel encontrar nehum campo com o name=' + itemname);
 	if(itemobj.length && isNaN(itemobj.selectedIndex) ){
 		itemobj = itemobj[0];
 	};	
 	if(!itemobj){
-		alert('BUG: N„o foi possÌvel encontrar o campo com o nome: '+itemname);
+		alert('BUG: N√£o foi poss√≠vel encontrar o campo com o nome: '+itemname);
 		return;
 	};
 
@@ -111,7 +111,7 @@ function add_validation(itemname,descriptor,errstr){
 };
 function change_submit(bt,newWidth, buttonSubmitSrc){
 	if(!this.formobj){
-		alert('BUG: Formul·rio n„o definido corretamente!');
+		alert('BUG: Formul√°rio n√£o definido corretamente!');
 		return;
 	};
 	__buttonSubmit__ = gElm(bt);
@@ -174,12 +174,12 @@ function TestComparison(objValue,strCompareElement,strvalidator,strError){
 	var bRet=true;
 	var objCompare=null;
 	if(!objValue.form){
-		alert('BUG: Formul·rio n„o definido!');
+		alert('BUG: Formul√°rio n√£o definido!');
 		return false
 	};
 	objCompare = objValue.form.elements[strCompareElement];
 	if(!objCompare){
-		alert('BUG: Campo com o nome '+strCompareElement+' n„o encontrado!');
+		alert('BUG: Campo com o nome '+strCompareElement+' n√£o encontrado!');
 		return false;
 	};
 	var cmpstr='';
@@ -251,7 +251,7 @@ function TestSelMin(objValue,strMinSel,strError){
 			}else if(__lang__ == 'es'){
 				strError = 'Seleccione al menos ' + minsel + ' opciones para el campo \"' + objValue.title + '\".';
 			}else{
-				strError = 'Selecione ao menos ' + minsel + ' opÁ„o(ıes) para o campo \"' + objValue.title + '\".';
+				strError = 'Selecione ao menos ' + minsel + ' op√ß√£o(√µes) para o campo \"' + objValue.title + '\".';
 			}
 		};
 		boxAlert(strError, objValue); 
@@ -280,9 +280,9 @@ function TestSelMax(objValue,strMaxSel,strError){
 			if (__lang__ == 'en'){
 				strError = 'Select at the most ' + maxsel + ' option(s) for field \"' + objValue.title + '\".';
 			}else if(__lang__ == 'es'){
-				strError = 'Seleccione como m·ximo ' + maxsel + ' opciones para el campo \"' + objValue.title + '\".';
+				strError = 'Seleccione como m√°ximo ' + maxsel + ' opciones para el campo \"' + objValue.title + '\".';
 			}else{
-				strError = 'Selecione no m·ximo ' + maxsel + ' opÁ„o(ıes) para o campo \"' + objValue.title + '\".';
+				strError = 'Selecione no m√°ximo ' + maxsel + ' op√ß√£o(√µes) para o campo \"' + objValue.title + '\".';
 			}
 		};
 		boxAlert(strError, objValue); 
@@ -295,7 +295,7 @@ function TestSelMax(objValue,strMaxSel,strError){
 function TestDontSelect(objValue,index,strError){
 	var ret = true;
 	if(objValue.selectedIndex == null) { 
-		alert('BUG: Este comando sÛ pode ser usado para elementos de seleÁ„o.'); 
+		alert('BUG: Este comando s√≥ pode ser usado para elementos de sele√ß√£o.'); 
 		ret = false; 
 	}else if(objValue.selectedIndex == eval(index)) { 
 		if(!strError || strError.length ==0) { 
@@ -304,7 +304,7 @@ function TestDontSelect(objValue,index,strError){
 			}else if(__lang__ == 'es'){
 				strError = 'Seleccione una de las opciones para el campo \"' + objValue.title + '\".'; 
 			}else{
-				strError = 'Selecione uma das opÁıes para o campo \"' + objValue.title + '\".'; 
+				strError = 'Selecione uma das op√ß√µes para o campo \"' + objValue.title + '\".'; 
 			}
 		};                                                        
 		boxAlert(strError, objValue); 
@@ -324,7 +324,7 @@ function TestRequiredInput(objValue,strError){
 			}else if(__lang__ == 'es'){
 				strError = 'El campo \"' + objValue.title + '\" es obligatorio.'; 
 			}else{
-				strError = 'O campo \"' + objValue.title + '\" È obrigatÛrio.'; 			
+				strError = 'O campo \"' + objValue.title + '\" √© obrigat√≥rio.'; 			
 			}
 		};
 		boxAlert(strError, objValue);
@@ -344,9 +344,9 @@ function TestMaxLen(objValue,strMaxLen,strError){
 				strErrorCont = 'Currently it has: ' + objValue.value.length + ' character(s).';
 			}else if(__lang__ == 'es'){
 				strError = 'El campo \"' + objValue.title + '\" puede contener hasta '+ strMaxLen +' caracter(es).'; 
-				strErrorCont = 'Actualmente tiene: ' + objValue.value.length + ' car·cter(es).';
+				strErrorCont = 'Actualmente tiene: ' + objValue.value.length + ' car√°cter(es).';
 			}else{
-				strError = 'O campo \"' + objValue.title + '\" pode conter no m·ximo '+ strMaxLen +' caracter(es).'; 
+				strError = 'O campo \"' + objValue.title + '\" pode conter no m√°ximo '+ strMaxLen +' caracter(es).'; 
 				strErrorCont = 'Atualmente ele tem: ' + objValue.value.length + ' caracter(es).';
 			}
 		};
@@ -366,10 +366,10 @@ function TestMinLen(objValue,strMinLen,strError){
 				strError = 'Field \"' + objValue.title + '\" must contain at least '+ strMinLen +' character(s).'; 
 				strErrorCont = 'Currently it has: ' + objValue.value.length + ' character(s).';
 			}else if(__lang__ == 'es'){
-				strError = 'El campo \"' + objValue.title + '\" debe contener un mÌnimo de '+ strMinLen +' caracter(es).'; 
-				strErrorCont = 'Actualmente tiene: ' + objValue.value.length + ' car·cter(es).';
+				strError = 'El campo \"' + objValue.title + '\" debe contener un m√≠nimo de '+ strMinLen +' caracter(es).'; 
+				strErrorCont = 'Actualmente tiene: ' + objValue.value.length + ' car√°cter(es).';
 			}else{
-				strError = 'O campo \"' + objValue.title + '\" deve conter no mÌnimo ' + strMinLen + ' caracter(es).'; 
+				strError = 'O campo \"' + objValue.title + '\" deve conter no m√≠nimo ' + strMinLen + ' caracter(es).'; 
 				strErrorCont = 'Atualmente ele tem: ' + objValue.value.length + ' caracter(es).';
 			}
 		};
@@ -390,9 +390,9 @@ function TestInputType(objValue,strRegExp,strError,strDefaultError){
 			if (__lang__ == 'en'){
 				strErrorCont = 'Error of character in position: ';
 			}else if(__lang__ == 'es'){
-				strErrorCont = 'Error en el car·cter en la posiciÛn: ';
+				strErrorCont = 'Error en el car√°cter en la posici√≥n: ';
 			}else{
-				strErrorCont = 'Erro no caracter na posiÁ„o: ';
+				strErrorCont = 'Erro no caracter na posi√ß√£o: ';
 			}
 		};
 		cBgColor(objValue);
@@ -410,9 +410,9 @@ function TestEmail(objValue,strError){
 			if (__lang__ == 'en'){
 				strError = '\"' + objValue.value+'\" is not a valid e-mail for field \"' + objValue.title + '\".'; 
 			}else if(__lang__ == 'es'){
-				strError = '\"' + objValue.value+'\" no es un e-mail v·lido para el campo \"' + objValue.title + '\".'; 
+				strError = '\"' + objValue.value+'\" no es un e-mail v√°lido para el campo \"' + objValue.title + '\".'; 
 			}else{
-				strError = '\"' + objValue.value+'\" n„o È um e-mail v·lido para o campo \"' + objValue.title + '\".'; 
+				strError = '\"' + objValue.value+'\" n√£o √© um e-mail v√°lido para o campo \"' + objValue.title + '\".'; 
 			}
 		};
 		boxAlert(strError, objValue); 
@@ -430,9 +430,9 @@ function TestRegExp(objValue,strRegExp,strError){
 			if (__lang__ == 'en'){
 				strError = 'Invalid character found in field \"' + objValue.title + '\".';
 			}else if(__lang__ == 'es'){
-				strError = 'Car·cter no permitido encontrado en el campo \"' + objValue.title + '\".';
+				strError = 'Car√°cter no permitido encontrado en el campo \"' + objValue.title + '\".';
 			}else{
-				strError = 'Caracter n„o permitido encontrado no campo \"' + objValue.title + '\".';
+				strError = 'Caracter n√£o permitido encontrado no campo \"' + objValue.title + '\".';
 			}
 		};
 		boxAlert(strError, objValue); 
@@ -445,7 +445,7 @@ function TestRegExp(objValue,strRegExp,strError){
 
 function TestSelectOneRadio(objValue,strError){
 	var objradio = objValue.form.elements[objValue.name];
-	if (!objradio) alert('BUG: N„o foi possÌvel encotrar nenhum radioButton no formul·rio.\nCertifique-se de que eles existem e que tem o atributo \"name\".');
+	if (!objradio) alert('BUG: N√£o foi poss√≠vel encotrar nenhum radioButton no formul√°rio.\nCertifique-se de que eles existem e que tem o atributo \"name\".');
 	var one_selected=false;
 	for(var r=0;r < objradio.length;r++){
 		if(objradio[r].checked == '1'){
@@ -460,7 +460,7 @@ function TestSelectOneRadio(objValue,strError){
 			}else if(__lang__ == 'es'){
 				strError = 'Seleccione una de las opciones para el campo \"'+objValue.title+'\".'; 
 			}else{
-				strError = 'Selecione uma das opÁıes para o campo \"'+objValue.title+'\".'; 
+				strError = 'Selecione uma das op√ß√µes para o campo \"'+objValue.title+'\".'; 
 			}
 		};	
 		boxAlert(strError, objValue);
@@ -564,12 +564,12 @@ function validateInput(strValidateStr,objValue,strError) {
 			if (__lang__ == 'en'){
 				strTxtError = 'Only alphanumeric characters (letters and numbers) are valid for field'; 
 			}else if(__lang__ == 'es'){
-				strTxtError = 'SÛlo caracteres alfanumÈricos (letras y n˙meros) son permitidos para el campo'; 
+				strTxtError = 'S√≥lo caracteres alfanum√©ricos (letras y n√∫meros) son permitidos para el campo'; 
 			}else{
-				strTxtError = 'Apenas caracteres alfanumÈricos(letras e n˙meros) s„o permitidos para o campo';
+				strTxtError = 'Apenas caracteres alfanum√©ricos(letras e n√∫meros) s√£o permitidos para o campo';
 			}
 		
-			ret = TestInputType(objValue,'[^A-Za-z0-9·‡„‚‰ÈËÍÎÌÏÓÔÛÚıÙˆ˙˘˚¸Á¡¿√¬ƒ…» ÀÕÃŒœ”“’‘÷⁄Ÿ€‹«\\s]',strError, strTxtError + ' \"' + objValue.title + '\".');
+			ret = TestInputType(objValue,'[^A-Za-z0-9√°√†√£√¢√§√©√®√™√´√≠√¨√Æ√Ø√≥√≤√µ√¥√∂√∫√π√ª√º√ß√Å√Ä√É√Ç√Ñ√â√à√ä√ã√ç√å√é√è√ì√í√ï√î√ñ√ö√ô√õ√ú√á\\s]',strError, strTxtError + ' \"' + objValue.title + '\".');
 			break;
 		};
 		case 'num': 
@@ -578,9 +578,9 @@ function validateInput(strValidateStr,objValue,strError) {
 			if (__lang__ == 'en'){
 				strTxtError = 'Only numeric characters (numbers) are valid for field'; 
 			}else if(__lang__ == 'es'){
-				strTxtError = 'SÛlo caracteres numÈricos (n˙meros) son permitidos para el campo'; 
+				strTxtError = 'S√≥lo caracteres num√©ricos (n√∫meros) son permitidos para el campo'; 
 			}else{
-				strTxtError = 'Apenas caracteres numÈricos(n˙meros) s„o permitidos para o campo';
+				strTxtError = 'Apenas caracteres num√©ricos(n√∫meros) s√£o permitidos para o campo';
 			}
 		 
 			ret = TestInputType(objValue,'[^0-9]',strError,  strTxtError + ' \"' + objValue.title + '\".');
@@ -591,22 +591,22 @@ function validateInput(strValidateStr,objValue,strError) {
 			if (__lang__ == 'en'){
 				strTxtError = 'Only letters are valid for field'; 
 			}else if(__lang__ == 'es'){
-				strTxtError = 'SÛlo letras son permitidas para el campo'; 
+				strTxtError = 'S√≥lo letras son permitidas para el campo'; 
 			}else{
-				strTxtError = 'Apenas letras s„o permitidas para o campo';
+				strTxtError = 'Apenas letras s√£o permitidas para o campo';
 			}
 		
-			ret = TestInputType(objValue,'[^A-Za-z·‡„‚‰ÈËÍÎÌÏÓÔÛÚıÙˆ˙˘˚¸Á¡¿√¬ƒ…» ÀÕÃŒœ”“’‘÷⁄Ÿ€‹«\\s]',strError, strTxtError + ' \"' + objValue.title + '\".');
+			ret = TestInputType(objValue,'[^A-Za-z√°√†√£√¢√§√©√®√™√´√≠√¨√Æ√Ø√≥√≤√µ√¥√∂√∫√π√ª√º√ß√Å√Ä√É√Ç√Ñ√â√à√ä√ã√ç√å√é√è√ì√í√ï√î√ñ√ö√ô√õ√ú√á\\s]',strError, strTxtError + ' \"' + objValue.title + '\".');
 			break; 
 		};
 		case 'restrict':
 		case 'rest': { 
 			if (__lang__ == 'en'){
-				strTxtError = 'Only letters, numbers, \"-\" and \"_\"†are valid for field'; 
+				strTxtError = 'Only letters, numbers, \"-\" and \"_\"¬†are valid for field'; 
 			}else if(__lang__ == 'es'){
-				strTxtError = 'SÛlo letras, n˙meros, \"-\" y \"_\" son permitidos para el campo'; 
+				strTxtError = 'S√≥lo letras, n√∫meros, \"-\" y \"_\" son permitidos para el campo'; 
 			}else{
-				strTxtError = 'Apenas letras, n˙meros, \"-\" e \"_\"  s„o permitidas para o campo';
+				strTxtError = 'Apenas letras, n√∫meros, \"-\" e \"_\"  s√£o permitidas para o campo';
 			}
 			ret = TestInputType(objValue,'[^A-Za-z0-9-_]',strError, strTxtError + ' \"' + objValue.title + '\".');
 			break; 
@@ -621,9 +621,9 @@ function validateInput(strValidateStr,objValue,strError) {
 				if (__lang__ == 'en'){
 					strTxtError = 'Only numeric characters (numbers) are valid for field'; 
 				}else if(__lang__ == 'es'){
-					strTxtError = 'SÛlo caracteres numÈricos (n˙meros) son permitidos para el campo'; 
+					strTxtError = 'S√≥lo caracteres num√©ricos (n√∫meros) son permitidos para el campo'; 
 				}else{
-					strTxtError = 'Apenas caracteres numÈricos(n˙meros) s„o permitidos para o campo';
+					strTxtError = 'Apenas caracteres num√©ricos(n√∫meros) s√£o permitidos para o campo';
 				}
 					
 		        boxAlert(strTxtError + ' \"' + objValue.title + '\".', objValue);
@@ -652,9 +652,9 @@ function validateInput(strValidateStr,objValue,strError) {
 				if (__lang__ == 'en'){
 					strTxtError = 'Only numeric characters (numbers) are valid for field'; 
 				}else if(__lang__ == 'es'){
-					strTxtError = 'SÛlo caracteres numÈricos (n˙meros) son permitidos para el campo'; 
+					strTxtError = 'S√≥lo caracteres num√©ricos (n√∫meros) son permitidos para el campo'; 
 				}else{
-					strTxtError = 'Apenas caracteres numÈricos(n˙meros) s„o permitidos para o campo';
+					strTxtError = 'Apenas caracteres num√©ricos(n√∫meros) s√£o permitidos para o campo';
 				}
 		        boxAlert(strTxtError + ' \"' + objValue.title + '\".', objValue);
 				cBgColor(objValue);
@@ -710,9 +710,9 @@ function validateInput(strValidateStr,objValue,strError) {
 					if (__lang__ == 'en'){
 			            strErrorTxt = 'is not a valid CPF number for field';
 					}else if(__lang__ == 'es'){
-			            strErrorTxt = 'no es un n˙mero de CPF v·lido para el campo';
+			            strErrorTxt = 'no es un n√∫mero de CPF v√°lido para el campo';
 					}else{
-			            strErrorTxt = 'n„o È um n˙mero de CPF v·lido para o campo';
+			            strErrorTxt = 'n√£o √© um n√∫mero de CPF v√°lido para o campo';
 					}
 						
 				boxAlert('\"' + objValue.value + '\" ' + strErrorTxt + ' \"' + objValue.title + '\".', objValue);
@@ -729,9 +729,9 @@ function validateInput(strValidateStr,objValue,strError) {
 				if (__lang__ == 'en'){
 		            strErrorTxt = 'is not a valid CNPJ number for field';
 				}else if(__lang__ == 'es'){
-		            strErrorTxt = 'no es un n˙mero de CNPJ v·lido para el campo';
+		            strErrorTxt = 'no es un n√∫mero de CNPJ v√°lido para el campo';
 				}else{
-		            strErrorTxt = 'n„o È um n˙mero de CNPJ v·lido para o campo';
+		            strErrorTxt = 'n√£o √© um n√∫mero de CNPJ v√°lido para o campo';
 				}
 						
 				boxAlert('\"' + objValue.value + '\" ' + strErrorTxt + ' \"' + objValue.title + '\".', objValue);
@@ -747,9 +747,9 @@ function validateInput(strValidateStr,objValue,strError) {
 				if (__lang__ == 'en'){
 					boxAlert('Field \"' + objValue.title + '\" allows only \".' + cmdvalue +' \"archives.', objValue);
 				}else if(__lang__ == 'es'){
-					boxAlert('El campo \"' + objValue.title + '\" permite sÛlo archivos con la extensiÛn \".' + cmdvalue +' \".', objValue);
+					boxAlert('El campo \"' + objValue.title + '\" permite s√≥lo archivos con la extensi√≥n \".' + cmdvalue +' \".', objValue);
 				}else{
-					boxAlert('O campo \"' + objValue.title + '\" permite somente arquivos com a extens„o \".' + cmdvalue +' \".', objValue);
+					boxAlert('O campo \"' + objValue.title + '\" permite somente arquivos com a extens√£o \".' + cmdvalue +' \".', objValue);
 				}
 				cBgColor(objValue);
 			}
@@ -778,8 +778,8 @@ function only(t,o,e) {
 	else return true;
 	S=(o)?o:'';
 	if(t=='num'||t=='number'||t=='numeric')S+='0123456789';
-	if(t=='alnum'||t=='alphanumeric')S+='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ·‡„‚‰ÈËÍÎÌÏÓÔÛÚıÙˆ˙˘˚¸Á¡¿√¬ƒ…» ÀÕÃŒœ”“’‘÷⁄Ÿ€‹« 0123456789';
-	if(t=='let'||t=='letters')S+='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ·‡„‚‰ÈËÍÎÌÏÓÔÛÚıÙˆ˙˘˚¸Á¡¿√¬ƒ…» ÀÕÃŒœ”“’‘÷⁄Ÿ€‹« ';	
+	if(t=='alnum'||t=='alphanumeric')S+='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ√°√†√£√¢√§√©√®√™√´√≠√¨√Æ√Ø√≥√≤√µ√¥√∂√∫√π√ª√º√ß√Å√Ä√É√Ç√Ñ√â√à√ä√ã√ç√å√é√è√ì√í√ï√î√ñ√ö√ô√õ√ú√á 0123456789';
+	if(t=='let'||t=='letters')S+='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ√°√†√£√¢√§√©√®√™√´√≠√¨√Æ√Ø√≥√≤√µ√¥√∂√∫√π√ª√º√ß√Å√Ä√É√Ç√Ñ√â√à√ä√ã√ç√å√é√è√ì√í√ï√î√ñ√ö√ô√õ√ú√á ';	
 	if(t=='rest'||t=='restrict')S+='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 	if(t=='email')S+='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@-_.';
 	if(key==null||key==0||key==8||key==9||key==13||key==27)return true;
@@ -817,9 +817,9 @@ function checkReset(f){
 	if (__lang__ == 'en'){
 		strErrorTxt = 'All data submitted will be deleted.\nTo delete all data click \"OK\".\nTo continue submitting information click \"Cancel\".';
 	}else if(__lang__ == 'es'){
-		strErrorTxt = 'Todos los datos registrados ser·n borrados.\nPara borrar todos los datos haga clic en \"OK\".\nPara continuar registrando haga clic en \"Cancelar\".';
+		strErrorTxt = 'Todos los datos registrados ser√°n borrados.\nPara borrar todos los datos haga clic en \"OK\".\nPara continuar registrando haga clic en \"Cancelar\".';
 	}else{
-		strErrorTxt = 'Todos os dados preenchidos ser„o apagados.\nPara apagar todos os dados clique em \"OK\".\nPara continuar preenchendo clique em \"Cancelar\".';
+		strErrorTxt = 'Todos os dados preenchidos ser√£o apagados.\nPara apagar todos os dados clique em \"OK\".\nPara continuar preenchendo clique em \"Cancelar\".';
 	}
 	if(confirm(strErrorTxt)) gElm(f).reset();
 };

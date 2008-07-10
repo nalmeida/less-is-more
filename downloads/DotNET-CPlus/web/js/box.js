@@ -1,4 +1,4 @@
-/**
+Ôªø/**
  *
  * openBox
  *
@@ -12,17 +12,17 @@
 			openBox('boxTeste')
 			openBox('boxTeste', {vAlign:'top'}) - topo e centro;
 			openBox('boxTeste', {vAlign:'top'}) - topo e centro;
-			openBox('boxTeste', {vAlign:'top', hAlign:'left'}) - topo e ‡ esquerda;
-			openBox('boxTeste', {vAlign:'top', hAlign:'right'}) - topo e ‡ direita;
+			openBox('boxTeste', {vAlign:'top', hAlign:'left'}) - topo e √† esquerda;
+			openBox('boxTeste', {vAlign:'top', hAlign:'right'}) - topo e √† direita;
 			openBox('boxTeste', {vAlign:'bottom'}) - base e ao centro;
-			openBox('boxTeste', {vAlign:'bottom', hAlign:'left'}) - base e ‡ esquerda;
-			openBox('boxTeste', {vAlign:'bottom', hAlign:'right'}) - base e ‡ direita;
+			openBox('boxTeste', {vAlign:'bottom', hAlign:'left'}) - base e √† esquerda;
+			openBox('boxTeste', {vAlign:'bottom', hAlign:'right'}) - base e √† direita;
 			openBox('boxTeste', {vAlign:100, hAlign:100}) - topo: 100px, esquerda: 100px;
 			openBox('boxTeste', {vAlign:100, hAlign:100, fix:true}) - topo: 100px, esquerda: 100px, FIXO;
-			openBox('boxTeste', {vAlign:100, hAlign:100, doScroll:true}) - topo: 100px, esquerda: 100px, FIXO e forÁa scroll atÈ o box;
-			openBox('boxTeste', {vAlign:100, hAlign:100, doScroll:100}) - topo: 100px, esquerda: 100px, FIXO e forÁa scroll a 100px;
+			openBox('boxTeste', {vAlign:100, hAlign:100, doScroll:true}) - topo: 100px, esquerda: 100px, FIXO e for√ßa scroll at√© o box;
+			openBox('boxTeste', {vAlign:100, hAlign:100, doScroll:100}) - topo: 100px, esquerda: 100px, FIXO e for√ßa scroll a 100px;
 			openBox('boxTeste', {closeBox:true}) - FECHA ao clicar no fundo;
-			openBox('boxTeste', {onOpen:openFnc, onClose:closeFnc}) - Executa funÁ„o ao abrir e ao fechar o pop;
+			openBox('boxTeste', {onOpen:openFnc, onClose:closeFnc}) - Executa fun√ß√£o ao abrir e ao fechar o pop;
 			
 			// see full list of examples at http://interface.desenv/html/exemplos/openBox.html
 		</code>
@@ -143,7 +143,7 @@ function openBox(e, o){
 	}*/
 
 	if(is.ie5){
-		alert('Este recurso n„o est· disponÌvel para o internet Explorer 5.0.');
+		alert('Este recurso n√£o est√° dispon√≠vel para o internet Explorer 5.0.');
 		try{
 			if(o.img && o.img.src)
 				window.open(o.img.src);
@@ -587,7 +587,7 @@ function __afterLoadImageActions(e,o,obj,imagemPop,closeImg){
 	tmpImg.width = imagemPop.width;
 	tmpImg.height = imagemPop.height;
 	tmpImg.src = imagemPop.src;
-	tmpImg.title = 'Clique na imagem para fech·-la.';
+	tmpImg.title = 'Clique na imagem para fech√°-la.';
 	
 	$(e).style.top = __outOfThePage__;
 	$(e).style.left = __outOfThePage__;

@@ -1,3 +1,3 @@
-<script type="text/javascript">
+﻿<script type="text/javascript">
 	Init.run();
 </script>

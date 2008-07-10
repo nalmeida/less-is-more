@@ -1,4 +1,4 @@
-/**
+Ôªø/**
  * @author	Nicholas Almeida
  * @version	2.1.1
  */
@@ -115,7 +115,7 @@ function ajax(o){
 					if(o.onTimeout){
 						o.onTimeout(extra);
 					} else{
-						alert('N„o foi possÌvel enviar sua requisiÁ„o.\nTempo de conex„o excedida.');
+						alert('N√£o foi poss√≠vel enviar sua requisi√ß√£o.\nTempo de conex√£o excedida.');
 					}
 					return false;
 				}, timeout);
