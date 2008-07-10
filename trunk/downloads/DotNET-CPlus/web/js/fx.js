@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @author	Nicholas Almeida
  * @version	2.5
 */
