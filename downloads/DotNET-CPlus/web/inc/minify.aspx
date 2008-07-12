@@ -4,7 +4,7 @@
 
 	@author Marcelo Miranda Carneiro - mail: mcarneiro@gmail.com. Thanks to Leandro Ribeiro and Nicholas Almeida.
 	@since 04/01/2008
-	@version 1.1.1
+	@version 1.1.2
 	@usage
 		<code>
 			// just call the Javascript file or CSS file as parameters:
@@ -39,13 +39,15 @@
 				Response.ContentType = "text/css";
 				foreach (string stNomeArquivo in vtArquivo){
 					// set folder and file name
-					if(vtArquivo[0].IndexOf(',') == -1){
+					if(stNomeArquivo.IndexOf(',') == -1){
 						file = stNomeArquivo;
 						folder = "global";
 					}else{
 						file = stNomeArquivo.Substring(0,stNomeArquivo.IndexOf(','));
 						folder = stNomeArquivo.Substring(stNomeArquivo.IndexOf(',')+1);
 					}
+					//debug
+					//Response.Write("file: "+file+", folder: "+folder+"\n");
 					srArquivo = new System.IO.StreamReader(Server.MapPath("../locales/"+folder+"/css/").ToString() + file,System.Text.Encoding.GetEncoding("utf-8"));
 					sbToStrip.Append(srArquivo.ReadToEnd());
 					sbToStrip.Append(Environment.NewLine);
