@@ -1,152 +1,162 @@
+var lim = {};
+
 /**
  * @class Utility class that provides detailed browser information.
  */
-var BrowserUtil = new function() {
-	var _supported = false;
-	var _version = -1;
+lim.BrowserUtil = {
+	_supported: false,
+	_version: -1, 
 
-	var _agent = navigator.userAgent;
-	var _ie = false;
-	var _safari = false;
-	var _opera = false;
-	var _mozilla = false;
-
-	if (/MSIE/.test(_agent)) {
-		_ie = true;
-		_version = parseFloat(_agent.substring(_agent.indexOf('MSIE') + 4));
-		_supported = _version >= 5.5;
-	} else if (/AppleWebKit/.test(_agent)) {
-		_safari = true;
-		_version = parseFloat(_agent.substring(_agent.indexOf('Safari') + 7));
-		_supported = _version >= 312;
-	} else if (/Opera/.test(_agent)) {
-		_opera = true;
-		_version = parseFloat(navigator.appVersion);
-		_supported = _version >= 9.02;
-	} else if (/Firefox/.test(_agent)) {
-		_mozilla = true;
-		_version = parseFloat(_agent.substring(_agent.indexOf('Firefox') + 8));
-		_supported = _version >= 1;
-	} else if (/Netscape/.test(_agent)) {
-		_mozilla = true;
-		_version = parseFloat(_agent.substring(_agent.indexOf('Netscape') + 9));
-		_supported = _version >= 8;
-	} else if (/Mozilla/.test(_agent) && /rv:/.test(_agent)) {
-		_mozilla = true;
-		_version = parseFloat(_agent.substring(_agent.indexOf('rv:') + 3));
-		_supported = _version >= 1.8;
-	}
-
+	_agent: navigator.userAgent, 
+	_ie: false, 
+	_safari: false, 
+	_opera: false, 
+	_mozilla: false, 
+	
+	init: function(){
+		if (/MSIE/.test(lim.BrowserUtil._agent)) {
+			lim.BrowserUtil._ie = true;
+			lim.BrowserUtil._version = parseFloat(lim.BrowserUtil._agent.substring(lim.BrowserUtil._agent.indexOf('MSIE') + 4));
+			lim.BrowserUtil._supported = lim.BrowserUtil._version >= 5.5;
+		} else if (/AppleWebKit/.test(lim.BrowserUtil._agent)) {
+			lim.BrowserUtil._safari = true;
+			lim.BrowserUtil._version = parseFloat(lim.BrowserUtil._agent.substring(lim.BrowserUtil._agent.indexOf('Safari') + 7));
+			lim.BrowserUtil._supported = lim.BrowserUtil._version >= 312;
+		} else if (/Opera/.test(lim.BrowserUtil._agent)) {
+			lim.BrowserUtil._opera = true;
+			lim.BrowserUtil._version = parseFloat(navigator.appVersion);
+			lim.BrowserUtil._supported = lim.BrowserUtil._version >= 9.02;
+		} else if (/Firefox/.test(lim.BrowserUtil._agent)) {
+			lim.BrowserUtil._mozilla = true;
+			lim.BrowserUtil._version = parseFloat(lim.BrowserUtil._agent.substring(lim.BrowserUtil._agent.indexOf('Firefox') + 8));
+			lim.BrowserUtil._supported = lim.BrowserUtil._version >= 1;
+		} else if (/Netscape/.test(lim.BrowserUtil._agent)) {
+			lim.BrowserUtil._mozilla = true;
+			lim.BrowserUtil._version = parseFloat(lim.BrowserUtil._agent.substring(lim.BrowserUtil._agent.indexOf('Netscape') + 9));
+			lim.BrowserUtil._supported = lim.BrowserUtil._version >= 8;
+		} else if (/Mozilla/.test(lim.BrowserUtil._agent) && /rv:/.test(lim.BrowserUtil._agent)) {
+			lim.BrowserUtil._mozilla = true;
+			lim.BrowserUtil._version = parseFloat(lim.BrowserUtil._agent.substring(lim.BrowserUtil._agent.indexOf('rv:') + 3));
+			lim.BrowserUtil._supported = lim.BrowserUtil._version >= 1.8;
+		}
+	}, 
+	
 	/**
 	 * Detects if the browser is supported.
 	 * @return Boolean
 	 */
-	this.isSupported = function() {
-		return _supported;
-	}
+	isSupported: function() {
+		return lim.BrowserUtil._supported;
+	},
 
 	/**
 	 * Detects the version of the browser.
 	 * @return {Number}
 	 */
-	this.getVersion = function() {
-		return _version;
-	}
+	getVersion: function() {
+		return lim.BrowserUtil._version;
+	},
 
 	/**
 	 * Detects if the browser is Internet Explorer.
 	 * @return Boolean
 	 */
-	this.isIE = function() {
-	   return _ie;
-	}
+	isIE: function() {
+	   return lim.BrowserUtil._ie;
+	},
 	
 	/**
 	 * Detects if the browser is Internet Explorer 5.
 	 * @return Boolean
 	 */
-	this.isIE5 = function() {
-		return this.isIE() && this.getVersion() >= 5 && this.getVersion() < 5.5;
+	isIE5: function() {
+		return lim.BrowserUtil.isIE() && lim.BrowserUtil.getVersion() >= 5 && lim.BrowserUtil.getVersion() < 5.5;
 		
-	}
+	},
 	
 	/**
 	 * Detects if the browser is Internet Explorer 5.5.
 	 * @return Boolean
 	 */
-	this.isIE55 = function() {
-		return this.isIE() && this.getVersion() >= 5.5 && this.getVersion() < 6;
-		
-	}
+	isIE55: function() {
+		return lim.BrowserUtil.isIE() && lim.BrowserUtil.getVersion() >= 5.5 && lim.BrowserUtil.getVersion() < 6;
+	},
 	
 	/**
 	 * Detects if the browser is Internet Explorer 6.
 	 * @return Boolean
 	 */
-	this.isIE6 = function() {
-		return this.isIE() && this.getVersion() >= 6 && this.getVersion() < 7;
-		
-	}
+	isIE6: function() {
+		return lim.BrowserUtil.isIE() && lim.BrowserUtil.getVersion() >= 6 && lim.BrowserUtil.getVersion() < 7;
+	},
 	
 	/**
 	 * Detects if the browser is Internet Explorer 7.
 	 * @return Boolean
 	 */
-	this.isIE7 = function() {
-		return this.isIE() && this.getVersion() >= 7;
-		
-	}
+	isIE7: function() {
+		return lim.BrowserUtil.isIE() && lim.BrowserUtil.getVersion() >= 7;
+	},
+	
+	/**
+	 * Detects if the browser is Internet Explorer 8.
+	 * @return Boolean
+	 */
+	isIE8: function() {
+		return lim.BrowserUtil.isIE() && lim.BrowserUtil.getVersion() >= 8;
+	},
 
 	/**
 	 * Detects if the browser is Safari.
 	 * @return Boolean
 	 */
-	this.isSafari = function() {
-		return _safari;
-	}
+	isSafari: function() {
+		return lim.BrowserUtil._safari;
+	},
 
 	/**
 	 * Detects if the browser is Opera.
 	 * @return Boolean
 	 */
-	this.isOpera = function() {
-		return _opera;
-	}
-
-	/**
-	 * Detects if the browser is Camino.
-	 * @return Boolean
-	 */
-	this.isCamino = function() {
-		return _camino;
-	}
+	isOpera: function() {
+		return lim.BrowserUtil._opera;
+	},
 
 	/**
 	 * Detects if the browser is Mozilla.
 	 * @return Boolean
 	 */
-	this.isMozilla = function() {
-		return _mozilla;
+	isMozilla: function() {
+		return lim.BrowserUtil._mozilla;
 	}
 };
 
 /**
  * @class Class gets an HTML Element by id.
- * @static
+ * @parameters $id:String - Element id.
  * @return Object
  */
-var $ = function($id) {
+lim.$ = function($id) {
 	return document.getElementById($id);
 	
 };
 
 /**
+ * Return if an abject is a HTML element.
+ * @parameters $elm:Object or String - Element to be tested. 
+ * @return Boolean
+ */
+lim.$.isHtmlObject = function($elm){
+	return (typeof($elm) === 'object' && $elm.nodeType == 1) ? true : false;
+};
+
+/**
  * Return display style of an element.
- * @static
+ * @parameters $id:String - Element id.
  * @return String
  */
-$.getDisplay = function($id){
-	return $($id).style.display;
+lim.$.getDisplay = function($id){
+	return lim.$($id).style.display;
 };
 
 /**
@@ -155,8 +165,8 @@ $.getDisplay = function($id){
  * @parameters $display:String - Optional. Default 'none'. Display state.
  * @return None
  */
-$.hide = function($id, $display){
-	$($id).style.display = $display ? $display : 'none';
+lim.$.hide = function($id, $display){
+	lim.$($id).style.display = $display ? $display : 'none';
 };
 
 /**
@@ -165,8 +175,8 @@ $.hide = function($id, $display){
  * @parameters $display:String - Optional. Default 'none'. Display state.
  * @return None
  */
-$.show = function($id, $display){
-	$($id).style.display = $display ? $display : 'block';
+lim.$.show = function($id, $display){
+	lim.$($id).style.display = $display ? $display : 'block';
 };
 
 /**
@@ -174,8 +184,8 @@ $.show = function($id, $display){
  * @parameters $id:String - Element id.
  * @return None
  */
-$.alternate = function($id){
-	$($id).style.display = ($.getDisplay($id) == 'block' || !$.getDisplay($id)) ? $.hide($id) : $.show($id);
+lim.$.alternate = function($id){
+	lim.$($id).style.display = (lim.$.getDisplay($id) == 'block' || !lim.$.getDisplay($id)) ? lim.$.hide($id) : lim.$.show($id);
 };
 
 /**
@@ -184,15 +194,15 @@ $.alternate = function($id){
  * @parameters $node:Array - The array notation of the new element.
  * @return Object
  */
-$.add = function($elm, $node){
-	return $._graft(($elm || document.body), $node);
+lim.$.add = function($elm, $node){
+	return lim.$._graft(($elm || document.body), $node);
 };
 
 /**
  * Private function creates the HTML element.
  * @return Object
  */
-$._graft = function(parent, t, doc){
+lim.$._graft = function(parent, t, doc){
 	doc = (doc || parent.ownerDocument || document);
 	var e;
 
@@ -224,11 +234,11 @@ $._graft = function(parent, t, doc){
 				e.setAttribute('class', 'namelessFromLOL');
 			}
 			if( t[i] == 'undefined' ) {
-				alert('ERROR $._graft: Can\'t $._graft an undefined value in a list!');
+				alert('ERROR $._graft: Can\'t lim.$._graft an undefined value in a list!');
 			} else if(  t[i].constructor == String || t[i].constructor == Array ) {
-				$._graft( e, t[i], doc );
+				lim.$._graft( e, t[i], doc );
 			} else if(  t[i].constructor == Number ) {
-				$._graft( e, t[i].toString(), doc );
+				lim.$._graft( e, t[i].toString(), doc );
 			} else if(  t[i].constructor == Object ) {
 				for(var k in t[i]) {
 					// support for attaching closures to DOM objects
@@ -243,7 +253,7 @@ $._graft = function(parent, t, doc){
 					}
 				}
 			} else {
-				alert('ERROR $._graft: Object ' + t[i] + ' is inscrutable as an $._graft arglet.');
+				alert('ERROR lim.$._graft: Object ' + t[i] + ' is inscrutable as an lim.$._graft arglet.');
 			}
 		}
 	}
@@ -257,11 +267,11 @@ $._graft = function(parent, t, doc){
  * @parameters $id:String - Element id.
  * @return None
  */
-$.del = function($id){
+lim.$.del = function($id){
 	try{
-		$($id).parentNode.removeChild($($id));
+		lim.$($id).parentNode.removeChild(lim.$($id));
 	} catch(error){
-		alert("ERROR $.del: " + error.message);
+		alert("ERROR lim.$.del: " + error.message);
 	}
 };
 
@@ -270,9 +280,9 @@ $.del = function($id){
  * @parameters $id:String or Object - Element id or element.
  * @return Array [x,y]
  */
-$.getPosition = function($id){
+lim.$.getPosition = function($id){
 	var _curleft = _curtop = 0;
-	var _obj = (typeof $id == 'object') ? $id : $($id);
+	var _obj = (lim.$.isHtmlObject($id)) ? $id : lim.$($id);
 	if (_obj.offsetParent) {
 		curleft = _obj.offsetLeft;
 		curtop = _obj.offsetTop;
@@ -285,17 +295,18 @@ $.getPosition = function($id){
 };
 
 /**
- * Get all tags inside some especific element or use document.
- * @parameters $tag:String - Tag. ----------------------------------------------------------------------------------
+ * Get all tags inside some especific element (or inside document).
+ * @parameters $tag:String - Tag. 
+ * @parameters $id:String or Object - Element id or element. Default: document
  * @return Array elements
  */
-$.tag = function ($tag, $id) {
+lim.$.tag = function ($tag, $id) {
 	var i;
 	var t = typeof($id);
-	if(t === 'object' && $id.nodeType == 1){
+	if(lim.$.isHtmlObject($id)){
 		i = $id;
 	} else if(t == 'string'){
-		i = $($id);
+		i = lim.$($id);
 	} else {
 		i = document;
 	}
@@ -304,68 +315,38 @@ $.tag = function ($tag, $id) {
 
 
 
-Pop = new function() {
-	this.defaultMessage = 'O bloqueador de pop-up está fazendo com que o link não seja aberto, Desabilite seu bloqueador e clique novamente.';
-	this.popup = null;
-	_this = this;
+lim.Pop = {
+	onError: alert,
+	defaultMessage:'O bloqueador de pop-up está fazendo com que o link não seja aberto, Desabilite seu bloqueador e clique novamente.',
+	popup:null,
 	
-	/* private vars */
-	var enabled = false; 
-	
-	this.isAvaliable = function(o){
-		this.onComplete = o.onComplete || null;
-		this.onError = o.onError || null;
-		
-		if(_this.enabled){
-			if(this.onComplete) this.onComplete();
-			return;
-		}
-		
-		var _checkPopup = window.open('about:blank','testPopup','width='+(o.w ? o.w : 1)+',height='+(o.h ? o.h : 1)+',top='+(o.t ? o.t : -1000)+',left='+(o.l ? o.l : -1000)+',screenX=0,screenY=0,scrollbars=no');
-		try {
-			_checkPopup.close();
-			_this.enabled = true;
-			if(this.onComplete) this.onComplete();
-		}catch(e){
-			if(this.onError) this.onError();
-			else alert(_this.defaultMessage);
-		}
-		this.onError = this.onComplete = null;
-	};
-
-	this.open = function($url, $name, $width, $height, $center, $scroll, $other){
+	open:function($url, $name, $width, $height, $center, $scroll, $other){
 		var l = 18;
 		var t = 18;
 		if ($center != false) {
 			l = (screen.availWidth - $width)/2;
 			t = (screen.availHeight - $height)/2;
 		}
-		if(_this.enabled) _this.popup = window.open($url, $name, 'width=' + $width + ', height=' + $height + ', left=' + l + ', top=' + t + ', scrollbars=' + (($scroll) ? 'yes' : 'no') + (($other) ? ', ' + $other : ''));
-		else _this.isAvaliable({
-								w: $width,
-								h: $height,
-								t: t,
-								l: l,
-								onComplete:function(){
-									_this.popup = window.open($url, $name, 'width=' + $width + ', height=' + $height + ', left=' + l + ', top=' + t + ', scrollbars=' + (($scroll) ? 'yes' : 'no') + (($other) ? ', ' + $other : ''));
-									return false;
-								}
-							});
-		return false;
-	};
-}
-
-/**/
+		lim.Pop.popup = window.open($url, $name, 'width=' + $width + ', height=' + $height + ', left=' + l + ', top=' + t + ', scrollbars=' + (($scroll) ? 'yes' : 'no') + (($other) ? ', ' + $other : ''));
+		if(lim.Pop.popup == null) {
+			this.onError(lim.Pop.defaultMessage);
+			return false;
+		}
+		return lim.Pop.popup;
+	}
+};
 
 /**
- * Get all elements with some tag.
- * @parameters $tag:String - Tag.
- * @return Array [x,y]
+ * Executes the command console.info on Firebug or alert for other browsers.
+ * @parameters $m:String - Message.
+ * @return None
  */
-trace = function(m){
+lim.trace = function($m){
+	this.customFunction = alert;
 	if(window['console']){
-		console.info(m);
+		console.info($m);
 	} else {
-		alert(m);
+		this.customFunction($m);
 	}
-}
+};
+lim.BrowserUtil.init();
