@@ -8,7 +8,7 @@
  * Guia de suporte a CSS em webmails e clientes de e-mail: http://www.campaignmonitor.com/css/
 
 ===HTML===
- * Map de imagem on-line: http://www.maschek.hu/imagemap/imgmap
+ * Gerador de _image map on-line_: http://www.maschek.hu/imagemap/imgmap
 
 ===Javascript===
  * Boas práticas e otimização de performance para Javascript: http://dev.opera.com/articles/view/efficient-javascript/
