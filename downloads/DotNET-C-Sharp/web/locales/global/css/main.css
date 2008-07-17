@@ -14,15 +14,12 @@ hr{display:none;position:absolute;}
 .nb{border:0px;background:transparent;}
 .dn{display:none;}
 .fc{ /* float container */
-	height:auto;
-	overflow:visible;
-	zoom:1;
-	/* ie 5.5 hack */
-	voice-family: "\"}\""; 
-	voice-family:inherit;
-	/* end ie 5.5 hack */
 	height:100%;
 	overflow:hidden;
+	/* ie 6- */
+	_height:auto;
+	_overflow:visible;
+	zoom:1;
 }
 /* --------------------------------------------------------------- Fonts */
 .al{text-align: left;}
