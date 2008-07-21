@@ -10,7 +10,7 @@
 	<uc:cabecalho_html id="cabecalho_html" runat="server" />
 </head>
 <body>
-	<form name="frm" id="frm" action="#">
+	<form name="frm" id="frm" action="#" runat="server">
 <uc:cabecalho id="cabecalho" runat="server" />
 		<div id="content">
 			<!-- ME APAGUE! -->
