@@ -19,8 +19,8 @@
 	*/
 	private void Page_Load(object sender, System.EventArgs e){
 
-		Response.ContentEncoding = System.Text.Encoding.GetEncoding("ISO-8859-1");
-		HttpContext.Current.Response.Charset = "ISO-8859-1";
+		Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
+		HttpContext.Current.Response.Charset = "UTF-8";
 		//HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.GetEncoding("windows-1250");
 		HttpContext.Current.Response.ExpiresAbsolute = System.DateTime.Today.AddDays(5);
 
