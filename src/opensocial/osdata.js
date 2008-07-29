@@ -9,11 +9,11 @@
 			
 			// Requires: opensocial-0.7, views, flash, setprefs
 			
-			OSData.init();
 			OSData.verbose = true;
 			OSData.onComplete = function(){
 				alert('OSData loaded!');
 			}
+			OSData.init();
 */
 var OSData = {
 	onComplete: null,
@@ -43,6 +43,7 @@ var OSData = {
 		id: null,
 		view: null,
 		canvasUrl: null,
+		proxyUrl: null,
 		cookie: null,
 		isInstalled: function(){
 			return (OSData.user.owner.id != null && OSData.user.viewer.id == null) ? true : false;
@@ -122,18 +123,11 @@ var OSData = {
 			_this.user.viewer.img 		= viewer.getField(opensocial.Person.Field.THUMBNAIL_URL);
 		}
 		
-		// OSCookie
-		try {
-			_this.app.cookie = eval('(' + unescape(cookie[_this.user.owner.id].OSCookie) + ')');
-		} catch(e){
-			_this._trace(e);
-			_this.app.cookie = null;
-		}
-		
 		// app
 		_this.app.id 				= gadgets.util.getUrlParameters()['gadgetId'];
 		_this.app.view 				= gadgets.views.getCurrentView().getName();
 		_this.app.canvasUrl 		= '/Application.aspx?appId=' + _this.app.id + '&uid=' + _this.user.owner.uid;
+		_this.app.proxyUrl 			= gadgets.io.getProxyUrl('');
 		
 		if(_this.verbose){
 			_this._trace(owner);
@@ -155,6 +149,13 @@ var OSData = {
 			_this._trace('app.canvasUrl = ' + _this.app.canvasUrl);
 		}
 		
+		// OSCookie
+		try {
+			_this.app.cookie = eval('(' + unescape(cookie[_this.user.owner.id].OSCookie) + ')');
+		} catch(e){
+			_this._trace(e);
+			_this.app.cookie = null;
+		}
 		if(_this.onComplete != null) _this.onComplete();
 	},
 	
