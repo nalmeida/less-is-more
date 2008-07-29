@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="iso-8859-1" ?>
+<Module>
+	<ModulePrefs title="Teste OSData" description="Descricao de Teste OSData" thumbnail="http://www.oyo.com.br/opensocial/oyo.png">
+	    <Locale lang="all" country="all" />
+	    <Locale lang="pt" country="br" />
+		<Require feature="opensocial-0.7"/>
+		<Require feature="dynamic-height" />
+		<Require feature="views" />
+	    <Require feature="flash" />
+		<Require feature="setprefs" />
+	</ModulePrefs>
+	<Content type="html">
+		<![CDATA[
+			<div id="loader">Carregando ..............</div>
+			<div id="content" style="display:none;">
+				<p>
+					<a href="#" onclick="OSData.app.setCookie('{sedaId:\'ID_SEDA_4\'}')">grava primeiro valor: {sedaId:"ID_SEDA_4"}</a>
+				</p>
+				<p>
+					<a href="#" onclick="console.info(OSData.app.cookie);">pega valor</a>
+				</p>
+				<script type="text/javascript" src="http://sedateens.aceite.fbiz.com.br/_open_social/osdata.js?v=75"></script>
+				<script type="text/javascript">
+					OSData.init();
+					OSData.onComplete = function(){
+						document.getElementById('loader').style.display = 'none';
+						document.getElementById('content').style.display = 'block';
+					}
+				</script>
+			</div>
+		]]>
+	</Content>
+</Module>
