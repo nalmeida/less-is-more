@@ -11,7 +11,10 @@
 	</ModulePrefs>
 	<Content type="html">
 		<![CDATA[
-			<div id="loader">Carregando ..............</div>
+			<h1>
+				21
+			</h1>
+			<div id="loader">Carregando ...</div>
 			<div id="content" style="display:none;">
 				<p>
 					<a href="#" onclick="OSData.app.setCookie('{sedaId:\'ID_SEDA_4\'}')">grava primeiro valor: {sedaId:"ID_SEDA_4"}</a>
@@ -19,15 +22,33 @@
 				<p>
 					<a href="#" onclick="console.info(OSData.app.cookie);">pega valor</a>
 				</p>
-				<script type="text/javascript" src="http://sedateens.aceite.fbiz.com.br/_open_social/osdata.js?v=75"></script>
+				
+				<p>
+					<a href="#" onclick="OSData.app.activity.send(OSData.app.activity.message.INSTALL);">Enviar atividade</a>
+				</p>
+			</div>
+			
+			<script type="text/javascript" src="http://sedateens.aceite.fbiz.com.br/_open_social/osdata.js"></script>
 				<script type="text/javascript">
 					OSData.init();
+					OSData.app.name = 'Aplicação de testes do Nicola!';
 					OSData.onComplete = function(){
 						document.getElementById('loader').style.display = 'none';
 						document.getElementById('content').style.display = 'block';
 					}
+					
+					OSData.app.activity.setDefaultActivityMessages({
+							INSTALL: {
+								title: ' adicionou o aplicativo ',
+								text: ''
+							}
+						}
+					);
+					OSData.app.activity.onComplete = function(){
+						alert(OSData.app.activity.message.INSTALL.title);
+					}
+					
 				</script>
-			</div>
 		]]>
 	</Content>
 </Module>
