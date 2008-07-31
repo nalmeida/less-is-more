@@ -32,7 +32,7 @@ var OSData = {
 		},
 		owner: {
 			data: null,
-			id: null,
+			id: '',
 			uid: null,
 			name: null,
 			url: null,
@@ -40,8 +40,10 @@ var OSData = {
 		}
 	},
 	app: {
+		name: "Your application name",
 		id: null,
 		view: null,
+		domain: null,
 		canvasUrl: null,
 		proxyUrl: null,
 		cookie: null,
@@ -69,11 +71,55 @@ var OSData = {
 		},
 		getCookie: function(){
 			return OSData.app.cookie;
+		},
+		
+		activity: {
+			onComplete: function(){},
+			
+			/* Default messages
+				@usage
+				
+				OSData.app.activity.setDefaultActivityMessages({
+						INSTALL: {
+							title: ' adicionou o aplicativo ',
+							text: ''
+						},
+						OTHER: {
+							title: ' other title ',
+							text: 'other body text'
+						}
+					}
+				);
+			*/
+			setDefaultActivityMessages: function($messagesObj){
+				var _this = OSData;
+				_this.app.activity.message = $messagesObj;
+			},
+			
+			message: {},
+			
+			send: function($messageObj){
+				var _this = this;
+				var params = {};  
+					if(!$messageObj.title){
+						return;
+					}
+					params[opensocial.Activity.Field.TITLE] = $messageObj.title;
+					if($messageObj.text){
+						params[opensocial.Activity.Field.BODY] = $messageObj.text;
+						alert(params[opensocial.Activity.Field.BODY]);
+					}
+				var activity = opensocial.newActivity(params);
+				opensocial.requestCreateActivity(activity, opensocial.CreateActivityPriority.LOW, _this.onComplete);
+				params = null;
+				activity = null;
+			}
 		}
 	},
 	
 	init: function(){
 		var _this = this;
+		
 		var dataReq = opensocial.newDataRequest();
 
         var params = {};
@@ -82,7 +128,7 @@ var OSData = {
 		dataReq.add(dataReq.newFetchPersonRequest('VIEWER',params),'viewer');
 		dataReq.add(dataReq.newFetchPersonRequest('OWNER',params),'owner');
 		dataReq.add(dataReq.newFetchPersonAppDataRequest('OWNER', 'OSCookie'), 'cookie');
-
+		
 		dataReq.send(function($data){
 			_this._onReceiveData($data);
 		});
@@ -124,9 +170,11 @@ var OSData = {
 		}
 		
 		// app
-		_this.app.id 				= gadgets.util.getUrlParameters()['gadgetId'];
+		var urlParameters = gadgets.util.getUrlParameters();
+		_this.app.domain 			= urlParameters['parent'];
+		_this.app.id 				= (_this.app.id == null) ? urlParameters['gadgetId'] : _this.app.id;
 		_this.app.view 				= gadgets.views.getCurrentView().getName();
-		_this.app.canvasUrl 		= '/Application.aspx?appId=' + _this.app.id + '&uid=' + _this.user.owner.uid;
+		_this.app.canvasUrl 		= _this.app.domain + '/Application.aspx?appId=' + _this.app.id + '&uid=' + _this.user.owner.uid;
 		_this.app.proxyUrl 			= gadgets.io.getProxyUrl('');
 		
 		if(_this.verbose){
@@ -147,13 +195,14 @@ var OSData = {
 			_this._trace('app.id = ' + _this.app.id);
 			_this._trace('app.view = ' + _this.app.view);
 			_this._trace('app.canvasUrl = ' + _this.app.canvasUrl);
+			_this._trace('app.proxyUrl = ' + _this.app.proxyUrl);
 		}
 		
 		// OSCookie
 		try {
 			_this.app.cookie = eval('(' + unescape(cookie[_this.user.owner.id].OSCookie) + ')');
 		} catch(e){
-			_this._trace(e);
+			//_this._trace(e);
 			_this.app.cookie = null;
 		}
 		if(_this.onComplete != null) _this.onComplete();
