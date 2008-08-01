@@ -1,4 +1,4 @@
-/**
+﻿/**
 	Create a static "OSData" (Open Social Data) Class
 	
 	@author Nicholas Almeida nicholasalmeida.com
