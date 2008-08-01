@@ -107,7 +107,6 @@ var OSData = {
 					params[opensocial.Activity.Field.TITLE] = $messageObj.title;
 					if($messageObj.text){
 						params[opensocial.Activity.Field.BODY] = $messageObj.text;
-						alert(params[opensocial.Activity.Field.BODY]);
 					}
 				var activity = opensocial.newActivity(params);
 				opensocial.requestCreateActivity(activity, opensocial.CreateActivityPriority.LOW, _this.onComplete);
