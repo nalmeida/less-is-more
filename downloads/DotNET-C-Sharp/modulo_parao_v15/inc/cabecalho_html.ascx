@@ -12,6 +12,6 @@
 	<meta http-equiv="expires" content="Fri, 13 Jul 2001 00:00:01 GMT" />
 
 	<link rel="shortcut icon" href="../img/favicon.ico" />
-	<link rel="stylesheet" type="text/css" href="../inc/stripper.aspx?main.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="../inc/minify.aspx?main.css" media="screen" />
 	
 	<script type="text/javascript" src="../inc/minify.aspx?main.js|functions.js"></script>
