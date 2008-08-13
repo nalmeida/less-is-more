@@ -6,36 +6,64 @@
 		<Require feature="opensocial-0.7"/>
 		<Require feature="dynamic-height" />
 		<Require feature="views" />
-	    <Require feature="flash" />
 		<Require feature="setprefs" />
 	</ModulePrefs>
 	<Content type="html">
 		<![CDATA[
+		
+			<style>
+				html{
+					margin:0;
+					padding:0;
+				}
+				body{
+					margin: 20px;
+				}
+			</style>
+		
 			<h1>
-				21
+				108
 			</h1>
 			<div id="loader">Carregando ...</div>
 			<div id="content" style="display:none;">
 				<p>
-					<a href="#" onclick="OSData.app.setCookie('{sedaId:\'ID_SEDA_4\'}')">grava primeiro valor: {sedaId:"ID_SEDA_4"}</a>
+					<a href="#" onclick="OSData.app.setCookie('{valor:\'teste123\'}')">gravar um valor (cookie)</a>
 				</p>
 				<p>
-					<a href="#" onclick="console.info(OSData.app.cookie);">pega valor</a>
+					<a href="#" onclick="console.info(OSData.app.cookie);">pega valor (cookie)</a>
 				</p>
 				
 				<p>
 					<a href="#" onclick="OSData.app.activity.send(OSData.app.activity.message.INSTALL);">Enviar atividade</a>
 				</p>
+				
+				<p>
+					<a href="#" onclick="OSData.user.owner.friends.request({FIRST:11});">Pegar amigos do Owner</a>
+				</p>
 			</div>
 			
-			<script type="text/javascript" src="http://sedateens.aceite.fbiz.com.br/_open_social/osdata.js"></script>
+			<script type="text/javascript" src="http://www.fbiz.com.br/_teste_os/osdata.js"></script>
 				<script type="text/javascript">
+				
+					OSData.app.name = 'Aplicação de testes do Nicóla!';
+					OSData.app.dataToRequest.FRIENDS = true;
+					
+					OSData.user.owner.friends.MAX = 10;
+					
+					OSData.user.owner.friends.onComplete = function($data){
+						console.info($data.length);
+						OSData.user.owner.friends.add($data);
+						console.info(OSData.user.owner.friends.list.length);
+					}
+					
 					OSData.init();
-					OSData.app.name = 'Aplicação de testes do Nicola!';
+					
 					OSData.onComplete = function(){
 						document.getElementById('loader').style.display = 'none';
 						document.getElementById('content').style.display = 'block';
 					}
+					
+					
 					
 					OSData.app.activity.setDefaultActivityMessages({
 							INSTALL: {
