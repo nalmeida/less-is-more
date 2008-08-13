@@ -17,6 +17,13 @@ namespace COMMON{
 	 * @author Regis Bittencourt - rbittencourt@fbiz.com.br, Marcelo Miranda Carneiro - mcarneiro@gmail.com
 	 */
 	public static class Util{
+		
+		private static string Port{
+	        get{
+	            return "";
+	        }
+		}
+	
 	    /**
 		 * COMMON.Util.Root Returns the project root path
 		 * @return String the project root path
@@ -28,7 +35,7 @@ namespace COMMON{
 	    public static string Root{
 	        get{
 	            return HttpContext.Current.Request.Url.Scheme + "://" +
-	                HttpContext.Current.Request.Url.Host +
+	                HttpContext.Current.Request.Url.Host + Port + 
 	                HttpContext.Current.Request.ApplicationPath + "/";
 	        }
 	    }
@@ -43,7 +50,7 @@ namespace COMMON{
 	    public static string GlobalPath{
 	        get{
 	            return HttpContext.Current.Request.Url.Scheme + "://" +
-	                HttpContext.Current.Request.Url.Host +
+	                HttpContext.Current.Request.Url.Host + Port + 
 	                HttpContext.Current.Request.ApplicationPath + "/locales/global/";
 	        }
 	    }
@@ -58,7 +65,7 @@ namespace COMMON{
 	    public static string LanguagePath{
 	        get{
 	            return HttpContext.Current.Request.Url.Scheme + "://" +
-	                HttpContext.Current.Request.Url.Host +
+	                HttpContext.Current.Request.Url.Host + Port + 
 	                HttpContext.Current.Request.ApplicationPath + "/locales/pt-BR/";
 	        }
 	    }
