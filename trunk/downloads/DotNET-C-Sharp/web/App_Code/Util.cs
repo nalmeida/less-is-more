@@ -36,7 +36,7 @@ namespace COMMON{
 	        get{
 	            return HttpContext.Current.Request.Url.Scheme + "://" +
 	                HttpContext.Current.Request.Url.Host + Port + 
-	                HttpContext.Current.Request.ApplicationPath + "/";
+	                HttpContext.Current.Request.ApplicationPath;
 	        }
 	    }
 	    /**
@@ -51,7 +51,7 @@ namespace COMMON{
 	        get{
 	            return HttpContext.Current.Request.Url.Scheme + "://" +
 	                HttpContext.Current.Request.Url.Host + Port + 
-	                HttpContext.Current.Request.ApplicationPath + "/locales/global/";
+	                HttpContext.Current.Request.ApplicationPath + "locales/global/";
 	        }
 	    }
 	    /**
@@ -66,7 +66,7 @@ namespace COMMON{
 	        get{
 	            return HttpContext.Current.Request.Url.Scheme + "://" +
 	                HttpContext.Current.Request.Url.Host + Port + 
-	                HttpContext.Current.Request.ApplicationPath + "/locales/pt-BR/";
+	                HttpContext.Current.Request.ApplicationPath + "locales/pt-BR/";
 	        }
 	    }
 	    /**
