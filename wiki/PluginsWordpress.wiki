@@ -1,17 +1,14 @@
 #summary Sugestoes de plugins para Wordpress..
 
-= Introduction =
+= Introdução =
 
 Eu, zóio, listo abaixo os plugins que considero importantes na contrução de qualquer blog.
 
 
-= Details =
+= Detalhes =
 
   * [http://www.arnebrachhold.de/projects/wordpress-plugins/google-xml-sitemaps-generator/ Google Sitemap (xml) Generator:] Plugin para gerar google sitemap (xml) levando como referência os posts e páginas do blog. Você pode definir a prioridades de atualização de cada parte do blog (tais como - Archives, home, single-post, etc).
 
   * [http://wp.uberdose.com/2007/03/24/all-in-one-seo-pack/ All in one SEO pack:] Plugin que permite personalizar description, title tag, evitar conteúdo duplicado afim de otimizar o blog para indexação dos crawlers
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+  * [http://www.ejump.co.uk/wordpress/easytube-plugin-for-wordpress/ Easytube:] Plugin para adicionar vídeos do youtube/ google video no wordpress de com uma sintaxe amigável.
