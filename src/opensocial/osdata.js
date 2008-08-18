@@ -88,6 +88,9 @@ var OSData = {
 			name: null,
 			url: null,
 			img: null
+		},
+		isOwner: function(){
+			return (OSData.user.owner.id != null) ? (OSData.user.owner.id == OSData.user.viewer.id) ? true : false : false;
 		}
 	},
 	app: {
@@ -199,10 +202,6 @@ var OSData = {
 		dataReq.send(function($data){
 			_this._onReceiveData($data);
 		});
-	},
-	
-	isOwner: function(){
-		return (OSData.user.owner.id != null) ? (OSData.user.owner.id == OSData.user.viewer.id) ? true : false : false;
 	},
 	
 	_onReceiveData: function($data){
