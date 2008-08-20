@@ -22,7 +22,7 @@ namespace COMMON{
 		 * @return String the project title name
 		 * @usage
 				<code>
-					<%=COMMON.Config.Title;%> //writes " - ##PAGE_TITLE##" on the page.
+					<%=COMMON.Config.Title%> //writes " - ##PAGE_TITLE##" on the page.
 				</code>
 		 */
 		public static string Title{
