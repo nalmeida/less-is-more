@@ -29,7 +29,7 @@ namespace COMMON{
 		 * @return String the project root path
 		 * @usage
 				<code>
-					<%=COMMON.Util.Root;%> // writes "http://ROOT/"
+					<%=COMMON.Util.Root%> // writes "http://ROOT/"
 				</code>
 		 */
 	    public static string Root{
@@ -44,7 +44,7 @@ namespace COMMON{
 		 * @return String the global path for external files (xml, css, jgs, gif, swf)
 		 * @usage
 				<code>
-					<%=COMMON.Util.GlobalPath;%> // writes "http://ROOT/locales/global/"
+					<%=COMMON.Util.GlobalPath%> // writes "http://ROOT/locales/global/"
 				</code>
 		 */
 	    public static string GlobalPath{
@@ -59,7 +59,7 @@ namespace COMMON{
 		 * @return String the especific path for external files (xml, css, jpg, gif, swf)
 		 * @usage
 				<code>
-					<%=COMMON.Util.LanguagePath;%> // writes "http://ROOT/locales/pt-BR/"
+					<%=COMMON.Util.LanguagePath%> // writes "http://ROOT/locales/pt-BR/"
 				</code>
 		 */
 	    public static string LanguagePath{
@@ -74,7 +74,7 @@ namespace COMMON{
 		 * @return String the especific path for external files (xml, css, jpg, gif, swf)
 		 * @usage
 				<code>
-					<%=COMMON.Util.Language;%> // writes "pt-BR"
+					<%=COMMON.Util.Language%> // writes "pt-BR"
 				</code>
 		 */
 	    public static string Language{
