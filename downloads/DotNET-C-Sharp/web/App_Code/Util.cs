@@ -13,10 +13,16 @@ namespace COMMON{
 	/**
 	 * COMMON.Util
 	 * @since 08/07/2008
-	 * @version 1.0
+	 * @version 1.0.1
 	 * @author Regis Bittencourt - rbittencourt@fbiz.com.br, Marcelo Miranda Carneiro - mcarneiro@gmail.com
 	 */
 	public static class Util{
+		
+		private static string Slash{
+			get{
+				return (HttpContext.Current.Request.ApplicationPath.ToString()[HttpContext.Current.Request.ApplicationPath.ToString().Length-1].ToString() == "/" ? "" : "/");
+			}
+		} 
 		
 		private static string Port{
 	        get{
@@ -36,7 +42,7 @@ namespace COMMON{
 	        get{
 	            return HttpContext.Current.Request.Url.Scheme + "://" +
 	                HttpContext.Current.Request.Url.Host + Port + 
-	                HttpContext.Current.Request.ApplicationPath;
+	                HttpContext.Current.Request.ApplicationPath + Slash;
 	        }
 	    }
 	    /**
@@ -49,9 +55,7 @@ namespace COMMON{
 		 */
 	    public static string GlobalPath{
 	        get{
-	            return HttpContext.Current.Request.Url.Scheme + "://" +
-	                HttpContext.Current.Request.Url.Host + Port + 
-	                HttpContext.Current.Request.ApplicationPath + "locales/global/";
+	            return Root + "locales/global/";
 	        }
 	    }
 	    /**
@@ -64,9 +68,7 @@ namespace COMMON{
 		 */
 	    public static string LanguagePath{
 	        get{
-	            return HttpContext.Current.Request.Url.Scheme + "://" +
-	                HttpContext.Current.Request.Url.Host + Port + 
-	                HttpContext.Current.Request.ApplicationPath + "locales/pt-BR/";
+	            return Root + "locales/pt-BR/";
 	        }
 	    }
 	    /**
