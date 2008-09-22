@@ -13,7 +13,14 @@
 			OSData.onComplete = function(){
 				alert('OSData loaded!');
 			}
-			OSData.init();
+			
+			// IMPORTANT: 
+			// --------------------------------------------
+			// OSData.init() *MUST* be the last OSData call!
+			// --------------------------------------------
+			OSData.init(); 
+			
+			
 */
 var OSData = {
 	onComplete: null,
