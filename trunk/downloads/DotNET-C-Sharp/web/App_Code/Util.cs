@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Configuration;
@@ -26,7 +26,7 @@ namespace COMMON{
 		
 		private static string Port{
 	        get{
-	            return "";
+	            return ":" + HttpContext.Current.Request.Url.Port.ToString();
 	        }
 		}
 	
