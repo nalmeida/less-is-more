@@ -39,7 +39,7 @@ var OSData = {
 			
 			friends: {
 				FIRST: 0,
-				MAX: 100,
+				MAX: 1000,
 				ORDER: "top_friends", // "top_friends" or ("name" unsuported)
 				FILTER: "all", // "all" or ("has_app" not working)
 				
