@@ -118,7 +118,8 @@ var OSData = {
 			return (OSData.user.owner.id != null && OSData.user.viewer.id == null) ? true : false;
 		},
 		
-		setCookie: function(str){
+		setCookie: function(str){ // OSData.app.setCookie('{variable:"value"}');
+			if(str.slice(0,1) != '{' || str.slice(-1) != '}') throw new Error("Cookie value (string) MUST be a stringfied object. {test:123}.");
 			var encodedValue = escape(str);
 			var req = null;
 			var _this = this;
@@ -130,12 +131,13 @@ var OSData = {
 						if(!$data.get('data').hadError()){
 							OSData.app.cookie = eval('(' + unescape($data.get('data').getOriginalDataRequest().parameters.value) + ')');
 						}else{
-							_this._trace('ERRO: ' + $data.get('data').getErrorMessage());
+							OSData._trace("ERROR: " + $data.get('data').getErrorMessage());
 						}
 					}
 				});
 			}
 		},
+		
 		getCookie: function(){
 			return OSData.app.cookie;
 		},
