@@ -40,8 +40,8 @@ var OSData = {
 			friends: {
 				FIRST: 0,
 				MAX: 1000,
-				ORDER: "top_friends", // "top_friends" or ("name" unsuported)
-				FILTER: "all", // "all" or ("has_app" not working)
+				ORDER: 'top_friends', // "top_friends" or ("name" unsuported)
+				FILTER: 'all', // "all" or ("has_app" not working)
 				
 				add: function($arrFriends){
 					var tmp = OSData.user.owner.friends.list.concat($arrFriends);
@@ -101,7 +101,7 @@ var OSData = {
 		}
 	},
 	app: {
-		name: "Your APP name",
+		name: 'Your APP name',
 		id: null,
 		view: null,
 		domain: null,
@@ -118,12 +118,25 @@ var OSData = {
 			return (OSData.user.owner.id != null && OSData.user.viewer.id == null) ? true : false;
 		},
 		
-		setCookie: function(str){ // OSData.app.setCookie('{variable:"value"}');
-			if(str.slice(0,1) != '{' || str.slice(-1) != '}') throw new Error("Cookie value (string) MUST be a stringfied object. {test:123}.");
+		/**
+		 * params MUST follow the doc: http://code.google.com/apis/opensocial/docs/0.7/reference/gadgets.io.RequestParameters.html#METHOD
+		 * sample:
+		 * 		var params = {};
+		 *	   		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+		*/
+		ajax: function(url, callback, params){
+			gadgets.io.makeRequest(url, callback, params);
+		},
+		
+		/**
+		 * sample: OSData.app.setCookie('{variable:"value"}');
+		*/
+		setCookie: function(str){
+			if(str.slice(0,1) != '{' || str.slice(-1) != '}') throw new Error('Cookie value (string) MUST be a stringfied object. {test:123}.');
 			var encodedValue = escape(str);
 			var req = null;
 			var _this = this;
-			if(OSData.isOwner()){
+			if(OSData.user.isOwner()){
 				req = opensocial.newDataRequest();
 				req.add(req.newUpdatePersonAppDataRequest(opensocial.DataRequest.PersonId.VIEWER,'OSCookie',encodedValue),'data');
 				req.send( function($data) {
@@ -131,7 +144,7 @@ var OSData = {
 						if(!$data.get('data').hadError()){
 							OSData.app.cookie = eval('(' + unescape($data.get('data').getOriginalDataRequest().parameters.value) + ')');
 						}else{
-							OSData._trace("ERROR: " + $data.get('data').getErrorMessage());
+							OSData._trace('ERROR: ' + $data.get('data').getErrorMessage());
 						}
 					}
 				});
@@ -186,13 +199,13 @@ var OSData = {
 	},
 	
 	init: function(){
-		var _this = this;
+		var _this = OSData;
 		
 		var dataReq = opensocial.newDataRequest();
 
         var params = {};
-        params[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] = [opensocial.Person.Field.PROFILE_URL]; 
-
+        params[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] = [opensocial.Person.Field.PROFILE_URL,opensocial.Person.Field.GENDER]; 
+		
 		if(_this.app.dataToRequest.OWNER) dataReq.add(dataReq.newFetchPersonRequest('OWNER',params),'owner');
 		if(_this.app.dataToRequest.VIEWER) dataReq.add(dataReq.newFetchPersonRequest('VIEWER',params),'viewer');
 		if(_this.app.dataToRequest.OSCOOKIE) dataReq.add(dataReq.newFetchPersonAppDataRequest('OWNER', 'OSCookie'), 'cookie');
@@ -203,7 +216,7 @@ var OSData = {
 				filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.FIRST] = _this.user.owner.friends.FIRST;
 				filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.SORT_ORDER] = [(_this.user.owner.friends.ORDER == 'name') ? opensocial.DataRequest.SortOrder.NAME : opensocial.DataRequest.SortOrder.TOP_FRIENDS];
 				filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.FILTER] = [(_this.user.owner.friends.FILTER == 'has_app') ? opensocial.DataRequest.FilterType.HAS_APP : opensocial.DataRequest.FilterType.ALL];
-				filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] = [opensocial.Person.Field.PROFILE_URL];
+				filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] = [opensocial.Person.Field.PROFILE_URL,opensocial.Person.Field.GENDER];
 				
 			dataReq.add(dataReq.newFetchPeopleRequest('OWNER_FRIENDS', filterOwnerFriends),'friends');
 		}
@@ -214,9 +227,6 @@ var OSData = {
 	},
 	
 	_onReceiveData: function($data){
-	
-		//console.info($data);
-		
 		var _this = this;
 		if(typeof($data.get) != 'function'){
 			return false;
@@ -239,11 +249,20 @@ var OSData = {
 		
 		if(_this.app.dataToRequest.OSCOOKIE) {
 			cookie = $data.get('cookie').hadError() ? null : $data.get('cookie').getData();
+			
+			var tmpCookie = cookie[_this.user.owner.id].OSCookie;
 			try {
-				_this.app.cookie = eval('(' + unescape(cookie[_this.user.owner.id].OSCookie) + ')');
+				if(typeof(tmpCookie) == 'string') {
+					_this.app.cookie = eval('(' + unescape(tmpCookie) + ')');
+				} else if(typeof(tmpCookie) == 'object') {
+					_this.app.cookie = tmpCookie;
+				} else {
+					_this.app.cookie = null;
+				}
 			} catch(e){
 				_this.app.cookie = null;
 			}
+			tmpCookie = null;
 		}
 		
 		if(_this.app.dataToRequest.FRIENDS){
@@ -309,6 +328,13 @@ var OSData = {
 		personObj.name 	= $dataObj.getField(opensocial.Person.Field.NAME).getField(opensocial.Name.Field.UNSTRUCTURED);
 		personObj.url 	= $dataObj.getField(opensocial.Person.Field.PROFILE_URL);
 		personObj.img 	= $dataObj.getField(opensocial.Person.Field.THUMBNAIL_URL);
+		try {
+			if($dataObj.getField(opensocial.Person.Field.GENDER) != null) {
+				personObj.gender= $dataObj.getField(opensocial.Person.Field.GENDER)['key'];
+			}
+		} catch(e){
+			personObj.gender= $dataObj.getField(opensocial.Person.Field.GENDER);
+		}
 		
 		return personObj;
 	},
@@ -323,7 +349,7 @@ var OSData = {
 	},
 	
 	_trace: function($m){
-		this.customFunction = alert;
+		this.customFunction = function(){};
 		if(window['console']){
 			console.info($m);
 		} else {
