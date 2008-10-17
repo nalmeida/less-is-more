@@ -26,11 +26,11 @@ var OSData = {
 	onComplete: null,
 	verbose: false,
 	
-	version: '0.8',
+	version: '0.9',
 	require: 'opensocial-0.7, views, flash, setprefs',
 	user: {
 		owner: {
-			data: null,
+			//data: null, // All user data as the OpenSocial sent.
 			id: '',
 			uid: null,
 			name: null,
@@ -49,6 +49,7 @@ var OSData = {
 					tmp = null;
 					return OSData.user.owner.friends.list;
 				},
+				
 				request: function($obj){
 					var _this = this;
 					var obj;
@@ -89,7 +90,7 @@ var OSData = {
 			}
 		},
 		viewer: {
-			data: null,
+			//data: null, // All user data as the OpenSocial sent.
 			id: null,
 			uid: null,
 			name: null,
@@ -121,8 +122,14 @@ var OSData = {
 		/**
 		 * params MUST follow the doc: http://code.google.com/apis/opensocial/docs/0.7/reference/gadgets.io.RequestParameters.html#METHOD
 		 * sample:
-		 * 		var params = {};
-		 *	   		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+		  		var postdata = {nome:"nicholas"};
+						postdata = gadgets.io.encodeValues(postdata);
+					var params = {};
+						params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST; 
+						params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
+						params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues(postdata);
+
+					OSData.app.ajax("http://YOUR_SERVER/", onComplete, params);
 		*/
 		ajax: function(url, callback, params){
 			gadgets.io.makeRequest(url, callback, params);
@@ -322,7 +329,7 @@ var OSData = {
 		if(!$personObj) personObj = {};
 		else personObj = $personObj;
 		
-		personObj.data 	= $dataObj;
+		//personObj.data 	= $dataObj; // All user data as the OpenSocial sent.
 		personObj.id   	= $dataObj.getField(opensocial.Person.Field.ID);
 		personObj.uid 	= _this._generateUID($dataObj.getField(opensocial.Person.Field.PROFILE_URL));
 		personObj.name 	= $dataObj.getField(opensocial.Person.Field.NAME).getField(opensocial.Name.Field.UNSTRUCTURED);
