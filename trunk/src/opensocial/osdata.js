@@ -42,50 +42,6 @@ var OSData = {
 				MAX: 1000,
 				ORDER: 'top_friends', // "top_friends" or ("name" unsuported)
 				FILTER: 'all', // "all" or ("has_app" not working)
-				
-				add: function($arrFriends){
-					var tmp = OSData.user.owner.friends.list.concat($arrFriends);
-					OSData.user.owner.friends.list = tmp;
-					tmp = null;
-					return OSData.user.owner.friends.list;
-				},
-				
-				request: function($obj){
-					var _this = this;
-					var obj;
-					
-					if(!$obj) obj = {};
-					else obj = $obj;
-					
-					if(!obj.FIRST) obj.FIRST = 0;
-					if(!obj.MAX) obj.MAX = OSData.user.owner.friends.MAX;
-					if(!obj.ORDER) obj.ORDER = OSData.user.owner.friends.ORDER;
-					if(!obj.FILTER) obj.FILTER = OSData.user.owner.friends.FILTER
-		
-					var dataReq = opensocial.newDataRequest();
-					var filterOwnerFriends = {};
-						filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.MAX] = obj.MAX;
-						filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.FIRST] = obj.FIRST;
-						filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.SORT_ORDER] = [(obj.ORDER == 'name') ? opensocial.DataRequest.SortOrder.NAME : opensocial.DataRequest.SortOrder.TOP_FRIENDS];
-						filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.FILTER] = [(obj.FILTER == 'has_app') ? opensocial.DataRequest.FilterType.HAS_APP : opensocial.DataRequest.FilterType.ALL];
-						filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] = [opensocial.Person.Field.PROFILE_URL];
-						
-					dataReq.add(dataReq.newFetchPeopleRequest('OWNER_FRIENDS', filterOwnerFriends),'friends');
-					
-					dataReq.send(function($data){
-					
-						var ownerFriends = $data.get('friends').hadError() ? null : $data.get('friends').getData();
-						var ownerFriendsArr = [];
-						var newOwnerFriendsArr = [];
-						if(ownerFriends != null) ownerFriendsArr = ownerFriends.asArray();
-						for(var i = 0; i< ownerFriendsArr.length; i++) newOwnerFriendsArr.push(OSData._createPerson(ownerFriendsArr[i]));
-					
-						if(OSData.user.owner.friends.onComplete != null) OSData.user.owner.friends.onComplete(newOwnerFriendsArr);
-					});
-					
-				},
-				onComplete: null,
-				
 				list: []
 			}
 		},
@@ -97,9 +53,28 @@ var OSData = {
 			url: null,
 			img: null
 		},
+		
 		isOwner: function(){
 			return (OSData.user.owner.id != null) ? (OSData.user.owner.id == OSData.user.viewer.id) ? true : false : false;
-		}
+		},
+		
+		/**
+		 * Returns the very basic owner user data.
+		 * sample:
+			OSData.user.simplify();
+		*/
+		simplify: function(){
+			var o = {};
+				o.owner = OSData._simplifyPerson(OSData.user.owner);
+				
+			var friends = {list:[]};
+			for(var i=0; i<OSData.user.owner.friends.list.length; i++){
+				friends.list.push(OSData._simplifyPerson(OSData.user.owner.friends.list[i]));
+			}
+			o.owner.friends = friends;
+			friends = null;
+			return o;
+		},
 	},
 	app: {
 		name: 'Your APP name',
@@ -211,7 +186,8 @@ var OSData = {
 		var dataReq = opensocial.newDataRequest();
 
         var params = {};
-        params[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] = [opensocial.Person.Field.PROFILE_URL,opensocial.Person.Field.GENDER]; 
+        //params[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] = [opensocial.Person.Field.PROFILE_URL,opensocial.Person.Field.GENDER]; 
+        params[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] = [opensocial.Person.Field.PROFILE_URL]; 
 		
 		if(_this.app.dataToRequest.OWNER) dataReq.add(dataReq.newFetchPersonRequest('OWNER',params),'owner');
 		if(_this.app.dataToRequest.VIEWER) dataReq.add(dataReq.newFetchPersonRequest('VIEWER',params),'viewer');
@@ -221,10 +197,10 @@ var OSData = {
 			var filterOwnerFriends = {};
 				filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.MAX] = _this.user.owner.friends.MAX;
 				filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.FIRST] = _this.user.owner.friends.FIRST;
-				filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.SORT_ORDER] = [(_this.user.owner.friends.ORDER == 'name') ? opensocial.DataRequest.SortOrder.NAME : opensocial.DataRequest.SortOrder.TOP_FRIENDS];
-				filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.FILTER] = [(_this.user.owner.friends.FILTER == 'has_app') ? opensocial.DataRequest.FilterType.HAS_APP : opensocial.DataRequest.FilterType.ALL];
-				filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] = [opensocial.Person.Field.PROFILE_URL,opensocial.Person.Field.GENDER];
-				
+				filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.SORT_ORDER] = (_this.user.owner.friends.ORDER == 'name') ? opensocial.DataRequest.SortOrder.NAME : opensocial.DataRequest.SortOrder.TOP_FRIENDS;
+				filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.FILTER] = (_this.user.owner.friends.FILTER == 'has_app') ? opensocial.DataRequest.FilterType.HAS_APP : opensocial.DataRequest.FilterType.ALL;
+				//filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] = [opensocial.Person.Field.PROFILE_URL,opensocial.Person.Field.GENDER];
+				filterOwnerFriends[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] = [opensocial.Person.Field.PROFILE_URL];
 			dataReq.add(dataReq.newFetchPeopleRequest('OWNER_FRIENDS', filterOwnerFriends),'friends');
 		}
 		
@@ -276,7 +252,9 @@ var OSData = {
 			ownerFriends = $data.get('friends').hadError() ? null : $data.get('friends').getData();
 			var ownerFriendsArr = [];
 			if(ownerFriends != null) ownerFriendsArr = ownerFriends.asArray();
-			for(var i = 0; i< ownerFriendsArr.length; i++) _this.user.owner.friends.list.push(_this._createPerson(ownerFriendsArr[i]));
+			for(var i = 0; i< ownerFriendsArr.length; i++) {
+				_this.user.owner.friends.list.push(_this._createPerson(ownerFriendsArr[i]));
+			}
 		}
 		
 		// app
@@ -294,6 +272,8 @@ var OSData = {
 			_this._trace('owner.name = ' + _this.user.owner.name);
 			_this._trace('owner.url = ' + _this.user.owner.url);
 			_this._trace('owner.img = ' + _this.user.owner.img);
+			_this._trace('owner.friends.list:');
+			_this._trace(_this.user.owner.friends);
 			_this._trace(_this.user.owner.friends.list);
 			
 			_this._trace(viewer);
@@ -316,7 +296,6 @@ var OSData = {
 		owner =
 		viewer = 
 		cookie = 
-		ownerFriends = 
 		ownerFriends = 
 		ownerFriendsArr = null;
 		
@@ -344,6 +323,14 @@ var OSData = {
 		}
 		
 		return personObj;
+	},
+	
+	_simplifyPerson: function(obj){
+		var o = {};
+			o.uid = obj.uid;
+			o.n = obj.name;
+			o.i = obj.img.replace(/http:\/\/img..orkut.com\/images\/small\//, '');
+		return o;
 	},
 	
 	_generateUID: function($data){
