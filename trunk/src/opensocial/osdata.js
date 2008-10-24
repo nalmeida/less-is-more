@@ -232,17 +232,21 @@ var OSData = {
 		
 		if(_this.app.dataToRequest.OSCOOKIE) {
 			cookie = $data.get('cookie').hadError() ? null : $data.get('cookie').getData();
-			
-			var tmpCookie = cookie[_this.user.owner.id].OSCookie;
+			var tmpCookie;
 			try {
-				if(typeof(tmpCookie) == 'string') {
-					_this.app.cookie = eval('(' + unescape(tmpCookie) + ')');
-				} else if(typeof(tmpCookie) == 'object') {
-					_this.app.cookie = tmpCookie;
-				} else {
+				tmpCookie = cookie[_this.user.owner.id].OSCookie;
+				try {
+					if(typeof(tmpCookie) == 'string') {
+						_this.app.cookie = eval('(' + unescape(tmpCookie) + ')');
+					} else if(typeof(tmpCookie) == 'object') {
+						_this.app.cookie = tmpCookie;
+					} else {
+						_this.app.cookie = null;
+					}
+				} catch(e){
 					_this.app.cookie = null;
 				}
-			} catch(e){
+			} catch(Er) {
 				_this.app.cookie = null;
 			}
 			tmpCookie = null;
