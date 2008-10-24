@@ -74,7 +74,7 @@ var OSData = {
 			o.owner.friends = friends;
 			friends = null;
 			return o;
-		},
+		}
 	},
 	app: {
 		name: 'Your APP name',
