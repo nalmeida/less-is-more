@@ -13,7 +13,7 @@ namespace COMMON{
 	/**
 	 * COMMON.Util
 	 * @since 08/07/2008
-	 * @version 1.0.1
+	 * @version 1.0
 	 * @author Regis Bittencourt - rbittencourt@fbiz.com.br, Marcelo Miranda Carneiro - mcarneiro@gmail.com
 	 */
 	public static class Util{
@@ -26,7 +26,7 @@ namespace COMMON{
 		
 		private static string Port{
 	        get{
-	            return ":" + HttpContext.Current.Request.Url.Port.ToString();
+	            return (HttpContext.Current.Request.Url.Port.ToString() == "80") ? "" : (":" + HttpContext.Current.Request.Url.Port.ToString());
 	        }
 		}
 	
@@ -35,7 +35,7 @@ namespace COMMON{
 		 * @return String the project root path
 		 * @usage
 				<code>
-					<%=COMMON.Util.Root%> // writes "http://ROOT/"
+					<%=COMMON.Util.Root;%> // writes "http://ROOT/"
 				</code>
 		 */
 	    public static string Root{
@@ -50,7 +50,7 @@ namespace COMMON{
 		 * @return String the global path for external files (xml, css, jgs, gif, swf)
 		 * @usage
 				<code>
-					<%=COMMON.Util.GlobalPath%> // writes "http://ROOT/locales/global/"
+					<%=COMMON.Util.GlobalPath;%> // writes "http://ROOT/locales/global/"
 				</code>
 		 */
 	    public static string GlobalPath{
@@ -63,7 +63,7 @@ namespace COMMON{
 		 * @return String the especific path for external files (xml, css, jpg, gif, swf)
 		 * @usage
 				<code>
-					<%=COMMON.Util.LanguagePath%> // writes "http://ROOT/locales/pt-BR/"
+					<%=COMMON.Util.LanguagePath;%> // writes "http://ROOT/locales/pt-BR/"
 				</code>
 		 */
 	    public static string LanguagePath{
@@ -76,7 +76,7 @@ namespace COMMON{
 		 * @return String the especific path for external files (xml, css, jpg, gif, swf)
 		 * @usage
 				<code>
-					<%=COMMON.Util.Language%> // writes "pt-BR"
+					<%=COMMON.Util.Language;%> // writes "pt-BR"
 				</code>
 		 */
 	    public static string Language{
@@ -84,5 +84,25 @@ namespace COMMON{
 	            return "pt-BR";
 	        }
 	    }
+		private static bool IsGZipSupported() {
+		    string AcceptEncoding = HttpContext.Current.Request.Headers["Accept-Encoding"];
+		    if (!string.IsNullOrEmpty(AcceptEncoding) && AcceptEncoding.Contains("gzip") || AcceptEncoding.Contains("deflate"))
+				return true;
+		    return false;
+		}
+		public static void GZipEncodePage() {
+		    if (IsGZipSupported()) {
+		        HttpResponse Response = HttpContext.Current.Response;
+		        string AcceptEncoding = HttpContext.Current.Request.Headers["Accept-Encoding"];
+		        if (AcceptEncoding.Contains("gzip")) {
+		            Response.Filter =  new System.IO.Compression.GZipStream(Response.Filter, System.IO.Compression.CompressionMode.Compress);
+		            Response.AppendHeader("Content-Encoding", "gzip");
+		        } else {
+		            Response.Filter =  new System.IO.Compression.DeflateStream(Response.Filter, System.IO.Compression.CompressionMode.Compress);
+		            Response.AppendHeader("Content-Encoding", "deflate");
+		        }
+		    }
+		}
+
 	}
 }
