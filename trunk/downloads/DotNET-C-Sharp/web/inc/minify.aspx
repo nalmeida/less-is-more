@@ -4,7 +4,7 @@
 
 	@author Marcelo Miranda Carneiro - mail: mcarneiro@gmail.com. Thanks to Leandro Ribeiro and Nicholas Almeida.
 	@since 04/01/2008
-	@version 1.2.2 (1 month cache + gzip)
+	@version 1.2.2
 	@usage
 		<code>
 			// just call the Javascript file or CSS file as parameters:
@@ -34,7 +34,7 @@
 			}
 		}
 		
-		GZipEncodePage();
+		COMMON.Util.GZipEncodePage();
 		
 		Response.Cache.SetLastModified(DateTime.Now);
 		Response.CacheControl = "public";
@@ -102,24 +102,5 @@
 		}catch (Exception ex){
 			Response.Write(ex.Message);
 		}
-	}
-	public static bool IsGZipSupported() {
-	    string AcceptEncoding = HttpContext.Current.Request.Headers["Accept-Encoding"];
-	    if (!string.IsNullOrEmpty(AcceptEncoding) && AcceptEncoding.Contains("gzip") || AcceptEncoding.Contains("deflate"))
-			return true;
-	    return false;
-	}
-	public static void GZipEncodePage() {
-	    if (IsGZipSupported()) {
-	        HttpResponse Response = HttpContext.Current.Response;
-	        string AcceptEncoding = HttpContext.Current.Request.Headers["Accept-Encoding"];
-	        if (AcceptEncoding.Contains("gzip")) {
-	            Response.Filter =  new System.IO.Compression.GZipStream(Response.Filter, System.IO.Compression.CompressionMode.Compress);
-	            Response.AppendHeader("Content-Encoding", "gzip");
-	        } else {
-	            Response.Filter =  new System.IO.Compression.DeflateStream(Response.Filter, System.IO.Compression.CompressionMode.Compress);
-	            Response.AppendHeader("Content-Encoding", "deflate");
-	        }
-	    }
 	}
 </script>
