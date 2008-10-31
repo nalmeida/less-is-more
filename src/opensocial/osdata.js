@@ -20,13 +20,13 @@
 			// --------------------------------------------
 			OSData.init(); 
 			
-			
+	@packer	http://compressorrater.thruhere.net/
 */
 var OSData = {
 	onComplete: null,
 	verbose: false,
 	
-	version: '0.9',
+	version: '0.9.2',
 	require: 'opensocial-0.7, views, flash, setprefs',
 	user: {
 		owner: {
