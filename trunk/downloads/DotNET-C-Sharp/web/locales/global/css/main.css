@@ -14,7 +14,6 @@ hr{display:none;position:absolute;}
 .nb{border:0px;background:transparent;}
 .dn{display:none;}
 .fc{ /* float container */
-	height:100%;
 	overflow:hidden;
 	/* ie 6- */
 	_height:auto;
