@@ -1,0 +1,218 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage"%><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt" lang="pt">
+<head>
+	<title><%=COMMON.Config.Title%></title>
+	<%=@"<meta name=""description"" content="""%><asp:contentplaceholder id="cphCustomDescription" runat="server" ><%=COMMON.Config.Title%></asp:contentplaceholder><%="/>"%>
+	<%=@"<meta name=""keywords"" content="""%><asp:contentplaceholder id="cphCustomKeywords" runat="server" ><%=COMMON.Config.Title%></asp:contentplaceholder><%="/>"%>
+	
+	<meta name="copyright" content="F.biz" />
+	<meta name="author" content="F.biz - http://www.fbiz.com.br/" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="MSSmartTagsPreventParsing" content="TRUE" />
+	<meta name="robots" content="INDEX, FOLLOW" />
+
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="Fri, 13 Jul 2001 00:00:01 GMT" />
+
+	<link rel="shortcut icon" href="<%=COMMON.Util.GlobalPath%>img/favicon.ico" />
+	
+	<%
+		string bpc = string.Empty;
+		if(Request.QueryString["bpc"] == "1"){
+			bpc = "&bpc=" + Request.QueryString["bpc"];
+		}
+	%>
+	<link rel="stylesheet" type="text/css" href="<%=COMMON.Util.Root%>minify.aspx?main.css<%=bpc%>" media="screen" />
+	<script type="text/javascript" src="<%=COMMON.Util.Root%>minify.aspx?main.js|functions.js<%=bpc%>"></script>
+	<asp:contentplaceholder id="cphCustomHeader" runat="server" />
+</head>
+<body>
+	<form name="frm" id="frm" action="#" runat="server">
+		<div id="content">
+			<!--
+			
+			ooooo           oooooooooooo    ooooo          .o.                                          .o. 
+			`888'           `888'     `8    `888'         .888.                                         888 
+			 888             888             888         .8"888.                                        888 
+			 888             888oooo8        888        .8' `888.                                       Y8P 
+			 888             888    "        888       .88ooo8888.                                      `8' 
+			 888       o     888       o     888      .8'     `888.                                     .o. 
+			o888ooooood8    o888ooooood8    o888o    o88o     o8888o   ANTES DE PERGUNTAR PRO CARNEIRO  Y8P 
+
+			E DEPOIS ME APAGUE!
+
+			-->
+			<div>
+				<style type="text/css">
+					body{
+						padding:10px;
+					}
+					body, h1, h2, h3, p{
+						font-family: Arial, Verdana, "Trebuchet MS";
+						font-size:13px;
+					}
+					p, p *{
+						color: #818285;
+					}
+					h1, h2, h3{
+						color: #000000;
+					}
+					h1{
+						padding-bottom:5px;
+						border-bottom: 1px solid #818285;
+						font-size:22px;
+					}
+					h2{
+						font-size:19px;
+					}
+					h3{
+						font-size:13px;
+						margin-bottom:0px;
+					}
+					p{
+						margin-top:0;
+					}
+					code{
+						color: #FF8000;
+						font-weight:bold;
+					}
+					.collapseContainer{
+						width:45%;
+						margin-right:5%;
+						float:left;display:inline;
+					}
+					.collapse{
+						padding:10px;
+					}
+					.collapse:hover{
+						padding:10px;
+						background:#F5F5FA;
+					}
+				</style>
+				<h1>
+					Módulo padrão C# v15.4.0 - utf-8
+				</h1>
+				
+				<div class="collapseContainer">
+					<h2>Variáveis do servidor</h2>
+					<div class="collapse">
+						<p>
+							<strong>Sempre</strong> use as variáveis do servidor para chamar as páginas, assim não existe a dependência de um arquivo para uma pasta específica.
+						</p>
+						
+						<h3>Título do site</h3>
+						<p>
+							<code>&lt;%=COMMON.Config.Title%&gt;</code> = "<%=COMMON.Config.Title%>"
+						</p>
+						<h3>Endereço da raíz do site</h3>
+						<p>
+							<code>&lt;%=COMMON.Util.Root%&gt;</code> = "<%=COMMON.Util.Root%>"
+						</p>
+						<h3>Endereço da raíz dos arquivos externos globais</h3>
+						<p>
+							<code>&lt;%=COMMON.Util.GlobalPath%&gt;</code> = "<%=COMMON.Util.GlobalPath%>"
+						</p>
+						<h3>Endereço da raíz dos arquivos externos de uma lígua específica (a princípio é "pt-BR" hard)</h3>
+						<p>
+							<code>&lt;%=COMMON.Util.LanguagePath%&gt;</code> = "<%=COMMON.Util.LanguagePath%>"
+						</p>
+						<h3>Lígua atual (a princípio é "pt-BR" hard)</h3>
+						<p>
+							<code>&lt;%=COMMON.Util.Language%&gt;</code> = "<%=COMMON.Util.Language%>"
+						</p>
+						<p>
+							<em>Classes se encontram em \App_Code\Config.cs e \App_Code\Util.cs</em>
+						</p>
+					</div>
+				</div>
+				
+				<div class="collapseContainer">
+					<h2>minify.aspx</h2>
+					<div class="collapse">
+						<p>
+							<strong>Todos os JS e CSS</strong> devem passar pela "<strong><%=COMMON.Util.Root%>minify.aspx</strong>". Ela remove espaços duplos, enters, tabs e comentários, concatena arquivos em uma única requisição, mantém o arquivo em cache e retorna na compactação GZIP.
+							No caso dos css, substitui a string <strong>"var(root)/"</strong> por "<%=COMMON.Util.Root%>"
+						</p>
+						<p>
+							Para usar chame o arquivo da seguinte forma:<br />
+							"<code>&lt;%=COMMON.Util.Root%&gt;minify.aspx?main.css|estilo.css|estilo2.css</code>"<br />
+						</p>
+						<p>
+							Esta linha escreverá na página: <br />
+							"<%=COMMON.Util.Root%>minify.aspx?main.css|estilo.css|estilo2.css"
+						</p>
+						<p>
+							Caso queira chamar um css específico de alguma língua, use<br />
+							"<code>&lt;%=COMMON.Util.Root%&gt;minify.aspx?main.css|estilo.css,&lt;%=COMMON.Util.Language%&gt;|estilo2.css</code>"
+						</p>
+						<p>
+							Esta linha escreverá na página: <br />
+							"<%=COMMON.Util.Root%>minify.aspx?main.css|estilo.css,<%=COMMON.Util.Language%>|estilo2.css"
+						</p>
+						<p>
+							Para desabilitar o cache da minify, passe o parâmetro via querystring <code>bpc=1</code>.<br />
+							"<code>&lt;%=COMMON.Util.Root%&gt;minify.aspx?main.css|estilo.css,&lt;%=COMMON.Util.Language%&gt;|estilo2.css&amp;bpc=1</code>"<br />
+						</p>
+						<p>
+							Este parâmetro pode ser passado direto na página (no caso, a default.aspx):<br />
+							"<%=COMMON.Util.Root%>default.aspx?bpc=1"
+						</p>
+					</div>
+				</div>
+				
+				<br class="cb" />
+				<div class="collapseContainer">
+					<h2>MasterPage</h2>
+					<div class="collapse">
+						<p>
+							Todo o conteúdo padrão para as páginas estão no arquivo "<%=COMMON.Util.Root%>/MarterPage.master" <br />
+							Este arquivo servirá de modelo para as páginas internas.
+						</p>
+						<p>
+							Para criar um conteúdo variável, na MarterPage.master, crie a tag, que poderá ter um conteúdo "padrão":<br />
+							<code>&lt;asp:contentplaceholder id=&quot;cphID_CONTENT_PLACE_HOLDER&quot; runat=&quot;server&quot; &gt;<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;código padrão (se houver)<br />
+								&lt;/asp:contentplaceholder&gt;
+							</code><br />
+						</p>
+						<p>
+							No arquivo da página (no caso, a default.aspx), coloque a tag:<br />
+							<code>
+								&lt;asp:content contentplaceholderid=&quot;cphID_CONTENT_PLACE_HOLDER&quot; runat=&quot;server&quot;&gt;<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;código que entrará no lugar da tag<br />
+								&lt;/asp:content&gt;
+							</code>
+						</p>
+						<h3>Exemplos</h3>
+						<p>
+							Substituindo na default.aspx:<br />
+							<asp:contentplaceholder id="cphID_CONTENT_PLACE_HOLDER" runat="server" >Usar &lt;asp:content contentplaceholderid=&quot;cphTeste&quot; runat=&quot;server&quot;&gt; no aspx</asp:contentplaceholder>
+						</p>
+						<p>
+							Sem substituir na default.aspx:<br />
+							<asp:contentplaceholder id="cphID_CONTENT_PLACE_HOLDER2" runat="server" ><strong>Este conteúdo vem do arquivo MasterPage.master</strong></asp:contentplaceholder>
+						</p>
+					</div>
+				</div>
+			</div>
+			<!-- ME APAGUE! -->
+		</div>
+	</form>
+	
+	<%if(COMMON.Util.Root.IndexOf("localhost") <= 0){%>
+	<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		var pageTracker = _gat._getTracker("##CODE##");
+		pageTracker._trackPageview('<asp:contentplaceholder id="cphCustomAnalytics" runat="server" ></asp:contentplaceholder>');
+	</script>
+	<%}%>
+	
+	<script type="text/javascript">
+		Init.run();
+	</script>
+</body>
+</html>
