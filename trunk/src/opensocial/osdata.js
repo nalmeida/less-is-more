@@ -26,7 +26,7 @@ var OSData = {
 	onComplete: null,
 	verbose: false,
 	
-	version: '0.9.2',
+	version: '0.9.2.1',
 	require: 'opensocial-0.7, views, flash, setprefs',
 	user: {
 		owner: {
@@ -315,7 +315,7 @@ var OSData = {
 		//personObj.data 	= $dataObj; // All user data as the OpenSocial sent.
 		personObj.id   	= $dataObj.getField(opensocial.Person.Field.ID);
 		personObj.uid 	= _this._generateUID($dataObj.getField(opensocial.Person.Field.PROFILE_URL));
-		personObj.name 	= $dataObj.getField(opensocial.Person.Field.NAME).getField(opensocial.Name.Field.UNSTRUCTURED);
+		personObj.name 	= $dataObj.getDisplayName();
 		personObj.url 	= $dataObj.getField(opensocial.Person.Field.PROFILE_URL);
 		personObj.img 	= $dataObj.getField(opensocial.Person.Field.THUMBNAIL_URL);
 		try {
