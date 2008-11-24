@@ -4,7 +4,7 @@
 
 	@author Marcelo Miranda Carneiro - mail: mcarneiro@gmail.com. Thanks to Leandro Ribeiro and Nicholas Almeida.
 	@since 04/01/2008
-	@version 1.2.2
+	@version 1.2.3
 	@usage
 		<code>
 			// just call the Javascript file or CSS file as parameters:
@@ -92,9 +92,10 @@
 				stJs = stJs.Replace("\n", "").Replace("\r", "").Replace("\t", "");
 				stJs = stJs.Replace("  ", " ").Replace("  ", " ").Replace("  ", " ").Replace("  ", " ");
 				stJs = stJs.Replace("var(root)/", COMMON.Util.Root);
-				
 				stJs = obRegExBlockComm.Replace(stJs, ""); //delete block comments
 				Response.Write("/**\n * @author F.biz - http://www.fbiz.com.br/\n */\n");
+			}else{
+				stJs = stJs.Replace("var(root)/", COMMON.Util.Root);
 			}
 
 			Response.Write(stJs);
