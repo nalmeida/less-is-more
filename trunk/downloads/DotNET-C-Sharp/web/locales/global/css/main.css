@@ -20,6 +20,12 @@ hr{display:none;position:absolute;}
 	_overflow:visible;
 	zoom:1;
 }
+.hide{
+	visibility:hidden;
+	overflow:hidden;
+	height:1px;
+	margin-top:-1px;
+}
 /* --------------------------------------------------------------- Fonts */
 .al{text-align: left;}
 .ac{text-align: center;}
@@ -46,3 +52,4 @@ a:hover{text-decoration:underline;}
 	use "var(root)/" to identify the server root path. Ex.:
 	background:url(var(root)/locales/global/img/px.gif) 0 0 no-repeat;
 */
+
