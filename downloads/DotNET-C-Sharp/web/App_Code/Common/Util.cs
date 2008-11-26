@@ -9,9 +9,9 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
-namespace COMMON{
+namespace Common{
 	/**
-	 * COMMON.Util
+	 * Common.Util
 	 * @since 08/07/2008
 	 * @version 1.0
 	 * @author Regis Bittencourt - rbittencourt@fbiz.com.br, Marcelo Miranda Carneiro - mcarneiro@gmail.com
@@ -31,11 +31,11 @@ namespace COMMON{
 		}
 	
 	    /**
-		 * COMMON.Util.Root Returns the project root path
+		 * Common.Util.Root Returns the project root path
 		 * @return String the project root path
 		 * @usage
 				<code>
-					<%=COMMON.Util.Root;%> // writes "http://ROOT/"
+					<%=Common.Util.Root;%> // writes "http://ROOT/"
 				</code>
 		 */
 	    public static string Root{
@@ -46,11 +46,11 @@ namespace COMMON{
 	        }
 	    }
 	    /**
-		 * COMMON.Util.GlobalPath Returns the global path for external files (xml, css, jpg, gif, swf)
+		 * Common.Util.GlobalPath Returns the global path for external files (xml, css, jpg, gif, swf)
 		 * @return String the global path for external files (xml, css, jgs, gif, swf)
 		 * @usage
 				<code>
-					<%=COMMON.Util.GlobalPath;%> // writes "http://ROOT/locales/global/"
+					<%=Common.Util.GlobalPath;%> // writes "http://ROOT/locales/global/"
 				</code>
 		 */
 	    public static string GlobalPath{
@@ -59,11 +59,11 @@ namespace COMMON{
 	        }
 	    }
 	    /**
-		 * COMMON.Util.LanguagePath 
+		 * Common.Util.LanguagePath 
 		 * @return String the especific path for external files (xml, css, jpg, gif, swf)
 		 * @usage
 				<code>
-					<%=COMMON.Util.LanguagePath;%> // writes "http://ROOT/locales/pt-BR/"
+					<%=Common.Util.LanguagePath;%> // writes "http://ROOT/locales/pt-BR/"
 				</code>
 		 */
 	    public static string LanguagePath{
@@ -71,12 +71,48 @@ namespace COMMON{
 	            return Root + "locales/pt-BR/";
 	        }
 	    }
+		/**
+		 * Common.Util.Bpc 
+		 * @return String "&bpc=1" if parameter bpc=1 is passed at the site URL
+		 * @usage
+				<code>
+					<%=Common.Util.Bpc;%>
+				</code>
+		 */
+		public static string Bpc {
+			get {
+				string bpc = string.Empty;
+				if(HttpContext.Current.Request.QueryString["bpc"] == "1"){
+					bpc = "&bpc=1";
+				}
+			
+				return bpc;
+			}
+		}
+		/**
+		 * Common.Util.Version 
+		 * @return String "X.X.X"
+		 * @usage
+				<code>
+					<%=Common.Util.Version;%>
+				</code>
+		 */
+		public static string Version {
+			get {
+				string version = "1.0.0";
+				
+				if(Common.Util.Bpc != string.Empty) {
+					version = new Random().Next(100000000).ToString();
+				}
+				return version;
+			}
+		}
 	    /**
-		 * COMMON.Util.Language 
+		 * Common.Util.Language 
 		 * @return String the especific path for external files (xml, css, jpg, gif, swf)
 		 * @usage
 				<code>
-					<%=COMMON.Util.Language;%> // writes "pt-BR"
+					<%=Common.Util.Language;%> // writes "pt-BR"
 				</code>
 		 */
 	    public static string Language{

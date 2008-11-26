@@ -4,7 +4,7 @@
 
 	@author Marcelo Miranda Carneiro - mail: mcarneiro@gmail.com. Thanks to Leandro Ribeiro and Nicholas Almeida.
 	@since 04/01/2008
-	@version 1.2.3
+	@version 1.3.0
 	@usage
 		<code>
 			// just call the Javascript file or CSS file as parameters:
@@ -18,8 +18,8 @@
 		</code>
 	*/
 	private void Page_Load(object sender, System.EventArgs e){
-
 		
+		/*
 		if(Request.QueryString["bpc"] != "1"){
 			// CACHE
 			DateTime dtNowUnc = DateTime.Now.ToUniversalTime();
@@ -37,20 +37,23 @@
 			}
 			Response.Cache.SetLastModified(DateTime.Now);
 			Response.CacheControl = "public";
-			Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
 		}
+		*/
 		
 		// GZIP ENCODE
-		COMMON.Util.GZipEncodePage();
+		Common.Util.GZipEncodePage();
 		
+		Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
 		HttpContext.Current.Response.Charset = "UTF-8";
 
 		try{
+			string version = Request.QueryString["v"];
 			string[] vtArquivo = Request.QueryString[0].ToString().Split(Convert.ToChar("|"));
 			System.Text.StringBuilder sbToStrip = new System.Text.StringBuilder();
 			System.IO.StreamReader srArquivo;
 			System.Text.RegularExpressions.Regex obRegExBlockComm = new System.Text.RegularExpressions.Regex("/\\*[\\d\\D]*?\\*/");
 			System.Text.RegularExpressions.Regex obRegExLineComm = new System.Text.RegularExpressions.Regex("([^:^'^\"^\\\\])(//.*)");
+			System.Text.RegularExpressions.Regex obRegExVersion = new System.Text.RegularExpressions.Regex("url\\((.[^\\)]*)\\)");
 
 			string file = "";
 			string folder = "";
@@ -75,7 +78,7 @@
 			}else{
 				Response.ContentType = "text/javascript";
 				foreach (string stNomeArquivo in vtArquivo){
-					srArquivo = new System.IO.StreamReader(Server.MapPath("js/") + stNomeArquivo,System.Text.Encoding.GetEncoding("utf-8"));
+					srArquivo = new System.IO.StreamReader(Server.MapPath("js/") + stNomeArquivo, System.Text.Encoding.GetEncoding("utf-8"));
 					sbToStrip.Append(srArquivo.ReadToEnd());
 					sbToStrip.Append(";");
 					sbToStrip.Append(Environment.NewLine);
@@ -86,20 +89,24 @@
 			string stJs = sbToStrip.ToString();
 			
 			if(Request.QueryString["bpc"] != "1"){
-				stJs = obRegExLineComm.Replace(stJs, "$1"); //deleve line comments
+				stJs = obRegExLineComm.Replace(stJs, "$1"); // deleve line comments
 				
-				//remove unecessary characters
+				// remove unecessary characters
 				stJs = stJs.Replace("\n", "").Replace("\r", "").Replace("\t", "");
 				stJs = stJs.Replace("  ", " ").Replace("  ", " ").Replace("  ", " ").Replace("  ", " ");
-				stJs = stJs.Replace("var(root)/", COMMON.Util.Root);
-				stJs = obRegExBlockComm.Replace(stJs, ""); //delete block comments
+				stJs = stJs.Replace("var(root)/", Common.Util.Root);
+				stJs = obRegExBlockComm.Replace(stJs, ""); // delete block comments
 				Response.Write("/**\n * @author F.biz - http://www.fbiz.com.br/\n */\n");
+				
 			}else{
-				stJs = stJs.Replace("var(root)/", COMMON.Util.Root);
+				stJs = stJs.Replace("var(root)/", Common.Util.Root);
 			}
 
+			stJs = obRegExVersion.Replace(stJs, "url($1?v=" + version + ")"); // replace all images paths adding the v=version 
+			
 			Response.Write(stJs);
 
+			obRegExVersion = null;
 			obRegExBlockComm = null;
 			obRegExLineComm = null;
 			srArquivo = null;

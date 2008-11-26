@@ -9,20 +9,20 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
-namespace COMMON{
+namespace Common{
 	/**
-	 * COMMON.Config
+	 * Common.Config
 	 * @since 08/07/2008
 	 * @version 1.0
 	 * @author Regis Bittencourt - rbittencourt@fbiz.com.br, Marcelo Miranda Carneiro - mcarneiro@gmail.com
 	 */
 	public static class Config{
 	    /**
-		 * COMMON.Config.Title
+		 * Common.Config.Title
 		 * @return String the project title name
 		 * @usage
 				<code>
-					<%=COMMON.Config.Title%> //writes " - ##PAGE_TITLE##" on the page.
+					<%=Common.Config.Title%> //writes " - ##PAGE_TITLE##" on the page.
 				</code>
 		 */
 		public static string Title{
