@@ -120,25 +120,25 @@ namespace Common{
 	            return "pt-BR";
 	        }
 	    }
+		
 		private static bool IsGZipSupported() {
 		    string AcceptEncoding = HttpContext.Current.Request.Headers["Accept-Encoding"];
-		    if (!string.IsNullOrEmpty(AcceptEncoding) && AcceptEncoding.Contains("gzip") || AcceptEncoding.Contains("deflate"))
-				return true;
+		    if (!string.IsNullOrEmpty(AcceptEncoding))
+		        if (AcceptEncoding.Contains("gzip") || AcceptEncoding.Contains("deflate"))
+		            return true;
 		    return false;
 		}
 		public static void GZipEncodePage() {
-		    if (IsGZipSupported()) {
-		        HttpResponse Response = HttpContext.Current.Response;
-		        string AcceptEncoding = HttpContext.Current.Request.Headers["Accept-Encoding"];
-		        if (AcceptEncoding.Contains("gzip")) {
-		            Response.Filter =  new System.IO.Compression.GZipStream(Response.Filter, System.IO.Compression.CompressionMode.Compress);
-		            Response.AppendHeader("Content-Encoding", "gzip");
-		        } else {
-		            Response.Filter =  new System.IO.Compression.DeflateStream(Response.Filter, System.IO.Compression.CompressionMode.Compress);
-		            Response.AppendHeader("Content-Encoding", "deflate");
-		        }
+		    if (!IsGZipSupported()) return;
+		    HttpResponse Response = HttpContext.Current.Response;
+		    string AcceptEncoding = HttpContext.Current.Request.Headers["Accept-Encoding"];
+		    if (AcceptEncoding.Contains("gzip")) {
+		        Response.Filter =  new System.IO.Compression.GZipStream(Response.Filter, System.IO.Compression.CompressionMode.Compress);
+		        Response.AppendHeader("Content-Encoding", "gzip");
+		    } else {
+		        Response.Filter =  new System.IO.Compression.DeflateStream(Response.Filter, System.IO.Compression.CompressionMode.Compress);
+		        Response.AppendHeader("Content-Encoding", "deflate");
 		    }
 		}
-
 	}
 }
