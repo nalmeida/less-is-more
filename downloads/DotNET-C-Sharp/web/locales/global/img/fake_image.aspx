@@ -14,12 +14,22 @@
 	'		<img src="../img/fake_Image.aspx?quad=100" alt="teste" title="teste" /> ' gera imagem quadrada com 100px
 	'		<img src="../img/fake_Image.aspx?width=120&height=100" alt="teste" title="teste" /> ' gera imagem com 120 x 100px
 	'	</code>
-
+	Private Function stringToColor(ByVal paramValue As String) As System.Drawing.Color
+		Dim red As Integer
+		Dim green As Integer
+		Dim blue As Integer
+		red = (System.Int32.Parse(paramValue.Substring(0, (2) - (0)), System.Globalization.NumberStyles.AllowHexSpecifier))
+		green = (System.Int32.Parse(paramValue.Substring(2, (4) - (2)), System.Globalization.NumberStyles.AllowHexSpecifier))
+		blue = (System.Int32.Parse(paramValue.Substring(4, (6) - (4)), System.Globalization.NumberStyles.AllowHexSpecifier))
+		Return System.Drawing.Color.FromArgb(red, green, blue)
+	End Function
+	
 	Sub Page_Load(sender As Object, e As EventArgs)
 
 		Dim qQuad = Request.QueryString("quad")
 		Dim qWidth = Request.QueryString("width")
 		Dim qHeight = Request.QueryString("height")
+		Dim qColor = Request.QueryString("color")
 		
 		if qQuad <> "" then
 			qWidth = qQuad
@@ -34,10 +44,15 @@
 			end if
 		end if
 		
+		if qColor = "" then
+			qColor = "E4E4E4"
+		else if qColor.length <> 6 then
+				qColor = "E4E4E4"
+		end if
+		
 		Dim letterWidth as Integer = 5.5
 		Dim letterHeight as Integer = 9
 		Dim fontSize as Integer = 9
-		
 		
 		Dim width as Integer = Convert.ToInt32(qWidth)
 		Dim height as Integer = Convert.ToInt32(qHeight)
@@ -45,12 +60,12 @@
 		Dim oBitmap As Bitmap = New Bitmap(width,height)
 		
 		Dim oGraphic As Graphics = Graphics.FromImage(oBitmap)
-		
 
 		Dim sText As String = width & "x" & height
 		Dim sFont As String = "Courier"
-
-		Dim oBrush As New SolidBrush(Color.LightGray)
+		Dim ccolor As Color = stringToColor(qColor)
+		
+		Dim oBrush As New SolidBrush(ccolor)
 		Dim oBrushWrite As New SolidBrush(Color.Black)
 
 		oGraphic.FillRectangle(oBrush, 0, 0, width, height)
