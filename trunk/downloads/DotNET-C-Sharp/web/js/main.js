@@ -225,7 +225,6 @@ function getPos(obj) {
 		}
 	}
 	return {x:curleft,y:curtop};
-	}
 };
 function docH(){
 	return is.ie ? document.body.scrollHeight : document.height;
