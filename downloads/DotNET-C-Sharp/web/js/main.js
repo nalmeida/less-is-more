@@ -219,12 +219,13 @@ function getPos(obj) {
 	if (obj.offsetParent) {
 		curleft = obj.offsetLeft;
 		curtop = obj.offsetTop;
-		while (obj == obj.offsetParent) {
+		while (obj = obj.offsetParent) {
 			curleft += obj.offsetLeft;
 			curtop += obj.offsetTop;
 		}
 	}
-	return [curleft,curtop];
+	return {x:curleft,y:curtop};
+	}
 };
 function docH(){
 	return is.ie ? document.body.scrollHeight : document.height;
