@@ -232,12 +232,10 @@ function docH(){
 function docW(){
 	return is.ie ? document.body.scrollWidth : document.width;
 };
-function winW() {
-    return is.ie ? document.body.clientWidth : window.innerWidth;
-};
-function winH() {
-    return is.ie ? document.body.clientHeight : window.innerHeight;
-};
+
+function winW(){return window.innerWidth ? window.innerWidth : document.documentElement.offsetWidth;}
+function winH(){return window.innerHeight ? window.innerHeight : document.documentElement.offsetHeight;}
+
 if(is.ie5 || is.ns4) alert('A versão de navegador que você está usando não é compatível com este site.\nAtualize-o para que todos os elementos funcionem corretamente.');
 
 /**************************************
