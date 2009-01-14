@@ -210,18 +210,27 @@
 		</div>
 	</form>
 	
-	<%if(Common.Util.Root.IndexOf("localhost") <= 0){%>
+	<%if(Common.Util.Root.Contains(".")){%>
 	<script type="text/javascript">
 		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
 	</script>
 	<script type="text/javascript">
 		var pageTracker = _gat._getTracker("##CODE##");
-		pageTracker._trackPageview('<asp:contentplaceholder id="cphCustomAnalytics" runat="server" ></asp:contentplaceholder>');
+	</script>
+	<%} else {%>
+	<script type="text/javascript">
+		var pageTracker = {
+			_trackPageview: function (w){
+				if(window['console']){
+					if(console.info) console.info('analytics: "' + w + '"');
+				}
+			}
+		};
 	</script>
 	<%}%>
-	
 	<script type="text/javascript">
+		pageTracker._trackPageview('<asp:contentplaceholder id="cphCustomAnalytics" runat="server" ></asp:contentplaceholder>');
 		Init.run();
 	</script>
 </body>
