@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt" lang="pt">
 <head>
 	<title><%=Common.Config.Title%></title>
-	<%=@"<meta name=""description"" content="""%><asp:contentplaceholder id="cphCustomDescription" runat="server" ><%=Common.Config.Title%></asp:contentplaceholder><%=@""" />"%>
-	<%=@"<meta name=""keywords"" content="""%><asp:contentplaceholder id="cphCustomKeywords" runat="server" ><%=Common.Config.Title%></asp:contentplaceholder><%=@""" />"%>
+	<%=@"<meta name=""description"" content="""%><asp:contentplaceholder id="cphCustomDescription" runat="server" ><%#Common.Config.Title%></asp:contentplaceholder><%=@""" />"%>
+	<%=@"<meta name=""keywords"" content="""%><asp:contentplaceholder id="cphCustomKeywords" runat="server" ><%#Common.Config.Title%></asp:contentplaceholder><%=@""" />"%>
 	
 	<meta name="copyright" content="F.biz" />
 	<meta name="author" content="F.biz - http://www.fbiz.com.br/" />
@@ -202,6 +202,10 @@
 						<p>
 							Sem substituir na default.aspx:<br />
 							<asp:contentplaceholder id="cphID_CONTENT_PLACE_HOLDER2" runat="server" ><strong>Este conteúdo vem do arquivo MasterPage.master</strong></asp:contentplaceholder>
+						</p>
+						<p>
+						    <strong>PS:</strong>Quando for colocar uma tag asp (ex: &lt;%=Variavel  %&gt;) dentro do conteúdo default de um 
+						    contentplaceholder usar o "#" no lugar do "=" (ex: &lt;%#Variavel  %&gt;) , senão o conteúdo não será substituído nas páginas filhas.
 						</p>
 					</div>
 				</div>
