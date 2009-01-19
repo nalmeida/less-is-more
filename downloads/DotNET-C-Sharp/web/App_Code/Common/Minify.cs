@@ -117,6 +117,7 @@ namespace Common
 
             string filePath;
             DateTime fileLastModified;
+			bool isError = false;
             if (vtArquivo[0].Contains(".css"))
             {
                 foreach (string stNomeArquivo in vtArquivo)
@@ -139,13 +140,21 @@ namespace Common
                     fileLastModified = File.GetLastWriteTime(filePath);
                     lastModifiedFileGlobal = fileLastModified > lastModifiedFileGlobal ? fileLastModified : lastModifiedFileGlobal;
                     
-                    srArquivo = new StreamReader(filePath, utf8);
+                    try
+					{
+					srArquivo = new StreamReader(filePath, utf8);
                     sbToStrip.Append(srArquivo.ReadToEnd());
                     sbToStrip.Append(Environment.NewLine);
                     srArquivo.Close();
+					}
+					catch
+					{
+						isError = true;
+						sbToStrip.Append("/* ERROR:  Missing file " + filePath + " */");
+					}
                 }
             }
-            else
+            if (vtArquivo[0].Contains(".js"))
             {
                 Response.ContentType = "text/javascript";
                 foreach (string stNomeArquivo in vtArquivo)
@@ -167,7 +176,7 @@ namespace Common
             //DO CLEANING AND TAG REPLACING
             string stContent = sbToStrip.ToString();
 
-            if (Util.Bpc == string.Empty)
+            if (Util.Bpc == string.Empty && !isError)
             {
                 stContent = Regex.Replace(stContent, "([^:^'^\"^\\\\])(//.*)", "$1"); // delete line comments
 
