@@ -32,6 +32,7 @@ hr{display:none;position:absolute;}
 .ar{text-align: right;}
 .txtErro{color:red;}
 /* --------------------------------------------------------------- Formularios */
+input[type="hidden"]{visibility:hidden;}
 input, select, textarea{color:#000;border: #404040 1px solid;background-color:#fff;}
 textarea{overflow:auto;}
 .fixSelect{vertical-align: 0 !important;vertical-align: -2px;}
