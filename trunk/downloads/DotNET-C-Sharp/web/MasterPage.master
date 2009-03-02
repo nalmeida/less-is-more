@@ -22,7 +22,7 @@
 	<asp:contentplaceholder id="cphCustomHeader" runat="server" />
 </head>
 <body>
-	<form name="frm" id="frm" action="#" runat="server">
+	<form name="frm" id="frm" runat="server">
 		<div id="content">
 			<!--
 			
