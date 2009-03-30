@@ -205,10 +205,6 @@ function createElm(e, n){
 	return graft(e, n);
 };
 
-String.prototype.trim = function(){
-	return this.replace(/^ +(.*[^ ]) +$/, "$1");
-}
-
 function delElm(id){
 	var e = typeof(id) == 'object' ? id : $(id);
 	try{
@@ -290,9 +286,9 @@ var Init = {
 
 String.prototype.trim = function(){
 	return this.replace(/^\s*(.*[^ ])\s*$/, "$1");
-}
+};
 
 String.prototype.wordLimiter = function($count){
 	var reg = new RegExp('\\s*(?:\\S+\\s*){1,'+$count+'}','gi');
 	return this.match(reg)[0].trim();
-}
+};
