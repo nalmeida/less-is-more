@@ -1,6 +1,5 @@
 /* --------------------------------------------------------------- Reset */
-body,div,td,p,span,img,input,select,textarea {font-family: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;font-size:11px;color:#000;}
-body{background-color:#fff;min-width:980px;text-shadow: #000 0 0 0;}
+body{background-color:#fff; min-width:980px; text-shadow: #000 0 0 0; font-family: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;font-size:11px;color:#000;}
 body *{outline:none;}
 body,div,ol,ul,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {margin:0;padding:0;}
 fieldset,img,abbr,acronym{border: 0px;}
