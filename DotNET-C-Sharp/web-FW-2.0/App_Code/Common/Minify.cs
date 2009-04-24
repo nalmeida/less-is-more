@@ -58,43 +58,48 @@ namespace Common
 
         public void DoCache(HttpContext context, DateTime lastModifiedUnc)
         {
-            string sDtModHdr = string.Empty;
-            sDtModHdr = Request.Headers.Get("If-Modified-Since");
-            // does header contain If-Modified-Since?
-            if (!string.IsNullOrEmpty(sDtModHdr))
-            {
-                sDtModHdr = sDtModHdr.Split(';')[0];
-                // convert to UNC date
-                DateTime dtModHdrUnc = Convert.ToDateTime(sDtModHdr).ToUniversalTime();
-                dtModHdrUnc = dtModHdrUnc.AddMilliseconds(dtModHdrUnc.Millisecond * -1);
-                lastModifiedUnc = lastModifiedUnc.ToUniversalTime();
-                lastModifiedUnc = lastModifiedUnc.AddMilliseconds(lastModifiedUnc.Millisecond * -1);
+            try
+			{
+				string sDtModHdr = string.Empty;
+				sDtModHdr = Request.Headers.Get("If-Modified-Since");
+				// does header contain If-Modified-Since?
+				if (!string.IsNullOrEmpty(sDtModHdr))
+				{
+					
+					sDtModHdr = sDtModHdr.Split(';')[0];
+					// convert to UNC date
+					DateTime dtModHdrUnc = Convert.ToDateTime(sDtModHdr).ToUniversalTime();
+					dtModHdrUnc = dtModHdrUnc.AddMilliseconds(dtModHdrUnc.Millisecond * -1);
+					lastModifiedUnc = lastModifiedUnc.ToUniversalTime();
+					lastModifiedUnc = lastModifiedUnc.AddMilliseconds(lastModifiedUnc.Millisecond * -1);
 
-                // if it was within the last month, return 304 and exit
-                if (DateTime.Compare(
-                    new DateTime(
-                    dtModHdrUnc.Year, 
-                    dtModHdrUnc.Month, 
-                    dtModHdrUnc.Day, 
-                    dtModHdrUnc.Hour,
-                    dtModHdrUnc.Minute, 
-                    dtModHdrUnc.Second), 
-                    new DateTime(
-                    lastModifiedUnc.Year,
-                    lastModifiedUnc.Month,
-                    lastModifiedUnc.Day,
-                    lastModifiedUnc.Hour,
-                    lastModifiedUnc.Minute,
-                    lastModifiedUnc.Second)) == 0)
-                {
-                    Response.StatusCode = 304;
-                    Response.StatusDescription = "Not Modified";
-                    Response.CacheControl = "public";
-                    Response.End();
-                }
-            }
-            Response.Cache.SetLastModified(lastModifiedUnc);
-            Response.CacheControl = "public";
+					// if it was within the last month, return 304 and exit
+					if (DateTime.Compare(
+						new DateTime(
+						dtModHdrUnc.Year, 
+						dtModHdrUnc.Month, 
+						dtModHdrUnc.Day, 
+						dtModHdrUnc.Hour,
+						dtModHdrUnc.Minute, 
+						dtModHdrUnc.Second), 
+						new DateTime(
+						lastModifiedUnc.Year,
+						lastModifiedUnc.Month,
+						lastModifiedUnc.Day,
+						lastModifiedUnc.Hour,
+						lastModifiedUnc.Minute,
+						lastModifiedUnc.Second)) == 0)
+					{
+						Response.StatusCode = 304;
+						Response.StatusDescription = "Not Modified";
+						Response.CacheControl = "public";
+						Response.End();
+					}
+				}
+				Response.Cache.SetLastModified(lastModifiedUnc);
+				Response.CacheControl = "public";
+			}
+			catch {}
         }
 
         public void ProcessRequest(HttpContext context)
