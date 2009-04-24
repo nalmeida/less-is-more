@@ -83,7 +83,7 @@ namespace Common{
 			get {
 				string bpc = string.Empty;
 				if(HttpContext.Current.Request.QueryString["bpc"] == "1"){
-					bpc = "&amp;bpc=1";
+					bpc = "&bpc=1";
 				}
 			
 				return bpc;
@@ -122,23 +122,31 @@ namespace Common{
 	    }
 		
 		private static bool IsGZipSupported() {
-		    string AcceptEncoding = HttpContext.Current.Request.Headers["Accept-Encoding"];
-		    if (!string.IsNullOrEmpty(AcceptEncoding))
-		        if (AcceptEncoding.Contains("gzip") || AcceptEncoding.Contains("deflate"))
-		            return true;
+			try 
+			{
+				string AcceptEncoding = HttpContext.Current.Request.Headers["Accept-Encoding"];
+				if (!string.IsNullOrEmpty(AcceptEncoding))
+					if (AcceptEncoding.Contains("gzip") || AcceptEncoding.Contains("deflate"))
+						return true;
+			}
+			catch {}
 		    return false;
 		}
 		public static void GZipEncodePage() {
-		    if (!IsGZipSupported()) return;
-		    HttpResponse Response = HttpContext.Current.Response;
-		    string AcceptEncoding = HttpContext.Current.Request.Headers["Accept-Encoding"];
-		    if (AcceptEncoding.Contains("gzip")) {
-		        Response.Filter =  new System.IO.Compression.GZipStream(Response.Filter, System.IO.Compression.CompressionMode.Compress);
-		        Response.AppendHeader("Content-Encoding", "gzip");
-		    } else {
-		        Response.Filter =  new System.IO.Compression.DeflateStream(Response.Filter, System.IO.Compression.CompressionMode.Compress);
-		        Response.AppendHeader("Content-Encoding", "deflate");
-		    }
+			try 
+			{
+				if (!IsGZipSupported()) return;
+				HttpResponse Response = HttpContext.Current.Response;
+				string AcceptEncoding = HttpContext.Current.Request.Headers["Accept-Encoding"];
+				if (AcceptEncoding.Contains("gzip")) {
+					Response.Filter =  new System.IO.Compression.GZipStream(Response.Filter, System.IO.Compression.CompressionMode.Compress);
+					Response.AppendHeader("Content-Encoding", "gzip");
+				} else {
+					Response.Filter =  new System.IO.Compression.DeflateStream(Response.Filter, System.IO.Compression.CompressionMode.Compress);
+					Response.AppendHeader("Content-Encoding", "deflate");
+				}
+			}
+			catch {}
 		}
 	}
 }
