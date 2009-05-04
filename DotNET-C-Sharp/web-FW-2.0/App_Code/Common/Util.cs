@@ -82,9 +82,7 @@ namespace Common{
 		public static string Bpc {
 			get {
 				string bpc = string.Empty;
-				if(HttpContext.Current.Request.QueryString["bpc"] == "1"){
-					bpc = "&bpc=1";
-				}
+				if(HttpContext.Current.Request.QueryString["bpc"] != ""){					bpc = "&bpc="+HttpContext.Current.Request.QueryString["bpc"];				}
 			
 				return bpc;
 			}
