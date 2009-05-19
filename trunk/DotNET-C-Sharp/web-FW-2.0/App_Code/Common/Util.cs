@@ -81,10 +81,7 @@ namespace Common{
 		 */
 		public static string Bpc {
 			get {
-				string bpc = string.Empty;
-				if(HttpContext.Current.Request.QueryString["bpc"] != ""){					bpc = "&bpc="+HttpContext.Current.Request.QueryString["bpc"];				}
-			
-				return bpc;
+				return HttpContext.Current.Request.QueryString["bpc"];
 			}
 		}
 		/**
@@ -99,7 +96,7 @@ namespace Common{
 			get {
 				string version = "1.0.0";
 				
-				if(Common.Util.Bpc != string.Empty) {
+				if(Common.Util.Bpc != null) {
 					version = new Random().Next(100000000).ToString();
 				}
 				return version;

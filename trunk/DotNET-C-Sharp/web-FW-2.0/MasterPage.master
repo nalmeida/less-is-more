@@ -17,8 +17,8 @@
 
 	<link rel="shortcut icon" href="<%=Common.Util.GlobalPath%>img/favicon.ico" />
 	
-	<link rel="stylesheet" type="text/css" href="<%=Common.Util.Root%>minify.aspx?main.css<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>" media="screen" />
-	<script type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?main.js|functions.js<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>"></script>
+	<link rel="stylesheet" type="text/css" href="<%=Common.Util.Root%>minify.aspx?main.css&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>" media="screen" />
+	<script type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?main.js|functions.js&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>"></script>
 	<asp:contentplaceholder id="cphCustomHeader" runat="server" />
 </head>
 <body>
@@ -118,6 +118,11 @@
 						<h3>Lígua atual (a princípio é "pt-BR" hard)</h3>
 						<p>
 							<code>&lt;%=Common.Util.Language%&gt;</code> = "<%=Common.Util.Language%>"
+						</p>
+						<h3>Bypass cache</h3>
+						<p>
+							"Debug mode" (minify é ignorada)<br />
+							<code>&lt;%=Common.Util.Bpc%&gt;</code> =  "<%=Common.Util.Bpc%>" - Bypass cache? "<%=(Common.Util.Bpc != null)%>"
 						</p>
 						<h3>Versão</h3>
 						<p>
