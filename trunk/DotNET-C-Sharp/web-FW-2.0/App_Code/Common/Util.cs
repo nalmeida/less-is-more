@@ -13,7 +13,7 @@ namespace Common{
 	/**
 	 * Common.Util
 	 * @since 08/07/2008
-	 * @version 1.0
+	 * @version 1.0.1
 	 * @author Regis Bittencourt - rbittencourt@fbiz.com.br, Marcelo Miranda Carneiro - mcarneiro@gmail.com
 	 */
 	public static class Util{
@@ -96,7 +96,7 @@ namespace Common{
 			get {
 				string version = "1.0.0";
 				
-				if(Common.Util.Bpc != null) {
+				if(Common.Util.Bpc != null && Common.Util.Bpc != "") {
 					version = new Random().Next(100000000).ToString();
 				}
 				return version;
@@ -131,8 +131,8 @@ namespace Common{
 			try 
 			{
 				if (!IsGZipSupported()) return;
-				HttpResponse Response = HttpContext.Current.Response;
 				string AcceptEncoding = HttpContext.Current.Request.Headers["Accept-Encoding"];
+				HttpResponse Response = HttpContext.Current.Response;
 				if (AcceptEncoding.Contains("gzip")) {
 					Response.Filter =  new System.IO.Compression.GZipStream(Response.Filter, System.IO.Compression.CompressionMode.Compress);
 					Response.AppendHeader("Content-Encoding", "gzip");
