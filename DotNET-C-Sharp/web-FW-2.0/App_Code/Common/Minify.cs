@@ -11,54 +11,54 @@ using System.Text.RegularExpressions;
 Minify
 
 @author Marcelo Miranda Carneiro - mail: mcarneiro@gmail.com. Thanks to Leandro Ribeiro and Nicholas Almeida.
- * updated Regis Bittencourt - changed into a http handler .net class. 
+* updated Regis Bittencourt - changed into a http handler .net class. 
 @since 04/01/2008
-@version 2.0.0
+@version 2.0.1
 @usage
-    <code>
-	    // just call the Javascript file or CSS file as parameters:
-	    <script type="text/javascript" src="minify.aspx?file1.js|file2.js"><\/script>
-	    <style type="text/css" src="minify.aspx?file1.css|file2.css"></style>
-	    // to call a specific language css
-	    <style type="text/css" src="minify.aspx?file1.css|file2.css,pt-BR"></style>
-	    // CSSs that will load:
-	    // <root>/locales/global/css/file1.css
-	    // <root>/locales/pt-BR/css/file2.css
-    </code>
+	<code>
+		// just call the Javascript file or CSS file as parameters:
+		<script type="text/javascript" src="minify.aspx?file1.js|file2.js"><\/script>
+		<style type="text/css" src="minify.aspx?file1.css|file2.css"></style>
+		// to call a specific language css
+		<style type="text/css" src="minify.aspx?file1.css|file2.css,pt-BR"></style>
+		// CSSs that will load:
+		// <root>/locales/global/css/file1.css
+		// <root>/locales/pt-BR/css/file2.css
+	</code>
 */
 
 
 namespace Common
 {
-    public class Minify : IHttpHandler
-    {
+	public class Minify : IHttpHandler
+	{
 
-        private HttpServerUtility _server;
-        public HttpServerUtility Server
-        {
-            get { return _server; }
-            set { _server = value; }
-        }
-
-
-        private HttpRequest _request;
-        public HttpRequest Request
-        {
-            get { return _request; }
-            set { _request = value; }
-        }
+		private HttpServerUtility _server;
+		public HttpServerUtility Server
+		{
+			get { return _server; }
+			set { _server = value; }
+		}
 
 
-        private HttpResponse _response;
-        public HttpResponse Response
-        {
-            get { return _response; }
-            set { _response = value; }
-        }
+		private HttpRequest _request;
+		public HttpRequest Request
+		{
+			get { return _request; }
+			set { _request = value; }
+		}
 
-        public void DoCache(HttpContext context, DateTime lastModifiedUnc)
-        {
-            try
+
+		private HttpResponse _response;
+		public HttpResponse Response
+		{
+			get { return _response; }
+			set { _response = value; }
+		}
+
+		public void DoCache(HttpContext context, DateTime lastModifiedUnc)
+		{
+			try
 			{
 				string sDtModHdr = string.Empty;
 				sDtModHdr = Request.Headers.Get("If-Modified-Since");
@@ -100,129 +100,117 @@ namespace Common
 				Response.CacheControl = "public";
 			}
 			catch {}
-        }
+		}
 
-        public void ProcessRequest(HttpContext context)
-        {
-            Request = context.Request;
-            Response = context.Response;
-            Server = context.Server;
+		public void ProcessRequest(HttpContext context)
+		{
+			Request = context.Request;
+			Response = context.Response;
+			Server = context.Server;
 
-           
-            // READING FILES
-            StringBuilder sbToStrip = new StringBuilder();
-            string file = string.Empty;
-            string folder = string.Empty;
+		
+			// READING FILES
+			StringBuilder sbToStrip = new StringBuilder();
+			string file = string.Empty;
+			string folder = string.Empty;
 
-            string[] vtArquivo = Request.QueryString[0].ToString().Split(Convert.ToChar("|"));
+			string[] vtArquivo = Request.QueryString[0].ToString().Split(Convert.ToChar("|"));
 
-            Encoding utf8 = Encoding.GetEncoding("utf-8");
-            StreamReader srArquivo;
-            DateTime lastModifiedFileGlobal = DateTime.MinValue;
+			Encoding utf8 = Encoding.GetEncoding("utf-8");
+			StreamReader srArquivo;
+			DateTime lastModifiedFileGlobal = DateTime.MinValue;
 
-            string filePath;
-            DateTime fileLastModified;
+			string filePath;
+			DateTime fileLastModified;
 			bool isError = false;
-            if (vtArquivo[0].Contains(".css"))
-            {
-                foreach (string stNomeArquivo in vtArquivo)
-                {
-                    Response.ContentType = "text/css";
-                    // set folder and file name
-                    if (stNomeArquivo.Contains(","))
-                    {
-                        string[] fileFolder = stNomeArquivo.Split(',');
-                        file = fileFolder[0];
-                        folder = fileFolder[1];
-                    }
-                    else
-                    {
-                        file = stNomeArquivo;
-                        folder = "global";
-                    }
-                    filePath = Server.MapPath("locales/" + folder + "/css/").ToString() + file;
+			if (vtArquivo[0].Contains(".css"))
+			{
+				foreach (string stNomeArquivo in vtArquivo)
+				{
+					Response.ContentType = "text/css";
+					// set folder and file name
+					if (stNomeArquivo.Contains(","))
+					{
+						string[] fileFolder = stNomeArquivo.Split(',');
+						file = fileFolder[0];
+						folder = fileFolder[1];
+					}
+					else
+					{
+						file = stNomeArquivo;
+						folder = "global";
+					}
+					filePath = Server.MapPath("locales/" + folder + "/css/").ToString() + file;
 
-                    fileLastModified = File.GetLastWriteTime(filePath);
-                    lastModifiedFileGlobal = fileLastModified > lastModifiedFileGlobal ? fileLastModified : lastModifiedFileGlobal;
-                    
-                    try
+					fileLastModified = File.GetLastWriteTime(filePath);
+					lastModifiedFileGlobal = fileLastModified > lastModifiedFileGlobal ? fileLastModified : lastModifiedFileGlobal;
+					
+					try
 					{
 					srArquivo = new StreamReader(filePath, utf8);
-                    sbToStrip.Append(srArquivo.ReadToEnd());
-                    sbToStrip.Append(Environment.NewLine);
-                    srArquivo.Close();
+					sbToStrip.Append(srArquivo.ReadToEnd());
+					sbToStrip.Append(Environment.NewLine);
+					srArquivo.Close();
 					}
 					catch
 					{
 						isError = true;
 						sbToStrip.Append("/* ERROR:  Missing file " + filePath + " */");
 					}
-                }
-            }
-            if (vtArquivo[0].Contains(".js"))
-            {
-                Response.ContentType = "text/javascript";
-                foreach (string stNomeArquivo in vtArquivo)
-                {
-                    filePath = Server.MapPath("js/") + stNomeArquivo;
+				}
+			}
+			if (vtArquivo[0].Contains(".js"))
+			{
+				Response.ContentType = "text/javascript";
+				foreach (string stNomeArquivo in vtArquivo)
+				{
+					filePath = Server.MapPath("js/") + stNomeArquivo;
 
-                    fileLastModified = File.GetLastWriteTime(filePath);
-                    lastModifiedFileGlobal = fileLastModified > lastModifiedFileGlobal ? fileLastModified : lastModifiedFileGlobal;
+					fileLastModified = File.GetLastWriteTime(filePath);
+					lastModifiedFileGlobal = fileLastModified > lastModifiedFileGlobal ? fileLastModified : lastModifiedFileGlobal;
 
-                    srArquivo = new StreamReader(filePath, utf8);
-                    sbToStrip.Append(srArquivo.ReadToEnd());
-                    sbToStrip.Append(";");
-                    sbToStrip.Append(Environment.NewLine);
-                    srArquivo.Close();
-                };
-            }
+					srArquivo = new StreamReader(filePath, utf8);
+					sbToStrip.Append(srArquivo.ReadToEnd());
+					sbToStrip.Append(";");
+					sbToStrip.Append(Environment.NewLine);
+					srArquivo.Close();
+				};
+			}
 
-            
-            //DO CLEANING AND TAG REPLACING
-            string stContent = sbToStrip.ToString();
+			
+			//DO REPLACEMENT
+			string stContent = sbToStrip.ToString();
 
-            if (Util.Bpc == string.Empty && !isError)
-            {
-                stContent = Regex.Replace(stContent, "([^:^'^\"^\\\\])(//.*)", "$1"); // delete line comments
+			// CSS
+			if (vtArquivo[0].Contains(".css")){
+				stContent = stContent.Replace("var(root)/", Common.Util.Root); // replace root tag
+				if(Request.QueryString["v"] != null){
+					stContent = Regex.Replace(stContent, "url\\((.[^\\)]*\\?.*)\\)", "url($1&v=" + Request.QueryString["v"] + ")"); // replace all images paths with a query adding the &v=version 
+					stContent = Regex.Replace(stContent, "url\\((.[^\\)\\?]*)\\)", "url($1?v=" + Request.QueryString["v"] + ")"); // replace all images paths adding the ?v=version 
+				}
+			}
 
-                // remove unecessary characters
-                stContent = stContent.Replace("\n", string.Empty).Replace("\r", string.Empty).Replace("\t", string.Empty);
-                stContent = stContent.Replace("  ", " ").Replace("  ", " ").Replace("  ", " ").Replace("  ", " ");
-                
-                stContent = stContent.Replace("var(root)/", Common.Util.Root); // replace root tag
-                
-                stContent = Regex.Replace(stContent, "/\\*[\\d\\D]*?\\*/", string.Empty); // delete block comments
-            }
-            {
-                stContent = stContent.Replace("var(root)/", Common.Util.Root); // replace root tag
-            }
+			
+			// CACHE
+			if (Util.Bpc == null || Util.Bpc == ""){
+				DoCache(context, lastModifiedFileGlobal);
+			}
 
-            stContent = Regex.Replace(stContent, "url\\((.[^\\)]*)\\)", "url($1?v=" + Request.QueryString["v"] + ")"); // replace all images paths adding the v=version 
+			// GZIP ENCODE
+			Util.GZipEncodePage();
+			
+			//OUTPUT
+			Response.Write("/**\n * @author F.biz - http://www.fbiz.com.br/\n */\n");
+			Response.Write(stContent);
+		}
 
+		public bool IsReusable
+		{
+			get
+			{
+				return true;
+			}
+		}
 
-            // CACHE
-            if (Util.Bpc == string.Empty)
-            {
-                DoCache(context, lastModifiedFileGlobal);
-            }
-
-            // GZIP ENCODE
-            Util.GZipEncodePage();
-
-            
-            //OUTPUT
-
-            Response.Write("/**\n * @author F.biz - http://www.fbiz.com.br/\n */\n");
-            Response.Write(stContent);
-        }
-
-        public bool IsReusable
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-    }
+	}
 }
