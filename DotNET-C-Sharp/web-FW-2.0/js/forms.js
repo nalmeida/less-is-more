@@ -44,6 +44,7 @@ function clear_all_validations(){
 	for(var itr=0;itr < this.formobj.elements.length;itr++){
 		this.formobj.elements[itr].validationset = null;
 	};
+	this.formobj.addnlvalidation = null;
 };
 function customAlert(d,t,s){
 	if(!gElm(d) || !gElm(t)) {
