@@ -1,7 +1,7 @@
-/**
+ï»¿/**
  * @author	Nicholas Almeida
  * @author	Marcelo Carneiro
- * @version	4.1.0
+ * @version	4.2.0
  */
 function isDef(S) {
     return (eval('typeof(' + S + ')') != 'undefined' && eval('typeof(' + S + ')') != 'unknown');
@@ -55,7 +55,7 @@ function openPop(u, n, w, h, c, s, o) {
 			popup.focus();
 			return false;
 		} catch(error) {
-			alert('Você deve desabilitar o recurso de anti pop-up para acessar este link.');
+			alert('VocÃª deve desabilitar o recurso de anti pop-up para acessar este link.');
 			return false;
 		}
 	}, 300);
@@ -179,11 +179,11 @@ function graft(parent, t, doc) {
                 for(var k in t[i]) {
                     // support for attaching closures to DOM objects
 					if(k == 'style' && is.ie) { 
-						e.style.cssText = t[i][k]; // correção para IE aplicar o style corretamente.
+						e.style.cssText = t[i][k]; // correÃ§Ã£o para IE aplicar o style corretamente.
                     } else if(typeof(t[i][k])=='function'){
-                        e[k] = t[i][k]; // aplicar função
+                        e[k] = t[i][k]; // aplicar funÃ§Ã£o
                     } else {
-						if (k == 'class') e.className = t[i][k]; // correção para o atributo class
+						if (k == 'class') e.className = t[i][k]; // correÃ§Ã£o para o atributo class
 						
 						e.setAttribute( k, t[i][k] );
                     }
@@ -219,12 +219,12 @@ function getPos(obj) {
 	if (obj.offsetParent) {
 		curleft = obj.offsetLeft;
 		curtop = obj.offsetTop;
-		while (obj == obj.offsetParent) {
+		while (obj = obj.offsetParent) {
 			curleft += obj.offsetLeft;
 			curtop += obj.offsetTop;
 		}
 	}
-	return [curleft,curtop];
+	return {x:curleft,y:curtop};
 };
 function docH(){
 	return is.ie ? document.body.scrollHeight : document.height;
@@ -232,13 +232,11 @@ function docH(){
 function docW(){
 	return is.ie ? document.body.scrollWidth : document.width;
 };
-function winW() {
-    return is.ie ? document.body.clientWidth : window.innerWidth;
-};
-function winH() {
-    return is.ie ? document.body.clientHeight : window.innerHeight;
-};
-if(is.ie5 || is.ns4) alert('A versão de navegador que você está usando não é compatível com este site.\nAtualize-o para que todos os elementos funcionem corretamente.');
+
+function winW(){return window.innerWidth ? window.innerWidth : document.documentElement.offsetWidth;}
+function winH(){return window.innerHeight ? window.innerHeight : document.documentElement.offsetHeight;}
+
+if(is.ie5 || is.ns4) alert('A versÃ£o de navegador que vocÃª estÃ¡ usando nÃ£o Ã© compatÃ­vel com este site.\nAtualize-o para que todos os elementos funcionem corretamente.');
 
 /**************************************
  * UTIL FUNCTIONS
@@ -285,3 +283,12 @@ var Init = {
 	}
 };
 //}
+
+String.prototype.trim = function(){
+	return this.replace(/^\s*(.*[^ ])\s*$/, "$1");
+};
+
+String.prototype.wordLimiter = function($count){
+	var reg = new RegExp('\\s*(?:\\S+\\s*){1,'+$count+'}','gi');
+	return this.match(reg)[0].trim();
+};
