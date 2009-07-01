@@ -188,7 +188,7 @@ namespace Common
 
                 Dictionary<string, string> dicVariables = new Dictionary<string, string>();
 
-                const string varRegEx = @"\$(?<varname>[^:$]*):(?<varvalue>[^;$]*);";
+                const string varRegEx = @"\$(?<varname>[^{$]*){(?<varvalue>[^}$]*)}";
                 const RegexOptions varRegExOptions = RegexOptions.Singleline | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace;
 
                 MatchCollection variables = Regex.Matches(stContent, varRegEx, varRegExOptions); //finds all variables in the css document
