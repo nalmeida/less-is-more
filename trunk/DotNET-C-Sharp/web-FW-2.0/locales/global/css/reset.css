@@ -30,7 +30,7 @@ br.clear, br.cb{line-height:0;font-size:1px;}
 	overflow:hidden;
 	zoom:1;
 	padding:0 3px;
-	border:1px solid #828282;
+	border:1px solid #404040;
 }
 	.inputHolder input{
 		float:left;display:inline;
@@ -55,20 +55,21 @@ textarea{
 select,
 textarea{
 	border: #404040 1px solid;
-	background:yellow;
 }
 /*
-	use "$root/" to identify the server root path. Ex.:
+	Use "$root/" para identificar a raíz do site. Ex.:
 	background:url($root/locales/global/img/px.gif) 0 0 no-repeat;
+	
+	É possível criar "Variáveis" no CSS:
+	
+	$highlightColor{red}
+	$fc{
+		overflow:hidden;
+		zoom:1;
+	}
+	
+	h1{
+		color:$highlightColor;
+		$fc
+	}
 */
-
-$regis: 1px solid red;
-$colorl: green !important;
-$fundo: url($root/locales/global/img/px.gif) 0 0 no-repeat;
-
-div{
-	border: $regis;
-	border: $regis;
-	background: $cololl;
-	background: $fundo;
-}
