@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "D:\...\web\", ".", "{578B6F4A-DB12-45BB-8081-6D8E82F16BDB}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "D:\...\web-FW-2.0\", ".", "{578B6F4A-DB12-45BB-8081-6D8E82F16BDB}"
 	ProjectSection(WebsiteProperties) = preProject
 		SccProjectName = "Svn"
 		SccAuxPath = "Svn"
@@ -21,6 +21,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "D:\...\web\", ".", "{578B6F
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "1807"
 	EndProjectSection
 EndProject
 Global
