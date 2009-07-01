@@ -58,7 +58,17 @@ textarea{
 	background:yellow;
 }
 /*
-	use "var(root)/" to identify the server root path. Ex.:
-	background:url(var(root)/locales/global/img/px.gif) 0 0 no-repeat;
+	use "$root/" to identify the server root path. Ex.:
+	background:url($root/locales/global/img/px.gif) 0 0 no-repeat;
 */
 
+$regis: 1px solid red;
+$colorl: green !important;
+$fundo: url($root/locales/global/img/px.gif) 0 0 no-repeat;
+
+div{
+	border: $regis;
+	border: $regis;
+	background: $cololl;
+	background: $fundo;
+}

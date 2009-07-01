@@ -2,6 +2,7 @@
 //uncomment this line above if you want to use as a standalone file. also rename it as minify.ashx and place it at root folder
 
 using System;
+using System.Collections.Generic;
 using System.Web;
 using System.IO;
 using System.Text;
@@ -30,187 +31,209 @@ Minify
 
 namespace Common
 {
-	public class Minify : IHttpHandler
-	{
+    public class Minify : IHttpHandler
+    {
 
-		private HttpServerUtility _server;
-		public HttpServerUtility Server
-		{
-			get { return _server; }
-			set { _server = value; }
-		}
-
-
-		private HttpRequest _request;
-		public HttpRequest Request
-		{
-			get { return _request; }
-			set { _request = value; }
-		}
+        private HttpServerUtility _server;
+        public HttpServerUtility Server
+        {
+            get { return _server; }
+            set { _server = value; }
+        }
 
 
-		private HttpResponse _response;
-		public HttpResponse Response
-		{
-			get { return _response; }
-			set { _response = value; }
-		}
+        private HttpRequest _request;
+        public HttpRequest Request
+        {
+            get { return _request; }
+            set { _request = value; }
+        }
 
-		public void DoCache(HttpContext context, DateTime lastModifiedUnc)
-		{
-			try
-			{
-				string sDtModHdr = string.Empty;
-				sDtModHdr = Request.Headers.Get("If-Modified-Since");
-				// does header contain If-Modified-Since?
-				if (!string.IsNullOrEmpty(sDtModHdr))
-				{
-					
-					sDtModHdr = sDtModHdr.Split(';')[0];
-					// convert to UNC date
-					DateTime dtModHdrUnc = Convert.ToDateTime(sDtModHdr).ToUniversalTime();
-					dtModHdrUnc = dtModHdrUnc.AddMilliseconds(dtModHdrUnc.Millisecond * -1);
-					lastModifiedUnc = lastModifiedUnc.ToUniversalTime();
-					lastModifiedUnc = lastModifiedUnc.AddMilliseconds(lastModifiedUnc.Millisecond * -1);
 
-					// if it was within the last month, return 304 and exit
-					if (DateTime.Compare(
-						new DateTime(
-						dtModHdrUnc.Year, 
-						dtModHdrUnc.Month, 
-						dtModHdrUnc.Day, 
-						dtModHdrUnc.Hour,
-						dtModHdrUnc.Minute, 
-						dtModHdrUnc.Second), 
-						new DateTime(
-						lastModifiedUnc.Year,
-						lastModifiedUnc.Month,
-						lastModifiedUnc.Day,
-						lastModifiedUnc.Hour,
-						lastModifiedUnc.Minute,
-						lastModifiedUnc.Second)) == 0)
-					{
-						Response.StatusCode = 304;
-						Response.StatusDescription = "Not Modified";
-						Response.CacheControl = "public";
-						Response.End();
-					}
-				}
-				Response.Cache.SetLastModified(lastModifiedUnc);
-				Response.CacheControl = "public";
-			}
-			catch {}
-		}
+        private HttpResponse _response;
+        public HttpResponse Response
+        {
+            get { return _response; }
+            set { _response = value; }
+        }
 
-		public void ProcessRequest(HttpContext context)
-		{
-			Request = context.Request;
-			Response = context.Response;
-			Server = context.Server;
+        public void DoCache(HttpContext context, DateTime lastModifiedUnc)
+        {
+            try
+            {
+                string sDtModHdr = Request.Headers.Get("If-Modified-Since");
+                // does header contain If-Modified-Since?
+                if (!string.IsNullOrEmpty(sDtModHdr))
+                {
 
-		
-			// READING FILES
-			StringBuilder sbToStrip = new StringBuilder();
-			string file = string.Empty;
-			string folder = string.Empty;
+                    sDtModHdr = sDtModHdr.Split(';')[0];
+                    // convert to UNC date
+                    DateTime dtModHdrUnc = Convert.ToDateTime(sDtModHdr).ToUniversalTime();
+                    dtModHdrUnc = dtModHdrUnc.AddMilliseconds(dtModHdrUnc.Millisecond * -1);
+                    lastModifiedUnc = lastModifiedUnc.ToUniversalTime();
+                    lastModifiedUnc = lastModifiedUnc.AddMilliseconds(lastModifiedUnc.Millisecond * -1);
 
-			string[] vtArquivo = Request.QueryString[0].ToString().Split(Convert.ToChar("|"));
+                    // if it was within the last month, return 304 and exit
+                    if (DateTime.Compare(
+                        new DateTime(
+                        dtModHdrUnc.Year,
+                        dtModHdrUnc.Month,
+                        dtModHdrUnc.Day,
+                        dtModHdrUnc.Hour,
+                        dtModHdrUnc.Minute,
+                        dtModHdrUnc.Second),
+                        new DateTime(
+                        lastModifiedUnc.Year,
+                        lastModifiedUnc.Month,
+                        lastModifiedUnc.Day,
+                        lastModifiedUnc.Hour,
+                        lastModifiedUnc.Minute,
+                        lastModifiedUnc.Second)) == 0)
+                    {
+                        Response.StatusCode = 304;
+                        Response.StatusDescription = "Not Modified";
+                        Response.CacheControl = "public";
+                        Response.End();
+                    }
+                }
+                Response.Cache.SetLastModified(lastModifiedUnc);
+                Response.CacheControl = "public";
+            }
+            catch
+            { }
+        }
 
-			Encoding utf8 = Encoding.GetEncoding("utf-8");
-			StreamReader srArquivo;
-			DateTime lastModifiedFileGlobal = DateTime.MinValue;
+        public void ProcessRequest(HttpContext context)
+        {
+            Request = context.Request;
+            Response = context.Response;
+            Server = context.Server;
 
-			string filePath;
-			DateTime fileLastModified;
-			bool isError = false;
-			if (vtArquivo[0].Contains(".css"))
-			{
-				foreach (string stNomeArquivo in vtArquivo)
-				{
-					Response.ContentType = "text/css";
-					// set folder and file name
-					if (stNomeArquivo.Contains(","))
-					{
-						string[] fileFolder = stNomeArquivo.Split(',');
-						file = fileFolder[0];
-						folder = fileFolder[1];
-					}
-					else
-					{
-						file = stNomeArquivo;
-						folder = "global";
-					}
-					filePath = Server.MapPath("locales/" + folder + "/css/").ToString() + file;
 
-					fileLastModified = File.GetLastWriteTime(filePath);
-					lastModifiedFileGlobal = fileLastModified > lastModifiedFileGlobal ? fileLastModified : lastModifiedFileGlobal;
-					
-					try
-					{
-					srArquivo = new StreamReader(filePath, utf8);
-					sbToStrip.Append(srArquivo.ReadToEnd());
-					sbToStrip.Append(Environment.NewLine);
-					srArquivo.Close();
-					}
-					catch
-					{
-						isError = true;
-						sbToStrip.Append("/* ERROR:  Missing file " + filePath + " */");
-					}
-				}
-			}
-			if (vtArquivo[0].Contains(".js"))
-			{
-				Response.ContentType = "text/javascript";
-				foreach (string stNomeArquivo in vtArquivo)
-				{
-					filePath = Server.MapPath("js/") + stNomeArquivo;
+            // READING FILES
+            StringBuilder sbToStrip = new StringBuilder();
+            string[] vtArquivo = Request.QueryString[0].Split(Convert.ToChar("|"));
 
-					fileLastModified = File.GetLastWriteTime(filePath);
-					lastModifiedFileGlobal = fileLastModified > lastModifiedFileGlobal ? fileLastModified : lastModifiedFileGlobal;
+            Encoding utf8 = Encoding.GetEncoding("utf-8");
+            StreamReader srArquivo;
+            DateTime lastModifiedFileGlobal = DateTime.MinValue;
 
-					srArquivo = new StreamReader(filePath, utf8);
-					sbToStrip.Append(srArquivo.ReadToEnd());
-					sbToStrip.Append(";");
-					sbToStrip.Append(Environment.NewLine);
-					srArquivo.Close();
-				};
-			}
+            string filePath;
+            DateTime fileLastModified;
 
-			
-			//DO REPLACEMENT
-			string stContent = sbToStrip.ToString();
+            if (vtArquivo[0].Contains(".css"))
+            {
+                foreach (string stNomeArquivo in vtArquivo)
+                {
+                    Response.ContentType = "text/css";
+                    // set folder and file name
+                    string file;
+                    string folder;
+                    if (stNomeArquivo.Contains(","))
+                    {
+                        string[] fileFolder = stNomeArquivo.Split(',');
+                        file = fileFolder[0];
+                        folder = fileFolder[1];
+                    }
+                    else
+                    {
+                        file = stNomeArquivo;
+                        folder = "global";
+                    }
+                    filePath = Server.MapPath("locales/" + folder + "/css/") + file;
 
-			// CSS
-			if (vtArquivo[0].Contains(".css")){
-				stContent = stContent.Replace("var(root)/", Common.Util.Root); // replace root tag
-				if(Request.QueryString["v"] != null){
-					stContent = Regex.Replace(stContent, "url\\((.[^\\)]*\\?.*)\\)", "url($1&v=" + Request.QueryString["v"] + ")"); // replace all images paths with a query adding the &v=version 
-					stContent = Regex.Replace(stContent, "url\\((.[^\\)\\?]*)\\)", "url($1?v=" + Request.QueryString["v"] + ")"); // replace all images paths adding the ?v=version 
-				}
-			}
+                    fileLastModified = File.GetLastWriteTime(filePath);
+                    lastModifiedFileGlobal = fileLastModified > lastModifiedFileGlobal ? fileLastModified : lastModifiedFileGlobal;
 
-			
-			// CACHE
-			if (Util.Bpc == null || Util.Bpc == ""){
-				DoCache(context, lastModifiedFileGlobal);
-			}
+                    try
+                    {
+                        srArquivo = new StreamReader(filePath, utf8);
+                        sbToStrip.Append(srArquivo.ReadToEnd());
+                        sbToStrip.Append(Environment.NewLine);
+                        srArquivo.Close();
+                    }
+                    catch
+                    {
+                        sbToStrip.Append("/* ERROR:  Missing file " + filePath + " */");
+                    }
+                }
+            }
+            if (vtArquivo[0].Contains(".js"))
+            {
+                Response.ContentType = "text/javascript";
+                foreach (string stNomeArquivo in vtArquivo)
+                {
+                    filePath = Server.MapPath("js/") + stNomeArquivo;
 
-			// GZIP ENCODE
-			Util.GZipEncodePage();
-			
-			//OUTPUT
-			Response.Write("/**\n * @author F.biz - http://www.fbiz.com.br/\n */\n");
-			Response.Write(stContent);
-		}
+                    fileLastModified = File.GetLastWriteTime(filePath);
+                    lastModifiedFileGlobal = fileLastModified > lastModifiedFileGlobal ? fileLastModified : lastModifiedFileGlobal;
 
-		public bool IsReusable
-		{
-			get
-			{
-				return true;
-			}
-		}
+                    srArquivo = new StreamReader(filePath, utf8);
+                    sbToStrip.Append(srArquivo.ReadToEnd());
+                    sbToStrip.Append(";");
+                    sbToStrip.Append(Environment.NewLine);
+                    srArquivo.Close();
+                }
+            }
 
-	}
+
+            //DO REPLACEMENT
+            string stContent = sbToStrip.ToString();
+
+            // CSS
+            if (vtArquivo[0].Contains(".css"))
+            {
+                stContent = stContent.Replace("$root/", Util.Root); // replace root tag
+
+
+                Dictionary<string, string> dicVariables = new Dictionary<string, string>();
+
+                const string varRegEx = @"\$(?<varname>[^:$]*):(?<varvalue>[^;$]*);";
+                const RegexOptions varRegExOptions = RegexOptions.Singleline | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace;
+
+                MatchCollection variables = Regex.Matches(stContent, varRegEx, varRegExOptions); //finds all variables in the css document
+                foreach (Match match in variables)
+                {
+                    dicVariables.Add(match.Groups["varname"].Value.Trim(), match.Groups["varvalue"].Value.Trim());  //stores it in a dictionary for a later use
+                }
+
+                stContent = Regex.Replace(stContent, varRegEx+ @"[^\r\n]*\r\n", string.Empty, varRegExOptions); // removes all variables to clean the css
+
+                foreach (string varname in dicVariables.Keys)
+                {
+                    stContent = stContent.Replace("$" + varname, dicVariables[varname]);  //replaces each variable with its value
+                }
+
+                
+                if (Request.QueryString["v"] != null)
+                {
+                    stContent = Regex.Replace(stContent, "url\\((.[^\\)]*\\?.*)\\)", "url($1&v=" + Request.QueryString["v"] + ")"); // replace all images paths with a query adding the &v=version 
+                    stContent = Regex.Replace(stContent, "url\\((.[^\\)\\?]*)\\)", "url($1?v=" + Request.QueryString["v"] + ")"); // replace all images paths adding the ?v=version 
+                }
+            }
+
+
+            // CACHE
+            if (string.IsNullOrEmpty(Util.Bpc))
+            {
+                DoCache(context, lastModifiedFileGlobal);
+            }
+
+            // GZIP ENCODE
+            Util.GZipEncodePage();
+
+            //OUTPUT
+            Response.Write("/**\n * @author F.biz - http://www.fbiz.com.br/\n */\n");
+            Response.Write(stContent);
+        }
+
+        public bool IsReusable
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+    }
 }
