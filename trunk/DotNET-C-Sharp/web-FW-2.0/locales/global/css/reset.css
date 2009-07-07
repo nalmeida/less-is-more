@@ -57,19 +57,19 @@ textarea{
 	border: #404040 1px solid;
 }
 /*
-	Use "$root/" para identificar a raíz do site. Ex.:
+	Use "$root/" para identificar a raiz do site. Ex.:
 	background:url($root/locales/global/img/px.gif) 0 0 no-repeat;
 	
-	É possível criar "Variáveis" no CSS:
+	E possil criar "variÃ¡veis" no CSS:
 	
-	$highlightColor{red}
-	$fc{
+	$colorError{red}
+	$attrFC{
 		overflow:hidden;
 		zoom:1;
 	}
 	
 	h1{
-		color:$highlightColor;
-		$fc
+		color:$colorError;
+		$attrFC
 	}
 */
