@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------- Reset */
+﻿/* --------------------------------------------------------------- Reset */
 body{background-color:#fff; min-width:980px; text-shadow: #000 0 0 0; font-family: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;font-size:12px;color:#000;}
 body *{outline:none;}
 body,div,ol,ul,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {margin:0;padding:0;}
@@ -60,7 +60,7 @@ textarea{
 	Use "$root/" para identificar a raiz do site. Ex.:
 	background:url($root/locales/global/img/px.gif) 0 0 no-repeat;
 	
-	E possil criar "variáveis" no CSS:
+	É possivel criar "variáveis" no CSS:
 	
 	$colorError{red}
 	$attrFC{
