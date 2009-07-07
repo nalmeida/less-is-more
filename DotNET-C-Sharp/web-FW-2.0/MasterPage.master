@@ -147,7 +147,6 @@
 				<div class="collapse">
 					<p>
 						<strong>Todos os JS e CSS</strong> devem passar pela "<strong><%=Common.Util.Root%>minify.aspx</strong>". Ela remove espaços duplos, enters, tabs e comentários, concatena arquivos em uma única requisição, mantém o arquivo em cache e retorna na compactação GZIP.
-						No caso dos css, substitui a string <strong>"var(root)/"</strong> por "<%=Common.Util.Root%>"
 					</p>
 					<p>
 						Para usar chame o arquivo da seguinte forma:<br />
@@ -177,6 +176,20 @@
 						Para evitar problemas de imagens no CACHE do usuário deve-se passar o parâmetro <code>v=VERSÃO</code>.
 						Este &quot;v&quot; será concatenado a todas as imagens de dentro dos CSS's. <strong class="warn">Se <code>bpc=1</code> v será igual a um número randomico.</strong> Ex.:
 						"<code>background:url(<%=Common.Util.Root%>/locales/global/img/px.gif?v=<%=Common.Util.Version%>) 0 0 no-repeat;</code>"<br />
+					</p>
+					<p>
+						É possível criar "variáveis" nos CSS. Inicialmente, a string <strong>"$root/"</strong> já é substituída por "<%=Common.Util.Root%>", mas é possíve criar novas usando o formato:<br />
+						<code>$NOME_DA_VARIAVEL{VALOR_DA_VARIAVEL}</code> e na classe esperada, escreva <code>$NOME_DA_VARIAVEL</code>. Ex.:<br />
+<code>
+	$fc{
+		overflow:hidden;
+		zoom:1;
+	}
+	.classe{
+		$fc
+	}
+</code><br />
+						As variáveis são excluídas do CSS no momento que a minify dá saída no arquivo.
 					</p>
 				</div>
 			</div>
