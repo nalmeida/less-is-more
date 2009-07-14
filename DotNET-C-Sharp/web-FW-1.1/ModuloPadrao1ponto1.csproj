@@ -89,6 +89,11 @@
                     AssemblyName = "System.Xml"
                     HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
                 />
+                <Reference
+                    Name = "ICSharpCode.SharpZipLib"
+                    AssemblyName = "ICSharpCode.SharpZipLib"
+                    HintPath = "bin\ICSharpCode.SharpZipLib.dll"
+                />
             </References>
         </Build>
         <Files>
@@ -121,6 +126,7 @@
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
+                <Folder RelPath = "bin\" />
                 <File
                     RelPath = "js\ajax.js"
                     BuildAction = "Content"
