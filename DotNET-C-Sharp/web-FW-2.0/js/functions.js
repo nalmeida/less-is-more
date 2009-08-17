@@ -45,10 +45,6 @@ var Analytics = {
 		if(!target) target = '_self';
 		if(!url) {
 			throw new Error('[ERROR] Analytics.trackAndGo: undefined URL.');
-			return;
-		}
-		if(!url) {
-			throw new Error('[ERROR] Analytics.trackAndGo: undefined URL.');
 		} else {
 			setTimeout(function(){
 				window.open(url, target);
@@ -110,5 +106,13 @@ var Analytics = {
 				throw new Error('[ERROR] Analytics.callJs: undefined function called.');
 			}
 		}, this._timeout);
+	},
+	
+	/**
+	 * Executa um "_setVar"
+	 * @param {string} str String da marcação desejada
+	 */
+	setVar: function(str) {
+		this.getTracker()._setVar(str);
 	}
 }; 
