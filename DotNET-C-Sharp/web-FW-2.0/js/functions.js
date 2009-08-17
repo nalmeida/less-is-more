@@ -2,8 +2,8 @@
  * Classe estática para chamar marcações do Google Analytics
  * @author Nicholas Almeida
  * @since 19:18 13/8/2009
+ * @see	para testar em localhost, colocar pageTracker._setDomainName("none"); LOGO APÓS a crição da chamada do analytics ANTES do
  */
-
 var Analytics = {
 	
 	/**
