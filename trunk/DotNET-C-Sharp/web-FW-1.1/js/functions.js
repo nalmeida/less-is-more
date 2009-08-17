@@ -2,8 +2,8 @@
  * Classe estática para chamar marcações do Google Analytics
  * @author Nicholas Almeida
  * @since 19:18 13/8/2009
+ * @see	para testar em localhost, colocar pageTracker._setDomainName("none"); LOGO APÓS a crição da chamada do analytics ANTES do
  */
-
 var Analytics = {
 	
 	/**
@@ -43,10 +43,6 @@ var Analytics = {
 	trackAndGo: function(str, url, target) {
 		this.track(str);
 		if(!target) target = '_self';
-		if(!url) {
-			throw new Error('[ERROR] Analytics.trackAndGo: undefined URL.');
-			return;
-		}
 		if(!url) {
 			throw new Error('[ERROR] Analytics.trackAndGo: undefined URL.');
 		} else {
@@ -110,5 +106,13 @@ var Analytics = {
 				throw new Error('[ERROR] Analytics.callJs: undefined function called.');
 			}
 		}, this._timeout);
+	},
+	
+	/**
+	 * Executa um "_setVar"
+	 * @param {string} str String da marcação desejada
+	 */
+	setVar: function(str) {
+		this.getTracker()._setVar(str);
 	}
-};  
+}; 
