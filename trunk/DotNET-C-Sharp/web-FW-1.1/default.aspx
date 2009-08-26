@@ -192,6 +192,21 @@
 				if(window['console']){
 					if(console.info) console.info('analytics: "' + w + '"');
 				}
+			},
+			_trackEvent: function (){
+				if(window['console']){
+					var _arrArguments = [];
+					var _arrArgumentsLen = arguments.length;
+					for(var i = 0; i< _arrArgumentsLen; i++) {
+						_arrArguments[i] = arguments[i];
+					}
+					if(console.info) console.info('analytics event: ("' + _arrArguments.join("\",\"") + '")');
+				}
+			},
+			_setVar: function (w){
+				if(window['console']){
+					if(console.info) console.info('analytics setvar: "' + w + '"');
+				}
 			}
 		};
 	</script>

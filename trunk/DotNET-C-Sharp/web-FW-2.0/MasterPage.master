@@ -288,7 +288,7 @@
 		var pageTracker = {
 			_trackPageview: function (w){
 				if(window['console']){
-					if(console.info) console.info('analytics pageview: "' + w + '"');
+					if(console.info) console.info('analytics: "' + w + '"');
 				}
 			},
 			_trackEvent: function (){
@@ -299,6 +299,11 @@
 						_arrArguments[i] = arguments[i];
 					}
 					if(console.info) console.info('analytics event: ("' + _arrArguments.join("\",\"") + '")');
+				}
+			},
+			_setVar: function (w){
+				if(window['console']){
+					if(console.info) console.info('analytics setvar: "' + w + '"');
 				}
 			}
 		};
