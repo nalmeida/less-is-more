@@ -36,11 +36,11 @@ var Analytics = {
 	
 	/**
 	 * Executa um "_trackPageview" e abre uma URL (window.open)
-	 * @param {string} str String da marcação desejada
 	 * @param {string} url desejada
 	 * @param {string} target por padrão '_self'
+	 * @param {string} str String da marcação desejada
 	 */
-	trackAndGo: function(str, url, target) {
+	trackAndGo: function(url, target, str) {
 		this.track(str);
 		if(!target) target = '_self';
 		if(!url) {
@@ -54,10 +54,10 @@ var Analytics = {
 	
 	/**
 	 * Executa um "_trackPageview" e após uma função JS (_timeout 250 milisegundos)
-	 * @param {function} func Função javascript válida
 	 * @param {string} str String da marcação desejada
+	 * @param {function} func Função javascript válida
 	 */
-	trackAndJs: function(str, func) {
+	trackAndJs: function(func, str) {
 		this.track(str);
 		this.callJs(func);
 	},
@@ -92,6 +92,27 @@ var Analytics = {
 	trackEventAndJs: function(func, category, action, optional_label, optional_value) {
 		this.trackEvent(category, action, optional_label, optional_value);
 		this.callJs(func);
+	},
+	
+	/**
+	 * Executa um "_trackEvent"  e abre uma URL (window.open)
+	 * @param {string} url desejada
+	 * @param {string} target por padrão '_self'
+	 * @param {string} category String da categoria
+	 * @param {string} action String da ação
+	 * @param {string} optional_label String do label
+	 * @param {number} optional_value
+	 */
+	trackEventAndGo: function(url, target, category, action, optional_label, optional_value) {
+		this.trackEvent(category, action, optional_label, optional_value);
+		if(!target) target = '_self';
+		if(!url) {
+			throw new Error('[ERROR] Analytics.trackAndGo: undefined URL.');
+		} else {
+			setTimeout(function(){
+				window.open(url, target);
+			}, this._timeout);
+		}
 	},
 
 	/**
