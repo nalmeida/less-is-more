@@ -28,6 +28,18 @@
 	
 	<script type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?functions.js&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>"></script>
 	<asp:contentplaceholder id="cphCustomHeader" runat="server" />
+	
+	<% if(Common.Util.isIE6) {// IE6 Only%>
+	<script type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?DD_belatedPNG.js&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>"></script>
+	<script type="text/javascript">
+		//<![CDATA[
+			$(document).ready(function(){
+				DD_belatedPNG.fix('.pngFix');
+			})
+		//]]>
+	</script>
+	<asp:contentplaceholder id="cphCustomHeaderIE6" runat="server" />
+	<% } %>
 </head>
 <body>
 	<form name="frm" id="frm" runat="server">
@@ -94,7 +106,7 @@
 			</style>
 			
 			<h1>
-				Módulo padrão C# v15.5 - utf-8
+				Módulo padrão C# v15.6 - utf-8
 			</h1>
 			
 			<div class="collapseContainer">
@@ -262,8 +274,6 @@
 		</div>
 	</form>
 	<% 
-	
-	
 		//
 		// ====================== IMPORTANTE =======================
 		//
@@ -272,23 +282,13 @@
 		// APAGAR ESSE COMENTÁRIO AO COLOCAR O CÓDIGO CORRETO.
 		//
 		// =========================================================
-		
-		
 	%>
-	<%if(Common.Util.Root.Contains(".")){%>
-	<script type="text/javascript">
-		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-	<script type="text/javascript">
-		var pageTracker = _gat._getTracker("##CODE##");
-	</script>
-	<%} else {%>
+	<% if(Common.Util.isLocal){ %>
 	<script type="text/javascript">
 		var pageTracker = {
 			_trackPageview: function (w){
 				if(window['console']){
-					if(console.info) console.info('analytics: "' + w + '"');
+					if(console.info) console.info('pageTracker._trackPageview("' + w + '")');
 				}
 			},
 			_trackEvent: function (){
@@ -298,17 +298,26 @@
 					for(var i = 0; i< _arrArgumentsLen; i++) {
 						_arrArguments[i] = arguments[i];
 					}
-					if(console.info) console.info('analytics event: ("' + _arrArguments.join("\",\"") + '")');
+					if(console.info) console.info('pageTracker._trackEvent("' + _arrArguments.join("\",\"") + '")');
 				}
 			},
 			_setVar: function (w){
 				if(window['console']){
-					if(console.info) console.info('analytics setvar: "' + w + '"');
+					if(console.info) console.info('pageTracker._setVar: "' + w + '"');
 				}
 			}
 		};
 	</script>
-	<%}%>
+
+	<% } else { %>
+	<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		var pageTracker = _gat._getTracker("##CODE##");
+	</script>
+	<% } %>
 	<script type="text/javascript">
 		pageTracker._trackPageview('<asp:contentplaceholder id="cphCustomAnalytics" runat="server" ></asp:contentplaceholder>');
 	</script>

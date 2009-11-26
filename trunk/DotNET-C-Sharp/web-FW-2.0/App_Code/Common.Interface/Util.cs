@@ -1,5 +1,6 @@
 using System;
 using System.Web;
+using System.Text.RegularExpressions;
 
 namespace Common
 {
@@ -47,6 +48,41 @@ namespace Common
                 return HttpContext.Current.Request.Url.Scheme + "://" +
                     HttpContext.Current.Request.Url.Host + Port +
                     HttpContext.Current.Request.ApplicationPath + Slash;
+            }
+        }
+
+ 		/**
+         * Common.Util.isLocal Returns if the website is running on "http://localhost" or under an IP Address "111.111.11.11"
+         * @return Boolean
+         * @usage
+                <code>
+                    <%=Common.Util.isLocal;%> // writes True or False
+                </code>
+         */
+        public static Boolean isLocal
+        {
+            get
+            {
+				Regex reg = new Regex(@"(?:[0-9]{1,3}(?:\.|)){4}");
+				string siteDomain = reg.Match(Common.Util.Root).ToString();
+	
+				return siteDomain != ""  || !Common.Util.Root.Contains(".");
+            }
+        }
+
+ 		/**
+         * Common.Util.isIE6 Returns if the browser is Internet Explorer 6
+         * @return Boolean
+         * @usage
+                <code>
+                    <%=Common.Util.isIE6;%> // writes True or False
+                </code>
+         */
+        public static Boolean isIE6
+        {
+            get
+            {
+				return Regex.IsMatch(HttpContext.Current.Request.ServerVariables["HTTP_USER_AGENT"], @"MSIE .?([1-6]){1}\.\d", RegexOptions.IgnoreCase);
             }
         }
 
