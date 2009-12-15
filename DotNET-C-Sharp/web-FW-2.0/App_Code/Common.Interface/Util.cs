@@ -53,6 +53,7 @@ namespace Common
 
  		/**
          * Common.Util.isLocal Returns if the website is running on "http://localhost" or under an IP Address "111.111.11.11"
+		 * @see RegularExpression from: http://www.geekzilla.co.uk/View0CBFD9A7-621D-4B0C-9554-91FD48AADC77.htm
          * @return Boolean
          * @usage
                 <code>
@@ -63,19 +64,20 @@ namespace Common
         {
             get
             {
-				Regex reg = new Regex(@"(?:[0-9]{1,3}(?:\.|)){4}");
+				Regex reg = new Regex(@"\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b");
 				string siteDomain = reg.Match(Common.Util.Root).ToString();
 	
 				return siteDomain != ""  || !Common.Util.Root.Contains(".");
             }
         }
 
+
  		/**
-         * Common.Util.isIE6 Returns if the browser is Internet Explorer 6
+         * Common.Util.isLocal Returns if the website is running on "http://localhost" or under an IP Address "111.111.11.11"
          * @return Boolean
          * @usage
                 <code>
-                    <%=Common.Util.isIE6;%> // writes True or False
+                    <%=Common.Util.isLocal;%> // writes True or False
                 </code>
          */
         public static Boolean isIE6
