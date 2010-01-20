@@ -1,0 +1,28 @@
+<ul class="nav">
+					<li>
+						<a href="<?php bloginfo("url") ?>" rel="index">Home</a>
+					</li>
+					<li>
+						<a href="<?php $page = get_page_by_title('Portifólio'); echo get_permalink($page->ID); ?>" rel="section" class="portifolio">Portifolio</a>
+						<ul>
+							<li>
+								<a href="<?php $page = get_page_by_title('Casamento'); echo get_permalink($page->ID); ?>" rel="subsection" class="casamento">Casamento</a>
+							</li>
+							<li>
+								<a href="<?php $page = get_page_by_title('Book'); echo get_permalink($page->ID); ?>" rel="subsection" class="book">Book</a>
+							</li>
+							<li>
+								<a href="<?php $page = get_page_by_title('Editorial'); echo get_permalink($page->ID); ?>" rel="subsection" class="editorial">Editorial</a>
+							</li>
+							<li>
+								<a href="<?php $page = get_page_by_title('Família'); echo get_permalink($page->ID); ?>" rel="subsection" class="familia">Família</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="<?php $page = get_page_by_title('Contato'); echo get_permalink($page->ID); ?>" rel="section" class="contato">Contato</a>
+					</li>
+					<li>
+						<a href="<?php $page = get_page_by_title('Blog'); echo apply_filters('the_permalink',$page->guid); ?>" rel="section" class="blog">Blog</a>
+					</li>
+				</ul>
