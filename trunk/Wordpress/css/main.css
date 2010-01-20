@@ -1,0 +1,289 @@
+html, body{
+	height:100%;
+	margin:0;
+	padding:0;
+	background:#ffffff;
+}
+
+h1{font-size:30px;font-weight:bold;}
+h2{font-size:24px;font-weight:bold;}
+h3{font-size:18px;font-weight:bold;}
+h4{font-size:12px;font-weight:bold;}
+h5{font-size:12px;font-weight:normal;}
+h6{font-size:12px;font-weight:normal;}
+
+.title-explain, .post-title{
+	font-size:24px;font-weight:bold;
+}
+
+#header{
+	background:#808080;
+	height:100px;
+	color:#ffffff;
+}
+
+#page{
+	min-height:100%;
+	height:auto !important;
+	height:100%;
+	position:relative;
+}
+	#container{
+		padding-bottom:100px;
+		overflow:hidden;
+		zoom:1;
+	}
+	
+	.wrapper{
+		float:left;display:inline;
+		width:710px;
+		padding:20px;
+	}
+
+#footer{
+	height:100px;
+	background:#808080;
+	position:absolute;
+	bottom:0;
+	left:0;
+	margin-top:-100px;
+	width:100%;
+}
+	#footer, #footer *{
+		color:#ffffff;
+	}
+
+#sidebar{
+	overflow:hidden;
+	zoom:1;
+	padding:10px;
+	background:#DFDFDF;
+}
+
+.content{
+	text-align:left;
+	margin:0 auto;
+	width:1002px;
+}
+
+.site-name, .site-name a{
+	font-size:30px;
+	color:#ffffff;
+	text-decoration:none;
+	font-weight:bold;
+}
+
+	.site-name a:hover{
+		text-decoration:underline;
+	}
+
+/*
+ * Comentários
+ */
+
+.post-comments{
+	margin:10px;
+	padding:10px 0;
+}
+
+/*
+ * Widgets
+ * Dormatação Padrão dos widgets padrão do wordpress
+ */
+
+.sidebox{
+	padding:15px 0;
+}
+/*
+ * Formulário de Busca
+ */
+#searchform{
+	margin:10px 0 0;
+}
+	#searchsubmit{
+		border:1px 	solid #404040;
+		background:#202020;
+		color:#ffffff;
+		font-size:12px;
+	}
+
+	#searchform label{
+		display:block;
+	}
+	
+	#s{
+		background:#202020;
+		border:1px 	solid #404040;
+		color:#ffffff;
+		font-weight:bold;
+		width:140px;
+		font-size:12px;
+	}
+
+/*
+ * Arquivo mensal
+ * 
+ */
+
+.widget_archive{}
+
+	.widget_archive ul{
+		margin:0;
+		padding:0;
+		list-style-type:none;
+	}
+
+/*
+ * Lista de categorias
+ * 
+ */
+.widget_categories{}
+
+	.widget_categories ul{
+		margin:0;
+		padding:0;
+		list-style-type:none;
+	}
+	
+/*
+ * Lista de ultimos comentários
+ * 
+ */
+.widget_recent_comments{}
+
+	.widget_recent_comments ul{
+		margin:0;
+		padding:0;
+		list-style-type:none;
+	}
+
+	
+/*
+ * Blogroll
+ * 
+ */
+.widget_links{}
+
+	.widget_links ul{
+		margin:0;
+		padding:0;
+		list-style-type:none;
+	}
+/*
+ * Blogmeta
+ */
+.widget_meta{}
+	
+	.widget_meta ul{
+		margin:0;
+		padding:0;
+		list-style-type:none;
+	}
+	
+/*
+ * Blog pages
+ */
+.widget_pages{}
+	
+	.widget_pages ul{
+		margin:0;
+		padding:0;
+		list-style-type:none;
+	}
+	
+/*
+ * Posts recentes
+ */
+.widget_recent_entries{}
+	
+	.widget_recent_entries ul{
+		margin:0;
+		padding:0;
+		list-style-type:none;
+	}
+
+/*
+ * Agenda - Calendário
+ */
+.widget_calendar{}
+
+	#calendar_wrap{
+		padding:10px;
+	}
+	
+		#wp-calendar caption{
+			background:#606060;
+			color:#dfdfdf;
+			text-align:center;
+			font-size:14px;
+			font-weight:bold;
+		}
+		
+		#wp-calendar th,
+		#wp-calendar td{
+			text-align:center;
+		}
+		
+			#wp-calendar td a,
+			#wp-calendar td a:link,
+			#wp-calendar td a:hover,
+			#wp-calendar td a:active,
+			#wp-calendar td a:visited{
+				background:#404040;
+				color:#ffffff;
+				display:block;
+				text-align:center;
+				font-weight:bold;
+				text-decoration:none;
+			}
+			
+				#wp-calendar td a:hover{
+					text-decoration:none;
+					background:#ffffff;
+					color:#404040;
+				}
+		
+/*
+ * Formulário de Comentário
+ * 
+ */
+
+	#commentform .deslogado{
+		margin:25px 0 0 0;
+	}
+	#commentform label{
+		display:-moz-inline-box;
+		display:inline-block;
+		#display:inline;
+		height:2em;
+		line-height:2em;
+		width:35%;
+		text-align:right;
+		padding:0 5px 0 0;
+	}
+	
+	#commentform .fld, #commentform textarea{
+		width:60%;
+		padding:2px 5px;
+		background:none repeat scroll 0 0 #202020;
+		border:1px solid #404040;
+		color:#FFFFFF;
+		font-size:12px;
+		font-weight:bold;
+	}
+	
+	#commentform textarea{
+		height:10em;
+		vertical-align:top;
+	}
+	
+	#commentform .send-button-container{
+		margin:10px;
+		text-align:right;
+	}
+	
+	.comments-navigation{
+		overflow:hidden;
+		zoom:1;
+		padding:10px 5px;
+	}
