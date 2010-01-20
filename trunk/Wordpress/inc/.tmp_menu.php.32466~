@@ -1,0 +1,11 @@
+<ul class="nav">
+					<li>
+						<a href="<?php bloginfo('url') ?>" rel="index"><?php _e(Home, 'interface'); ?></a>
+					</li>
+					<li>
+						<a href="<?php $page = get_page_by_title('O CEEA'); echo get_permalink($page->ID); ?>" rel="section"><?php _e('O CEEA', 'interface'); ?></a>
+					</li>
+					<li>
+						<a href="/artigos" rel="section"><?php _e('Publicações' ,'interface')?></a>
+					</li>
+				</ul>
