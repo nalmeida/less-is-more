@@ -26,7 +26,7 @@
 	//]]>
 	</script>
 	
-	<script type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?functions.js&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>"></script>
+	<script type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?fbiz.js&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>"></script>
 	<asp:contentplaceholder id="cphCustomHeader" runat="server" />
 	
 	<% if(Common.Util.isIE6) {// IE6 Only%>
@@ -106,7 +106,7 @@
 			</style>
 			
 			<h1>
-				Módulo padrão C# v15.6 - utf-8
+				Módulo padrão C# v15.7 - utf-8
 			</h1>
 			
 			<div class="collapseContainer">
