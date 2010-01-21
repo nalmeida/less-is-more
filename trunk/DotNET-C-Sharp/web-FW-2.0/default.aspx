@@ -1,6 +1,6 @@
 ﻿<%@ Page masterpagefile="~/MasterPage.master" Language="C#" %>
 
-<asp:content contentplaceholderid="cphCustomTitle" runat="server">Módulo Padrão C# 15.6 - utf-8</asp:content>
+<asp:content contentplaceholderid="cphCustomTitle" runat="server">Módulo Padrão C# 15.7 - utf-8</asp:content>
 
 <asp:content contentplaceholderid="cphCustomHeader" runat="server">
 <% // content place holder do header %>
