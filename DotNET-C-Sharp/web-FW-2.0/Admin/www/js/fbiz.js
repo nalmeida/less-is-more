@@ -1,0 +1,5 @@
+(function(scope, $) {
+	
+	// namespace
+	
+})(window, $);
