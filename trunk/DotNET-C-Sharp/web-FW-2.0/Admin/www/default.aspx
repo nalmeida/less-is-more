@@ -1,10 +1,11 @@
 ﻿<%@ Page masterpagefile="~/MasterPage.master" Language="C#" %>
-<asp:content contentplaceholderid="cphCustomTitle" runat="server">
-    Módulo Padrão C# 15.7 - utf-8
-</asp:content>
-<asp:content contentplaceholderid="cphCustomHeader" runat="server">
-    <% // content place holder do header %>
-</asp:content>
+
+<asp:content contentplaceholderid="cphCustomTitle" runat="server">Módulo Padrão C# 15.7 - utf-8</asp:content>
+
+<asp:content contentplaceholderid="cphCustomHeader" runat="server"><% // content place holder do header %></asp:content>
+
+<asp:content ID="Content5" contentplaceholderid="cphBodyProperties" runat="server">class="home"</asp:content>
+
 <asp:content contentplaceholderid="cphMainContent" runat="server">
     <div id="primary_content">
         <h2>Welcome back <span class="theme_highlight">John Doe</span></h2>
@@ -48,7 +49,7 @@
         </ul>
 		
         <!--  START TAB -->
-        <div id="tabs">
+        <div id="tabs" class="tabs">
            
 		    <!--  TAB BOXES/HEADINGS -->
             <ul>
@@ -66,7 +67,7 @@
                     any admin theme as we want to be able to visually sift through lots of
                     data aall at once. This table has zebra striping by default.
                 </p>
-                <table class="tablesorter" id="myTable">
+                <table class="tablesorter">
                     <thead>
                         <tr>
                             <th class="header" width="22%">
@@ -294,39 +295,17 @@
         <!--  END TABS -->
 		<!-- The paginator -->
 	        <ul class="paginator">
-	            <li>
-	                <a href="#">Previous</a>
-	            </li>
-	            <li class="current">
-	                <a href="#">1</a>
-	            </li>
-	            <li>
-	                <a href="#">2</a>
-	            </li>
-	            <li>
-	                <a href="#">3</a>
-	            </li>
-	            <li>
-	                <a href="#">4</a>
-	            </li>
-	            <li>
-	                <a href="#">5</a>
-	            </li>
-	            <li>
-	                <a href="#">6</a>
-	            </li>
-	            <li>
-	                <a href="#">7</a>
-	            </li>
-	            <li>
-	                <a href="#">8</a>
-	            </li>
-	            <li>
-	                <a href="#">9</a>
-	            </li>
-	            <li>
-	                <a href="#">Next</a>
-	            </li>
+	        	<li><a href="#">Previous</a></li>
+	            <li class="current"><a href="#">1</a></li>
+	            <li><a href="#">2</a></li>
+	            <li><a href="#">3</a></li>
+	            <li><a href="#">4</a></li>
+	            <li><a href="#">5</a></li>
+	            <li><a href="#">6</a></li>
+	            <li><a href="#">7</a></li>
+	            <li><a href="#">8</a></li>
+	            <li><a href="#">9</a></li>
+	            <li><a href="#">Next</a></li>
 	        </ul>
         <!-- Paginator end -->
     </div>
