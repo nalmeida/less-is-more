@@ -11,5 +11,6 @@ $(document).ready(function(){
 	fbiz.tablesort()
 	fbiz.tabs()
 	fbiz.nav()
-
+	fbiz.login()
+	
 });

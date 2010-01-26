@@ -1,6 +1,14 @@
 (function(scope, $) {
 	
 	// namespace
+	
+	scope.fbiz.login = function() {
+		$('#button').click(function(){
+			window.location.href = fbiz.Common.Util.Root + "Home";
+			return false;
+		})
+	}
+	
 	scope.fbiz.tabs = function(cl){
 		cl = cl ? cl : '.tabs'
 		

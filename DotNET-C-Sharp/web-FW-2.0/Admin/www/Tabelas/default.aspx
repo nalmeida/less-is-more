@@ -46,7 +46,7 @@
                         0130 456 890
                     </td>
                     <td>
-                        <a href="#" title="User"><img src="<%=Common.Util.Root%>locales/global/img/user.png" alt="User" width="16" height="16"></a><a href="#" title="Accept"><img src="<%=Common.Util.Root%>locales/global/img/accept.png" alt="Accept" width="16" height="16"></a><a href="#" title="Close"><img src="<%=Common.Util.Root%>locales/global/img/delete.png" alt="Close" width="16" height="16"></a>
+                        <a href="#" title="User"><img src="<%=Common.Util.Root%>locales/global/img/user.png" alt="User" width="16" height="16" /></a><a href="#" title="Accept"><img src="<%=Common.Util.Root%>locales/global/img/accept.png" alt="Accept" width="16" height="16" /></a><a href="#" title="Close"><img src="<%=Common.Util.Root%>locales/global/img/delete.png" alt="Close" width="16" height="16" /></a>
                     </td>
                 </tr>
                 <tr class="even">
@@ -60,7 +60,7 @@
                         0120 546 999
                     </td>
                     <td>
-                        <a href="#" title="User"><img src="<%=Common.Util.Root%>locales/global/img/user.png" alt="User" width="16" height="16"></a><a href="#" title="Accept"><img src="<%=Common.Util.Root%>locales/global/img/accept.png" alt="Accept" width="16" height="16"></a><a href="#" title="Close"><img src="<%=Common.Util.Root%>locales/global/img/delete.png" alt="Close" width="16" height="16"></a>
+                        <a href="#" title="User"><img src="<%=Common.Util.Root%>locales/global/img/user.png" alt="User" width="16" height="16" /></a><a href="#" title="Accept"><img src="<%=Common.Util.Root%>locales/global/img/accept.png" alt="Accept" width="16" height="16" /></a><a href="#" title="Close"><img src="<%=Common.Util.Root%>locales/global/img/delete.png" alt="Close" width="16" height="16" /></a>
                     </td>
                 </tr>
                 <tr>
@@ -74,7 +74,7 @@
                         0141 654 001
                     </td>
                     <td>
-                        <a href="#" title="User"><img src="<%=Common.Util.Root%>locales/global/img/user.png" alt="User" width="16" height="16"></a><a href="#" title="Accept"><img src="<%=Common.Util.Root%>locales/global/img/accept.png" alt="Accept" width="16" height="16"></a><a href="#" title="Close"><img src="<%=Common.Util.Root%>locales/global/img/delete.png" alt="Close" width="16" height="16"></a>
+                        <a href="#" title="User"><img src="<%=Common.Util.Root%>locales/global/img/user.png" alt="User" width="16" height="16" /></a><a href="#" title="Accept"><img src="<%=Common.Util.Root%>locales/global/img/accept.png" alt="Accept" width="16" height="16" /></a><a href="#" title="Close"><img src="<%=Common.Util.Root%>locales/global/img/delete.png" alt="Close" width="16" height="16" /></a>
                     </td>
                 </tr>
                 <tr class="even">
@@ -88,7 +88,7 @@
                         0171 123 890
                     </td>
                     <td>
-                        <a href="#" title="User"><img src="<%=Common.Util.Root%>locales/global/img/user.png" alt="User" width="16" height="16"></a><a href="#" title="Accept"><img src="<%=Common.Util.Root%>locales/global/img/accept.png" alt="Accept" width="16" height="16"></a><a href="#" title="Close"><img src="<%=Common.Util.Root%>locales/global/img/delete.png" alt="Close" width="16" height="16"></a>
+                        <a href="#" title="User"><img src="<%=Common.Util.Root%>locales/global/img/user.png" alt="User" width="16" height="16" /></a><a href="#" title="Accept"><img src="<%=Common.Util.Root%>locales/global/img/accept.png" alt="Accept" width="16" height="16" /></a><a href="#" title="Close"><img src="<%=Common.Util.Root%>locales/global/img/delete.png" alt="Close" width="16" height="16" /></a>
                     </td>
                 </tr>
                 <tr>
@@ -102,7 +102,7 @@
                         0121 321 456
                     </td>
                     <td>
-                        <a href="#" title="User"><img src="<%=Common.Util.Root%>locales/global/img/user.png" alt="User" width="16" height="16"></a><a href="#" title="Accept"><img src="<%=Common.Util.Root%>locales/global/img/accept.png" alt="Accept" width="16" height="16"></a><a href="#" title="Close"><img src="<%=Common.Util.Root%>locales/global/img/delete.png" alt="Close" width="16" height="16"></a>
+                        <a href="#" title="User"><img src="<%=Common.Util.Root%>locales/global/img/user.png" alt="User" width="16" height="16" /></a><a href="#" title="Accept"><img src="<%=Common.Util.Root%>locales/global/img/accept.png" alt="Accept" width="16" height="16" /></a><a href="#" title="Close"><img src="<%=Common.Util.Root%>locales/global/img/delete.png" alt="Close" width="16" height="16" /></a>
                     </td>
                 </tr>
                 <tr class="even">
@@ -116,7 +116,7 @@
                         0181 321 456
                     </td>
                     <td>
-                        <a href="#" title="User"><img src="<%=Common.Util.Root%>locales/global/img/user.png" alt="User" width="16" height="16"></a><a href="#" title="Accept"><img src="<%=Common.Util.Root%>locales/global/img/accept.png" alt="Accept" width="16" height="16"></a><a href="#" title="Close"><img src="<%=Common.Util.Root%>locales/global/img/delete.png" alt="Close" width="16" height="16"></a>
+                        <a href="#" title="User"><img src="<%=Common.Util.Root%>locales/global/img/user.png" alt="User" width="16" height="16" /></a><a href="#" title="Accept"><img src="<%=Common.Util.Root%>locales/global/img/accept.png" alt="Accept" width="16" height="16" /></a><a href="#" title="Close"><img src="<%=Common.Util.Root%>locales/global/img/delete.png" alt="Close" width="16" height="16" /></a>
                     </td>
                 </tr>
                 <tr>
@@ -130,7 +130,7 @@
                         0131 456 988
                     </td>
                     <td>
-                        <a href="#" title="User"><img src="<%=Common.Util.Root%>locales/global/img/user.png" alt="User" width="16" height="16"></a><a href="#" title="Accept"><img src="<%=Common.Util.Root%>locales/global/img/accept.png" alt="Accept" width="16" height="16"></a><a href="#" title="Close"><img src="<%=Common.Util.Root%>locales/global/img/delete.png" alt="Close" width="16" height="16"></a>
+                        <a href="#" title="User"><img src="<%=Common.Util.Root%>locales/global/img/user.png" alt="User" width="16" height="16" /></a><a href="#" title="Accept"><img src="<%=Common.Util.Root%>locales/global/img/accept.png" alt="Accept" width="16" height="16" /></a><a href="#" title="Close"><img src="<%=Common.Util.Root%>locales/global/img/delete.png" alt="Close" width="16" height="16" /></a>
                     </td>
                 </tr>
             </tbody>
