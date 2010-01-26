@@ -32,22 +32,25 @@
         <form name="frm" id="frm" runat="server">
             <!--  START WRAPPER -->
             <div id="wrapper">
-                <div id="top">MY TOP BAR</div>
+                <div id="top">
+					<p class="saudacao"><strong>Olá fulano!</strong><a href="" class="saudacao">Sair x</a></p>
+				</div>
                 <!--  end topbar -->
                 <div id="header">
-                    <h1>F.Biz - Admin</h1>
+                    <h1>
+						<a href="<%=Common.Util.Root%>Home">F.Biz - Admin</a>
+					</h1>
                 </div>
                 <!--  end header --><!--  START NAVIGATION --><!-- the class "active" is used to highlight the current/active linke -->
                 <div id="nav">
                     <ul>
-                        <li class="active"><a href="<%=Common.Util.Root%>" class="active">Home</a></li>
+                        <li class="active"><a href="<%=Common.Util.Root%>Home" class="active">Home</a></li>
                         <li><a href="<%=Common.Util.Root%>Tabelas/">Tabelas</a></li>
                         <li><a href="<%=Common.Util.Root%>Mensagens/">Mensagens</a></li>
                         <li><a href="<%=Common.Util.Root%>Formularios/">Formularios</a></li>
 						<li><a href="<%=Common.Util.Root%>Listas/">Listas</a></li>
 						<li><a href="<%=Common.Util.Root%>Headings/">Headings</a></li>
-						<li><a href="<%=Common.Util.Root%>Tabs/">Tabs</a></li>                        
-                        <li><a href="#">Logout</a></li>
+						<li><a href="<%=Common.Util.Root%>Tabs/">Tabs</a></li>
                     </ul>
                 </div>
                 <!--  end div #nav --><!--  END NAVIGATION --><!--  START SUB NAV --><!-- the class "active" is used to highlight the current/active linke -->

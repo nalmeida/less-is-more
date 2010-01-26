@@ -19,6 +19,12 @@ dd{
 }
 	#admin_wrapper h1 { font-size: 28px;padding-bottom: 10px;}
 
+/* ----------------------------
+		LOGIN
+------------------------------- */
+.login #subnav { display:none; }
+.login #nav { display:none; }
+.login #top { display:none; }
 
 /* ----------------------------
 		NOTIFICATIONS
@@ -47,25 +53,28 @@ dd{
 /* ----------------------------
 		LAYOUT
 ------------------------------- */
-#top { height: 20px;}
-#header { height: 70px;padding-left: 50px;}
+#top { height: auto;}
+	.saudacao {
+		text-align:right;
+		color:#fff;
+		padding:5px;
+	}
+#header { height: 70px;padding-left: 50px; overflow:hidden;}
 	
 	#header h1 {
-		margin: 0px;
-		padding:10px 0 0 0;
+		margin-top: 11px;
 		font-size: 200%;
 	}
 
 #content_wrapper {
-	margin:20px;	
-	padding: 0px;
-	float: left;	
+	margin:20px;
+	padding: 0px;	
 	clear: both	
 }
 #primary_content {
-	float: left;
 	margin: 0px;
 	padding:20px 30px 20px 20px;
+	overflow:hidden;
 }
 
 /* ----------------------------
@@ -336,14 +345,14 @@ table.tablesorter tbody td {
 	}
 		/*	class "active" is used to highlight the current/active link	*/
 		#nav li.active, #nav li:hover {
-			margin-top: -4px;
+			margin-top: 0px;
 		}
 
 	#nav a {
-	text-transform: uppercase;
-	font-size: 12px;
-	font-weight: bold;
-	text-decoration: none;
+		text-transform: uppercase;
+		font-size: 12px;
+		font-weight: bold;
+		text-decoration: none;
 	}
 	
 	/*	class "active" is used to highlight the current/active link	*/
@@ -357,10 +366,10 @@ table.tablesorter tbody td {
 #subnav	{
 	height: 30px;
 	clear: both;
-	padding:0 0 5px 50px;
+	padding:10px 0 10px 50px;
 }
-	#subnav li  { float: left;line-height: 30px;}
-	#subnav a  { font-size: 12px;padding:5px; background:#FFCC00; margin-right:5px;border:1px solid #131C25; text-decoration: none;}
+	#subnav li  { float: left;line-height: 30px; }
+	#subnav a  { font-size: 12px;padding:5px; margin-right:5px; text-decoration: none; }
 	
 	/*	class "active" is used to highlight the current/active link	*/
 	#subnav a.active  {font-weight: bold;}
