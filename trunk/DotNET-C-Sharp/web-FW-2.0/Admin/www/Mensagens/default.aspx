@@ -8,12 +8,12 @@
 
 <asp:content contentplaceholderid="cphMainContent" runat="server">
     <div id="primary_content">
-       	<h2>Welcome back <span class="theme_highlight">John Doe</span></h2>
+       	<h2>Mensagens</h2>
         <p>As mensagens disponíveis no modulo padrão são de Sucesso e Erro. Só copiar o código.</p>
 			
 		<!--  START NOTIFICATION BOXES -->       
-        <div class="success">Success - This is a success mssage.</div>
-        <div class="fail">Failure - This is a failure mssage.</div>
+        <div class="success">Sucesso - Esta é uma mensagem de sucesso.</div>
+        <div class="fail">Erro - Esta é uma mensagem de erro.</div>
                
     </div>
     <!--  end div #primary_content -->

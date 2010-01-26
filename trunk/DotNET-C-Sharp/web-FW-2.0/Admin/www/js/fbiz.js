@@ -31,7 +31,6 @@
 		$('#nav ul').find('li a')
 			.parent().removeClass('active').end()
 			.removeClass('active').each(function(){		
-				console.log($(this).text().toLowerCase().match(el))
 				if( $(this).text().toLowerCase().match(el) )  
 					$(this).addClass('active').parent().addClass('active') 
 			})

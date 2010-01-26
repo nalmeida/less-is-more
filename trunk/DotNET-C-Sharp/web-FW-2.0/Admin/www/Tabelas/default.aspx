@@ -13,7 +13,7 @@
             Para utilizar as tabelas de forma a usar o tema padrão do módulo, basta apenas criar 
 			a estrutura do html igual a tabela do exemplo abaixo.
 			<br />
-			A classe <strong>tablesorter</strong> é necessária para a formatação do Css quanto para a função de ordenação do  o javascript de ordenação.
+			A classe <strong>tablesorter</strong> é necessária tanto para a formatação do Css quanto para a função de ordenação do  o javascript de ordenação.
 			<strong></strong>
         </p>
 
