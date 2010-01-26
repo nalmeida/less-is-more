@@ -1,0 +1,173 @@
+/* Change your font here */
+body { background-color: #EAEAEA;}
+
+h1,h2,h3,h4,h5,h6{ color: #333333}
+
+p{ color: #666666;}
+
+dt{ font-weight: bold;text-decoration: underline;font-size: 14px;margin-top: 5px;margin-bottom: 5px;} 
+dd{ color: #666666; }
+#admin_wrapper {
+	background-color: #FFFFFF;
+	border: 10px solid #d6d6d6;
+}
+
+/* ----------------------------
+		NOTIFICATIONS
+------------------------------- */
+
+.success 				{ background-color: #D5FFCF; border: 1px solid #97FF88; color: #009900; background-image: url($root/locales/global/img/accept.png);}
+.fail 					{ background-color: #FFCFCF;border: 1px solid #FF9595;color: #CC3300; background-image: url($root/locales/global/img/delete.png);}
+.information 			{ background-color: #DCE3FF;border: 1px solid #93A8FF;color: #0033FF; background-image: url($root/locales/global/img/information.png);}
+.attention 				{ background-color: #FFFBCC;border: 1px solid #FFF35E;color: #C69E00; background-image: url($root/locales/global/img/warning.png);}
+
+.close-notification { background: url($root/locales/global/img/close.png) no-repeat;}
+
+.even { background-color: #EAEAEA; }
+
+/* ----------------------------
+		LAYOUT
+------------------------------- */
+#top { background-color: #0A0F13;}
+#header { background-color: #131C25;}
+	
+	#header h1 { color: #FFFFFF; }
+
+#primary_content {
+	background-color: #FFFFFF;
+	border: 1px solid #d6d6d6;
+}
+
+/* ----------------------------
+		PRIMARY CONTENT
+------------------------------- */
+#primary_content h2, #modal h2 { border-bottom:2px solid #d6d6d6; }
+
+#primary_content h3, #modal h3 { color: #222; }
+#primary_content h4 , #modal h4 { color: #333333; }
+#primary_content h5, #modal h5  { color: #999999; }
+#primary_content h6 	{ color: #999999; }
+
+#primary_content li  { color: #666666; }
+
+/* ----------------------------
+		SIDEBAR
+------------------------------- */		
+	#sidebar a {
+		color: #666666;
+		border-top:1px solid #EEEEEE;
+		border-bottom:1px solid #EEEEEE;
+	}
+
+	#sidebar .active, #sidebar a:hover {
+		background-color: #FFFFFF;
+		border-right:1px solid #d6d6d6;
+		border-top: 1px solid #d6d6d6;
+		border-bottom: 1px solid #d6d6d6;
+		color: #000000;
+	}
+
+
+/* ----------------------------
+		TABLES
+------------------------------- */
+th 	{ background-color: #d6d6d6; }
+
+#primary_content tr:hover { background-color: #FFFFCC; }
+
+/* ----------------------------
+		TABS
+------------------------------- */
+#tabs div p { color: #666666; }
+
+#tabs ul, ul.paginator{ background: #fff; }
+#tabs li, ul.paginator li { border: 1px solid #d6d6d6; }
+
+#tabs ul li.active, #tabs li:hover { background-color: #F5F5F5;}
+
+#tabs ul li.active a { color: #333333;}
+#tabs div { border: 1px solid #d6d6d6; }
+
+#tabs ul li a , ul.paginator li a{ color: #7E7E7E; }
+
+/* ----------------------------
+		FORMS
+------------------------------- */
+form .input {
+	border: 1px solid #CCCCCC;
+	background-color: #F3F3F3;
+	}
+
+form .button	{
+	background-color: #D6D6D6;
+	color: #666666;
+	border: 1px solid #CCCCCC;
+}
+
+.styled_textarea {
+	border: 1px solid #d6d6d6;
+	background-color: #F3F3F3;
+}
+input:focus, textarea:focus		{
+	background-color: #FFFFCC;
+	border: 1px solid #999999;
+}
+
+.paginator li a:hover { background-color: #d6d6d6; } 
+.paginator li.current a { background-color: #d6d6d6; }
+
+/* ----------------------------
+		MODAL DIALOG
+------------------------------- */
+#modal p { color: #666666; }
+#modal hr { color: #D4D0C8; }
+#modal .delete-link { color: #0000FF; }
+
+/* tables */
+table.tablesorter { background-color: #CDCDCD; }
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+	background-color: #d6d6d6;
+	border: 1px solid #FFF;
+}
+table.tablesorter thead tr .header { background: #cdcdcd url($root/locales/global/img/bg.gif) no-repeat center right; }
+table.tablesorter tbody td {
+	color: #3D3D3D;
+	background-color: #FFF;
+}
+table.tablesorter tbody tr.odd td { background-color:#F0F0F6; }
+table.tablesorter thead tr .headerSortUp { background-image: url($root/locales/global/img/asc.gif); }
+table.tablesorter thead tr .headerSortDown { background-image: url($root/locales/global/img/desc.gif);}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {	background-color: #B7B7B7;}
+
+/* ----------------------------
+		MAIN NAVIGATION
+------------------------------- */
+#nav { background-color: #FFCC00; }
+	#nav li {
+		border-right: 1px solid #131C25;
+	}
+		/*	class "active" is used to highlight the current/active link	*/
+		#nav li.active, #nav li:hover {
+			color:#131C25;
+			background-color: #FFFFFF;
+			border-top: 4px solid #fff;
+			border-right: 1px solid #fff;
+		}
+
+	#nav a { color:#131C25; }
+	
+	/*	class "active" is used to highlight the current/active link	*/
+	#nav a.active { color: #131C25; }
+	
+/* ----------------------------
+		SUB NAVIGATION
+------------------------------- */
+#subnav	{
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #d6d6d6;
+}
+	#subnav a  { color: #000;}
+	
+	/*	class "active" is used to highlight the current/active link	*/
+	#subnav a.active  {color: #131C25;}
+	#subnav a:hover 	{ color: #131C25;}
