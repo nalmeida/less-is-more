@@ -36,6 +36,7 @@
 	
 	scope.fbiz.nav = function(el){
 		var el = el ? el :  $('body').attr('class')
+			el = el.toLowerCase()
 		$('#nav ul').find('li a')
 			.parent().removeClass('active').end()
 			.removeClass('active').each(function(){		

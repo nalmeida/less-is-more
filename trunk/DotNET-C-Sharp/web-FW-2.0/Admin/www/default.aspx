@@ -9,26 +9,27 @@
 <asp:content contentplaceholderid="cphMainContent" runat="server">
 <!-- START ADMIN WRAPPER -->
 <div id="admin_wrapper">
-	<h1>Super Simple Admin Theme</h1>
+	<h1>F.biz Admin</h1>
 	
-	<p>Welcome. To log in just hit the log in button below.</p>
+	<p>Bem-vindo ao Admin!</p>
 	
-	<div class="attention">For the demo, just hit the login button</div>
+	<!--
+		<div class="attention">mensagem de alerta </div>
+	-->
 	
 	<form action="index1.html" method="get">
 	<p>
-		<label>Username</label>
+		<label>Login</label>
 		<input name="username" class="input large" value="username" type="text" />
 	</p>
 		
 	<p>
-		<label>Password</label>
+		<label>Senha</label>
 		<input name="password" class="input large" value="password" type="password" />
 	</p>
 	  
 	<p>
-		<input name="Submit" id="button" value="Login" class="button" type="submit" />
-		<input name="reset" id="reset" value="Reset" class="button" type="reset" />
+		<input name="Submit" id="button" value="Entrar" class="button" type="submit" />
 	</p>
 	</form>
 </div>
