@@ -18,8 +18,8 @@
         </p>
 			
 		<!--  START NOTIFICATION BOXES -->       
-        <div class="success canhide">Success - This is a success mssage.</div>
-        <div class="fail canhide">Failure - This is a failure mssage.</div>
+        <div class="success">Success - This is a success mssage.</div>
+        <div class="fail">Failure - This is a failure mssage.</div>
         <!--  END NOTIFICATION BOXES -->
 		
 		<h2>List Types</h2>
@@ -252,9 +252,7 @@
                         <label>
                             This is a text area...
                         </label>
-                        <textarea name="textarea" cols="50" rows="7" class="styled_textarea">
-                            Text area for lots of lines of text...
-                        </textarea>
+                        <textarea name="textarea" cols="50" rows="7" class="styled_textarea">Text area for lots of lines of text...</textarea>
                     </p>
                     <p>
                         <input class="button" value="Submit" type="button">
