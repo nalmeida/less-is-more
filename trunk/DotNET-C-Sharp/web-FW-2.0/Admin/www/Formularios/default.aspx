@@ -16,21 +16,21 @@
                 Campo de formulário pequeno 
 				Classe css: "input small"
             </label>
-            <input name="textfield1" class="input small" id="textfield1" value="Small..." type="text">
+            <input name="textfield1" class="input small" id="textfield1" value="Small..." type="text" />
         </p>
         <p>
             <label>
               	Campo de formulário médio 
 				Classe css: "input medium"
             </label>
-            <input name="textfield2" class="input medium" id="textfield2" value="Medium..." type="text">
+            <input name="textfield2" class="input medium" id="textfield2" value="Medium..." type="text" />
         </p>
         <p>
             <label>
                 Campo de formulário grande 
 				Classe css: "input large"
             </label>
-            <input name="textfield3" class="input large" id="textfield3" value="Large..." type="text">
+            <input name="textfield3" class="input large" id="textfield3" value="Large..." type="text" />
         </p>
         <p>
             <label>
@@ -38,22 +38,22 @@
             </label>
         </p>
         <p>
-            <input name="check1" class="checkbox" id="check1" type="checkbox">checkbox comum 
+            <input name="check1" class="checkbox" id="check1" type="checkbox" />checkbox comum 
         </p>
         <p>
-            <input name="check2" class="checkbox" id="check2" checked="checked" type="checkbox">checkbox comum 
+            <input name="check2" class="checkbox" id="check2" checked="checked" type="checkbox" />checkbox comum 
         </p>
         <p>
             <label>
                 Radio Buttons
             </label>
-            <input name="radio" class="radio" id="radio1" value="radio1" type="radio">radio comum 
+            <input name="radio" class="radio" id="radio1" value="radio1" type="radio" />radio comum 
         </p>
         <p>
-            <input name="radio" class="radio" id="radio2" value="radio1" type="radio">radio comum
+            <input name="radio" class="radio" id="radio2" value="radio1" type="radio" />radio comum
         </p>
         <p>
-            <input name="radio" class="radio" id="radio3" value="radio3" type="radio">radio comum 
+            <input name="radio" class="radio" id="radio3" value="radio3" type="radio" />radio comum 
         </p>
         <p>
             <label>
@@ -74,7 +74,7 @@
             <textarea name="textarea" cols="50" rows="7" class="styled_textarea">Text area for lots of lines of text...</textarea>
         </p>
         <p>
-            <input class="button" value="Submit" type="button">
+            <input class="button" value="Submit" type="button" />
         </p>
         
                
