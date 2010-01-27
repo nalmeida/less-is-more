@@ -25,7 +25,7 @@
         <meta http-equiv="cache-control" content="no-cache" />
         <meta http-equiv="expires" content="Fri, 13 Jul 2001 00:00:01 GMT" />
         <link rel="shortcut icon" href="<%=Common.Util.GlobalPath%>img/favicon.ico" />
-        <link rel="stylesheet" type="text/css" href="<%=Common.Util.Root%>minify.aspx?reset.css|main.css|navigation.css|theme.fbiz.css&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>" media="screen" />
+        <link rel="stylesheet" type="text/css" href="<%=Common.Util.Root%>minify.aspx?reset.css|main.css|theme.fbiz.css&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>" media="screen" />
         <asp:contentplaceholder id="cphCustomHeader" runat="server" />
     </head>
     <body <asp:contentplaceholder id="cphBodyProperties" runat="server" />>
@@ -38,7 +38,7 @@
                 <!--  end topbar -->
                 <div id="header">
                     <h1>
-						<a href="<%=Common.Util.Root%>Home">F.Biz - Admin</a>
+						Módulo Padrão - Admin
 					</h1>
                 </div>
                 <!--  end header --><!--  START NAVIGATION --><!-- the class "active" is used to highlight the current/active linke -->
@@ -70,7 +70,7 @@
                    <!--  END PRIMARY CONTENT --><!--  START SIDEBAR -->
                    
                     <div id="footer">
-                        © Copyright 2010 F.biz - <strong>Admin Theme</strong>
+						F.biz - <strong>Admin</strong>
                         | <a href="#">Top</a>
                     </div>
                     <!--  END FOOTER -->

@@ -1,5 +1,5 @@
 /* Change your font here */
-body { background-color: #EAEAEA;}
+body { background-color: #d3d4ce;}
 
 h1,h2,h3,h4,h5,h6{ color: #333333}
 
@@ -13,10 +13,9 @@ dd{ color: #666666; }
 }
 
 #wrapper {
-	/*
-	background: transparent url($root/locales/global/img/bg_fbiz_2.jpg) repeat-x center top;
-	*/
-	background: transparent url($root/locales/global/img/bg_fbiz.jpg) no-repeat right -45px;
+	background: #d3d4ce url($root/locales/global/img/bg_fbiz.jpg) no-repeat right top;
+	overflow:hidden;
+	zoom:1;
 }
 
 /* ----------------------------
@@ -38,13 +37,9 @@ dd{ color: #666666; }
 #top { background: rgba(0, 0, 0, 0.7);}
 #header { background-color: transparent;}
 	
-	#header h1 a { 
-		background:url($root/locales/global/img/logo_fbiz.png);
-		color: #FFFFFF; 
+	#header h1{ 
+		color: #000; 
 		display:block;
-		text-indent:-9999px;
-		width:92px;
-		height:45px;
 	}
 
 #primary_content {
@@ -158,16 +153,15 @@ table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSo
 ------------------------------- */
 #nav { background-color: transparent; }
 	#nav li {
-		margin-right:10px;
 		background: rgba(255, 255, 255, 0.7);
 		-moz-border-radius-bottomleft:0px;
 		-moz-border-radius-bottomright:0px;
-		-moz-border-radius-topleft:15px;
-		-moz-border-radius-topright:15px;
+		-moz-border-radius-topleft:5px;
+		-moz-border-radius-topright:5px;
 		-webkit-border-bottom-left-radius:0px;
 		-webkit-border-bottom-right-radius:0px;
-		-webkit-border-top-left-radius:15px;
-		-webkit-border-top-right-radius:15px;
+		-webkit-border-top-left-radius:5px;
+		-webkit-border-top-right-radius:5px;
 	}
 		/*	class "active" is used to highlight the current/active link	*/
 		#nav li.active, #nav li:hover {
@@ -175,8 +169,8 @@ table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSo
 			background-color: #FFCC00;
 			-moz-border-radius-bottomleft:0px;
 			-moz-border-radius-bottomright:0px;
-			-moz-border-radius-topleft:15px;
-			-moz-border-radius-topright:15px;
+			-moz-border-radius-topleft:5px;
+			-moz-border-radius-topright:5px;
 		}
 
 	#nav a { color:#808284; }
@@ -193,16 +187,18 @@ table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSo
 	-webkit-box-shadow: 0 0px 15px #999;
 }
 	#subnav a  { 
-		color: #FFCC00; 
-		background:#131C25;
+		color: #000; 
+		background:#f49b26;
 		-moz-border-radius: 5px;
 		-webkit-border-radius: 5px;
 		-moz-box-shadow: 0 1px 3px #999;
 		-webkit-box-shadow: 0 1px 3px #999;
-		text-shadow: 0 -1px 1px #222;
 	}
 	
 	/*	class "active" is used to highlight the current/active link	*/
-	#subnav a.active  {color: #FFCC00;}
-	#subnav a:hover 	{ color: #FFCC00; text-decoration:underline; background:#686868;}
-	#subnav a:hover 	{ color: #FFCC00; text-decoration:underline; background:#686868;}
+	#subnav a.active  {color: #000;}
+	#subnav a:hover 	{ 
+		color: #000; 
+		text-decoration:underline; 
+		background:#fff;
+	}
