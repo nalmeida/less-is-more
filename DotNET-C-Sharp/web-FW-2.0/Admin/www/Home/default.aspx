@@ -8,44 +8,61 @@
 
 <asp:content contentplaceholderid="cphMainContent" runat="server">
     <div id="primary_content">
-        <h2>Welcome back <span class="theme_highlight">John Doe</span></h2>
+        <h2>Bem-vindo ao Admin F.biz</h2>
         <p>
-            This
-            is some introductory text for the Super Skinnable Admin Theme. This
-            theme is really simple to skin because it uses very few colours or
-            images, so you can add your own icons or use those recommended in the
-            helpfile. Enjoy clicking around the theme!
+           	Esta página contém todos os objetos html usados no admin até o momento.
+		   <br />Copie exatamente o código respeitando sua hierarquia html para poder utilizar os temas corretamente.		   
         </p>
-			
+		<p>
+			Você pode visualizar os objetos html navegando nas abas do admin, cada objeto é detalhado em cada aba.
+		</p>
+		
+		<h2>Botões</h2>
+		<p>Botões de ação para aprovação de conteúdo</p>
+		<button class="button aproved" type="submit">Aprovados</button>
+		<button class="button reproved" type="submit">Reprovados</button>
+		<button class="button pendent" type="submit">Pendentes</button>
+		
+		<p>Botão padrão</p>
+		<button class="button" type="submit">Enviar</button>
+		
+		<h2>Mensagens</h2>
+		
 		<!--  START NOTIFICATION BOXES -->       
-        <div class="success">Success - This is a success mssage.</div>
-        <div class="fail">Failure - This is a failure mssage.</div>
+
+        <div class="success">Sucesso - Esta é uma mensagem de sucesso.</div>
+        <div class="fail">Erro - Esta é uma mensagem de erro.</div>
+
         <!--  END NOTIFICATION BOXES -->
 		
-		<h2>List Types</h2>
-        <p>There are many types of lists used in web design, here are just a few of them.</p>
+		<h2>Tipos de listas</h2>
+        <p>
+        	Abaixo seguem os tipos de listas existentes em html
+			<br />
+			Os códigos html estão comentados, basta copiar.
+		</p>
         
-		<!--  Definition List -->
-		<h3>Definition List</h3>
+		<!-- Lista de definição -->
+		<h3>Lista de definição - DL</h3>
         <dl>
-            <dt>Definition List Title</dt>
-            <dd>This is a definition list division.</dd>
+            <dt>Título</dt>
+            <dd>Descrição</dd>
         </dl>
 		
-        <!--  Ordered List -->
-		<h3>Ordered List</h3>
+        <!-- Lista ordenada -->
+		<h3>Lista ordenada</h3>
         <ol>
-            <li>List Item 1</li>
-            <li>List Item 2</li>
-            <li>List Item 3</li>
+            <li>Lista Item 1</li>
+            <li>Lista Item 2</li>
+            <li>Lista Item 3</li>
         </ol>
 		
-        <!--  Unordered List -->
-		<h3>Unordered List</h3>
+        <!--  Lista não-ordenada -->
+		<h3>Lista não-ordenada</h3>
         <ul>
-            <li>List Item 1</li>
-            <li>List Item 2</li>
-            <li>List Item 3</li>
+            <li>Lista Item 1</li>
+            <li>Lista Item 2</li>
+            <li>Lista Item 3</li>
         </ul>
 		
         <!--  START TAB -->
@@ -53,14 +70,14 @@
            
 		    <!--  TAB BOXES/HEADINGS -->
             <ul>
-                <li class="active"><a href="#tab-1">Tables</a></li>
-                <li><a href="#tab-2">Forms</a></li>
-                <li><a href="#tab-3">Typography</a></li>
+                <li class="active"><a href="#tab-1">Tabelas</a></li>
+                <li><a href="#tab-2">Formulários</a></li>
+                <li><a href="#tab-3">Headings</a></li>
             </ul>
            
 		    <!--  START TAB 1 -->
             <div id="tab-1">
-                <h3>Tables</h3>
+                <h3>Tabelas</h3>
                 <p>
                     Here
                     is an example of a styled table. The table is a very important part of
@@ -189,8 +206,8 @@
                 <br>
             </div>
             <!--  end div #tab1 --><!--  END TAB 1 --><!--  START TAB 2 -->
-            <div style="display: none;" id="tab-2">
-                <h3>Forms</h3>
+            <div id="tab-2">
+                <h3>Formulários</h3>
                 <p>
                     Here are some example form elements. You can add some custom classes like small, medium and last to adjust to your own needs.
                 </p>
@@ -259,8 +276,8 @@
                     </p>
                 </form>
             </div><!--  end div #tab-2 --><!--  END TAB 2 --><!--  START TAB 3 -->
-            <div style="display: none;" id="tab-3">
-                <h3>Typography</h3>
+            <div id="tab-3">
+                <h3>Headings</h3>
                 <p>
                     Here
                     is an example of the typography used in this theme. I've listed the

@@ -4,7 +4,7 @@
 
 <asp:content contentplaceholderid="cphCustomHeader" runat="server"><% // content place holder do header %></asp:content>
 
-<asp:content ID="Content5" contentplaceholderid="cphBodyProperties" runat="server">class="Listas"</asp:content>
+<asp:content ID="Content5" contentplaceholderid="cphBodyProperties" runat="server">class="Headings"</asp:content>
 
 <asp:content contentplaceholderid="cphMainContent" runat="server">
     <div id="primary_content">

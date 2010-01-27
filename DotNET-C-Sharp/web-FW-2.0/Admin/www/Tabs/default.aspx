@@ -4,10 +4,34 @@
 
 <asp:content contentplaceholderid="cphCustomHeader" runat="server"><% // content place holder do header %></asp:content>
 
-<asp:content ID="Content5" contentplaceholderid="cphBodyProperties" runat="server">class="Listas"</asp:content>
+<asp:content ID="Content5" contentplaceholderid="cphBodyProperties" runat="server">class="Tabs"</asp:content>
 
 <asp:content contentplaceholderid="cphMainContent" runat="server">
     <div id="primary_content">
+    	
+		<p>
+			Para utilizar as abas basta copiar o html do código e seguir padrões conforme os comentários.			
+		</p>	
+		<br />
+		<p>	
+			Basicamente, deve existir um div geral englobando o conteúdo com a class "tabs"
+			Dentro, deve existir uma lista não ordenada que nela os links para as devidas sessões.
+		</p>
+		<br />
+		<p>
+			Logo abaixo da lista não ordenada, devem vir as sessões separadas por div e cada div deve ter um id diferente.
+		</p>
+		<br />
+		<p>			
+			Os links da lista devem ter um "#" (hash) seguido dos id´s do div das sessões, assim o javascript vai abrir a aba
+			correta se baseando nos id´s.
+		</p>
+		<br />
+		<p>			
+			O código está bem comentado e fácil de ser reproduzido. 
+		</p>
+		<br />
+		
        	<!--  START TAB -->
         <div id="tabs" class="tabs">
            
