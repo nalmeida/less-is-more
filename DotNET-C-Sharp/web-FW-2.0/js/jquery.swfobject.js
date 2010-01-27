@@ -118,13 +118,17 @@
 						{
 							attrs: {
 								id: obj.id,
-								name: obj.name,
-								height: obj.height || 180,
-								width: obj.width || 320
+								name: obj.id || obj.id,				/* nalmeida: name = id */
+								width: obj.width || 320, 			/* nalmeida: minWidth = 320 */
+								height: obj.height || 240 			/* nalmeida: minHeight = 240 */
 							},
 							params: {
 								wmode: obj.wmode || 'opaque',
-								flashvars: obj.flashvars
+								flashvars: obj.flashvars || {}, 	/* nalmeida: flashvars || {} */
+								menu: "false", 						/* nalmeida: menu = false */
+								allowFullScreen: true, 				/* nalmeida: allowFullScreen = false */
+								allowScriptAccess: 'always' 		/* nalmeida: allowScriptAccess = false */
+								
 							}
 						},
 						obj

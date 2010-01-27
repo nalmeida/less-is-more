@@ -1,8 +1,6 @@
 (function(scope, $) {
 	// namespace
 	if(!scope.fbiz) scope.fbiz = {};
-	// Version
-	scope.fbiz.VERSION = '0.1';
 	
 	/**
 	 * Classe "estática" para chamar marcações do Google Analytics
@@ -11,6 +9,8 @@
 	 * @see Para testar em localhost com o analytics "real", colocar pageTracker._setDomainName("none");
 	 */
 	var Analytics = function () {
+		// Constants
+		this.VERSION = '1.0.0';
 		
 		/**
 		 * Private
@@ -147,4 +147,4 @@
 	// Static 
 	scope.fbiz.Analytics = new Analytics();
 	
-})(window, $);
+})(window, jQuery);
