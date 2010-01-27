@@ -26,7 +26,6 @@
 	//]]>
 	</script>
 	
-	<script type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?fbiz.js&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>"></script>
 	<asp:contentplaceholder id="cphCustomHeader" runat="server" />
 	
 	<% if(Common.Util.isIE6) {// IE6 Only%>
@@ -106,7 +105,7 @@
 			</style>
 			
 			<h1>
-				Módulo padrão C# v15.7 - utf-8
+				Módulo padrão C# v16.0 - utf-8
 			</h1>
 			
 			<div class="collapseContainer">
@@ -270,6 +269,62 @@
 					</ul>
 				</div>
 			</div>
+			<div class="collapseContainer">
+				<script type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?swfobject.js|fbiz.flash.js&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>"></script>
+				
+				<h2>Exemplos usando a fake_flash e fake_image</h2>
+				<div class="collapse">
+					<ul>
+						<li>
+							<p>
+								<strong>fake_image</strong>: <br />
+								<img src="<%=Common.Util.GlobalPath%>img/fake_image.aspx?width=240&height=120" alt="" />
+							</p>
+						</li>
+						<li>
+							<p>
+								<strong>fake_flash</strong>: <br />
+								<p>
+									Necessita da:
+								</p>
+								<ul>
+									<li><%=Common.Util.Root%>js/swfobject.js</li>
+									<li><%=Common.Util.Root%>js/fbiz.flash.js</li>
+								</ul>
+								<div id="flashHolder">
+									Esse conteúdo só é exibido se o usuário não tiver o Flashplayer instalado!
+								</div>
+								
+								<script type="text/javascript">
+									// Simples
+									// fbiz.Flash.add('<%=Common.Util.GlobalPath%>swf/fake_flash.swf', '#flashHolder', '100%', 120);
+								
+									// Completa
+									function onFlashAdded(data) {
+										data.ref;
+										data.id;
+										data.success;
+									}
+									var extra = {
+										flashvars:{
+											bpc: '<%=Common.Util.Bpc%>',
+											root: '<%=Common.Util.GlobalPath%>swf/'
+										},
+										expressInstall: '<%=Common.Util.GlobalPath%>swf/expressInstall.swf',
+										attributes: {
+											bgcolor: '#000000'
+										}, 
+										onComplete: onFlashAdded
+									};
+									fbiz.Flash.add('<%=Common.Util.GlobalPath%>swf/fake_flash.swf', '#flashHolder', '100%', 120, extra);
+
+								</script>
+							</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
 		<!-- ME APAGUE! -->
 		</div>
 	</form>
