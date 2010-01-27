@@ -34,7 +34,10 @@ dd{ color: #666666; }
 /* ----------------------------
 		LAYOUT
 ------------------------------- */
-#top { background: rgba(0, 0, 0, 0.7);}
+#top { 
+	background: #545552;
+	background: rgba(0, 0, 0, 0.6);
+}
 #header { background-color: transparent;}
 	
 	#header h1{ 
@@ -45,6 +48,7 @@ dd{ color: #666666; }
 #primary_content {
 	background-color: #FFFFFF;
 	border: 1px solid #d6d6d6;
+	border-left:0;
 }
 
 /* ----------------------------
@@ -125,28 +129,6 @@ input:focus, textarea:focus		{
 .paginator li a:hover { background-color: #d6d6d6; } 
 .paginator li.current a { background-color: #d6d6d6; }
 
-/* ----------------------------
-		MODAL DIALOG
-------------------------------- */
-#modal p { color: #666666; }
-#modal hr { color: #D4D0C8; }
-#modal .delete-link { color: #0000FF; }
-
-/* tables */
-table.tablesorter { background-color: #CDCDCD; }
-table.tablesorter thead tr th, table.tablesorter tfoot tr th {
-	background-color: #d6d6d6;
-	border: 1px solid #FFF;
-}
-table.tablesorter thead tr .header { background: #cdcdcd url($root/locales/global/img/bg.gif) no-repeat center right; }
-table.tablesorter tbody td {
-	color: #3D3D3D;
-	background-color: #FFF;
-}
-table.tablesorter tbody tr.odd td { background-color:#F0F0F6; }
-table.tablesorter thead tr .headerSortUp { background-image: url($root/locales/global/img/asc.gif); }
-table.tablesorter thead tr .headerSortDown { background-image: url($root/locales/global/img/desc.gif);}
-table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {	background-color: #B7B7B7;}
 
 /* ----------------------------
 		MAIN NAVIGATION

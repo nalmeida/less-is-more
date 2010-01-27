@@ -41,33 +41,73 @@
 						Módulo Padrão - Admin
 					</h1>
                 </div>
-                <!--  end header --><!--  START NAVIGATION --><!-- the class "active" is used to highlight the current/active linke -->
-                <div id="nav">
-                    <ul>
-                        <li class="active"><a href="<%=Common.Util.Root%>Home" class="active">Home</a></li>
-                        <li><a href="<%=Common.Util.Root%>Tabelas/">Tabelas</a></li>
-                        <li><a href="<%=Common.Util.Root%>Mensagens/">Mensagens</a></li>
-                        <li><a href="<%=Common.Util.Root%>Formularios/">Formularios</a></li>
-						<li><a href="<%=Common.Util.Root%>Listas/">Listas</a></li>
-						<li><a href="<%=Common.Util.Root%>Headings/">Headings</a></li>
-						<li><a href="<%=Common.Util.Root%>Tabs/">Tabs</a></li>
-                    </ul>
-                </div>
-                <!--  end div #nav --><!--  END NAVIGATION --><!--  START SUB NAV --><!-- the class "active" is used to highlight the current/active linke -->
-                <div id="subnav">
-                    <ul>
-                        <li><a href="#">Lorem Ipsum</a></li>
-                        <li><a href="#">Cras Lorum</a></li>
-                        <li><a href="#" class="active">Nunc Tempus</a></li>
-                        <li><a href="#">Aenean</a></li>
-                        <li><a href="#">Nulla</a></li>
-                    </ul>
-                </div>
-                <!--  end div #subnav --><!--  END SUB NAV --><!--  START CONTENT -->
+                <!--  end header -->
+								
+				<!--  START SUB NAV --><!-- the class "active" is used to highlight the current/active linke -->
+                <div id="subnav"></div>
+                <!--  end div #subnav --><!--  END SUB NAV -->
+				
+				<!--  START CONTENT -->
                 <div id="content_wrapper">
-                    <!--  START PRIMARY CONTENT -->
+				
+					<!-- Accordion Menu -->  
+					<ul id="main-nav">
+						<li>
+							<a href="<%=Common.Util.Root%>Home" class="nav-top-item no-submenu"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
+								Home
+							</a>       
+						</li>
+
+						<li> 
+							<a href="#" class="nav-top-item current"> <!-- Add the class "current" to current menu item -->
+							Teste Submenus
+							</a>
+							<ul style="display: none;">
+								<li><a href="#">Link</a></li>
+								<li><a class="current" href="<%=Common.Util.Root%>Usage">Como Usar</a></li> <!-- Add class "current" to sub menu items also -->
+							</ul>
+						</li>
+						
+						<li> 
+							<a href="<%=Common.Util.Root%>Tabelas/" class="nav-top-item no-submenu">
+							Tabelas
+							</a>
+						</li>
+
+						<li>
+							<a href="<%=Common.Util.Root%>Mensagens/" class="nav-top-item no-submenu">
+								Mensagens
+							</a>
+						</li>
+
+						<li>
+							<a href="<%=Common.Util.Root%>Formularios/" class="nav-top-item no-submenu">
+								Formularios
+							</a>
+						</li>
+
+						<li>
+							<a href="<%=Common.Util.Root%>Listas/" class="nav-top-item no-submenu">
+								Listas
+							</a>
+						</li>
+
+						<li>
+							<a href="<%=Common.Util.Root%>Headings/" class="nav-top-item no-submenu">
+								Headings
+							</a>
+						</li>
+						
+						<li>
+							<a href="<%=Common.Util.Root%>Tabs/" class="nav-top-item no-submenu">
+								Tabs
+							</a>
+						</li>
+					</ul>
+					
+					<!--  START PRIMARY CONTENT -->
 					 <asp:contentplaceholder id="cphMainContent" runat="server"></asp:contentplaceholder>
-                   <!--  END PRIMARY CONTENT --><!--  START SIDEBAR -->
+					<!--  END PRIMARY CONTENT --><!--  START SIDEBAR -->
                    
                     <div id="footer">
 						F.biz - <strong>Admin</strong>
@@ -96,6 +136,6 @@
 			})(window, jQuery);			
             //]]>
         </script>		
-		<script type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?fbiz.js|jquery.tablesorter.js|main.js&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>"></script>        
+		<script type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?fbiz.js|jquery.tablesorter.js|main.js|simpla.js&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>"></script>        
     </body>
 </html>
