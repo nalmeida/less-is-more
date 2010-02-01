@@ -42,11 +42,7 @@
 					</h1>
                 </div>
                 <!--  end header -->
-								
-				<!--  START SUB NAV --><!-- the class "active" is used to highlight the current/active linke -->
-                <div id="subnav"></div>
-                <!--  end div #subnav --><!--  END SUB NAV -->
-				
+											
 				<!--  START CONTENT -->
                 <div id="content_wrapper">
 				
@@ -66,42 +62,6 @@
 								<li><a href="#">Link</a></li>
 								<li><a class="current" href="<%=Common.Util.Root%>Usage">Como Usar</a></li> <!-- Add class "current" to sub menu items also -->
 							</ul>
-						</li>
-						
-						<li> 
-							<a href="<%=Common.Util.Root%>Tabelas/" class="nav-top-item no-submenu">
-							Tabelas
-							</a>
-						</li>
-
-						<li>
-							<a href="<%=Common.Util.Root%>Mensagens/" class="nav-top-item no-submenu">
-								Mensagens
-							</a>
-						</li>
-
-						<li>
-							<a href="<%=Common.Util.Root%>Formularios/" class="nav-top-item no-submenu">
-								Formularios
-							</a>
-						</li>
-
-						<li>
-							<a href="<%=Common.Util.Root%>Listas/" class="nav-top-item no-submenu">
-								Listas
-							</a>
-						</li>
-
-						<li>
-							<a href="<%=Common.Util.Root%>Headings/" class="nav-top-item no-submenu">
-								Headings
-							</a>
-						</li>
-						
-						<li>
-							<a href="<%=Common.Util.Root%>Tabs/" class="nav-top-item no-submenu">
-								Tabs
-							</a>
 						</li>
 					</ul>
 					
