@@ -65,6 +65,7 @@
             <li>Lista Item 3</li>
         </ul>
 		
+		<h2>Tabs</h2>
         <p>
 			Para utilizar as abas basta copiar o html do código e seguir padrões conforme os comentários.			
 		</p>	

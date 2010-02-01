@@ -1,5 +1,5 @@
 /* Change your font here */
-body { background-color: #d3d4ce;}
+body { background: #D3D4CE url($root/locales/global/img/bg_site.png) repeat-y right top;}
 
 h1,h2,h3,h4,h5,h6{ color: #333333}
 
@@ -13,7 +13,7 @@ dd{ color: #666666; }
 }
 
 #wrapper {
-	background: #d3d4ce url($root/locales/global/img/bg_fbiz.jpg) no-repeat right top;
+	background: transparent url($root/locales/global/img/bg_fbiz.jpg) no-repeat right top;
 	overflow:hidden;
 	zoom:1;
 }
@@ -184,3 +184,8 @@ input:focus, textarea:focus		{
 		text-decoration:underline; 
 		background:#fff;
 	}
+
+/************ Button ************/
+button.aproved {background:#00aa00 !important;}
+button.reproved {background:#e60000 !important}
+button.pendent {background:#bfbf00 !important}
