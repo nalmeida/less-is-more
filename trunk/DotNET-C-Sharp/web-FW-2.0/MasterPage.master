@@ -5,8 +5,8 @@
 	<%=@"<meta name=""description"" content="""%><asp:contentplaceholder id="cphCustomDescription" runat="server" ><%#Common.Config.Title%></asp:contentplaceholder><%=@""" />"%>
 	<%=@"<meta name=""keywords"" content="""%><asp:contentplaceholder id="cphCustomKeywords" runat="server" ><%#Common.Config.Title%></asp:contentplaceholder><%=@""" />"%>
 	
-	<meta name="copyright" content="F.biz" />
-	<meta name="author" content="F.biz - http://www.fbiz.com.br/" />
+	<meta name="copyright" content="<%=Common.Config.CompanyName%>" />
+	<meta name="author" content="<%=Common.Config.AuthorName%> - <%=Common.Config.AuthorAddress%>" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="MSSmartTagsPreventParsing" content="TRUE" />
 	<meta name="robots" content="INDEX, FOLLOW" />
@@ -18,6 +18,7 @@
 	<link rel="shortcut icon" href="<%=Common.Util.GlobalPath%>img/favicon.ico" />
 	
 	<link rel="stylesheet" type="text/css" href="<%=Common.Util.Root%>minify.aspx?reset.css&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>" media="screen" />
+	
 	<% // carrega o jquery do servidor do google, se não der certo, carrega local %>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
 	<script type="text/javascript">
@@ -101,6 +102,9 @@
 				.warn,
 				.warn *{
 					color:warn;
+				}
+				ul{
+					margin:10px 0;
 				}
 			</style>
 			
@@ -266,39 +270,61 @@
 								</a>
 							</p>
 						</li>
+						<li>
+							<p>
+								<strong>DD_belatedPNG</strong>: <br />
+								<a href="http://www.dillerdesign.com/experiment/DD_belatedPNG/" target="_blank">
+									http://www.dillerdesign.com/experiment/DD_belatedPNG/
+								</a>
+							</p>
+						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="collapseContainer">
-				<script type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?swfobject.js|fbiz.flash.js&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>"></script>
+				<script type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?swfobject.js|lim.flash.js&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>"></script>
 				
-				<h2>Exemplos usando a fake_flash e fake_image</h2>
+				<h2>fake_flash e fake_image</h2>
 				<div class="collapse">
+					<p>
+						Para imagens ou flashs dinâmicos ou até mesmo para marcação enquanto não existir a versão final:
+					</p>
 					<ul>
 						<li>
 							<p>
-								<strong>fake_image</strong>: <br />
-								<img src="<%=Common.Util.GlobalPath%>img/fake_image.aspx?width=240&height=120" alt="" />
+								<strong>fake_image</strong> <br>
+								(<a href="<%=Common.Util.GlobalPath%>img/fake_image.aspx"><%=Common.Util.GlobalPath%>img/fake_image.aspx</a>):
+							</p>
+							<p>
+								Ao criar a imagem, é necessário passar os parâmetros <code>width</code> e <code>height</code> para o fake_image.aspx. é possível passar <code>color</code> com o valor hexadecimal da cor.
+							</p>
+							<p>
+								<img src="<%=Common.Util.GlobalPath%>img/fake_image.aspx?width=240&amp;height=120" alt="" />
 							</p>
 						</li>
 						<li>
 							<p>
-								<strong>fake_flash</strong>: <br />
-								<p>
-									Necessita da:
-								</p>
-								<ul>
-									<li><%=Common.Util.Root%>js/swfobject.js</li>
-									<li><%=Common.Util.Root%>js/fbiz.flash.js</li>
-								</ul>
-								<div id="flashHolder">
-									Esse conteúdo só é exibido se o usuário não tiver o Flashplayer instalado!
-								</div>
+								<strong>fake_flash</strong> <br>
+								(<a href="<%=Common.Util.GlobalPath%>swf/fake_flash.swf"><%=Common.Util.GlobalPath%>swf/fake_flash.swf</a>):
+							</p>
+							<p>
+								Ao escrever ou redimensionar o flash o tamanho será atualizado. Não é necessário passar parâmetros adicionais.<br>
+							</p>
+							<p>Necessita da:</p>
+							<ul>
+								<li><%=Common.Util.Root%>js/swfobject.js</li>
+								<li><%=Common.Util.Root%>js/lim.flash.js</li>
+							</ul>
+							
+							<div id="flashHolder">
+								Esse conteúdo só é exibido se o usuário não tiver o Flashplayer instalado!
+							</div>
 								
-								<script type="text/javascript">
-									// Simples
-									// fbiz.Flash.add('<%=Common.Util.GlobalPath%>swf/fake_flash.swf', '#flashHolder', '100%', 120);
-								
+							<script type="text/javascript">
+								// Simples
+								// lim.flash.add('<%=Common.Util.GlobalPath%>swf/fake_flash.swf', '#flashHolder', '100%', 120);
+							
+								(function(){
 									// Completa
 									function onFlashAdded(data) {
 										data.ref;
@@ -316,10 +342,9 @@
 										}, 
 										onComplete: onFlashAdded
 									};
-									fbiz.Flash.add('<%=Common.Util.GlobalPath%>swf/fake_flash.swf', '#flashHolder', '100%', 120, extra);
-
-								</script>
-							</p>
+									lim.flash.add('<%=Common.Util.GlobalPath%>swf/fake_flash.swf', '#flashHolder', '100%', 120, extra);
+								})();
+							</script>
 						</li>
 					</ul>
 				</div>

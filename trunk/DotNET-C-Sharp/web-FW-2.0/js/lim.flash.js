@@ -1,17 +1,20 @@
+if(!window['lim']){
+	var lim = {};
+}
 (function(scope, $, swfobject) {
 	
 	// Requirements
 	if(!$ || !swfobject){
-		throw new Error ('jQuery 1.3.2 and swfObject 2.2 is needed for "fbiz.flash"');
+		throw new Error ('jQuery 1.3.2 and swfObject 2.2 is needed for "flash"');
 		return;
 	}
 	
 	// namespace
-	if(!scope.fbiz) scope.fbiz = {};
-	if(!scope.fbiz.Flash) scope.fbiz.Flash = {};
+	if(!scope) scope = window;
+	scope.flash = {};
 	
 	// Version
-	scope.fbiz.Flash.VERSION = '1.1.0';
+	scope.flash.VERSION = '1.1.0';
 	
 	/**
 	 * Substitui um elemento HTML na tela por um "flash" usando a SWFObject
@@ -67,8 +70,7 @@
 			fbiz.Flash.add('<%=Common.Util.GlobalPath%>swf/fake_flash.swf', '#flashHolder', '100%', 120, extra);
 		});
 	 */
-	
-	scope.fbiz.Flash.add = function(p_url, p_id, p_width, p_height, p_extra){
+	scope.flash.add = function(p_url, p_id, p_width, p_height, p_extra){
 		
 		// Constants
 		var FLASHPLAYER_DEFAULT_VERSION = '9.0.0';
@@ -78,7 +80,6 @@
 		 */
 		var extra = p_extra || {};
 		var id = p_id.replace(/\#/gi,''); // remove o # caso venha com um
-		
 		var flashvars = extra.flashvars || {};
 		
 		var params = $.extend({
@@ -91,9 +92,18 @@
 			name: id
 		}, extra.attributes || {});
 
-		var onComplete = extra.onComplete || function(data){data.ref; data.id; data.success; };
-
-		swfobject.embedSWF(p_url, id, p_width, p_height, extra.version || FLASHPLAYER_DEFAULT_VERSION, extra.expressInstall, flashvars, params, attributes, onComplete);
+		swfobject.embedSWF(
+			p_url,
+			id,
+			p_width,
+			p_height,
+			extra.version || FLASHPLAYER_DEFAULT_VERSION,
+			extra.expressInstall,
+			flashvars,
+			params,
+			attributes,
+			extra.onComplete
+		);
 	};
 	
-})(window, jQuery, swfobject);
+})(lim, jQuery, swfobject);

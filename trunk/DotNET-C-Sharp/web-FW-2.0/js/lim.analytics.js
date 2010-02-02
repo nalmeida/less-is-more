@@ -1,35 +1,37 @@
+if(!window['lim']){
+	var lim = {};
+}
 (function(scope, $) {
 	// namespace
-	if(!scope.fbiz) scope.fbiz = {};
+	if(!scope) scope = window;
 	
 	/**
-	 * Classe "estática" para chamar marcações do Google Analytics
+	 * Classe para chamar marcações do Google Analytics
 	 * @author Nicholas Almeida
 	 * @since 19:18 13/8/2009
 	 * @see Para testar em localhost com o analytics "real", colocar pageTracker._setDomainName("none");
 	 */
-	var Analytics = function () {
-		// Constants
-		this.VERSION = '1.0.0';
+	scope.Analytics = function () {
 		
 		/**
 		 * Private
 		 */
 		var _timeout = 250;
-		var _pageTracker = 'pageTracker';
+		var _pageTrackerMethodName = 'pageTracker';
+		var _pageTracker = window[_pageTrackerMethodName];
 	
 		/**
 		 * Atribui valor para _pageTracker
 		 */
 		this.setTracker = function(trackerFunction) {
-			_pageTracker = trackerFunction;
+			_pageTracker =  typeof(trackerFunction) == 'function' ? trackerFunction : window[trackerFunction];
 		};
 	
 		/**
 		 * Retorna a pageTracker usada
 		 */
 		this.getTracker = function() {
-			return scope[_pageTracker];
+			return _pageTracker;
 		};
 	
 		/**
@@ -37,7 +39,7 @@
 		 * @param {string} str String da marcação desejada
 		 */
 		this.track = function(str) {
-			this.getTracker()._trackPageview(str);
+			_pageTracker._trackPageview(str);
 		};
 	
 		/**
@@ -143,8 +145,11 @@
 			this.getTracker()._setVar(str);
 		};
 	};
+
+	// constants
+	scope.Analytics.VERSION = '1.0.0';
 	
-	// Static 
-	scope.fbiz.Analytics = new Analytics();
+	// Instancia pre gerada
+	scope.analytics = new Analytics();
 	
-})(window, jQuery);
+})(lim, jQuery);
