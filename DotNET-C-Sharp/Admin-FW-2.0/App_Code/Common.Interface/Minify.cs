@@ -231,7 +231,7 @@ namespace Common
             Util.GZipEncodePage();
 
             //OUTPUT
-            Response.Write("/**\n * @author F.biz - http://www.fbiz.com.br/\n */\n");
+            Response.Write("/**\n * @author "+Common.Config.AuthorName+" - "+Common.Config.AuthorAddress+"\n */\n");
             Response.Write(stContent);
         }
 

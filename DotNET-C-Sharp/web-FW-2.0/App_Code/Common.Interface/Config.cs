@@ -34,5 +34,29 @@ namespace Common
                 return " - ##PAGE_TITLE##";
             }
         }
+
+        public static string AuthorName
+        {
+            get
+            {
+                return "##AUTHOR_NAME##";
+            }
+        }
+
+        public static string AuthorAddress
+        {
+            get
+            {
+                return "##AUTHOR_ADDRESS##";
+            }
+        }
+
+        public static string CompanyName
+        {
+            get
+            {
+                return "##COMPANY_NAME##";
+            }
+        }
     }
 }
