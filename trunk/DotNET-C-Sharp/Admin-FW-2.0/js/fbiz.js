@@ -12,21 +12,33 @@
 	scope.fbiz.tabs = function(cl){
 		cl = cl ? cl : '.tabs'
 		
-		/* Tabs Animation */
-		var tabs = $(cl)
-			tabs			
-			.find('div').hide().end()
-			.find('div:first').show().end()
-			.find('ul li:first').addClass('active').parent()
+		var querystring = function(){		
+			var tab = null
+				if(scope.location.href.match(/\#/))
+					tab = '#' + scope.location.href.split(/#/)[1]
+			return 	tab	
+		}
+		
+		var tabs = $('.tabs ul').eq(0)
+		var location = querystring() || '#' + tabs.find('li a').eq(0).attr('href').split('#')[1]
+		
+		var zera = function(){
+			tabs.parent().children('div').hide().end().end()
+				.find('li').removeClass('active')			
+		}
+		
+		zera()
+		
+		tabs.find('a[href='+ location +']').parent().addClass('active')
+		$(location).show()
 			
-			.find('a').click(function(){ 
-				tabs.find('li').removeClass('active')
-				$(this).parent().addClass('active')				
-				var currentTab = $(this).attr('href')				
-				tabs.find('div').hide()
-				$(currentTab).show()
-				return false
-			})
+		tabs.find('a').click(function(){
+			zera()
+			$(this).addClass('destaque').parent().addClass('active')			
+			$( '#'+ this.href.split(/#/)[1] ).show()
+			return false
+		})					
+		
 	}
 	
 	scope.fbiz.tablesort = function(cl){
