@@ -31,7 +31,7 @@ if(!window['lim']){
 		 * Retorna a pageTracker usada
 		 */
 		this.getTracker = function() {
-			return _pageTracker;
+			return _pageTracker != null ? _pageTracker : window[_pageTrackerMethodName];
 		};
 	
 		/**
@@ -52,7 +52,7 @@ if(!window['lim']){
 			this.track(str);
 			if(!target) target = '_self';
 			if(!url) {
-				throw new Error('[ERROR] fbiz.analytics.trackAndGo: undefined URL.');
+				throw new Error('[ERROR] lim.analytics.trackAndGo: undefined URL.');
 			} else {
 				setTimeout(function(){
 					window.open(url, target);
@@ -79,10 +79,10 @@ if(!window['lim']){
 		 */
 		this.trackEvent = function(category, action, optional_label, optional_value) {
 			if(!category || !action) {
-				throw new Error('[ERROR] fbiz.analytics.trackEvent: trackEvent must contain "category" and "action" parameters.');
+				throw new Error('[ERROR] lim.analytics.trackEvent: trackEvent must contain "category" and "action" parameters.');
 			} else {
 				if((optional_value && isNaN(optional_value)) || optional_value === true) {
-					throw new Error('[ERROR] fbiz.analytics.trackEvent: optional_value must be a number.');
+					throw new Error('[ERROR] lim.analytics.trackEvent: optional_value must be a number.');
 				} else {
 					this.getTracker()._trackEvent(category, action, optional_label, optional_value);
 				}
@@ -115,7 +115,7 @@ if(!window['lim']){
 			this.trackEvent(category, action, optional_label, optional_value);
 			if(!target) target = '_self';
 			if(!url) {
-				throw new Error('[ERROR] fbiz.analytics.trackAndGo: undefined URL.');
+				throw new Error('[ERROR] lim.analytics.trackAndGo: undefined URL.');
 			} else {
 				setTimeout(function(){
 					window.open(url, target);
@@ -132,7 +132,7 @@ if(!window['lim']){
 				try {
 					func();
 				} catch(e) {
-					throw new Error('[ERROR] fbiz.analytics.callJs: undefined function called.');
+					throw new Error('[ERROR] lim.analytics.callJs: undefined function called.');
 				}
 			}, this._timeout);
 		};
@@ -145,11 +145,11 @@ if(!window['lim']){
 			this.getTracker()._setVar(str);
 		};
 	};
-
+	
 	// constants
 	scope.Analytics.VERSION = '1.0.0';
 	
 	// Instancia pre gerada
-	scope.analytics = new Analytics();
+	scope.analytics = new scope.Analytics();
 	
 })(lim, jQuery);
