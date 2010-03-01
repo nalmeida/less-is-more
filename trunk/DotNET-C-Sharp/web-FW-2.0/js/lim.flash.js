@@ -67,7 +67,7 @@ if(!window['lim']){
 				}, 
 				onComplete: onFlashAdded
 			};
-			fbiz.Flash.add('<%=Common.Util.GlobalPath%>swf/fake_flash.swf', '#flashHolder', '100%', 120, extra);
+			lim.Flash.add('<%=Common.Util.GlobalPath%>swf/fake_flash.swf', '#flashHolder', '100%', 120, extra);
 		});
 	 */
 	scope.flash.add = function(p_url, p_id, p_width, p_height, p_extra){
