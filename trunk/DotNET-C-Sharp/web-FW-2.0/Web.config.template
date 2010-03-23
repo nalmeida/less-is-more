@@ -18,11 +18,14 @@
 		</mailSettings>
 	</system.net>
 
+	<system.web>
+		<customErrors mode="Off"/>
+		<compilation defaultLanguage="c#" debug="true" />
+		<globalization fileEncoding="utf-8" uiCulture="pt-BR" culture="pt-BR" requestEncoding="utf-8" responseEncoding="utf-8" />
+	</system.web>	
+	
 	<location path="." inheritInChildApplications="false" >
 		<system.web>
-			<customErrors mode="Off"/>
-			<compilation defaultLanguage="c#" debug="true" />
-			<globalization fileEncoding="utf-8" uiCulture="pt-BR" culture="pt-BR" requestEncoding="utf-8" responseEncoding="utf-8" />
 			<httpHandlers>
 				<add path="minify.aspx" type="Common.Minify" verb = "*"/>
 				<add path="locales/global/img/fake_image.aspx" type="Common.FakeImage" verb = "*"/>
