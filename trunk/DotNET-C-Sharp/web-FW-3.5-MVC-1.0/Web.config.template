@@ -44,6 +44,14 @@
     </compilation>
     <globalization fileEncoding="utf-8" uiCulture="pt-BR" culture="pt-BR" requestEncoding="utf-8" responseEncoding="utf-8"/>
   </system.web>
+  
+  <system.net>
+	<mailSettings>
+		<smtp>
+			<network host="172.16.18.4"/>
+		</smtp>
+	</mailSettings>
+  </system.net>
 
   <location path="." inheritInChildApplications="false" >
     <system.web>
