@@ -39,7 +39,7 @@ namespace Common
         {
             get
             {
-                return "##AUTHOR_NAME##";
+                return "F.biz";
             }
         }
 
@@ -47,7 +47,7 @@ namespace Common
         {
             get
             {
-                return "##AUTHOR_ADDRESS##";
+                return "http://www.fbiz.com.br/";
             }
         }
 
@@ -55,7 +55,7 @@ namespace Common
         {
             get
             {
-                return "##COMPANY_NAME##";
+                return "F.biz";
             }
         }
     }
