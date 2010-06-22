@@ -20,13 +20,15 @@
 				</sectionGroup>
 			</sectionGroup>
 		</sectionGroup>
+		<section name="dataConfiguration" type="Microsoft.Practices.EnterpriseLibrary.Data.Configuration.DatabaseSettings, Microsoft.Practices.EnterpriseLibrary.Data"/>
 	</configSections>
 	<appSettings/>
 
   <connectionStrings>
     <remove name="Sql" />
-    <add    name="Sql" providerName="System.Data.SqlClient" connectionString="Data Source=FDES\SQL2000;Initial Catalog=;User Id=sa;Password=159753;" />
+    <add    name="Sql" providerName="System.Data.SqlClient" connectionString="Data Source=FDES\SQL2005;Initial Catalog=;User Id=sa;Password=159753;" />
   </connectionStrings>
+  <dataConfiguration defaultDatabase="Sql"/>
 
   <system.web>
     <customErrors mode="Off"/>
