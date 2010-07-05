@@ -191,9 +191,13 @@ namespace Common
 			// CSS
 			if (vtArquivo[0].Contains(".css"))
 			{
-				stContent = stContent.Replace("$root/", Util.Root); // replace root tag
-				stContent = stContent.Replace("$global/", Util.GlobalPath); // replace global tag
-				stContent = stContent.Replace("$language/", Util.LanguagePath); // replace global tag
+				// replaces
+				stContent = stContent.Replace("$root/", Util.AssetsRoot); 
+				stContent = stContent.Replace("$global/", Util.GlobalPath);
+				stContent = stContent.Replace("$language/", Util.LanguagePath);
+				stContent = stContent.Replace("$upload-root/", Util.UploadsRoot); 
+				stContent = stContent.Replace("$upload-global/", Util.GlobalUploadPath);
+				stContent = stContent.Replace("$upload-language/", Util.LanguageUploadPath);
 
 				Dictionary<string, string> dicVariables = new Dictionary<string, string>();
 

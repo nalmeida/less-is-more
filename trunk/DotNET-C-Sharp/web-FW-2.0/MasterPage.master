@@ -1,5 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage"%><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt" lang="pt">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-BR" >
 <head>
 	<%=@"<title>"%><asp:contentplaceholder id="cphCustomTitle" runat="server" >##SESSION_NAME##</asp:contentplaceholder><%=Common.Config.Title%><%=@"</title>"%>
 	<%=@"<meta name=""description"" content="""%><asp:contentplaceholder id="cphCustomDescription" runat="server" ><%#Common.Config.Title%></asp:contentplaceholder><%=@""" />"%>
@@ -8,12 +8,7 @@
 	<meta name="copyright" content="<%=Common.Config.CompanyName%>" />
 	<meta name="author" content="<%=Common.Config.AuthorName%> - <%=Common.Config.AuthorAddress%>" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="MSSmartTagsPreventParsing" content="TRUE" />
 	<meta name="robots" content="INDEX, FOLLOW" />
-
-	<meta http-equiv="pragma" content="no-cache" />
-	<meta http-equiv="cache-control" content="no-cache" />
-	<meta http-equiv="expires" content="Fri, 13 Jul 2001 00:00:01 GMT" />
 
 	<link rel="shortcut icon" href="<%=Common.Util.GlobalPath%>img/favicon.ico" />
 	
@@ -72,88 +67,155 @@
 					padding-bottom:5px;
 					border-bottom: 1px solid #818285;
 					font-size:22px;
+					margin-bottom:20px;
 				}
 				h2{
+					margin-top:20px;
 					font-size:19px;
 				}
 				h3{
 					font-size:13px;
-					margin-bottom:0px;
+					margin-bottom:2px;
 				}
 				p{
 					margin-top:0;
 				}
-				code{
-					color: #FF8000;
-					font-weight:bold;
+				strong{color:#5E5F62;}
+				code{ color: #D66B00; }
+					code strong{color:#BF6000;}
+				.response{
+					color: #2A7B32;
 				}
+					.response strong {color: #205F28;}
 				.collapseContainer{
-					width:44.5%;
-					margin-right:5%;
-					float:left;display:inline;
+					min-width:500px;
+					max-width:850px;
 				}
 					.collapse{
 						padding:10px;
 					}
-					.collapse:hover{
-						padding:10px;
-						background:#F5F5FA;
-					}
 				.warn,
 				.warn *{
-					color:warn;
+					color:red;
 				}
 				ul{
-					margin:10px 0;
+					margin:0 0;
 				}
+					li{
+						margin:10px 0;
+					}
+						li p{
+							margin:0;
+						}
 			</style>
 			
 			<h1>
-				Módulo padrão C# v16.0 - utf-8
+				Módulo padrão C# v16.1 - utf-8
 			</h1>
-			
+			<div class="collapseContainer">
+				<p>
+					O objetivo do módulo padrão é facilitar e padronizar o passo inicial de um projeto garantindo a qualidade com ferramentas e organização pré-definidas.
+				</p>
+				<p class="warn">
+					<strong>Utilize <a href="https://spreadsheets.google.com/ccc?key=0AkNYIOYSXshBcEhVX3lhakJxbmhKdmlRY3A0NkRURUE&amp;hl=en&amp;authkey=CIOn5OII#gid=0" target="_blank" class="warn">este checklist</a> para evitar o esquecimento de detalhes na entrega de um projeto.</strong>
+				</p>
+			</div>
 			<div class="collapseContainer">
 				<h2>Variáveis do servidor</h2>
 				<div class="collapse">
 					<p>
-						<strong>Sempre</strong> use as variáveis do servidor para chamar as páginas, assim não existe a dependência de um arquivo para uma pasta específica.
+						<strong>Sempre</strong> use as variáveis do servidor para chamar as páginas.<br />
+						<strong class="warn">NUNCA utilize caminhos relativos ou absolutos escritos "na mão"</strong>.
 					</p>
 					
-					<h3>Título do site</h3>
-					<p>
-						<code>&lt;%=Common.Config.Title%&gt;</code> = "<%=Common.Config.Title%>"
-					</p>
-					<h3>Endereço da raíz do site</h3>
-					<p>
-						<code>&lt;%=Common.Util.Root%&gt;</code> = "<%=Common.Util.Root%>"
-					</p>
-					<h3>Endereço da raíz dos arquivos externos globais</h3>
-					<p>
-						<code>&lt;%=Common.Util.GlobalPath%&gt;</code> = "<%=Common.Util.GlobalPath%>"
-					</p>
-					<h3>Endereço da raíz dos arquivos externos de uma lígua específica (a princípio é "pt-BR" hard)</h3>
-					<p>
-						<code>&lt;%=Common.Util.LanguagePath%&gt;</code> = "<%=Common.Util.LanguagePath%>"
-					</p>
-					<h3>Lígua atual (a princípio é "pt-BR" hard)</h3>
-					<p>
-						<code>&lt;%=Common.Util.Language%&gt;</code> = "<%=Common.Util.Language%>"
-					</p>
-					<h3>Bypass cache</h3>
-					<p>
-						"Debug mode" (minify é ignorada)<br />
-						<code>&lt;%=Common.Util.Bpc%&gt;</code> =  "<%=Common.Util.Bpc%>" - Bypass cache? "<%=(Common.Util.Bpc != null)%>"
-					</p>
-					<h3>Versão</h3>
-					<p>
-						Versão atual dos arquivos JS, CSS, imagens, etc. O valor é colocado "hard" dentro do arquivo. Sempre que precisar subir para produção uma versão atual do CSS, JS, etc deve-se alterar o valor de Version <strong>seguindo o seguinte padrão: major.minor[.build[.revision]]</strong> <a href="http://en.wikipedia.org/wiki/Software_versioning" target="_blank">(saiba mais sobre como criar um núnero de versão correto aqui)</a>.
-					</p>
-					<p>
-						<code>&lt;%=Common.Util.Version%&gt;</code> = "<%=Common.Util.Version%>"
-					</p>
-					<p>
-						<em>Classes se encontram em \App_Code\common\Config.cs e \App_Code\common\Util.cs</em>
-					</p>
+					<ul>
+						<li>
+							<h3>Endereço da raíz do site</h3>
+							<p>
+								<code>&lt;%=Common.Util.Root%&gt;</code> = "<span class="response"><%=Common.Util.Root%></span>"
+							</p>
+						</li>
+						<li>
+							<h3>Endereço da raíz do servidor de "assets"</h3>
+							<p>
+								"Assets" é tudo que define as características visuais do site e é "fixo" (jpg, gif, png, swf, xml, css, js, etc que são parte da estrutura do site).
+							</p>
+							<p>
+								<em>Definido no <strong>Web.Config</strong>, chave <code>ROOT-ASSETS</code>, se não existir usa <code>Config.Util.Root</code>.</em>
+							</p>
+							<p>
+								<code>&lt;%=Common.Util.AssetsRoot%&gt;</code> = "<span class="response"><%=Common.Util.AssetsRoot%></span>"
+							</p>
+						</li>
+						<li>
+							<h3>Endereço da raíz do servidor de "uploads"</h3>
+							<p>
+								 São "assets" criados por um sistema ou admin -- dinâmicos e variáveis por ambiente como imagens de um blog.
+							</p>
+							<p>
+								<em>Definido no <strong>Web.Config</strong>, chave <code>ROOT-UPLOADS</code>, se não existir usa <code>Config.Util.AssetsRoot</code>.</em>
+							</p>
+							<p>
+								<code>&lt;%=Common.Util.UploadsRoot%&gt;</code> = "<span class="response"><%=Common.Util.UploadsRoot%></span>"
+							</p>
+						</li>
+						<li>
+							<h3>Endereço da raíz dos assets globais</h3>
+							<p>
+								<code>&lt;%=Common.Util.GlobalPath%&gt;</code> = "<span class="response"><%=Common.Util.GlobalPath%></span>"
+							</p>
+						</li>
+						<li>
+							<h3>Endereço da raíz dos assets da língua atual</h3>
+							<p>
+								<code>&lt;%=Common.Util.LanguagePath%&gt;</code> = "<span class="response"><%=Common.Util.LanguagePath%></span>"
+							</p>
+						</li>
+						<li>
+							<h3>Endereço da raíz dos assets dinâmicos ("uploads") globais</h3>
+							<p>
+								<code>&lt;%=Common.Util.GlobalUploadPath%&gt;</code> = "<span class="response"><%=Common.Util.GlobalUploadPath%></span>"
+							</p>
+						</li>
+						<li>
+							<h3>Endereço da raíz dos assets dinâmicos ("uploads") da língua atual</h3>
+							<p>
+								<code>&lt;%=Common.Util.LanguageUploadPath%&gt;</code> = "<span class="response"><%=Common.Util.LanguageUploadPath%></span>"
+							</p>
+						</li>
+						<li>
+							<h3>Língua atual (a princípio é "pt-BR" hard)</h3>
+							<p>
+								<code>&lt;%=Common.Util.Language%&gt;</code> = "<span class="response"><%=Common.Util.Language%></span>"
+							</p>
+						</li>
+						<li>
+							<h3>Título do site</h3>
+							<p>
+								<code>&lt;%=Common.Config.Title%&gt;</code> = "<span class="response"><%=Common.Config.Title%></span>"
+							</p>
+						</li>
+						<li>
+							<h3>Bypass cache</h3>
+							<p>
+								"Debug mode" (minify é ignorada)<br />
+								<code>&lt;%=Common.Util.Bpc%&gt;</code> =  "<span class="response"><%=Common.Util.Bpc%></span>"<br />
+								Bypass cache? "<span class="response"><%=(Common.Util.Bpc != null)%></span>"
+							</p>
+						</li>
+						<li>
+							<h3>Versão</h3>
+							<p>
+								Versão atual dos arquivos JS, CSS, imagens, etc. O valor é colocado "hard" dentro do arquivo. Sempre que precisar subir para produção uma versão atual do CSS, JS, etc deve-se alterar o valor de Version <strong>seguindo o seguinte padrão: major.minor[.build[.revision]]</strong> <a href="http://en.wikipedia.org/wiki/Software_versioning" target="_blank">(saiba mais sobre como criar um núnero de versão correto aqui)</a>.
+							</p>
+							<p>
+								<code>&lt;%=Common.Util.Version%&gt;</code> = "<span class="response"><%=Common.Util.Version%></span>"
+							</p>
+							<p>
+								<em>Classes se encontram em \App_Code\common\Config.cs e \App_Code\common\Util.cs</em>
+							</p>
+						</li>
+					</ul>
 				</div>
 			</div>
 			
@@ -161,55 +223,74 @@
 				<h2>minify.aspx</h2>
 				<div class="collapse">
 					<p>
-						<strong>Todos os JS e CSS</strong> devem passar pela "<strong><%=Common.Util.Root%>minify.aspx</strong>". Ela remove espaços duplos, enters, tabs e comentários, concatena arquivos em uma única requisição, mantém o arquivo em cache e retorna na compactação GZIP.
+						<strong>Todos os JS e CSS</strong> devem passar pela "<strong><%=Common.Util.Root%>minify.aspx</strong>". Ela remove tabs e comentários, concatena arquivos em uma única requisição, mantém o cache e retorna na compactação GZIP.
+					</p>
+					<h3>Usando a minify.aspx</h3>
+					<p>
+						Para chamar um arquivo, passe os arquivos via querystring separados por pipeline (" <strong>|</strong> "). Exemplo com CSS:<br />
+						<code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;<strong>&lt;%=Common.Util.Root%&gt;minify.aspx?reset.css</strong>&quot; media=&quot;screen&quot; /&gt;</code>
 					</p>
 					<p>
-						Para usar chame o arquivo da seguinte forma:<br />
-						"<code>&lt;%=Common.Util.Root%&gt;minify.aspx?main.css|estilo.css|estilo2.css</code>"<br />
+						No browser, a linha acima aparecerá da seguinte forma: <br />
+						"<code class="response">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;<strong><%=Common.Util.Root%>minify.aspx?reset.css</strong>&quot; media=&quot;screen&quot; /&gt;</code>"
+					</p>
+					
+					<h3>Chamando um arquivo específico da language</h3>
+					<p>
+						Caso queira chamar um css da língua atual, separe o arquivo da língua usando a vírgula (" <strong>,</strong> "):<br />
+						"<code>(...)minify.aspx?reset.css|<strong>reset.css,&lt;%=Common.Util.Language%&gt;</strong>|estilo2.css(...)</code>"
 					</p>
 					<p>
-						Esta linha escreverá na página: <br />
-						"<%=Common.Util.Root%>minify.aspx?main.css|estilo.css|estilo2.css"
+						No browser, a linha acima aparecerá da seguinte forma: <br />
+						"<code class="response">(...)minify.aspx?reset.css|<strong>reset.css,<%=Common.Util.Language%></strong>|estilo2.css(...)</code>"
+					</p>
+					<h3>Cache</h3>
+					<p>
+						Para desabilitar o CACHE do <strong>CSS</strong>, passe o parâmetro via querystring <code>bpc=1</code>.<br />
+						"<code>(...)minify.aspx?reset.css&amp;<strong>bpc=&lt;%=Common.Util.Bpc%&gt;</strong>(...)</code>"
 					</p>
 					<p>
-						Caso queira chamar um css específico de alguma língua, use<br />
-						"<code>&lt;%=Common.Util.Root%&gt;minify.aspx?main.css|estilo.css,&lt;%=Common.Util.Language%&gt;|estilo2.css</code>"
-					</p>
-					<p>
-						Esta linha escreverá na página: <br />
-						"<%=Common.Util.Root%>minify.aspx?main.css|estilo.css,<%=Common.Util.Language%>|estilo2.css"
-					</p>
-					<p>
-						Para os arquivos no formato original e desabilitar o CACHE do usuário, passe o parâmetro via querystring <code>bpc=1</code>.<br />
-						"<code>&lt;%=Common.Util.Root%&gt;minify.aspx?main.css|estilo.css,&lt;%=Common.Util.Language%&gt;|estilo2.css&amp;bpc=1</code>"<br />
+						No browser, a linha acima aparecerá da seguinte forma: <br />
+						"<code class="response">(...)minify.aspx?reset.css&amp;<strong>bpc=<%=Common.Util.Bpc%></strong>(...)</code>"
 					</p>
 					<p>
 						Este parâmetro pode ser passado direto na página (no caso, a default.aspx):<br />
 						"<%=Common.Util.Root%>default.aspx?bpc=1"
 					</p>
 					<p>
-						Para evitar problemas de imagens no CACHE do usuário deve-se passar o parâmetro <code>v=VERSÃO</code>.
-						Este &quot;v&quot; será concatenado a todas as imagens de dentro dos CSS's. <strong class="warn">Se <code>bpc=1</code> v será igual a um número randomico.</strong> Ex.:
-						"<code>background:url(<%=Common.Util.Root%>/locales/global/img/px.gif?v=<%=Common.Util.Version%>) 0 0 no-repeat;</code>"<br />
+						Para forçar o carregamento das imagens do css deve-se passar o parâmetro <code>v=VERSÃO</code>.
+						Este &quot;v&quot; será concatenado a todas as imagens de dentro dos CSS's.
+						Ex.:
+						"<code>background:url($root/locales/global/img/px.gif?v=<%=Common.Util.Version%>) 0 0 no-repeat;</code>"
 					</p>
+					<h3>"Variáveis" no CSS</h3>
 					<p>
-						É possível criar "variáveis" nos CSS. Inicialmente, a string <strong>"$root/"</strong> já é substituída por "<%=Common.Util.Root%>", mas é possíve criar novas usando o formato:<br />
+						É possível criar "variáveis" nos CSS. A minify já faz o parse das sequintes variáveis:
+					</p>
+					<ul>
+						<li> <code>$root/</code> por <code>&lt;%=Common.Util.AssetsRoot%&gt;</code>; </li>
+						<li> <code>$global/</code> por <code>&lt;%=Common.Util.GlobalPath%&gt;</code>; </li>
+						<li> <code>$language/</code> por <code>&lt;%=Common.Util.LanguagePath%&gt;</code>; </li>
+						<li> <code>$upload-root/</code> por <code>&lt;%=Common.Util.UploadsRoot%&gt;</code>; </li>
+						<li> <code>$upload-global/</code> por <code>&lt;%=Common.Util.GlobalUploadPath%&gt;</code>; </li>
+						<li> <code>$upload-language/</code> por <code>&lt;%=Common.Util.LanguageUploadPath%&gt;</code>; </li>
+					</ul>
+					<p>
+						Além destas variáveis, é possível customizar:
 						<code>$NOME_DA_VARIAVEL{VALOR_DA_VARIAVEL}</code> e na classe esperada, escreva <code>$NOME_DA_VARIAVEL</code>. Ex.:<br />
-<code>
-	$fc{
-		overflow:hidden;
-		zoom:1;
-	}
-	.classe{
-		$fc
-	}
-</code><br />
-						As variáveis são excluídas do CSS no momento que a minify dá saída no arquivo.
+						<pre><code><strong>$fc</strong>{
+    overflow:hidden;
+    zoom:1;
+}
+.classe{
+    <strong>$fc</strong>
+}
+</code></pre>
+						A sting que "define" as variáveis são excluídas do CSS no momento que a minify dá saída no arquivo.
 					</p>
 				</div>
 			</div>
 			
-			<div class="cb" ></div>
 			<div class="collapseContainer">
 				<h2>MasterPage</h2>
 				<div class="collapse">
@@ -242,7 +323,7 @@
 						<asp:contentplaceholder id="cphContent" runat="server" ><strong>Este conteúdo vem do arquivo MasterPage.master</strong></asp:contentplaceholder>
 					</p>
 					<p>
-						<strong>PS:</strong>Quando for colocar uma tag asp (ex: &lt;%=Variavel  %&gt;) dentro do conteúdo default de um 
+						<strong>PS:</strong> Quando for colocar uma tag asp (ex: &lt;%=Variavel  %&gt;) dentro do conteúdo default de um 
 						contentplaceholder usar o "#" no lugar do "=" (ex: &lt;%#Variavel  %&gt;) , senão o conteúdo não será substituído nas páginas filhas.
 					</p>
 				</div>
@@ -292,7 +373,7 @@
 					<ul>
 						<li>
 							<p>
-								<strong>fake_image</strong> <br>
+								<strong>fake_image</strong> <br />
 								(<a href="<%=Common.Util.GlobalPath%>img/fake_image.aspx"><%=Common.Util.GlobalPath%>img/fake_image.aspx</a>):
 							</p>
 							<p>
@@ -304,11 +385,11 @@
 						</li>
 						<li>
 							<p>
-								<strong>fake_flash</strong> <br>
+								<strong>fake_flash</strong> <br />
 								(<a href="<%=Common.Util.GlobalPath%>swf/fake_flash.swf"><%=Common.Util.GlobalPath%>swf/fake_flash.swf</a>):
 							</p>
 							<p>
-								Ao escrever ou redimensionar o flash o tamanho será atualizado. Não é necessário passar parâmetros adicionais.<br>
+								Ao escrever ou redimensionar o flash o tamanho será atualizado. Não é necessário passar parâmetros adicionais.<br />
 							</p>
 							<p>Necessita da:</p>
 							<ul>

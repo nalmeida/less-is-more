@@ -39,7 +39,7 @@ namespace Common
         {
             get
             {
-                return "F.biz";
+                return "";
             }
         }
 
@@ -47,7 +47,7 @@ namespace Common
         {
             get
             {
-                return "http://www.fbiz.com.br/";
+                return "";
             }
         }
 
@@ -55,7 +55,7 @@ namespace Common
         {
             get
             {
-                return "F.biz";
+                return "";
             }
         }
     }
