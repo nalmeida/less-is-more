@@ -2,13 +2,23 @@
 <SEO>
   <pages>
     <url>/</url>
-    <h1>Módulo Padrão</h1>
+    <h1>H1 Módulo Padrão C# 16.1 MVC - utf-8</h1>
     <description>Modulo Padrão description</description>
     <keywords>Módulo Padrão keyword</keywords>
-    <title>Módulo Padrão C# 16.0 - utf-8</title>
+    <title>Módulo Padrão C# 16.1 MVC - utf-8</title>
     <frequency>3</frequency>
     <priority>2</priority>
   </pages>
+  <pages>
+    <url>/teste/</url>
+    <h1>H1 teste</h1>
+    <description>Modulo Padrão description</description>
+    <keywords>Módulo Padrão keyword</keywords>
+    <title>teste</title>
+    <frequency>3</frequency>
+    <priority>2</priority>
+  </pages>
+<!--
   <pages>
     <url>/fale/</url>
     <h1>Fale Conosco</h1>
@@ -18,4 +28,5 @@
     <frequency>3</frequency>
     <priority>2</priority>
   </pages>  
+-->
 </SEO>

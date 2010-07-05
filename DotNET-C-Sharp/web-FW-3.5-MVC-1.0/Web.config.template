@@ -22,7 +22,16 @@
 		</sectionGroup>
 		<section name="dataConfiguration" type="Microsoft.Practices.EnterpriseLibrary.Data.Configuration.DatabaseSettings, Microsoft.Practices.EnterpriseLibrary.Data"/>
 	</configSections>
-	<appSettings/>
+	<appSettings>
+		<!-- 
+			HARD PATHS
+		-->
+		<!-- override Common.Util.GlobalPath and Common.Util.LanguagePath "root", if null, uses Common.Util.Root -->
+		<!-- <add key="ROOT-ASSETS" value="http://ROOT-ASSETS/"/>  -->
+
+		<!-- override Common.Util.GlobalUploadPath and Common.Util.LanguageUploadPath "root", if null, uses Common.Util.AssetsRoot -->
+		<!-- <add key="ROOT-UPLOADS" value="http://ROOT-UPLOADS/"/> -->
+	</appSettings>
 
   <connectionStrings>
     <remove name="Sql" />
