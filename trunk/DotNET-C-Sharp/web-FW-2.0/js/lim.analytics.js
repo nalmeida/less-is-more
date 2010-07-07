@@ -1,7 +1,7 @@
 if(!window['lim']){
 	var lim = {};
 }
-(function(scope, $) {
+(function(scope) {
 	// namespace
 	if(!scope) scope = window;
 	
@@ -19,6 +19,20 @@ if(!window['lim']){
 		var _timeout = 250;
 		var _pageTrackerMethodName = 'pageTracker';
 		var _pageTracker = window[_pageTrackerMethodName];
+	
+		this.gotoPage = function(url, target){
+			target = target || '_self';
+			switch(target){
+				case '_self':
+					setTimeout(function(){
+						document.location.href = url;
+					}, this._timeout);
+					break;
+				default:
+					window.open(url, target);
+					break;
+			}
+		}
 	
 		/**
 		 * Atribui valor para _pageTracker
@@ -50,13 +64,10 @@ if(!window['lim']){
 		 */
 		this.trackAndGo = function(url, target, str) {
 			this.track(str);
-			if(!target) target = '_self';
 			if(!url) {
 				throw new Error('[ERROR] lim.analytics.trackAndGo: undefined URL.');
 			} else {
-				setTimeout(function(){
-					window.open(url, target);
-				}, this._timeout);
+				this.gotoPage(url, target);
 			}
 		};
 	
@@ -113,13 +124,10 @@ if(!window['lim']){
 		 */
 		this.trackEventAndGo = function(url, target, category, action, optional_label, optional_value) {
 			this.trackEvent(category, action, optional_label, optional_value);
-			if(!target) target = '_self';
 			if(!url) {
 				throw new Error('[ERROR] lim.analytics.trackAndGo: undefined URL.');
 			} else {
-				setTimeout(function(){
-					window.open(url, target);
-				}, this._timeout);
+				this.gotoPage(url, target);
 			}
 		};
 
@@ -129,9 +137,9 @@ if(!window['lim']){
 		 */
 		this.callJs = function(func) {
 			setTimeout(function() {
-				try {
+				if(typeof(func) == 'function'){
 					func();
-				} catch(e) {
+				}else{
 					throw new Error('[ERROR] lim.analytics.callJs: undefined function called.');
 				}
 			}, this._timeout);
@@ -147,9 +155,9 @@ if(!window['lim']){
 	};
 	
 	// constants
-	scope.Analytics.VERSION = '1.0.0';
+	scope.Analytics.VERSION = '1.0.1';
 	
 	// Instancia pre gerada
 	scope.analytics = new scope.Analytics();
 	
-})(lim, jQuery);
+})(lim);
