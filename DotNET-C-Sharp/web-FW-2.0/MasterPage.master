@@ -448,23 +448,23 @@
 	<script type="text/javascript">
 		var pageTracker = {
 			_trackPageview: function (w){
-				if(window['console']){
-					if(console.info) console.info('pageTracker._trackPageview("' + w + '")');
+				if(window['console'] && console.info){
+					w = w ? '"'+w+'"' : '';
+					console.info('pageTracker._trackPageview('+w+')');
 				}
 			},
 			_trackEvent: function (){
-				if(window['console']){
+				if(window['console'] && console.info){
 					var _arrArguments = [];
-					var _arrArgumentsLen = arguments.length;
-					for(var i = 0; i< _arrArgumentsLen; i++) {
+					for(var i = 0, len = arguments.length; i < len; i++) {
 						_arrArguments[i] = arguments[i];
 					}
-					if(console.info) console.info('pageTracker._trackEvent("' + _arrArguments.join("\",\"") + '")');
+					console.info('pageTracker._trackEvent("' + _arrArguments.join("\",\"") + '")');
 				}
 			},
 			_setVar: function (w){
-				if(window['console']){
-					if(console.info) console.info('pageTracker._setVar: "' + w + '"');
+				if(window['console'] && console.info){
+					console.info('pageTracker._setVar: "' + w + '"');
 				}
 			}
 		};
