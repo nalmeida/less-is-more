@@ -81,7 +81,7 @@
 					margin-top:0;
 				}
 				strong{color:#5E5F62;}
-				code{ color: #D66B00; }
+				code{ color: #D66B00; white-space:pre-wrap; }
 					code strong{color:#BF6000;}
 				.response{
 					color: #2A7B32;
@@ -278,14 +278,14 @@
 					<p>
 						Além destas variáveis, é possível customizar:
 						<code>$NOME_DA_VARIAVEL{VALOR_DA_VARIAVEL}</code> e na classe esperada, escreva <code>$NOME_DA_VARIAVEL</code>. Ex.:<br />
-						<pre><code><strong>$fc</strong>{
+						<code><strong>$fc</strong>{
     overflow:hidden;
     zoom:1;
 }
 .classe{
     <strong>$fc</strong>
 }
-</code></pre>
+</code>
 						A sting que "define" as variáveis são excluídas do CSS no momento que a minify dá saída no arquivo.
 					</p>
 				</div>
@@ -300,18 +300,15 @@
 					</p>
 					<p>
 						Para criar um conteúdo variável, na MarterPage.master, crie a tag, que poderá ter um conteúdo "padrão":<br />
-						<code>&lt;asp:contentplaceholder id=&quot;cphID_CONTENT_PLACE_HOLDER&quot; runat=&quot;server&quot; &gt;<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;código padrão (se houver)<br />
-							&lt;/asp:contentplaceholder&gt;
-						</code><br />
+						<code>&lt;asp:contentplaceholder id=&quot;cphID_CONTENT_PLACE_HOLDER&quot; runat=&quot;server&quot; &gt;
+	código padrão (se houver)
+&lt;/asp:contentplaceholder&gt;</code>
 					</p>
 					<p>
 						No arquivo da página (no caso, a default.aspx), coloque a tag:<br />
-						<code>
-							&lt;asp:content contentplaceholderid=&quot;cphID_CONTENT_PLACE_HOLDER&quot; runat=&quot;server&quot;&gt;<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;código que entrará no lugar da tag<br />
-							&lt;/asp:content&gt;
-						</code>
+						<code>&lt;asp:content contentplaceholderid=&quot;cphID_CONTENT_PLACE_HOLDER&quot; runat=&quot;server&quot;&gt;
+	código que entrará no lugar da tag
+&lt;/asp:content&gt;</code>
 					</p>
 					<h3>Exemplos</h3>
 					<p>
