@@ -17,8 +17,7 @@ if(!window['lim']){
 		 * Private
 		 */
 		var _timeout = 250;
-		var _pageTrackerMethodName = 'pageTracker';
-		var _pageTracker = window[_pageTrackerMethodName];
+		var _pageTracker = window['_gaq'] || [];
 	
 		this.gotoPage = function(url, target){
 			target = target || '_self';
@@ -42,18 +41,11 @@ if(!window['lim']){
 		};
 	
 		/**
-		 * Retorna a pageTracker usada
-		 */
-		this.getTracker = function() {
-			return _pageTracker != null ? _pageTracker : window[_pageTrackerMethodName];
-		};
-	
-		/**
 		 * Executa um "_trackPageview"
 		 * @param {string} str String da marcação desejada
 		 */
 		this.track = function(str) {
-			_pageTracker._trackPageview(str);
+			_pageTracker.push(['_trackPageview', str]);
 		};
 	
 		/**
@@ -95,7 +87,7 @@ if(!window['lim']){
 				if((optional_value && isNaN(optional_value)) || optional_value === true) {
 					throw new Error('[ERROR] lim.analytics.trackEvent: optional_value must be a number.');
 				} else {
-					this.getTracker()._trackEvent(category, action, optional_label, optional_value);
+					_pageTracker.push(['_trackEvent', category, action, optional_label, optional_value]);
 				}
 			}
 		};
@@ -150,7 +142,7 @@ if(!window['lim']){
 		 * @param {string} str String da marcação desejada
 		 */
 		this.setVar = function(str) {
-			this.getTracker()._setVar(str);
+			_pageTracker.push(['_setVar', str]);
 		};
 	};
 	
