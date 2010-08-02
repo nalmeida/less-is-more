@@ -1,5 +1,5 @@
 /* Change your font here */
-body { background: #D3D4CE url($root/locales/global/img/bg_site.png) repeat-y right top;}
+body { background: #D3D4CE url($global-theme/img/bg_site.png) repeat-y right top;}
 
 h1,h2,h3,h4,h5,h6{ color: #333333}
 
@@ -7,37 +7,16 @@ p{ color: #666666;}
 
 dt{ font-weight: bold;text-decoration: underline;font-size: 14px;margin-top: 5px;margin-bottom: 5px;} 
 dd{ color: #666666; }
-#admin_wrapper {
-	background-color: #FFFFFF;
-	border: 10px solid #d6d6d6;
-}
 
 #wrapper {
-	background: transparent url($root/locales/global/img/bg_fbiz.jpg) no-repeat right top;
+	background: transparent url($global-theme/img/bg_fbiz.jpg) no-repeat right top;
 	overflow:hidden;
 	zoom:1;
 }
 
 /* ----------------------------
-		NOTIFICATIONS
-------------------------------- */
-
-.success 				{ background-color: #D5FFCF; border: 1px solid #97FF88; color: #009900; background-image: url($root/locales/global/img/accept.png);}
-.fail 					{ background-color: #FFCFCF;border: 1px solid #FF9595;color: #CC3300; background-image: url($root/locales/global/img/delete.png);}
-.information 			{ background-color: #DCE3FF;border: 1px solid #93A8FF;color: #0033FF; background-image: url($root/locales/global/img/information.png);}
-.attention 				{ background-color: #FFFBCC;border: 1px solid #FFF35E;color: #C69E00; background-image: url($root/locales/global/img/warning.png);}
-
-.close-notification { background: url($root/locales/global/img/close.png) no-repeat;}
-
-.even { background-color: #EAEAEA; }
-
-/* ----------------------------
 		LAYOUT
 ------------------------------- */
-#top { 
-	background: #545552;
-	background: rgba(0, 0, 0, 0.6);
-}
 #header { background-color: transparent;}
 	
 	#header h1{ 
@@ -51,11 +30,25 @@ dd{ color: #666666; }
 	border-left:0;
 }
 
+/* navigation bar */
+#main-nav li a.nav-top-item {
+	-moz-border-radius-topleft:5px;
+	-webkit-border-top-left-radius:5px;
+	-moz-border-radius-bottomleft:5px;
+	-webkit-border-bottom-left-radius:5px;
+	background-color:#fff;
+}
+#main-nav li a.current {
+	background-color:#fab720;
+	background-image: -moz-linear-gradient(100% 100% 90deg, #fab720, #fb9920);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fab720), to(#fb9920));
+	background-repeat: no-repeat;
+}
+
 /* ----------------------------
 		PRIMARY CONTENT
 ------------------------------- */
 #primary_content h2, #modal h2 { border-bottom:2px solid #d6d6d6; }
-
 #primary_content h3, #modal h3 { color: #222; }
 #primary_content h4 , #modal h4 { color: #333333; }
 #primary_content h5, #modal h5  { color: #999999; }
@@ -64,22 +57,14 @@ dd{ color: #666666; }
 #primary_content li  { color: #666666; }
 
 /* ----------------------------
-		SIDEBAR
-------------------------------- */		
-	#sidebar a {
-		color: #666666;
-		border-top:1px solid #EEEEEE;
-		border-bottom:1px solid #EEEEEE;
-	}
+		NOTIFICATIONS
+------------------------------- */
 
-	#sidebar .active, #sidebar a:hover {
-		background-color: #FFFFFF;
-		border-right:1px solid #d6d6d6;
-		border-top: 1px solid #d6d6d6;
-		border-bottom: 1px solid #d6d6d6;
-		color: #000000;
-	}
-
+.success, .fail, .information, .attention { padding-left:45px; }
+.success{ background-image: url($global-theme/img/accept.png); }
+.fail { background-image: url($global-theme/img/delete.png); }
+.information { background-image: url($global-theme/img/information.png); }
+.attention { background-image: url($global-theme/img/warning.png); }
 
 /* ----------------------------
 		TABLES
@@ -91,17 +76,31 @@ th 	{ background-color: #d6d6d6; }
 /* ----------------------------
 		TABS
 ------------------------------- */
-#tabs div p { color: #666666; }
 
-#tabs ul, ul.paginator{ background: #fff; }
-#tabs li, ul.paginator li { border: 1px solid #d6d6d6; }
-
-#tabs ul li.active, #tabs li:hover { background-color: #F5F5F5;}
-
-#tabs ul li.active a { color: #333333;}
-#tabs div { border: 1px solid #d6d6d6; }
-
-#tabs ul li a , ul.paginator li a{ color: #7E7E7E; }
+.tabs {
+	color:#666666;
+	margin: 0;
+}
+		ul.paginator li,
+		ul.tabsNavigation li,
+		.tabContent{
+			border: 1px solid #C4C4C4;
+		}
+		ul.tabsNavigation li{
+			background: #F6F6F6;
+		}
+		ul.tabsNavigation li.active{
+			background:#fff;
+		}
+		
+		.tabsNavigation a,
+		ul.paginator li a {
+			text-decoration: none;
+			padding: 8px;
+			font-weight: bold;
+			text-transform: uppercase;
+			font-size: 12px;
+		}
 
 /* ----------------------------
 		FORMS
@@ -109,11 +108,11 @@ th 	{ background-color: #d6d6d6; }
 form .input {
 	border: 1px solid #CCCCCC;
 	background-color: #F3F3F3;
-	}
+}
 
-form .button	{
+form .button {
 	background-color: #D6D6D6;
-	color: #666666;
+/*	color: #666666;*/
 	border: 1px solid #CCCCCC;
 }
 
@@ -185,7 +184,4 @@ input:focus, textarea:focus		{
 		background:#fff;
 	}
 
-/************ Button ************/
-button.aproved {background:#00aa00 !important;}
-button.reproved {background:#e60000 !important}
-button.pendent {background:#bfbf00 !important}
+

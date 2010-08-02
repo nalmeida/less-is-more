@@ -128,13 +128,15 @@ namespace Common
 				{
 					Response.ContentType = "text/css";
 					// set folder and file name
-					string file;
-					string folder;
+					string file = "";
+					string folder = "";
+					string themeFolder = "";
 					if (stNomeArquivo.Contains(","))
 					{
 						string[] fileFolder = stNomeArquivo.Split(',');
 						file = fileFolder[0];
 						folder = fileFolder[1];
+						themeFolder = fileFolder[2];
 					}
 					else
 					{
@@ -142,10 +144,11 @@ namespace Common
 						folder = "global";
 					}
 
-					if (string.IsNullOrEmpty(folder))
-						continue;
+					if (string.IsNullOrEmpty(folder)){
+						folder = "global";
+					}
 
-					filePath = Server.MapPath("locales/" + folder + "/css/") + file;
+					filePath = Server.MapPath("locales/" + folder + (!string.IsNullOrEmpty(themeFolder) ? "/themes/"+themeFolder : "") + "/css/") + file;
 
 					fileLastModified = File.GetLastWriteTime(filePath);
 					lastModifiedFileGlobal = fileLastModified > lastModifiedFileGlobal ? fileLastModified : lastModifiedFileGlobal;
@@ -194,6 +197,8 @@ namespace Common
 				stContent = stContent.Replace("$root/", Util.Root); // replace root tag
 				stContent = stContent.Replace("$global/", Util.GlobalPath); // replace global tag
 				stContent = stContent.Replace("$language/", Util.LanguagePath); // replace global tag
+				stContent = stContent.Replace("$global-theme/", Util.GlobalThemePath); // replace global tag
+				stContent = stContent.Replace("$language-theme/", Util.LanguageThemePath); // replace global tag
 
 				Dictionary<string, string> dicVariables = new Dictionary<string, string>();
 

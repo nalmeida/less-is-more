@@ -5,12 +5,10 @@
 
 $(document).ready(function(){
 	
-	/* Zebra Striping for Tables */					   
-	$("tr:nth-child(even)").addClass("even")
-	 
-	fbiz.tablesort()
-	fbiz.tabs()
-	fbiz.nav()
-	fbiz.login()
+	lim.applyZebra();
+	lim.tablesort()
+	lim.tabs()
+	lim.nav()
+	lim.login()
 	
 });
