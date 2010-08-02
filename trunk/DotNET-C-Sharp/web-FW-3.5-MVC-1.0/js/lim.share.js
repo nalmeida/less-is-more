@@ -16,15 +16,15 @@ if(!window['lim']){
 		// Example with all possible options
 
 		// SHARE TO TWITTER
-		lim.share.share("twitter", {msg: 'message here'});
+		lim.share.run('twitter', {msg: 'message here'});
 		
 		// SHARE TO FACEBOOK
 		// (IMPORTANT! Facebook users title and description metatags for texts and link rel="image_src"
 		// for thumbs, otherwise, it uses the first imagem of the site)
-		lim.share.share("facebook", {url: 'http://www.site.com/', title: 'title here'});
+		lim.share.run('facebook', {url: 'http://www.site.com/', title: 'title here'});
 		
 		// SHARE TO ORKUT
-		lim.share.share("orkut", {url: 'http://www.site.com/', title: 'title here', msg: 'comment here'});
+		lim.share.run('orkut', {url: 'http://www.site.com/', title: 'title here', msg: 'comment here'});
 		
 	 * </code>
 	 */
@@ -41,10 +41,10 @@ if(!window['lim']){
 			facebook: function(p_address, p_data){
 				switch(true){
 					case (!p_data):
-						throw new Error("share facebook Error: data object is required.");
+						throw new Error('[ERROR] lim.share facebook: data object is required.');
 						return false;
 					case (!p_data.url):
-						throw new Error("share facebook Error: link URL (data.url) is required.");
+						throw new Error('[ERROR] lim.share facebook: link URL (data.url) is required.');
 						return false;
 				}
 				return true;
@@ -52,13 +52,13 @@ if(!window['lim']){
 			orkut: function(p_address, p_data){
 				switch(true){
 					case (!p_data):
-						throw new Error("share orkut Error: data object is required.");
+						throw new Error('[ERROR] lim.share orkut: data object is required.');
 						return false;
 					case (!p_data.url):
-						throw new Error("share orkut Error: link URL (data.url) is required.");
+						throw new Error('[ERROR] lim.share orkut: link URL (data.url) is required.');
 						return false;
 					case (!p_data.title):
-						throw new Error("share orkut Error: title (data.title) is required.");
+						throw new Error('[ERROR] lim.share orkut: title (data.title) is required.');
 						return false;
 				}
 				return true;
@@ -66,10 +66,10 @@ if(!window['lim']){
 			twitter: function(p_address, p_data){
 				switch(true){
 					case (!p_data):
-						throw new Error("share twitter Error: data object is required.");
+						throw new Error('[ERROR] lim.share twitter: data object is required.');
 						return false;
 					case (!p_data.msg):
-						throw new Error("share facebook Error: status (data.msg) is required.");
+						throw new Error('[ERROR] lim.share facebook: status (data.msg) is required.');
 						return false;
 				}
 				return true;
@@ -96,7 +96,7 @@ if(!window['lim']){
 			if(!this._built) this.init();
 			
 			if(!this._validateType(p_type)){
-				throw new Error('share Error: Not a valid type. Available Types: "' + this._types.join('", "') + '"');
+				throw new Error('[ERROR] lim.share: Not a valid type. Available Types: "' + this._types.join('", "') + '"');
 				return false;
 			}
 			
