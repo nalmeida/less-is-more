@@ -1,4 +1,5 @@
 ﻿<%@ Page masterpagefile="~/MasterPage.master" Language="C#" %>
+<%@ Register TagPrefix="uc" TagName="navigation" Src="~/inc/navigation.ascx" %>
 
 <asp:content contentplaceholderid="cphCustomTitle" runat="server">Módulo Padrão C# 15.7 - utf-8</asp:content>
 
@@ -7,7 +8,9 @@
 <asp:content ID="Content5" contentplaceholderid="cphBodyProperties" runat="server">class="formularios"</asp:content>
 
 <asp:content contentplaceholderid="cphMainContent" runat="server">
-    <div id="primary_content">
+	<uc:navigation id="navigation" runat="server" />
+    
+	<div class="primary_content">
        	<h2>Como Usar</h2>
 		
         <p>Caso o Item de menu não tenha sub-menu, inserir a classe "no-submenu"</p>
