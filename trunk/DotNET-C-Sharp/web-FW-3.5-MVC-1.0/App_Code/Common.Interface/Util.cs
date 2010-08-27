@@ -2,6 +2,11 @@ using System;
 using System.Web;
 using System.Text.RegularExpressions;
 using System.Configuration;
+using System.Xml;
+using System.Xml.Xsl;
+using System.Xml.XPath;
+using System.IO;
+using System.Text;
 
 namespace Common
 {
@@ -175,23 +180,6 @@ namespace Common
 			}
 		}
 
-
-		/**
-		 * Common.Util.isLocal Returns if the website is running on "http://localhost" or under an IP Address "111.111.11.11"
-		 * @return Boolean
-		 * @usage
-				<code>
-					<%=Common.Util.isLocal;%> // writes True or False
-				</code>
-		 */
-		public static Boolean isIE6
-		{
-			get
-			{
-				return Regex.IsMatch(HttpContext.Current.Request.ServerVariables["HTTP_USER_AGENT"], @"MSIE .?([1-6]){1}\.\d", RegexOptions.IgnoreCase);
-			}
-		}
-
 		/**
 		 * Common.Util.Bpc 
 		 * @return String "&bpc=1" if parameter bpc=1 is passed at the site URL
@@ -244,6 +232,51 @@ namespace Common
 			{
 				return "pt-BR";
 			}
+		}
+
+		/**
+		 * Loads a XML and apply XSL stylesheet transformation.
+		 * @param xmlUrl
+		 * @param xslUrl
+		 * @param xslParams params to be added in the XSL
+		 * @return the result of transformation
+		 * @usage
+			<code>
+			<%=Common.Util.TransformXML(
+				Common.Util.LanguagePath+"xml/text.xml",
+				Common.Util.Root+"xsl/style.xsl",
+				new String[][] {
+					new String[] {"teste", "", "123"},
+					new String[] {"teste2", "", "123"}
+				}
+			)%>
+			</code>
+		 */
+		public static string TransformXML(string xmlUrl, string xslUrl, string[][] xslParams)
+		{
+			XmlTextReader xmlReader = new XmlTextReader(xmlUrl);
+			XPathDocument xpathDoc = new XPathDocument(xmlReader); 
+			XslCompiledTransform transform = new XslCompiledTransform();
+			transform.Load(xslUrl);
+
+			StringWriter sw = new StringWriter();
+			XmlWriter xmlWriter = new XmlTextWriter(sw);
+
+			XsltArgumentList argsList = new XsltArgumentList();
+			argsList.AddParam("root", "", Root);
+			argsList.AddParam("languagePath", "", LanguagePath);
+			argsList.AddParam("globalPath", "", GlobalPath);
+			
+			if(xslParams != null){
+				for(int paramIndex=0, paramLen = xslParams.Length; paramIndex < paramLen; paramIndex++){
+					argsList.AddParam(xslParams[paramIndex][0], xslParams[paramIndex][1], xslParams[paramIndex][2]);
+				}
+			}
+			
+			transform.Transform(xpathDoc, argsList, xmlWriter);
+			xmlReader.Close();
+			
+			return sw.ToString();
 		}
 
 		private static bool IsGZipSupported()
