@@ -61,7 +61,7 @@
 	
 	<asp:contentplaceholder id="cphCustomHeader" runat="server" />
 	
-	<% if(Common.Util.isIE6) {// IE6 Only%>
+	<% if(Common.Browser.Is("IE", "6")) {// IE6 Only%>
 	<script type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?DD_belatedPNG.js&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>"></script>
 	<script type="text/javascript">
 		//<![CDATA[
@@ -158,6 +158,54 @@
 				</p>
 			</div>
 			<div class="collapseContainer">
+				<h2>Métodos do servidor</h2>
+				<div class="collapse">
+					<p>
+						Na pasta App_Code/Common.Interface existem algumas classes úteis:
+					</p>
+					<ul>
+						<li>
+							<h3>Common.Browser</h3>
+							<p>
+								Compara e verifica qual browser está sendo usado através do user agent. A sigla do browser por enquanto é definida dentro da classe (na construtora), assim como a lógica para verificação da versão.
+							</p>
+							<h4>Common.Browser.Is</h4>
+							<p>
+								<code>Common.Browser.Is("ie")</code>: <%=Common.Browser.Is("ie")%> - Verifica se é Internet Explorer (independente da versão)<br />
+								<code>Common.Browser.Is("ie", "6")</code>: <%=Common.Browser.Is("ie", "6")%> - Verifica se é Internet Explorer 6 (compara com a string do user agent)<br />
+							</p>
+							<p>
+								Exemplos:<br />
+								<code>Common.Browser.Is("safari")</code>: <%=Common.Browser.Is("safari")%><br />
+								<code>Common.Browser.Is("firefox")</code>: <%=Common.Browser.Is("firefox")%><br />
+								<code>Common.Browser.Is("opera")</code>: <%=Common.Browser.Is("opera")%><br />
+								<code>Common.Browser.Is("chrome")</code>: <%=Common.Browser.Is("chrome")%><br />
+								<code>Common.Browser.Is("google chrome")</code>: <%=Common.Browser.Is("google chrome")%><br />
+								<code>Common.Browser.Is("ipad")</code>: <%=Common.Browser.Is("ipad")%><br />
+								<code>Common.Browser.Is("ipod")</code>: <%=Common.Browser.Is("ipod")%>
+							</p>
+							<h4>Common.Browser.IsAny</h4>
+							<p>O método "IsAny", que verifica se é qualquer dos browsers listados:</p>
+							<p>
+								<code>Common.Browser.IsAny("safari", "firefox")</code>: <%=Common.Browser.IsAny("safari", "firefox")%><br />
+							</p>
+						</li>
+						<li>
+							<h3>Common.Util.TransformXML</h3>
+							<p>
+								O método transformXML carrega o XML e aplica a folha de estilo (XSL). Também pode receber parametros para serem usados no XSL.
+							</p>
+							<p>
+								Atualmente as variáveis "Root", "LanguagePath" e "GlobalPath" já são passadas para qualquer XSL como <code>$root</code>, <code>$languagePath</code> e <code>$globalPath</code>.
+							</p>
+							<p>Ex. de aplicação:</p>
+<code>Common.Util.TransformXML("teste.xml", "estilo.xsl", new String[][] {
+	new String[]{"filtro-bairro", "", "itaim"},
+	new String[]{"filtro-cidade", "", "sp"}
+})</code>
+						</li>
+					</ul>
+				</div>
 				<h2>Variáveis do servidor</h2>
 				<div class="collapse">
 					<p>

@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-BR">
 <head>
 	<%="<title>"+ Common.Config.Title +"</title>"%>
@@ -61,7 +61,7 @@
 
 	<asp:contentplaceholder id="cphCustomHeader" runat="server" />
 	
-	<% if(Common.Util.isIE6) {// IE6 Only%>
+	<% if(Common.Browser.Is("IE", "6")) {// IE6 Only%>
 	<script type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?DD_belatedPNG.js&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>"></script>
 	<script type="text/javascript">
 	    //<![CDATA[
@@ -112,7 +112,7 @@
 				margin-top:20px;
 				font-size:19px;
 			}
-			h3{
+			h3, h4{
 				font-size:13px;
 				margin-bottom:2px;
 			}
@@ -120,7 +120,7 @@
 				margin-top:0;
 			}
 			strong{color:#5E5F62;}
-			code{ color: #D66B00; }
+			code{ color: #D66B00; white-space:pre-wrap; }
 				code strong{color:#BF6000;}
 			.response{
 				color: #2A7B32;
@@ -160,6 +160,54 @@
 			</p>
 		</div>
 		<div class="collapseContainer">
+			<h2>Métodos do servidor</h2>
+			<div class="collapse">
+				<p>
+					Na pasta App_Code/Common.Interface existem algumas classes úteis:
+				</p>
+				<ul>
+					<li>
+						<h3>Common.Browser</h3>
+						<p>
+							Compara e verifica qual browser está sendo usado através do user agent. A sigla do browser por enquanto é definida dentro da classe (na construtora), assim como a lógica para verificação da versão.
+						</p>
+						<h4>Common.Browser.Is</h4>
+						<p>
+							<code>Common.Browser.Is("ie")</code>: <%=Common.Browser.Is("ie")%> - Verifica se é Internet Explorer (independente da versão)<br />
+							<code>Common.Browser.Is("ie", "6")</code>: <%=Common.Browser.Is("ie", "6")%> - Verifica se é Internet Explorer 6 (compara com a string do user agent)<br />
+						</p>
+						<p>
+							Exemplos:<br />
+							<code>Common.Browser.Is("safari")</code>: <%=Common.Browser.Is("safari")%><br />
+							<code>Common.Browser.Is("firefox")</code>: <%=Common.Browser.Is("firefox")%><br />
+							<code>Common.Browser.Is("opera")</code>: <%=Common.Browser.Is("opera")%><br />
+							<code>Common.Browser.Is("chrome")</code>: <%=Common.Browser.Is("chrome")%><br />
+							<code>Common.Browser.Is("google chrome")</code>: <%=Common.Browser.Is("google chrome")%><br />
+							<code>Common.Browser.Is("ipad")</code>: <%=Common.Browser.Is("ipad")%><br />
+							<code>Common.Browser.Is("ipod")</code>: <%=Common.Browser.Is("ipod")%>
+						</p>
+						<h4>Common.Browser.IsAny</h4>
+						<p>O método "IsAny", que verifica se é qualquer dos browsers listados:</p>
+						<p>
+							<code>Common.Browser.IsAny("safari", "firefox")</code>: <%=Common.Browser.IsAny("safari", "firefox")%><br />
+						</p>
+					</li>
+					<li>
+						<h3>Common.Util.TransformXML</h3>
+						<p>
+							O método transformXML carrega o XML e aplica a folha de estilo (XSL). Também pode receber parametros para serem usados no XSL.
+						</p>
+						<p>
+							Atualmente as variáveis "Root", "LanguagePath" e "GlobalPath" já são passadas para qualquer XSL como <code>$root</code>, <code>$languagePath</code> e <code>$globalPath</code>.
+						</p>
+						<p>Ex. de aplicação:</p>
+<code>Common.Util.TransformXML("teste.xml", "estilo.xsl", new String[][] {
+	new String[]{"filtro-bairro", "", "itaim"},
+	new String[]{"filtro-cidade", "", "sp"}
+})</code>
+					</li>
+				</ul>
+			</div>
 			<h2>Variáveis do servidor</h2>
 			<div class="collapse">
 				<p>
@@ -329,14 +377,14 @@
 				<p>
 					Além destas variáveis, é possível customizar:
 					<code>$NOME_DA_VARIAVEL{VALOR_DA_VARIAVEL}</code> e na classe esperada, escreva <code>$NOME_DA_VARIAVEL</code>. Ex.:<br />
-					<pre><code><strong>$fc</strong>{
+					<code><strong>$fc</strong>{
    overflow:hidden;
    zoom:1;
 }
 .classe{
    <strong>$fc</strong>
 }
-</code></pre>
+</code>
 					A sting que "define" as variáveis são excluídas do CSS no momento que a minify dá saída no arquivo.
 				</p>
 			</div>
@@ -351,28 +399,27 @@
 				</p>
 				<p>
 					Para criar um conteúdo variável, na MarterPage.master, crie a tag, que poderá ter um conteúdo "padrão":<br />
-					<code>&lt;asp:contentplaceholder id=&quot;cphID_CONTENT_PLACE_HOLDER&quot; runat=&quot;server&quot; &gt;<br />
-						&nbsp;&nbsp;&nbsp;&nbsp;código padrão (se houver)<br />
-						&lt;/asp:contentplaceholder&gt;
-					</code><br />
+<code>&lt;asp:contentplaceholder id=&quot;cphID_CONTENT_PLACE_HOLDER&quot; runat=&quot;server&quot; &gt;
+	código padrão (se houver)
+&lt;/asp:contentplaceholder&gt;
+</code><br />
 				</p>
 				<p>
 					No arquivo da página (no caso, a default.aspx), coloque a tag:<br />
-					<code>
-						&lt;asp:content contentplaceholderid=&quot;cphID_CONTENT_PLACE_HOLDER&quot; runat=&quot;server&quot;&gt;<br />
-						&nbsp;&nbsp;&nbsp;&nbsp;código que entrará no lugar da tag<br />
-						&lt;/asp:content&gt;
-					</code>
+<code>&lt;asp:content contentplaceholderid=&quot;cphID_CONTENT_PLACE_HOLDER&quot; runat=&quot;server&quot;&gt;
+	código que entrará no lugar da tag
+&lt;/asp:content&gt;
+</code>
 				</p>
 				<h3>Exemplos</h3>
-				<p>
+				<div>
 					Substituindo na default.aspx:<br />
 					<asp:contentplaceholder id="cphMainContent" runat="server" >Usar &lt;asp:content contentplaceholderid=&quot;cphMainContent&quot; runat=&quot;server&quot;&gt; no aspx</asp:contentplaceholder>
-				</p>
-				<p>
+				</div>
+				<div>
 					Sem substituir na default.aspx:<br />
 					<asp:contentplaceholder id="cphContent" runat="server" ><strong>Este conteúdo vem do arquivo MasterPage.master</strong></asp:contentplaceholder>
-				</p>
+				</div>
 				<p>
 					<strong>PS:</strong> Quando for colocar uma tag asp (ex: &lt;%=Variavel  %&gt;) dentro do conteúdo default de um 
 					contentplaceholder usar o "#" no lugar do "=" (ex: &lt;%#Variavel  %&gt;) , senão o conteúdo não será substituído nas páginas filhas.
