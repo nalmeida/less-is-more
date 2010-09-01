@@ -253,16 +253,22 @@ namespace Common
 		public static string TransformXML(string xmlUrl, string xslUrl, string[][] xslParams, bool trustedXsl)
 		{
 			string returnValue = "";
-			if(HttpContext.Current.Cache[xslUrl] == null){
+			string xmlName = xslUrl.Replace(Root, "/")+"|"+xmlUrl.Replace(Root, "/");
+			if(HttpContext.Current.Cache[xmlName] == null || avoidXmlCache == true){
 
 				XmlTextReader xmlReader = new XmlTextReader(xmlUrl);
 				XslCompiledTransform transform = new XslCompiledTransform();
 				StringWriter sw = new StringWriter();
 
-				if(trustedXsl){
-					transform.Load(xslUrl, XsltSettings.TrustedXslt, new XmlUrlResolver());
+				if(HttpContext.Current.Cache[xslUrl] == null){
+					if(trustedXsl){
+						transform.Load(xslUrl, XsltSettings.TrustedXslt, new XmlUrlResolver());
+					}else{
+						transform.Load(xslUrl);
+					}
+					HttpContext.Current.Cache.Insert(xslUrl, transform, new CacheDependency(HttpContext.Current.Server.MapPath(xslUrl.Replace(Root, "~/"))));
 				}else{
-					transform.Load(xslUrl);
+					transform = (XslCompiledTransform)HttpContext.Current.Cache[xslUrl];
 				}
 
 				XsltArgumentList argsList = new XsltArgumentList();
@@ -279,9 +285,9 @@ namespace Common
 				transform.Transform(new XPathDocument(xmlReader), argsList, new XmlTextWriter(sw));
 				xmlReader.Close();
 				returnValue = sw.ToString();
-				HttpContext.Current.Cache.Insert(xslUrl, returnValue, new CacheDependency(HttpContext.Current.Server.MapPath(xslUrl.Replace(Root, "~/"))));
+				HttpContext.Current.Cache.Insert(xmlName, returnValue, new CacheDependency(HttpContext.Current.Server.MapPath(xmlUrl.Replace(Root, "~/"))));
 			}else{
-				returnValue = HttpContext.Current.Cache[xslUrl].ToString();
+				returnValue = HttpContext.Current.Cache[xmlName].ToString();
 			}
 			
 			return returnValue;
