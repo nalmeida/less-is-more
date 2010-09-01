@@ -1,12 +1,14 @@
 using System;
-using System.Web;
-using System.Text.RegularExpressions;
 using System.Configuration;
-using System.Xml;
-using System.Xml.Xsl;
-using System.Xml.XPath;
 using System.IO;
+using System.Net;
+using System.Text.RegularExpressions;
 using System.Text;
+using System.Web.Caching;
+using System.Web;
+using System.Xml.XPath;
+using System.Xml.Xsl;
+using System.Xml;
 
 namespace Common
 {
@@ -234,12 +236,18 @@ namespace Common
 			}
 		}
 
+		public static string TransformXML(string xmlUrl, string xslUrl){
+			return TransformXML(xmlUrl, xslUrl, null, false);
+		}
+		public static string TransformXML(string xmlUrl, string xslUrl, string[][] xslParams){
+			return TransformXML(xmlUrl, xslUrl, xslParams, false);
+		}
+		
 		/**
 		 * Loads a XML and apply XSL stylesheet transformation.
 		 * @param xmlUrl
 		 * @param xslUrl
 		 * @param xslParams params to be added in the XSL
-		 * @return the result of transformation
 		 * @usage
 			<code>
 			<%=Common.Util.TransformXML(
@@ -252,31 +260,41 @@ namespace Common
 			)%>
 			</code>
 		 */
-		public static string TransformXML(string xmlUrl, string xslUrl, string[][] xslParams)
+		public static string TransformXML(string xmlUrl, string xslUrl, string[][] xslParams, bool trustedXsl)
 		{
-			XmlTextReader xmlReader = new XmlTextReader(xmlUrl);
-			XPathDocument xpathDoc = new XPathDocument(xmlReader); 
-			XslCompiledTransform transform = new XslCompiledTransform();
-			transform.Load(xslUrl);
+			string returnValue = "";
+			if(HttpContext.Current.Cache[xslUrl] == null){
 
-			StringWriter sw = new StringWriter();
-			XmlWriter xmlWriter = new XmlTextWriter(sw);
+				XmlTextReader xmlReader = new XmlTextReader(xmlUrl);
+				XslCompiledTransform transform = new XslCompiledTransform();
+				StringWriter sw = new StringWriter();
 
-			XsltArgumentList argsList = new XsltArgumentList();
-			argsList.AddParam("root", "", Root);
-			argsList.AddParam("languagePath", "", LanguagePath);
-			argsList.AddParam("globalPath", "", GlobalPath);
-			
-			if(xslParams != null){
-				for(int paramIndex=0, paramLen = xslParams.Length; paramIndex < paramLen; paramIndex++){
-					argsList.AddParam(xslParams[paramIndex][0], xslParams[paramIndex][1], xslParams[paramIndex][2]);
+				if(trustedXsl){
+					transform.Load(xslUrl, XsltSettings.TrustedXslt, new XmlUrlResolver());
+				}else{
+					transform.Load(xslUrl);
 				}
+
+				XsltArgumentList argsList = new XsltArgumentList();
+				argsList.AddParam("root", "", Root);
+				argsList.AddParam("languagePath", "", LanguagePath);
+				argsList.AddParam("globalPath", "", GlobalPath);
+
+				if(xslParams != null){
+					for(int paramIndex=0, paramLen = xslParams.Length; paramIndex < paramLen; paramIndex++){
+						argsList.AddParam(xslParams[paramIndex][0], xslParams[paramIndex][1], xslParams[paramIndex][2]);
+					}
+				}
+
+				transform.Transform(new XPathDocument(xmlReader), argsList, new XmlTextWriter(sw));
+				xmlReader.Close();
+				returnValue = sw.ToString();
+				HttpContext.Current.Cache.Insert(xslUrl, returnValue, new CacheDependency(HttpContext.Current.Server.MapPath(xslUrl.Replace(Root, "~/"))));
+			}else{
+				returnValue = HttpContext.Current.Cache[xslUrl].ToString();
 			}
 			
-			transform.Transform(xpathDoc, argsList, xmlWriter);
-			xmlReader.Close();
-			
-			return sw.ToString();
+			return returnValue;
 		}
 
 		private static bool IsGZipSupported()
