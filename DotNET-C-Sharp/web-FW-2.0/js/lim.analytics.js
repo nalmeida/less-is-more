@@ -6,10 +6,10 @@ if(!window['lim']){
 	if(!scope) scope = window;
 	
 	/**
-	 * Classe para chamar marcações do Google Analytics
+	 * Classe para chamar marcações do Google Analytics para versão ASSÍNCRONA
 	 * @author Nicholas Almeida
 	 * @since 19:18 13/8/2009
-	 * @see Para testar em localhost com o analytics "real", colocar pageTracker._setDomainName("none");
+	 * @see Para testar em localhost com o analytics "real", colocar _pageTracker.push(['_setDomainName', "none"]);
 	 */
 	scope.Analytics = function () {
 		
