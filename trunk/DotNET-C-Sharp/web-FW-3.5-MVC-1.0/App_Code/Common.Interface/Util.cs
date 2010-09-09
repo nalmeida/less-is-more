@@ -237,10 +237,13 @@ namespace Common
 		}
 
 		public static string TransformXML(string xmlUrl, string xslUrl){
-			return TransformXML(xmlUrl, xslUrl, null, false);
+			return TransformXML(xmlUrl, xslUrl, null, false, false);
 		}
 		public static string TransformXML(string xmlUrl, string xslUrl, string[][] xslParams){
-			return TransformXML(xmlUrl, xslUrl, xslParams, false);
+			return TransformXML(xmlUrl, xslUrl, xslParams, false, false);
+		}
+		public static string TransformXML(string xmlUrl, string xslUrl, string[][] xslParams, bool avoidXmlCache){
+			return TransformXML(xmlUrl, xslUrl, xslParams, avoidXmlCache, false);
 		}
 		
 		/**
@@ -260,11 +263,11 @@ namespace Common
 			)%>
 			</code>
 		 */
-		public static string TransformXML(string xmlUrl, string xslUrl, string[][] xslParams, bool trustedXsl)
+		public static string TransformXML(string xmlUrl, string xslUrl, string[][] xslParams, bool avoidXmlCache, bool trustedXsl)
 		{
 			string returnValue = "";
 			string xmlName = xslUrl.Replace(Root, "/")+"|"+xmlUrl.Replace(Root, "/");
-			if(HttpContext.Current.Cache[xmlName] == null || avoidXmlCache == true){
+			if(HttpContext.Current.Cache[xmlName] == null || HttpContext.Current.Cache[xslUrl] == null || avoidXmlCache == true){
 
 				XmlTextReader xmlReader = new XmlTextReader(xmlUrl);
 				XslCompiledTransform transform = new XslCompiledTransform();
