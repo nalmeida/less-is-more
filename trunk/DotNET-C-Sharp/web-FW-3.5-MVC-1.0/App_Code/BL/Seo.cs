@@ -54,17 +54,40 @@ namespace BL
 		{
 			return Obter(Common.Util.RawUrl);
 		}
+       
 
 		private bool PopulaDataSet()
 		{
-			if (File.Exists(HttpContext.Current.Server.MapPath("~/App_Data/seo.xml")))
-			{
-				ds = new DataSet();
-				ds.ReadXml(HttpContext.Current.Server.MapPath("~/App_Data/seo.xml"));
-				return true;
-			}
-			else
-				return false;
+
+            try
+            {
+                //tenta carregar o objeto de SEO primeiramente do cache
+                if (HttpContext.Current.Cache["SEO"] != null)
+                {
+                    ds = (DataSet)HttpContext.Current.Cache["SEO"];
+                    return true;
+                }
+                else if (File.Exists(HttpContext.Current.Server.MapPath("~/App_Data/seo.xml")))
+                {
+                        ds = new DataSet();
+                        ds.ReadXml(HttpContext.Current.Server.MapPath("~/App_Data/seo.xml"));
+                        //grava os dados em cache, que expira apos 12 horas.
+                        HttpContext.Current.Cache.Add("SEO", ds, null, DateTime.Now.AddHours(12), System.Web.Caching.Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.Normal, null);
+                        return true;
+                }
+                else
+                    return false;                
+            }
+            catch
+            {
+                return false;
+            }
+
 		}
-	}
+    
+        internal void LoadMetaTags()
+        {
+ 	        throw new NotImplementedException();
+        }
+    }
 }
