@@ -19,13 +19,9 @@ namespace Common
 	 */
 	public static partial class Config
 	{
-		private static VO.Seo seo;
-		private static string rawURL;
-		private static VO.Seo getSeo(){
-			if(rawURL != Common.Util.RawUrl){
-				seo = Singleton<BL.Seo>.Instancia.Obter();
-			}
-			return seo;
+		private static VO.Seo getSeo()
+        {
+            return Singleton<BL.Seo>.Instancia.Obter();
 		}
 		/**
 		 * Common.Config.Title

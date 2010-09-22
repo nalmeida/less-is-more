@@ -157,8 +157,8 @@ namespace Common
 		{
 			get
 			{
-				string ret = HttpContext.Current.Request.RawUrl.Replace(HttpContext.Current.Request.ApplicationPath, "");
-				return !string.IsNullOrEmpty(ret) && ret[ret.Length - 1].ToString() == "/" ? ret : ret + "/";
+                string ret = HttpContext.Current.Request.RawUrl.Substring(HttpContext.Current.Request.ApplicationPath.Length);
+				return !string.IsNullOrEmpty(ret) && ret.EndsWith("/") ? ret : ret + "/";
 			}
 		}
 
