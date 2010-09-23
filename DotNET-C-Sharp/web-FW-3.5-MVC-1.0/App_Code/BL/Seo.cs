@@ -72,7 +72,7 @@ namespace BL
                         ds = new DataSet();
                         ds.ReadXml(HttpContext.Current.Server.MapPath("~/App_Data/seo.xml"));
                         //grava os dados em cache, que expira apos 12 horas.
-                        HttpContext.Current.Cache.Add("SEO", ds, null, DateTime.Now.AddHours(12), System.Web.Caching.Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.Normal, null);
+                        HttpContext.Current.Cache.Add("SEO", ds, new System.Web.Caching.CacheDependency(HttpContext.Current.Server.MapPath("~/App_Data/seo.xml")), System.Web.Caching.Cache.NoAbsoluteExpiration, System.Web.Caching.Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.Normal, null);
                         return true;
                 }
                 else
