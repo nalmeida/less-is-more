@@ -172,7 +172,11 @@
 							<h4>Common.Browser.Is</h4>
 							<p>
 								<code>Common.Browser.Is("ie")</code>: <%=Common.Browser.Is("ie")%> - Verifica se é Internet Explorer (independente da versão)<br />
-								<code>Common.Browser.Is("ie", "6")</code>: <%=Common.Browser.Is("ie", "6")%> - Verifica se é Internet Explorer 6 (compara com a string do user agent)<br />
+								<code>Common.Browser.Is("ie", "6")</code>: <%=Common.Browser.Is("ie", "6")%> - Verifica se é Internet Explorer 6<br />
+								<code>Common.Browser.Is("ie", ">=6")</code>: <%=Common.Browser.Is("ie", ">=6")%> - Verifica se é maior-igual ao Internet Explorer 6<br />
+								<code>Common.Browser.Is("ie", "&gt;6")</code>: <%=Common.Browser.Is("ie", ">6")%> - Verifica se é maior ao Internet Explorer 6<br />
+								<code>Common.Browser.Is("ie", "&lt;6")</code>: <%=Common.Browser.Is("ie", "<6")%> - Verifica se é menor ao Internet Explorer 6<br />
+								<code>Common.Browser.Is("ie", "&lt;=6")</code>: <%=Common.Browser.Is("ie", "<=6")%> - Verifica se é menor-igual ao Internet Explorer 6
 							</p>
 							<p>
 								Exemplos:<br />
@@ -180,14 +184,14 @@
 								<code>Common.Browser.Is("firefox")</code>: <%=Common.Browser.Is("firefox")%><br />
 								<code>Common.Browser.Is("opera")</code>: <%=Common.Browser.Is("opera")%><br />
 								<code>Common.Browser.Is("chrome")</code>: <%=Common.Browser.Is("chrome")%><br />
-								<code>Common.Browser.Is("google chrome")</code>: <%=Common.Browser.Is("google chrome")%><br />
+								<code>Common.Browser.Is("google-chrome")</code>: <%=Common.Browser.Is("google-chrome")%><br />
 								<code>Common.Browser.Is("ipad")</code>: <%=Common.Browser.Is("ipad")%><br />
-								<code>Common.Browser.Is("ipod")</code>: <%=Common.Browser.Is("ipod")%>
+								<code>Common.Browser.Is("iphone")</code>: <%=Common.Browser.Is("iphone")%>
 							</p>
 							<h4>Common.Browser.IsAny</h4>
-							<p>O método "IsAny", que verifica se é qualquer dos browsers listados:</p>
+							<p>O método "IsAny", que verifica se é qualquer dos browsers listados. O método de chamada dos browsers é o mesmo do método Is, porém separando os parâmetros por espaço:</p>
 							<p>
-								<code>Common.Browser.IsAny("safari", "firefox")</code>: <%=Common.Browser.IsAny("safari", "firefox")%><br />
+								<code>Common.Browser.IsAny("safari", "firefox >=3.6", "chrome 6")</code>: <%=Common.Browser.IsAny("safari", "firefox >=3.6", "chrome 6")%><br />
 							</p>
 						</li>
 						<li>
