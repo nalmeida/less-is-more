@@ -1,0 +1,60 @@
+$hh{zoom:1;overflow:hidden;}
+$fl{float:left;display:inline;}
+$fr{float:right;display:inline;}
+	/* Reset */
+	#contentWrapper img {
+		display:block;
+	}
+	
+	#contentWrapper object, 
+	#contentWrapper embed {
+		background:#000;
+	}
+	
+	
+	.content {
+		margin:10px;
+		$hh
+	}
+
+/**
+ * 	
+ *  APAGUE DAQUI PARA BAIXO E EDITE OS CONTEÚDOS DENTRO DO div.content
+ */
+.hide{
+	visibility:hidden;
+	overflow:hidden;
+	height:1px;
+	margin-top:-1px;
+	font-size:1px;
+	line-height:0;
+}	
+	.content{
+		background:#efefef;
+	}
+		.content .h1 {
+			margin-bottom:10px;
+			font-size:22px;
+		}
+		
+			.funcionalidade {
+				padding:5px;
+				border:1px solid #ccc;
+				margin-bottom:10px;
+				$hh
+			}
+			
+			.funcionalidade .h2 {
+				border-left:18px solid yellow;
+				padding-left: 5px;
+				margin-bottom:5px;
+			}
+			
+				.aprovada .h2 {
+					border-left:18px solid green;
+				}
+				
+				.reprovada .h2 {
+					border-left:18px solid red;
+					color:red;
+				}

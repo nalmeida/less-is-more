@@ -1,0 +1,28 @@
+$hh{zoom:1;overflow:hidden;}
+$fl{float:left;display:inline;}
+$fr{float:right;display:inline;}
+
+/* Facebook will remove this */
+/* --------------------------------------------------------------- Facebook Fake BG*/
+body {
+	background:url($language/img/bg_fb.png) no-repeat center top;
+	text-align:center;
+}
+	body #facebookHolder {
+		width:954px;
+		margin:auto;
+		text-align:left;
+		padding-top:152px;
+		padding-left:25px;
+	}
+	
+	body #contentWrapper {
+		width:546px;
+		overflow:hidden;
+		margin:0 auto 50px;		
+		padding-top:1px;		
+		$hh
+	}
+/* --------------------------------------------------------------- Facebook Fake BG*/	
+
+			
