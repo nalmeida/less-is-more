@@ -5,7 +5,7 @@ var FbjQuery = {
 
 	// CONSTANTES
 	VERSION: '0.1',
-	ROOT: document.getRootElement(),
+	ROOT: document.getElementById('root') || document,
 	/*
 		addClassName(a), addEventListener(f, b), appendChild(a), callSWF(e), cloneNode(c), constructorfbjs_dom(c, a), focus(), getAbsoluteLeft(), getAbsoluteTop(), getAccessKey(), getAction(), getChecked(), getChildNodes(), getClassName(), getClientHeight(), getClientWidth(), getColSpan(), getCols(), getDir(a), getDisabled(), getElementsByTagName(b), getFirstChild(), getForm(), getHref(), getId(), getLastChild(), getMaxLength(), getMethod(), getName(), getNextSibling(), getNodeType(), getOffsetHeight(), getOffsetWidth(), getOptions(), getParentNode(), getPreviousSibling(), getReadOnly(), getRowSpan(), getRows(), getScrollHeight(), getScrollLeft(), getScrollTop(), getScrollWidth(a), getSelected(), getSelectedIndex(), getSelection(), getSrc(), getStyle(a), getTabIndex(), getTagName(), getTarget(), getTitle(), getType(), getValue(), getdir(a), hasClassName(a), insertBefore(b, a), listEventListeners(e), purgeEventListeners(e), removeChild(a), removeClassName(a), removeEventListener(f, b), replaceChild(a, b), select(), serialize(), setAccessKey(a), setAction(a), setChecked(a), setClassName(a), setColSpan(a), setCols(a), setDir(a), setDisabled(a), setHref(a), setId(b), setInnerFBML(a), setInnerXHTML(b), setMaxLength(a), setMethod(a), setName(a), setReadOnly(a), setRowSpan(a), setRows(a), setScrollLeft(a), setScrollTop(a), setSelected(a), setSelectedIndex(a), setSelection(c, a), setSrc(a), setStyle(a, b), setTabIndex(a), setTarget(a), setTextValue(b), setTitle(a), setType(a), setValue(a), submit(), toggleClassName(a)
 	*/
