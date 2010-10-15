@@ -19,7 +19,7 @@ body {
 	body #contentWrapper {
 		width:546px;
 		overflow:hidden;
-		margin:0 auto 50px;		
+		margin-left:152px;	
 		padding-top:1px;		
 		$hh
 	}
