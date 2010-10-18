@@ -7,6 +7,7 @@ using System.Web;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Collections.Specialized;
 
 /* 
 Minify
@@ -58,6 +59,9 @@ namespace Common
 			set { _response = value; }
 		}
 
+		public DateTime lastModifiedFileGlobal = DateTime.MinValue;
+		public string[] vtArquivo;
+
 		public void DoCache(HttpContext context, DateTime lastModifiedUnc)
 		{
 			try
@@ -108,16 +112,61 @@ namespace Common
 		{
 			Request = context.Request;
 			Response = context.Response;
-			Server = context.Server;
 
+			String MinifyFiles = Execute(Request.QueryString);
+
+			if (vtArquivo[0].Contains(".js"))
+			{
+				Response.ContentType = "text/javascript";
+			}
+			else
+			{
+				Response.ContentType = "text/css";
+			}
+
+			// CACHE
+			if (string.IsNullOrEmpty(Util.Bpc))
+			{
+				DoCache(context, lastModifiedFileGlobal);
+			}
+
+			// GZIP ENCODE
+			Util.GZipEncodePage();
+
+			//OUTPUT
+			Response.Write("/**\n * @author " + Common.Config.AuthorName + " - " + Common.Config.AuthorAddress + "\n */\n");
+			Response.Write(MinifyFiles);
+		}
+
+		public bool IsReusable
+		{
+			get
+			{
+				return true;
+			}
+		}
+
+		public string Execute(String Files, String bpc, String v)
+		{
+			NameValueCollection MinifyExecutionConfiguration = new NameValueCollection();
+			MinifyExecutionConfiguration.Add("Files", Files);
+			MinifyExecutionConfiguration.Add("bpc", bpc);
+			MinifyExecutionConfiguration.Add("v", v);
+
+			return Execute(MinifyExecutionConfiguration);
+
+		}
+		private string Execute(NameValueCollection Files)
+		{
+			Server = HttpContext.Current.Server;
 
 			// READING FILES
 			StringBuilder sbToStrip = new StringBuilder();
-			string[] vtArquivo = Request.QueryString[0].Split(Convert.ToChar("|"));
+			vtArquivo = Files[0].Split(Convert.ToChar("|"));
 
 			Encoding utf8 = Encoding.GetEncoding("utf-8");
 			StreamReader srArquivo;
-			DateTime lastModifiedFileGlobal = DateTime.MinValue;
+			lastModifiedFileGlobal = DateTime.MinValue;
 
 			string filePath;
 			DateTime fileLastModified;
@@ -126,7 +175,6 @@ namespace Common
 			{
 				foreach (string stNomeArquivo in vtArquivo)
 				{
-					Response.ContentType = "text/css";
 					// set folder and file name
 					string file;
 					string folder;
@@ -169,7 +217,6 @@ namespace Common
 			}
 			if (vtArquivo[0].Contains(".js"))
 			{
-				Response.ContentType = "text/javascript";
 				foreach (string stNomeArquivo in vtArquivo)
 				{
 					filePath = Server.MapPath("js/") + stNomeArquivo;
@@ -192,10 +239,10 @@ namespace Common
 			if (vtArquivo[0].Contains(".css"))
 			{
 				// replaces
-				stContent = stContent.Replace("$root/", Util.AssetsRoot); 
+				stContent = stContent.Replace("$root/", Util.AssetsRoot);
 				stContent = stContent.Replace("$global/", Util.GlobalPath);
 				stContent = stContent.Replace("$language/", Util.LanguagePath);
-				stContent = stContent.Replace("$upload-root/", Util.UploadsRoot); 
+				stContent = stContent.Replace("$upload-root/", Util.UploadsRoot);
 				stContent = stContent.Replace("$upload-global/", Util.GlobalUploadPath);
 				stContent = stContent.Replace("$upload-language/", Util.LanguageUploadPath);
 
@@ -216,35 +263,14 @@ namespace Common
 					stContent = stContent.Replace("$" + varname, dicVariables[varname]);  //replaces each variable with its value
 				}
 
-				if (Request.QueryString["v"] != null)
+				if (Files["v"] != null)
 				{
-					stContent = Regex.Replace(stContent, "url\\((.[^\\)]*\\?.*)\\)", "url($1&v=" + Request.QueryString["v"] + ")"); // replace all images paths with a query adding the &v=version 
-					stContent = Regex.Replace(stContent, "url\\((.[^\\)\\?]*)\\)", "url($1?v=" + Request.QueryString["v"] + ")"); // replace all images paths adding the ?v=version 
+					stContent = Regex.Replace(stContent, "url\\((.[^\\)]*\\?.*)\\)", "url($1&v=" + Files["v"] + ")"); // replace all images paths with a query adding the &v=version 
+					stContent = Regex.Replace(stContent, "url\\((.[^\\)\\?]*)\\)", "url($1?v=" + Files["v"] + ")"); // replace all images paths adding the ?v=version 
 				}
 			}
 
-
-			// CACHE
-			if (string.IsNullOrEmpty(Util.Bpc))
-			{
-				DoCache(context, lastModifiedFileGlobal);
-			}
-
-			// GZIP ENCODE
-			Util.GZipEncodePage();
-
-			//OUTPUT
-			Response.Write("/**\n * @author "+Common.Config.AuthorName+" - "+Common.Config.AuthorAddress+"\n */\n");
-			Response.Write(stContent);
+			return stContent.ToString();
 		}
-
-		public bool IsReusable
-		{
-			get
-			{
-				return true;
-			}
-		}
-
 	}
 }
