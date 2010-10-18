@@ -1,12 +1,40 @@
 var alert = function(p_str, p_tit) {
 	var dialog = new Dialog().showMessage(p_tit || ' ', p_str);
 };
+/**
+ * Cria um Objeto $ com os mesmos métodos do jQuery só que usando as funções disponíveis no Facebook
+ * @author Nicholas Almeida
+ * @since 18/10/2010
+ * 
+ * @usage
+
+	// Importante. O Javascript deve ser inserido DENTRO da tag <script>. Não funcionará se chamado direto no <script src="...">
+	<h2 class="h2">jQuery (nalmeida 11/06/2010)</h2>
+	<div id="htmlDemo">
+		#htmlDemo
+	</div>
+	<a href="#" onclick="$('#htmlDemo').text('loading...');$.ajax({url: '<%=Common.Util.Root%>ajax.aspx', 'dataType':'json', error: onAjaxError, complete: function(data){$('#htmlDemo').text(data.po)}});">ajax statico JSON</a><br />
+	<a href="#" onclick="$('#htmlDemo').text('loading...');$.ajax({url: '<%=Common.Util.Root%>ajax.aspx', 'cache':false, data:{'nome':'nicholas'}, error: onAjaxError, complete: function(data){$('#htmlDemo').text(data)}});">ajax statico passando parâmentros</a><br />
+	<a href="#" onclick="$('#htmlDemo').text('loading...');$.ajax({url: '<%=Common.Util.Root%>ajax.aspx', error: onAjaxError, complete: function(data){$('#htmlDemo').text(data)}});">ajax statico</a><br />
+	<a href="#" onclick="$('#htmlDemo').load({url: '<%=Common.Util.Root%>ajax_html.aspx'}).text('carregando HTML Brasil!...');">ajax LOAD</a><br />
+	<a href="#" onclick="$('#htmlDemo').ajax({url: '<%=Common.Util.Root%>ajax.aspx', error: onAjaxError, complete: function(data){$('#htmlDemo').text(data)}}).text('carregando...');">ajax elemento</a><br />
+	<a href="#" onclick="$('#htmlDemo').css({'background':'blue', 'color':'white'});">CSS</a><br />
+	<a href="#" onclick="$('#htmlDemo').html('<i><b>conteúdo do setInnerXHTML</b></i>');">html</a><br />
+	<fb:js-string var="str_example">Pre-rendered FBML content.</fb:js-string>
+	<a href="#" onclick="$('#htmlDemo').fbml(str_example);">fbml</a><br />
+	<a href="#" onclick="$('#htmlDemo').text('conteúdo do setInnerFBML');">text</a><br />
+	<a href="#" onclick="$('#htmlDemo').hide();">hide</a><br />
+	<a href="#" onclick="$('#htmlDemo').show();">show</a><br />
+	<a href="#" onclick="$('#htmlDemo').html('<i><b>conteúdo do setInnerFBML</b></i>').css('background', 'yellow');">chain</a><br />
+	<a href="#" onclick="$('.aprovada').hide();">classes</a>
+ */
 var FbjQuery = {
 
 	// CONSTANTES
-	VERSION: '0.1',
-	ROOT: document.getElementById('root') || document,
+	VERSION: '1.0',
+	ROOT: document.getElementById('root') || document, // Todo o conteúdo deve estar dentro de um div com id "root". Ele é que contém todos os métodos que o Facebook disponibiliza
 	/*
+		Métodos disponíveis no Bacebook
 		addClassName(a), addEventListener(f, b), appendChild(a), callSWF(e), cloneNode(c), constructorfbjs_dom(c, a), focus(), getAbsoluteLeft(), getAbsoluteTop(), getAccessKey(), getAction(), getChecked(), getChildNodes(), getClassName(), getClientHeight(), getClientWidth(), getColSpan(), getCols(), getDir(a), getDisabled(), getElementsByTagName(b), getFirstChild(), getForm(), getHref(), getId(), getLastChild(), getMaxLength(), getMethod(), getName(), getNextSibling(), getNodeType(), getOffsetHeight(), getOffsetWidth(), getOptions(), getParentNode(), getPreviousSibling(), getReadOnly(), getRowSpan(), getRows(), getScrollHeight(), getScrollLeft(), getScrollTop(), getScrollWidth(a), getSelected(), getSelectedIndex(), getSelection(), getSrc(), getStyle(a), getTabIndex(), getTagName(), getTarget(), getTitle(), getType(), getValue(), getdir(a), hasClassName(a), insertBefore(b, a), listEventListeners(e), purgeEventListeners(e), removeChild(a), removeClassName(a), removeEventListener(f, b), replaceChild(a, b), select(), serialize(), setAccessKey(a), setAction(a), setChecked(a), setClassName(a), setColSpan(a), setCols(a), setDir(a), setDisabled(a), setHref(a), setId(b), setInnerFBML(a), setInnerXHTML(b), setMaxLength(a), setMethod(a), setName(a), setReadOnly(a), setRowSpan(a), setRows(a), setScrollLeft(a), setScrollTop(a), setSelected(a), setSelectedIndex(a), setSelection(c, a), setSrc(a), setStyle(a, b), setTabIndex(a), setTarget(a), setTextValue(b), setTitle(a), setType(a), setValue(a), submit(), toggleClassName(a)
 	*/
 	
@@ -311,88 +339,19 @@ var FbjQuery = {
 		
 		// Fazendo bind de todos os eventos possíveis!
 		// TODO: testar quais realmente funcionam!
-		// var _eventsArr = ['blur','focus','focusin','focusout','load','resize','scroll','unload','click','dblclick','mousedown','mouseup','mousemove','mouseover','mouseout','mouseenter','mouseleave','change','select','submit','keydown','keypress','keyup','error'];
-		// for(var i = 0; _eventsArr[i]; i++) {
-		// 	(function() {
-		// 		var _eventName = _eventsArr[i];
-		// 		_this[_eventName] = function(p_handler, p_usecapture) {
-		// 			return _this.bind(_eventName, p_handler, p_usecapture)
-		// 		};
-		// 	})();
-		// };
-		// _eventsArr = null;
+		var _eventsArr = ['blur','focus','focusin','focusout','load','resize','scroll','unload','click','dblclick','mousedown','mouseup','mousemove','mouseover','mouseout','mouseenter','mouseleave','change','select','submit','keydown','keypress','keyup','error'];
+		for(var i = 0; _eventsArr[i]; i++) {
+			(function() {
+				var _eventName = _eventsArr[i];
+				_this[_eventName] = function(p_handler, p_usecapture) {
+					return _this.bind(_eventName, p_handler, p_usecapture)
+				};
+			})();
+		};
+		_eventsArr = null;
 	}
 
 };
-var pageTracker = {
-	PAGE_VIEW: 'trackPageview',
-	PAGE_EVENT: 'trackEvent',
-	UACode: null,
-	URLProxy: null,
-	domain: 'facebook.com',
-	title: '',
-	_testRequiredParameters: function() {
-		if(!pageTracker.UACode) {
-			alert('[pageTracker.' + p_obj.func + '] pageTracker.UACode is undefined;', 'ERROR');
-			return false;
-		}
-		if(!pageTracker.URLProxy) {
-			alert('[pageTracker.' + p_obj.func + '] pageTracker.URLProxy is undefined;', 'ERROR');
-			return false;
-		}
-		if(!pageTracker.domain) {
-			alert('[pageTracker.' + p_obj.func + '] pageTracker.domain is undefined;', 'ERROR');
-			return false;
-		}	
-	},
-	_trackPageview: function (p_str){
-		
-		var tmpObj = {
-			url: pageTracker.URLProxy,
-			cache: false,
-			data: {
-				'googlecode': 		pageTracker.UACode,
-				'googledomain': 	pageTracker.domain,
-				
-				'pagetitle': 		pageTracker.title,
-				'pagelink': 		p_str,
-				
-				'func': 			pageTracker.PAGE_VIEW
-			}
-		};
-		
-		pageTracker._testRequiredParameters(tmpObj.data);
-		
-		FbjQuery.ajax(tmpObj);
-	},
-	jujuba: function (p_category, p_action, p_label, p_value){
-		
-		var tmpObj = {
-			url: pageTracker.URLProxy,
-			cache: false,
-			data: {
-				'googlecode': 		pageTracker.UACode,
-				'googledomain': 	pageTracker.domain,
-				
-				'category': 		p_category || '',
-				'action': 			p_action || '',
-				'label': 			p_label || '',
-				'value': 			p_value || '',
-				
-				'func': 			pageTracker.PAGE_VIEW
-			}
-		};
-		
-		pageTracker._testRequiredParameters(tmpObj.data);
-		
-		FbjQuery.ajax(tmpObj);
-		
-	},
-	_setVar: function (w){
-	}
-	
-};
-
 var $ = function(p_selector) {
 	return new FbjQuery.Class(p_selector);
 };
