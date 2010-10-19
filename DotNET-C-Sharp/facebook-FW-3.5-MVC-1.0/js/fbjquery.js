@@ -31,7 +31,7 @@ var alert = function(p_str, p_tit) {
 var FbjQuery = {
 
 	// CONSTANTES
-	VERSION: '1.0',
+	VERSION: '1.1',
 	ROOT: document.getElementById('root') || document, // Todo o conteúdo deve estar dentro de um div com id "root". Ele é que contém todos os métodos que o Facebook disponibiliza
 	/*
 		Métodos disponíveis no Bacebook
@@ -111,7 +111,7 @@ var FbjQuery = {
 	*/
 	isObject: function(p_obj){
 		// return Object.prototype.toString.call(p_obj) === '[object Object]';
-		return (typeof(p_obj) == 'object' && p_obj != null && p_obj.length == null);
+		return (typeof(p_obj) == 'object' && p_obj != null);
 	},
 	isArray: function(p_obj){
 		// return Object.prototype.toString.call(p_obj) === '[object Array]';
@@ -121,6 +121,31 @@ var FbjQuery = {
 		//the following condition should be in there too, but FBJS prevents access to Array
 		//fn.constructor != [].constructor
 		return !!p_fn && typeof p_fn != 'string' && !p_fn.nodeName &&  /^[\s[]?function/.test( p_fn + '' );
+	},
+	each: function( object, callback, args ) {
+		var name, i = 0, length = object.length;
+
+		if ( args ) {
+			if ( length === undefined ) {
+				for ( name in object )
+					if ( callback.apply( object[ name ], args ) === false )
+						break;
+			} else
+				for ( ; i < length; )
+					if ( callback.apply( object[ i++ ], args ) === false )
+						break;
+
+		// A special, fast, case for the most common use of each
+		} else {
+			if ( length === undefined ) {
+				for ( name in object )
+					if ( callback.call( object[ name ], name, object[ name ] ) === false )
+						break;
+			} else
+				for ( var value = object[0];
+					i < length && callback.call( value, i, value ) !== false; value = object[++i] ){}
+		}
+
 	},
 	extend: function() {
 		// copy reference to target object
@@ -223,7 +248,7 @@ var FbjQuery = {
 				var _elm = _arrTags[i];
 
 				if(_arrTags[i].hasClassName(p_class)) {
-					_arrHasClass[_arrHasClass.length] = _arrTags[i];
+					_arrHasClass[_arrHasClass.length] = _elm;
 				}
 			}
 
@@ -235,7 +260,6 @@ var FbjQuery = {
 		var _$len;
 		var _root = FbjQuery.ROOT;
 		var _this = this;
-		
 		if(FbjQuery.isObject(p_selector)) { // Já é um objeto DOM
 			_$ = [p_selector];
 		} else {
@@ -280,6 +304,10 @@ var FbjQuery = {
 			_applyFBJS('setInnerXHTML', [p_html]);
 			return this;
 		};
+		
+		this.each = function( callback, args ) {
+			return FbjQuery.each( _$, callback, args );
+		},
 
 		this.css = function(p_prop, p_value) {
 			var _objStyle = {};
@@ -303,22 +331,6 @@ var FbjQuery = {
 			return this;
 		};
 		
-		this.espirro = function(p_objAjax) {
-			var tmpObj = {
-				dataType:'html',
-				error: function() {
-					alert('ERRO!')
-				},
-				complete: function(response){
-					_this.fbml(response);
-				}
-			};
-			var newObj = FbjQuery.extend(p_objAjax, tmpObj);
-			FbjQuery.ajax(newObj);
-			return this;
-		};
-		
-
 		// Métodos Ajax que funcionam exatamente igual
 		var _ajaxArr = ['ajax','post','get'];
 		for(var i = 0; _ajaxArr[i]; i++) {
