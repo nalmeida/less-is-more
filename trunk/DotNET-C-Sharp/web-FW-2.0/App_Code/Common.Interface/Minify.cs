@@ -193,7 +193,7 @@ namespace Common
 					if (string.IsNullOrEmpty(folder))
 						continue;
 
-					filePath = Server.MapPath("locales/" + folder + "/css/") + file;
+					filePath = HttpContext.Current.Request.PhysicalApplicationPath + "locales//" + folder + "//css//" + file;
 
 					fileLastModified = File.GetLastWriteTime(filePath);
 					lastModifiedFileGlobal = fileLastModified > lastModifiedFileGlobal ? fileLastModified : lastModifiedFileGlobal;
@@ -219,7 +219,7 @@ namespace Common
 			{
 				foreach (string stNomeArquivo in vtArquivo)
 				{
-					filePath = Server.MapPath("js/") + stNomeArquivo;
+					filePath = HttpContext.Current.Request.PhysicalApplicationPath + "js\\" + stNomeArquivo;
 
 					fileLastModified = File.GetLastWriteTime(filePath);
 					lastModifiedFileGlobal = fileLastModified > lastModifiedFileGlobal ? fileLastModified : lastModifiedFileGlobal;
