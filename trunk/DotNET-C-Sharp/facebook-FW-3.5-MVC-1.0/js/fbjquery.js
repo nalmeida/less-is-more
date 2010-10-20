@@ -307,7 +307,16 @@ var FbjQuery = {
 		
 		this.each = function( callback, args ) {
 			return FbjQuery.each( _$, callback, args );
-		},
+		};
+		
+		this.val = function(p_value){
+			if(p_value) {
+				_applyFBJS('setValue', [p_value]);
+				return this;
+			} else {
+				return _root['getValue'].apply(_$[0]);
+			}
+		};
 
 		this.css = function(p_prop, p_value) {
 			var _objStyle = {};
