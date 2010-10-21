@@ -11,7 +11,7 @@
 	<script type="text/javascript">
 		pageTracker.UACode = '##CODE##';
 		pageTracker.URLProxy = 'http://interfacephp.fbiz.com.br/facebook/fbga/fbga.php';
-	</script>
+	<\/script>
 	<a href="#" onclick="pageTracker._trackPageview('/facebook/clique-home');">pageTracker._trackPageview</a><br />
 	<a href="#" onclick="pageTracker._trackEvent('evento', 'funciona?');">pageTracker._trackEvent</a><br />
 	Marcação no "onload" <img src='http://interfacephp.fbiz.com.br/facebook/fbga/fbga.php?googlecode=UA-17044986-2&googledomain=facebook.com&pagelink=/facebook/init&pagetitle=' /><br />
