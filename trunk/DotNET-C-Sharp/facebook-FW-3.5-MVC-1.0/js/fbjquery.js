@@ -340,6 +340,17 @@ var FbjQuery = {
 			return this;
 		};
 		
+		this.load = function(p_objAjax) {
+			var tmpObj = {
+				dataType:'html',
+				complete: function(response){
+					_this.fbml(response);
+				}
+			};
+			FbjQuery.ajax(FbjQuery.extend(p_objAjax, tmpObj));
+			return this;
+		};
+		
 		// Métodos Ajax que funcionam exatamente igual
 		var _ajaxArr = ['ajax','post','get'];
 		for(var i = 0; _ajaxArr[i]; i++) {
