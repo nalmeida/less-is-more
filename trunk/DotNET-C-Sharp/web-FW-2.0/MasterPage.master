@@ -52,7 +52,7 @@
 	</script>
 	
 	<% // carrega o jquery do servidor do google, se não der certo, carrega local %>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	<script type="text/javascript">
 	//<![CDATA[
 		if(!window['jQuery']) document.write('<scr'+'ipt type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?jquery.js"><\/scr'+'ipt>');
@@ -431,7 +431,7 @@
 						</li>
 						<li>
 							<p>
-								<strong>jQuery 1.3.2</strong>: <br />
+								<strong>jQuery 1.4.2</strong>: <br />
 								<a href="http://docs.jquery.com/Main_Page" target="_blank">
 									http://docs.jquery.com/Main_Page
 								</a>
