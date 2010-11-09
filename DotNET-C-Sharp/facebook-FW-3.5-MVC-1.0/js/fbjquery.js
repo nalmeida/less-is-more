@@ -12,10 +12,9 @@ var FbjQuery = {
 	VERSION: '1.1',
 	ROOT: document.getElementById('root') || document, // Todo o conteúdo deve estar dentro de um div com id "root". Ele é que contém todos os métodos que o Facebook disponibiliza
 	/*
-		Métodos disponíveis no Bacebook
 		addClassName(a), addEventListener(f, b), appendChild(a), callSWF(e), cloneNode(c), constructorfbjs_dom(c, a), focus(), getAbsoluteLeft(), getAbsoluteTop(), getAccessKey(), getAction(), getChecked(), getChildNodes(), getClassName(), getClientHeight(), getClientWidth(), getColSpan(), getCols(), getDir(a), getDisabled(), getElementsByTagName(b), getFirstChild(), getForm(), getHref(), getId(), getLastChild(), getMaxLength(), getMethod(), getName(), getNextSibling(), getNodeType(), getOffsetHeight(), getOffsetWidth(), getOptions(), getParentNode(), getPreviousSibling(), getReadOnly(), getRowSpan(), getRows(), getScrollHeight(), getScrollLeft(), getScrollTop(), getScrollWidth(a), getSelected(), getSelectedIndex(), getSelection(), getSrc(), getStyle(a), getTabIndex(), getTagName(), getTarget(), getTitle(), getType(), getValue(), getdir(a), hasClassName(a), insertBefore(b, a), listEventListeners(e), purgeEventListeners(e), removeChild(a), removeClassName(a), removeEventListener(f, b), replaceChild(a, b), select(), serialize(), setAccessKey(a), setAction(a), setChecked(a), setClassName(a), setColSpan(a), setCols(a), setDir(a), setDisabled(a), setHref(a), setId(b), setInnerFBML(a), setInnerXHTML(b), setMaxLength(a), setMethod(a), setName(a), setReadOnly(a), setRowSpan(a), setRows(a), setScrollLeft(a), setScrollTop(a), setSelected(a), setSelectedIndex(a), setSelection(c, a), setSrc(a), setStyle(a, b), setTabIndex(a), setTarget(a), setTextValue(b), setTitle(a), setType(a), setValue(a), submit(), toggleClassName(a)
 	*/
-	
+
 	// Static Methods
 	// AJAX
 	genericAjax: function(p_url, p_query, p_responsetype, p_complete, p_error, p_requirelogin, p_uselocalproxy) {
@@ -40,7 +39,7 @@ var FbjQuery = {
 		var _objAjax = p_objAjax;
 		var _cache;
 		var _url, _query, _responseType, _complete, _error, _requirelogin, _uselocalproxy; // FB Objects
-		
+
 		if(FbjQuery.isObject(_objAjax)) {
 			var respType;
 			switch(_objAjax.dataType) {
@@ -68,21 +67,21 @@ var FbjQuery = {
 			_cache = (_objAjax.cache != null && (_objAjax.cache === false || _objAjax.cache == 'false')) ? false : true;
 		}
 		else if(typeof(_objAjax) == 'string') _url = _objAjax;
-		
+
 		if(_cache === false) {
 			_url += (_url.match(/\?/) ? '&' : '?') + 'rnd=' + Math.random(10000);
 		}
 		FbjQuery.genericAjax(_url, _query, _responseType, _complete, _error, _requirelogin, _uselocalproxy);
 	},
-	
+
 	post: function(p_objAjax) {
 		FbjQuery.ajax(p_objAjax);
 	},
-	
+
 	get: function(p_objAjax) {
 		FbjQuery.ajax(p_objAjax);
 	},
-	
+
 	// UTIL
 	/**
 	@see http://forum.jquery.com/topic/why-use-jquery-isobject-in-jquery-extend
@@ -188,7 +187,7 @@ var FbjQuery = {
 			var arrText = p_str.split('-');
 			var arrConverted = [];
 				arrConverted.push(arrText[0]);
-			
+
 			for(var i=1, len = arrText.length; i < len; i++) {
 				var firtsLetter = arrText[i].slice(0,1);
 					firtsLetter = firtsLetter.toUpperCase();
@@ -244,7 +243,7 @@ var FbjQuery = {
 			var selector = p_selector.slice(0,1);
 			_$ = null;
 			_$len = 0;
-			
+
 			// constructor
 			if(selector == '#') {
 				_$ = _getById(p_selector.replace('#',''));
@@ -253,7 +252,7 @@ var FbjQuery = {
 			} else {
 				_$ = _getByTag(p_selector);
 			}
-			
+
 		}
 		this.length = _$len = _$.length;
 
@@ -274,7 +273,7 @@ var FbjQuery = {
 		};
 
 		this.fbml = function(p_html) {
-			_applyFBJS('setInnerFBML', [p_html], document);
+			_applyFBJS('setInnerFBML', [p_html], _root);
 			return this;
 		};
 
@@ -282,11 +281,11 @@ var FbjQuery = {
 			_applyFBJS('setInnerXHTML', [p_html]);
 			return this;
 		};
-		
+
 		this.each = function( callback, args ) {
 			return FbjQuery.each( _$, callback, args );
 		};
-		
+
 		this.val = function(p_value){
 			if(p_value) {
 				_applyFBJS('setValue', [p_value]);
@@ -298,26 +297,26 @@ var FbjQuery = {
 
 		this.css = function(p_prop, p_value) {
 			var _objStyle = {};
-			
+
 			if(arguments.length == 0 ) {
 				return this;
 			} else if(arguments.length == 1 ) { // Getter ou passado por Objeto
-			 
+
 				if(FbjQuery.isObject(p_prop)) { // Setter por objeto
 					_objStyle = FbjQuery.util.convertObjCSSProp(p_prop);
 				} else if(p_prop == 'string'){ // Getter
 					return _applyFBJS('getStyle', [FbjQuery.util.transformCSSPropToJSProp(p_prop)]);
 				}
-				
+
 			} else if(arguments.length == 2 ){ // Setter por "prop":"valor"
 				_objStyle[FbjQuery.util.transformCSSPropToJSProp(p_prop)] = p_value;
 			}
-			
+
 			_applyFBJS('setStyle', [_objStyle]);
-			
+
 			return this;
 		};
-		
+
 		this.load = function(p_objAjax) {
 			var tmpObj = {
 				dataType:'html',
@@ -325,10 +324,14 @@ var FbjQuery = {
 					_this.fbml(response);
 				}
 			};
+
+			if(typeof(p_objAjax) == 'string') {
+				tmpObj.url = p_objAjax;
+			}
 			FbjQuery.ajax(FbjQuery.extend(p_objAjax, tmpObj));
 			return this;
 		};
-		
+
 		// Métodos Ajax que funcionam exatamente igual
 		var _ajaxArr = ['ajax','post','get'];
 		for(var i = 0; _ajaxArr[i]; i++) {
@@ -341,15 +344,14 @@ var FbjQuery = {
 			})();
 		};
 		_ajaxArr = null;
-	
+
 		this.bind = function(p_event, p_handler, p_usecapture) {
 			_applyFBJS('addEventListener', [p_event, p_handler, p_usecapture]);
 			return this;
 		};
-		
-		// Fazendo bind de todos os eventos possíveis!
-		// TODO: testar quais realmente funcionam!
-		var _eventsArr = ['blur','focus','focusin','focusout','load','resize','scroll','unload','click','dblclick','mousedown','mouseup','mousemove','mouseover','mouseout','mouseenter','mouseleave','change','select','submit','keydown','keypress','keyup','error'];
+
+		// removed "load" event
+		var _eventsArr = ['blur','focus','focusin','focusout','resize','scroll','unload','click','dblclick','mousedown','mouseup','mousemove','mouseover','mouseout','mouseenter','mouseleave','change','select','submit','keydown','keypress','keyup','error'];
 		for(var i = 0; _eventsArr[i]; i++) {
 			(function() {
 				var _eventName = _eventsArr[i];
