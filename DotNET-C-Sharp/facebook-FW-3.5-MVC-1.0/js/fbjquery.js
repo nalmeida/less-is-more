@@ -5,28 +5,6 @@ var alert = function(p_str, p_tit) {
  * Cria um Objeto $ com os mesmos métodos do jQuery só que usando as funções disponíveis no Facebook
  * @author Nicholas Almeida
  * @since 18/10/2010
- * 
- * @usage
-
-	// Importante. O Javascript deve ser inserido DENTRO da tag <script>. Não funcionará se chamado direto no <script src="...">
-	<h2 class="h2">jQuery (nalmeida 11/06/2010)</h2>
-	<div id="htmlDemo">
-		#htmlDemo
-	</div>
-	<a href="#" onclick="$('#htmlDemo').text('loading...');$.ajax({url: '<%=Common.Util.Root%>ajax.aspx', 'dataType':'json', error: onAjaxError, complete: function(data){$('#htmlDemo').text(data.po)}});">ajax statico JSON</a><br />
-	<a href="#" onclick="$('#htmlDemo').text('loading...');$.ajax({url: '<%=Common.Util.Root%>ajax.aspx', 'cache':false, data:{'nome':'nicholas'}, error: onAjaxError, complete: function(data){$('#htmlDemo').text(data)}});">ajax statico passando parâmentros</a><br />
-	<a href="#" onclick="$('#htmlDemo').text('loading...');$.ajax({url: '<%=Common.Util.Root%>ajax.aspx', error: onAjaxError, complete: function(data){$('#htmlDemo').text(data)}});">ajax statico</a><br />
-	<a href="#" onclick="$('#htmlDemo').load({url: '<%=Common.Util.Root%>ajax_html.aspx'}).text('carregando HTML Brasil!...');">ajax LOAD</a><br />
-	<a href="#" onclick="$('#htmlDemo').ajax({url: '<%=Common.Util.Root%>ajax.aspx', error: onAjaxError, complete: function(data){$('#htmlDemo').text(data)}}).text('carregando...');">ajax elemento</a><br />
-	<a href="#" onclick="$('#htmlDemo').css({'background':'blue', 'color':'white'});">CSS</a><br />
-	<a href="#" onclick="$('#htmlDemo').html('<i><b>conteúdo do setInnerXHTML</b></i>');">html</a><br />
-	<fb:js-string var="str_example">Pre-rendered FBML content.</fb:js-string>
-	<a href="#" onclick="$('#htmlDemo').fbml(str_example);">fbml</a><br />
-	<a href="#" onclick="$('#htmlDemo').text('conteúdo do setInnerFBML');">text</a><br />
-	<a href="#" onclick="$('#htmlDemo').hide();">hide</a><br />
-	<a href="#" onclick="$('#htmlDemo').show();">show</a><br />
-	<a href="#" onclick="$('#htmlDemo').html('<i><b>conteúdo do setInnerFBML</b></i>').css('background', 'yellow');">chain</a><br />
-	<a href="#" onclick="$('.aprovada').hide();">classes</a>
  */
 var FbjQuery = {
 
