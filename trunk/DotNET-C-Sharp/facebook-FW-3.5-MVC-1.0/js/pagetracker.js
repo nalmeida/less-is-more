@@ -3,19 +3,6 @@
  * IMPORTANTE: O "post" dos dados precisa ser feito para uma versão modificada do FBGA disponível em: https://svn.desenv:8443/svn/interface/facebook/fbga/www/
  * @author Nicholas Almeida
  * @since 18/10/2010
- * 
- * @usage
-
-	// IMPORTANTE: O "post" dos dados precisa ser feito para uma versão modificada do FBGA disponível em: https://svn.desenv:8443/svn/interface/facebook/fbga/www/
-	// As chamadas de _trackPageview e _trackEvent só funcionam em ações de "clique";
-	<script type="text/javascript">
-		pageTracker.UACode = '##CODE##';
-		pageTracker.URLProxy = 'http://interfacephp.fbiz.com.br/facebook/fbga/fbga.php';
-	<\/script>
-	<a href="#" onclick="pageTracker._trackPageview('/facebook/clique-home');">pageTracker._trackPageview</a><br />
-	<a href="#" onclick="pageTracker._trackEvent('evento', 'funciona?');">pageTracker._trackEvent</a><br />
-	Marcação no "onload" <img src='http://interfacephp.fbiz.com.br/facebook/fbga/fbga.php?googlecode=UA-17044986-2&googledomain=facebook.com&pagelink=/facebook/init&pagetitle=' /><br />
-	
  */
 var pageTracker = {
 	PAGE_VIEW: 'trackPageview',
