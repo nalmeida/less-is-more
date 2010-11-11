@@ -1,0 +1,187 @@
+/* Change your font here */
+body { background: #D3D4CE url($global-theme/img/bg_site.png) repeat-y right top;}
+
+h1,h2,h3,h4,h5,h6{ color: #333333}
+
+p{ color: #666666;}
+
+dt{ font-weight: bold;text-decoration: underline;font-size: 14px;margin-top: 5px;margin-bottom: 5px;} 
+dd{ color: #666666; }
+
+#wrapper {
+	background: transparent url($global-theme/img/bg_fbiz.jpg) no-repeat right top;
+	overflow:hidden;
+	zoom:1;
+}
+
+/* ----------------------------
+		LAYOUT
+------------------------------- */
+#header { background-color: transparent;}
+	
+	#header h1{ 
+		color: #000; 
+		display:block;
+	}
+
+#primary_content {
+	background-color: #FFFFFF;
+	border: 1px solid #d6d6d6;
+	border-left:0;
+}
+
+/* navigation bar */
+#main-nav li a.nav-top-item {
+	-moz-border-radius-topleft:5px;
+	-webkit-border-top-left-radius:5px;
+	-moz-border-radius-bottomleft:5px;
+	-webkit-border-bottom-left-radius:5px;
+	background-color:#fff;
+}
+#main-nav li a.current {
+	background-color:#fab720;
+	background-image: -moz-linear-gradient(100% 100% 90deg, #fab720, #fb9920);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fab720), to(#fb9920));
+	background-repeat: no-repeat;
+}
+
+/* ----------------------------
+		PRIMARY CONTENT
+------------------------------- */
+#primary_content h2, #modal h2 { border-bottom:2px solid #d6d6d6; }
+#primary_content h3, #modal h3 { color: #222; }
+#primary_content h4 , #modal h4 { color: #333333; }
+#primary_content h5, #modal h5  { color: #999999; }
+#primary_content h6 	{ color: #999999; }
+
+#primary_content li  { color: #666666; }
+
+/* ----------------------------
+		NOTIFICATIONS
+------------------------------- */
+
+.success, .fail, .information, .attention { padding-left:45px; }
+.success{ background-image: url($global-theme/img/accept.png); }
+.fail { background-image: url($global-theme/img/delete.png); }
+.information { background-image: url($global-theme/img/information.png); }
+.attention { background-image: url($global-theme/img/warning.png); }
+
+/* ----------------------------
+		TABLES
+------------------------------- */
+th 	{ background-color: #d6d6d6; }
+
+#primary_content tr:hover { background-color: #FFFFCC; }
+
+/* ----------------------------
+		TABS
+------------------------------- */
+
+.tabs {
+	color:#666666;
+	margin: 0;
+}
+		ul.paginator li,
+		ul.tabsNavigation li,
+		.tabContent{
+			border: 1px solid #C4C4C4;
+		}
+		ul.tabsNavigation li{
+			background: #F6F6F6;
+		}
+		ul.tabsNavigation li.active{
+			background:#fff;
+		}
+		
+		.tabsNavigation a,
+		ul.paginator li a {
+			text-decoration: none;
+			padding: 8px;
+			font-weight: bold;
+			text-transform: uppercase;
+			font-size: 12px;
+		}
+
+/* ----------------------------
+		FORMS
+------------------------------- */
+form .input {
+	border: 1px solid #CCCCCC;
+	background-color: #F3F3F3;
+}
+
+form .button {
+	background-color: #D6D6D6;
+/*	color: #666666;*/
+	border: 1px solid #CCCCCC;
+}
+
+.styled_textarea {
+	border: 1px solid #d6d6d6;
+	background-color: #F3F3F3;
+}
+input:focus, textarea:focus		{
+	background-color: #FFFFCC;
+	border: 1px solid #999999;
+}
+
+.paginator li a:hover { background-color: #d6d6d6; } 
+.paginator li.current a { background-color: #d6d6d6; }
+
+
+/* ----------------------------
+		MAIN NAVIGATION
+------------------------------- */
+#nav { background-color: transparent; }
+	#nav li {
+		background: rgba(255, 255, 255, 0.7);
+		-moz-border-radius-bottomleft:0px;
+		-moz-border-radius-bottomright:0px;
+		-moz-border-radius-topleft:5px;
+		-moz-border-radius-topright:5px;
+		-webkit-border-bottom-left-radius:0px;
+		-webkit-border-bottom-right-radius:0px;
+		-webkit-border-top-left-radius:5px;
+		-webkit-border-top-right-radius:5px;
+	}
+		/*	class "active" is used to highlight the current/active link	*/
+		#nav li.active, #nav li:hover {
+			color:#808284;
+			background-color: #FFCC00;
+			-moz-border-radius-bottomleft:0px;
+			-moz-border-radius-bottomright:0px;
+			-moz-border-radius-topleft:5px;
+			-moz-border-radius-topright:5px;
+		}
+
+	#nav a { color:#808284; }
+	
+	/*	class "active" is used to highlight the current/active link	*/
+	#nav a.active , #nav a:hover, #nav li:hover a{ color: #000; }
+	
+/* ----------------------------
+		SUB NAVIGATION
+------------------------------- */
+#subnav	{
+	background-color: #FFCC00;
+	-moz-box-shadow: 0 0px 15px #999;
+	-webkit-box-shadow: 0 0px 15px #999;
+}
+	#subnav a  { 
+		color: #000; 
+		background:#f49b26;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-box-shadow: 0 1px 3px #999;
+		-webkit-box-shadow: 0 1px 3px #999;
+	}
+	
+	/*	class "active" is used to highlight the current/active link	*/
+	#subnav a.active  {color: #000;}
+	#subnav a:hover 	{ 
+		color: #000; 
+		text-decoration:underline; 
+		background:#fff;
+	}
+
+
