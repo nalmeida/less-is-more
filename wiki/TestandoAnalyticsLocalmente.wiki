@@ -35,7 +35,7 @@ TODO: Descrever a técnica
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', '##CODE##']);
-		_gaq.push(['_trackPageview','<asp:contentplaceholder id="cphCustomAnalytics" runat="server" ></asp:contentplaceholder>']);
+		_gaq.push(['_trackPageview','']);
 	</script>
 }}}
 
