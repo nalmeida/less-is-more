@@ -13,6 +13,8 @@ As principais motivações para a criação deste framework são:
    # facilidade na manutenção;
    # manter uma padronização com as melhores técnicas comprovadas.
 
+-----------------------------------------------------------------------------------------
+
 = Práticas Gerais = 
 
 == Encoding do arquivo ==
