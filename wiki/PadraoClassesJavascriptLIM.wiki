@@ -5,9 +5,10 @@
 Add your content here.
 
 
-= Details =
+= Detalhes =
 
-Se for necessário escrever uma documentação mais detalhada, utilizar [http://code.google.com/p/jsdoc-toolkit/w/list JSDoc]
+* Se for necessário escrever uma documentação mais detalhada, utilizar [http://code.google.com/p/jsdoc-toolkit/w/list JSDoc]
+* Sempre que possível, valide a Classe no [http://www.jslint.com/ JSLint]
 
 = Modelo =
 {{{
