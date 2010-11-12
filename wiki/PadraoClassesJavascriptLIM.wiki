@@ -5,9 +5,10 @@ Para a construção de Classes para LIM, é necessário seguir alguns padrões c
  * A Classe sempre deve fazer parte do objeto "namespace" {{{lim}}}
  * A Classe deve estar "encapsulada" no padrão [http://jibbering.com/faq/notes/closures/ Javascript Closures]
  * Documentação do código (quando necessária) utilizando [http://code.google.com/p/jsdoc-toolkit/w/list JSDoc]
+ * Usar como referência o padrão de escrita [http://docs.jquery.com/JQuery_Core_Style_Guidelines jQuery Core Style Guideline]
  * Sempre que possível, validar a Classe no [http://www.jslint.com/ JSLint]
  * Se for permitido *e* necessário a utlização de alguma biblioteca Javascript externa, utilize [http://jquery.com jQuery] 1.4.2
- * Usar como referência o padrão de [http://docs.jquery.com/JQuery_Core_Style_Guidelines jQuery Core Style Guideline]
+
 
 = Convenção de sintaxe Javascript =
  # Todas as Classes e métodos devem seguir o padrão [http://pt.wikipedia.org/wiki/CamelCase CamelCase]. Classes, obviamente, devem começar com a prileira letra maiúscula e métodos minúscula;
