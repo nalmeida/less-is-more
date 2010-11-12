@@ -1,3 +1,4 @@
+= Introdução = 
 Para a construção de Classes para LIM, é necessário seguir alguns padrões clássicos de desenvolvimento e boas práticas:
  * A Classe sempre deve fazer parte do objeto "namespace" {{{lim}}}
  * A Classe deve estar "encapsulada" no padrão [http://jibbering.com/faq/notes/closures/ Javascript Closures]
