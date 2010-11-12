@@ -1,0 +1,46 @@
+#Padrão de desenvolvimento das classes "lim"
+
+= Introduction =
+
+Add your content here.
+
+
+= Details =
+
+Se for necessário escrever uma documentação mais detalhada, utilizar [http://code.google.com/p/jsdoc-toolkit/w/list JSDoc]
+
+= Modelo =
+{{{
+/**
+ * Nome da Classe
+ * Breve descrição do que a Classe faz em Português
+ * 
+ * @author Autor 1
+ * @author Autor 2 ...
+ * @version 0.0.0
+ * @requires NomeDasOutrasClassesNecessaria1 NomeDasOutrasClassesNecessaria2
+*/
+
+if(!window['lim']){
+	var lim = {};
+}
+(function(namespace, ...){
+	
+	var StaticName = {
+		VERSION: '0.0.0',
+		
+		Class: function () { 
+			
+		}
+	}
+	
+	// Dynamic Class
+	namespace.StaticName = new StaticName.Class();
+	
+	// Static Class
+	namespace.StaticName = new StaticName.Class;
+	namespace.StaticName.Class = StaticName.Class;
+	
+	
+})(lim, ...);
+}}}
