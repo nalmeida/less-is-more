@@ -7,8 +7,8 @@ Add your content here.
 
 = Detalhes =
 
-* Se for necessário escrever uma documentação mais detalhada, utilizar [http://code.google.com/p/jsdoc-toolkit/w/list JSDoc]
-* Sempre que possível, valide a Classe no [http://www.jslint.com/ JSLint]
+ * Se for necessário escrever uma documentação mais detalhada, utilizar [http://code.google.com/p/jsdoc-toolkit/w/list JSDoc]
+ * Sempre que possível, valide a Classe no [http://www.jslint.com/ JSLint]
 
 = Modelo =
 {{{
