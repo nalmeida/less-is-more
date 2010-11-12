@@ -44,7 +44,7 @@ Em adição ao estilo 1TBS adotar também:
 
 == Legibilidade e compreensão vs. peso dos arquivos ==
 
-Nós preferimos a legibilidade e compreensão em detrimento da economia de tamanho dos arquivos. Iremos utilizar processos do lado do servidor que irão comprimir automaticamente (GZip) todos os arquivos estáticos do lado do cliente, tais como CSS e JavaScript.
+Nós preferimos a legibilidade e compreensão em detrimento da economia de tamanho dos arquivos. Iremos utilizar processos do lado do servidor que irão comprimir automaticamente (GZip) todos os arquivos estáticos do lado do cliente, tais como CSS e Javascript.
 
 Não há nenhuma necessidade de comprimir HTML, CSS ou Javascript _na mão_.
 
