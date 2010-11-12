@@ -96,4 +96,4 @@ Não atribuir estilos a IDs e sim Classes
 -----------------------------------------------------------------------------------------
 = Javascript =
 
-Para a padronização dos Javascript, seguir as recomendações de: 	PadraoClassesJavascriptLIM 
+Para a padronização dos Javascript, seguir as recomendações de: 	[http://code.google.com/p/less-is-more/wiki/PadraoClassesJavascriptLIM PadraoClassesJavascriptLIM]
