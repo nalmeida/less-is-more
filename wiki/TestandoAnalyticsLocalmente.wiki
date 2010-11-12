@@ -1,11 +1,54 @@
 #summary Como testar localmente o Google Analytics sem fazer as requisições para o servidor
 
-TODO
-
 = Introdução =
-TODO
+
 
 = Google Analytics Síncrono ou Assíncrono? =
+
+Em Dezembro de 2009 o Google lançou uma nova tag para o Google Analytics como uma forma alternativa para a coleta de dados de maneira assíncrona- Asynchronous Snippet.
+
+As empresas que possuem códigos pesados com muitos scripts em suas páginas sempre ficaram preocupados se o código do GA poderia influenciar no carregamento da página no browser dos visitantes, porém com este novo código isso não será mais uma preocupação, já que ele trabalha “em separado” da programação da página do seu site para que possa ser reduzido o tempo de carregamento de sua página.
+
+As vantagens para o uso deste novo código de coleta de dados são:
+
+    * Carga do código de rastreamento mais rápido em suas páginas da web devido a execução navegador melhorado
+    * Coleta de dados e precisão
+    * Eliminação da dependências quando o JavaScript não foi totalmente carregado
+
+O código de controle assíncrono está agora disponível para todos os usuários do Google Analytics. O uso do novo código de monitoramento é opcional: o código do Google Analytics existente continuará a trabalhar como está. Mas para melhorar seus tempos de carga e afinar a precisão dos dados do Google Analytics esta nova forma de coleta é a ideal.
+
+== Método Assíncrono (_novo_) ==
+TODO: Descrever a técnica
+{{{
+<% if(Common.Util.isLocal){ %>
+<script type="text/javascript">
+	var _gaq = {
+		push: function(p_arr) {
+			var arr = p_arr;
+			var func = arr[0];
+			arr.shift();
+			arr = arr.join('\',\'');
+			if(window['console']) console.info('_gaq.push([\'' + func + '\',\'' + arr + '\']);');
+		}				
+	}
+</script>
+<% } else { %>
+<script type="text/javascript">
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+<% } %>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', '##CODE##']);
+	_gaq.push(['_trackPageview','']);
+</script>
+}}}
+
+== Método Síncrono (_antigo_) ==
 TODO: Descrever a técnica
 {{{
 <% if(Common.Util.isLocal){ %>
@@ -47,37 +90,3 @@ TODO: Descrever a técnica
 	pageTracker._trackPageview('');
 </script>
 }}}
-
-== Método Assíncrono ==
-TODO: Descrever a técnica
-{{{
-<% if(Common.Util.isLocal){ %>
-<script type="text/javascript">
-	var _gaq = {
-		push: function(p_arr) {
-			var arr = p_arr;
-			var func = arr[0];
-			arr.shift();
-			arr = arr.join('\',\'');
-			if(window['console']) console.info('_gaq.push([\'' + func + '\',\'' + arr + '\']);');
-		}				
-	}
-</script>
-<% } else { %>
-<script type="text/javascript">
-	(function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
-</script>
-<% } %>
-<script type="text/javascript">
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', '##CODE##']);
-	_gaq.push(['_trackPageview','']);
-</script>
-}}}
-
-== Método Síncrono ==
-TODO
