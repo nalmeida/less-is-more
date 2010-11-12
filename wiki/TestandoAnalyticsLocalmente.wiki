@@ -1,13 +1,15 @@
 #summary Como testar localmente o Google Analytics sem fazer as requisições para o servidor
 
-= Introduction =
+TODO
 
-Add your content here.
+= Introdução =
+TODO
 
+= Google Analytics Síncrono ou Assíncrono? =
+TODO
 
-= Details =
+== Método Assíncrono ==
+TODO
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+== Método Síncrono ==
+TODO
