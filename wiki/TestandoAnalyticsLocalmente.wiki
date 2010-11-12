@@ -17,7 +17,7 @@ As vantagens para o uso deste novo código de coleta de dados são:
 
 O código de controle assíncrono está agora disponível para todos os usuários do Google Analytics. O uso do novo código de monitoramento é opcional: o código do Google Analytics existente continuará a trabalhar como está. Mas para melhorar seus tempos de carga e afinar a precisão dos dados do Google Analytics esta nova forma de coleta é a ideal.
 
-== Método Assíncrono (_novo_) ==
+== Teste local do método assíncrono (_novo_) ==
 TODO: Descrever a técnica
 {{{
 <% if(Common.Util.isLocal){ %>
@@ -48,7 +48,7 @@ TODO: Descrever a técnica
 </script>
 }}}
 
-== Método Síncrono (_antigo_) ==
+== Teste local do método síncrono (_antigo_) ==
 TODO: Descrever a técnica
 {{{
 <% if(Common.Util.isLocal){ %>
