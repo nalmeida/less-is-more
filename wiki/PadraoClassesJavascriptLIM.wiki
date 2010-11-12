@@ -11,8 +11,8 @@ Para a construção de Classes para LIM, é necessário seguir alguns padrões c
 = Convenção de sintaxe Javascript =
  # Todas as Classes e métodos devem seguir o padrão [http://pt.wikipedia.org/wiki/CamelCase CamelCase]. Classes, obviamente, devem começar com a prileira letra maiúscula e métodos minúscula;
  # Constantes devem ser escrica em caixa alta;
- # Variáveis ou métodos privados ou "protegidos" devem começar com "_" (underline);
- # Parâmetros recebidos por uma função ou método devem começar com "p_";
+ # Variáveis ou métodos privados ou "protegidos" devem começar com {{{_}}} (underline);
+ # Parâmetros recebidos por uma função ou método devem começar com {{{p_}}};
 
 == Exemplo ==
 {{{
