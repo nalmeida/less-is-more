@@ -9,7 +9,35 @@ TODO
 TODO
 
 == Método Assíncrono ==
-TODO
+TODO: Descrever a técnica
+{{{
+	<% if(Common.Util.isLocal){ %>
+	<script type="text/javascript">
+		var _gaq = {
+			push: function(p_arr) {
+				var arr = p_arr;
+				var func = arr[0];
+				arr.shift();
+				arr = arr.join('\',\'');
+				if(window['console']) console.info('_gaq.push([\'' + func + '\',\'' + arr + '\']);');
+			}				
+		}
+	</script>
+	<% } else { %>
+	<script type="text/javascript">
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+	<% } %>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', '##CODE##']);
+		_gaq.push(['_trackPageview','<asp:contentplaceholder id="cphCustomAnalytics" runat="server" ></asp:contentplaceholder>']);
+	</script>
+}}}
 
 == Método Síncrono ==
 TODO
