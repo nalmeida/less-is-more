@@ -1,8 +1,4 @@
-#Padrão de desenvolvimento das classes "lim"
-
-= Introduction =
-
-Add your content here.
+Se for permitido e necessário a utlização de alguma biblioteca Javascript, utilize [http://jquery.com jQuery]. Atualmente optamos pela versão 1.4.2
 
 
 = Detalhes =
