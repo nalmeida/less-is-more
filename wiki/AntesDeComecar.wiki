@@ -33,7 +33,7 @@ Principais princípios:
 
     * As instruções de código deve estar em linhas separadas;
     * Abrir { a cada if, else, while, function, etc, mesmo que estes só tenham uma linha de instrução;
-    * O { deve ficar na mesma linha do início do comando. Ex.: function teste() {
+    * O { deve ficar na mesma linha do início do comando. Ex.: {{{function teste() { }}}
     * Todos os fins de instrução devem terminar com ;
 
 
