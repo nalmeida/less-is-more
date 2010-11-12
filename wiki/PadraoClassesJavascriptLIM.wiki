@@ -1,10 +1,9 @@
-Se for permitido e necessário a utlização de alguma biblioteca Javascript, utilize [http://jquery.com jQuery]. Atualmente optamos pela versão 1.4.2
-
-
-= Detalhes =
-
- * Se for necessário escrever uma documentação mais detalhada, utilizar [http://code.google.com/p/jsdoc-toolkit/w/list JSDoc]
- * Sempre que possível, valide a Classe no [http://www.jslint.com/ JSLint]
+Para a construção de Classes para LIM, é necessário seguir alguns padrões clássicos de desenvolvimento e boas práticas:
+ * A Classe sempre deve fazer parte do objeto "namespace" {{{lim}}}
+ * A Classe deve estar "encapsulada" no padrão [http://jibbering.com/faq/notes/closures/ Javascript Closures]
+ * Documentação do código (quando necessária) utilizando [http://code.google.com/p/jsdoc-toolkit/w/list JSDoc]
+ * Sempre que possível, validar a Classe no [http://www.jslint.com/ JSLint]
+ * Se for permitido e necessário a utlização de alguma biblioteca Javascript, utilize [http://jquery.com jQuery] 1.4.2
 
 = Modelo =
 {{{
