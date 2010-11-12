@@ -46,7 +46,7 @@ Em adição ao estilo 1TBS adotar também:
 
 Nós preferimos a legibilidade e compreensão em detrimento da economia de tamanho dos arquivos. Iremos utilizar processos do lado do servidor que irão comprimir automaticamente (GZip) todos os arquivos estáticos do lado do cliente, tais como CSS e JavaScript.
 
-Não há nenhuma necessidade de comprimir HTML, CSS ou JavaScript _na mão_.
+Não há nenhuma necessidade de comprimir HTML, CSS ou Javascript _na mão_.
 
 Recomendamos ainda o uso de comentários no HTML, CSS e JS. Os comentários HTML devem sempre ser feitos como comentário da linguagem nativa.
 
