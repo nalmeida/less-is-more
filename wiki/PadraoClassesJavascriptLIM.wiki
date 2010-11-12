@@ -1,4 +1,4 @@
-#summary Padrões de Desenvolvimento de Classes para a LIM
+#summary Padrões de desenvolvimento de Classes para a LIM
 
 = Introdução = 
 Para a construção de Classes para LIM, é necessário seguir alguns padrões clássicos de desenvolvimento e boas práticas:
@@ -33,7 +33,7 @@ var Test = function(p_some) {
 };
 }}} 
 
-= Modelo =
+= Classe Modelo =
 {{{
 /**
  * Nome da Classe
