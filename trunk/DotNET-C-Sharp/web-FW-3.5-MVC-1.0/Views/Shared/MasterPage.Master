@@ -13,6 +13,8 @@
 	<link rel="shortcut icon" href="<%=Common.Util.GlobalPath%>img/favicon.ico" />
 	<link rel="stylesheet" type="text/css" href="<%=Common.Util.Root%>minify.aspx?reset.css&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>" media="screen" />
 	
+	<%=Minify.Minifyzer.WriteTag("GaleraDoHino") %>
+	
 	<% 
 		//
 		// ====================== IMPORTANTE =======================
@@ -24,6 +26,8 @@
 		// =========================================================
 		//
 	%>
+
+	
 	<% if(Common.Util.isLocal){ %>
 	<script type="text/javascript">
 		var _gaq = {
@@ -72,7 +76,9 @@
 	</script>
 	<asp:contentplaceholder id="cphCustomHeaderIE6" runat="server" />
 	<% } %>
-
+    <%=Singleton<Common.Minify>.Instancia.Execute("jquery.js|lim.analytics.js", null, "")%>
+    ----------- <br /><br /><br /><br /><br /><br />
+    <%=Singleton<Common.Minify>.Instancia.Execute("flash-structure.css|reset.css", null, "")%>
 </head>
 
 <body>

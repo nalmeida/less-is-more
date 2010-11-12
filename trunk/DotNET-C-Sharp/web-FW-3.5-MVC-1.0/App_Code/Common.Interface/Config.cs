@@ -83,5 +83,24 @@ namespace Common
 				return "";
 			}
 		}
+
+        public static string MinifyEncryptKey
+        {
+            get 
+            {
+                return RetornarConfig("MinifyEncryptKey");
+            }
+        }
+
+        private static string RetornarConfig(string config)
+        {
+            string configvalue = ConfigurationManager.AppSettings.Get(config);
+            if (string.IsNullOrEmpty(config))
+            {
+                throw new ConfigurationErrorsException("A chave " + config + " não está definida. " +
+                "No Web.Config, crie dentro de AppSetings a chave " + config);
+            }
+            return configvalue;
+        }
 	}
 }
