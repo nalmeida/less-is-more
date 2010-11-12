@@ -7,7 +7,7 @@ TODO: Excrever os motivos de ter um JS só para testes locais
 TODO
 
 
-= Google Analytics Síncrono ou Assíncrono? =
+== Google Analytics Síncrono ou Assíncrono? ==
 
 Em Dezembro de 2009 o Google lançou uma nova tag para o Google Analytics como uma forma alternativa para a coleta de dados de maneira assíncrona- Asynchronous Snippet.
 
@@ -21,7 +21,7 @@ As vantagens para o uso deste novo código de coleta de dados são:
 
 O código de controle assíncrono está agora disponível para todos os usuários do Google Analytics. O uso do novo código de monitoramento é opcional: o código do Google Analytics existente continuará a trabalhar como está. Mas para melhorar seus tempos de carga e afinar a precisão dos dados do Google Analytics esta nova forma de coleta é a ideal.
 
-== Teste local do método assíncrono (_novo_) ==
+= Teste local do método assíncrono (_novo_) =
 TODO: Descrever a técnica
 {{{
 <% if(Common.Util.isLocal){ %>
@@ -52,7 +52,7 @@ TODO: Descrever a técnica
 </script>
 }}}
 
-== Teste local do método síncrono (_antigo_) ==
+= Teste local do método síncrono (_antigo_) =
 TODO: Descrever a técnica
 {{{
 <% if(Common.Util.isLocal){ %>
