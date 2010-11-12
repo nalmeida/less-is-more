@@ -146,16 +146,23 @@ namespace Common
             }
         }
 
-        public string Execute(String Files, String bpc, String v)
+        public string Execute(String Files, params string[] parametros)
         {
             NameValueCollection MinifyExecutionConfiguration = new NameValueCollection();
             MinifyExecutionConfiguration.Add("Files", Files);
-            MinifyExecutionConfiguration.Add("bpc", bpc);
-            MinifyExecutionConfiguration.Add("v", v);
+            if (parametros[0] != null)
+            {
+                MinifyExecutionConfiguration.Add("bpc", parametros[0]);
+            }
+            if (parametros[1] != null)
+            {
+                MinifyExecutionConfiguration.Add("v", parametros[1]);
+            }
 
             return Execute(MinifyExecutionConfiguration);
 
         }
+       
         private string Execute(NameValueCollection Files)
         {
             Server = HttpContext.Current.Server;
@@ -193,7 +200,7 @@ namespace Common
                     if (string.IsNullOrEmpty(folder))
                         continue;
 
-                    filePath = Server.MapPath("locales/" + folder + "/css/") + file;
+                    filePath = HttpContext.Current.Request.PhysicalApplicationPath +  "locales//" + folder + "//css//" + file;
 
                     fileLastModified = File.GetLastWriteTime(filePath);
                     lastModifiedFileGlobal = fileLastModified > lastModifiedFileGlobal ? fileLastModified : lastModifiedFileGlobal;
@@ -219,7 +226,7 @@ namespace Common
             {
                 foreach (string stNomeArquivo in vtArquivo)
                 {
-                    filePath = Server.MapPath("js/") + stNomeArquivo;
+                    filePath = HttpContext.Current.Request.PhysicalApplicationPath + "js\\" + stNomeArquivo;
 
                     fileLastModified = File.GetLastWriteTime(filePath);
                     lastModifiedFileGlobal = fileLastModified > lastModifiedFileGlobal ? fileLastModified : lastModifiedFileGlobal;
