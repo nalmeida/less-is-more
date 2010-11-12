@@ -6,37 +6,77 @@ TODO
 TODO
 
 = Google Analytics Síncrono ou Assíncrono? =
-TODO
+TODO: Descrever a técnica
+{{{
+<% if(Common.Util.isLocal){ %>
+<script type="text/javascript">
+	var pageTracker = {
+		_trackPageview: function (w){
+			if(window['console']){
+				if(console.info) console.info('pageTracker._trackPageview("' + w + '")');
+			}
+		},
+		_trackEvent: function (){
+			if(window['console']){
+				var _arrArguments = [];
+				var _arrArgumentsLen = arguments.length;
+				for(var i = 0; i< _arrArgumentsLen; i++) {
+					_arrArguments[i] = arguments[i];
+				}
+				if(console.info) console.info('pageTracker._trackEvent("' + _arrArguments.join("\",\"") + '")');
+			}
+		},
+		_setVar: function (w){
+			if(window['console']){
+				if(console.info) console.info('pageTracker._setVar: "' + w + '"');
+			}
+		}
+	};
+</script>
+
+<% } else { %>
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+	var pageTracker = _gat._getTracker("##CODE##");
+</script>
+<% } %>
+<script type="text/javascript">
+	pageTracker._trackPageview('');
+</script>
+}}}
 
 == Método Assíncrono ==
 TODO: Descrever a técnica
 {{{
-	<% if(Common.Util.isLocal){ %>
-	<script type="text/javascript">
-		var _gaq = {
-			push: function(p_arr) {
-				var arr = p_arr;
-				var func = arr[0];
-				arr.shift();
-				arr = arr.join('\',\'');
-				if(window['console']) console.info('_gaq.push([\'' + func + '\',\'' + arr + '\']);');
-			}				
-		}
-	</script>
-	<% } else { %>
-	<script type="text/javascript">
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
-	<% } %>
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', '##CODE##']);
-		_gaq.push(['_trackPageview','']);
-	</script>
+<% if(Common.Util.isLocal){ %>
+<script type="text/javascript">
+	var _gaq = {
+		push: function(p_arr) {
+			var arr = p_arr;
+			var func = arr[0];
+			arr.shift();
+			arr = arr.join('\',\'');
+			if(window['console']) console.info('_gaq.push([\'' + func + '\',\'' + arr + '\']);');
+		}				
+	}
+</script>
+<% } else { %>
+<script type="text/javascript">
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+<% } %>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', '##CODE##']);
+	_gaq.push(['_trackPageview','']);
+</script>
 }}}
 
 == Método Síncrono ==
