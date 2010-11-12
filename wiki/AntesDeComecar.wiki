@@ -21,6 +21,8 @@ As principais motivações para a criação deste framework são:
 
 Todo os arquivos da LIM estão e DEVEM ser salvos como *UTF-8*, portanto, configure corretamete o seu editor!
 
+-----------------------------------------------------------------------------------------
+
 == Identação ==
 
 Não importa qual a linguagem em que se esteja desenvolvendo uma correta indentação é obrigatória para o entendimento do código. Os editores devem estar configurados para que cada *TAB corresponda a 4 espaços*. Importante: Para a identação do código, não se deve usar espaços. Uma página HTML pode ficar até 40% mais pesada só por conta desses espaços.
@@ -49,6 +51,8 @@ Em adição ao estilo 1TBS adotar também:
 === Identação CSS ===
 TODO
 
+-----------------------------------------------------------------------------------------
+
 == Legibilidade e compreensão vs. peso dos arquivos ==
 
 Nós preferimos a legibilidade e compreensão em detrimento da economia de tamanho dos arquivos. Iremos utilizar processos do lado do servidor que irão comprimir automaticamente (GZip) todos os arquivos estáticos do lado do cliente, tais como CSS e Javascript.
@@ -60,6 +64,8 @@ Recomendamos ainda o uso de comentários no HTML, CSS e JS. Os comentários HTML
 Errado: {{{<!-- Comentário -->}}}
 
 Correto (.NET C#): {{{<%// Comentário%>}}}
+
+-----------------------------------------------------------------------------------------
 
 == HTML ==
 
@@ -80,3 +86,14 @@ Garantindo essa compatibilidade é bem provável que ele tenha um ótimo desempe
 Como padrão deve-se utilizar XHTML 1.0 Strict.
 
 {{{<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">}}}
+
+-----------------------------------------------------------------------------------------
+
+== CSS == 
+TODO
+Não atribuir estilos a IDs e sim Classes
+
+-----------------------------------------------------------------------------------------
+== Javascript ==
+TODO
+Colocar link para página de JS
