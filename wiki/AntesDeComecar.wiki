@@ -25,6 +25,9 @@ Todo os arquivos da LIM estão e DEVEM ser salvos como *UTF-8*, portanto, config
 
 Não importa qual a linguagem em que se esteja desenvolvendo uma correta indentação é obrigatória para o entendimento do código. Os editores devem estar configurados para que cada *TAB corresponda a 4 espaços*. Importante: Para a identação do código, não se deve usar espaços. Uma página HTML pode ficar até 40% mais pesada só por conta desses espaços.
 
+=== Identação HTML ===
+TODO
+
 === Identação JS ===
 
 Como convenção seguir o estilo de indentação 1TBS ([http://en.wikipedia.org/wiki/Indent_style#Variant:_1TBS The One True Brace Style]):
@@ -41,6 +44,10 @@ Em adição ao estilo 1TBS adotar também:
 
     * Utilização de strings com *aspas simples* ' para o código JS e *aspas duplas " para o código HTML*;
     * Para parâmetros de uma função, iniciar com o prefixo {{{p_}}};
+
+
+=== Identação CSS ===
+TODO
 
 == Legibilidade e compreensão vs. peso dos arquivos ==
 
