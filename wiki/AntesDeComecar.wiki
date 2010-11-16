@@ -1,4 +1,5 @@
 #summary Instruções básicas para qualquer projeto LIM
+#sidebar TableOfContents
 
 = Introdução =
 
