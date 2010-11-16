@@ -61,8 +61,7 @@ Garantindo essa compatibilidade é bem provável que ele tenha um ótimo desempe
 
 Muito se fala sobre o [http://dev.w3.org/html5/spec/Overview.html HTML5] mas com as espectativas do _Final Draft_ para *2010* e da versão final para *[http://ishtml5readyyet.com/ 2022]* , recomendamos utilizar XHTML 1.0 Transitional.
 
-{{{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">}}}
+{{{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">}}}
 
 -----------------------------------------------------------------------------------------
 
