@@ -1,1 +1,1 @@
-#summary Padrão de escrita HTML para projetos LIM
+#summary Padrões de marcação HTML para projetos LIM
