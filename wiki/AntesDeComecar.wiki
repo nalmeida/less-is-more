@@ -23,37 +23,7 @@ Todo os arquivos da LIM estão e DEVEM ser salvos como *UTF-8*, portanto, config
 
 -----------------------------------------------------------------------------------------
 
-= Identação =
-
-Não importa qual a linguagem em que se esteja desenvolvendo uma correta indentação é obrigatória para o entendimento do código. Os editores devem estar configurados para que cada *TAB corresponda a 4 espaços*. Importante: Para a identação do código, não se deve usar espaços. Uma página HTML pode ficar até 40% mais pesada só por conta desses espaços.
-
-=== Identação HTML ===
-TODO
-
-=== Identação JS ===
-
-Como convenção seguir o estilo de indentação 1TBS ([http://en.wikipedia.org/wiki/Indent_style#Variant:_1TBS The One True Brace Style]):
-
-Principais princípios:
-
-    * As instruções de código deve estar em linhas separadas;
-    * Abrir { a cada if, else, while, function, etc, mesmo que estes só tenham uma linha de instrução;
-    * O { deve ficar na mesma linha do início do comando. Ex.: {{{function teste() { }}}
-    * Todos os fins de instrução devem terminar com ;
-
-
-Em adição ao estilo 1TBS adotar também:
-
-    * Utilização de strings com *aspas simples* ' para o código JS e *aspas duplas " para o código HTML*;
-    * Para parâmetros de uma função, iniciar com o prefixo {{{p_}}};
-
-
-=== Identação CSS ===
-TODO
-
------------------------------------------------------------------------------------------
-
-= Legibilidade e compreensão vs. peso dos arquivos =
+= Legibilidade e compreensão _versus_ peso dos arquivos =
 
 Nós preferimos a legibilidade e compreensão em detrimento da economia de tamanho dos arquivos. Iremos utilizar processos do lado do servidor que irão comprimir automaticamente (GZip) todos os arquivos estáticos do lado do cliente, tais como CSS e Javascript.
 
@@ -67,25 +37,32 @@ Correto (.NET C#): {{{<%// Comentário%>}}}
 
 -----------------------------------------------------------------------------------------
 
+= Identação =
+
+Não importa qual a linguagem em que se esteja desenvolvendo uma correta indentação é obrigatória para o entendimento do código. Os editores devem estar configurados para que cada *TAB corresponda a 4 espaços*. Importante: Para a identação do código, não se deve usar espaços. Uma página HTML pode ficar até 40% mais pesada só por conta desses espaços.
+
+
+----------------------------------------------------------------------------------------
+
 = HTML =
 
 Todo o código HTML deve ser testado e estar 100% [http://validator.w3.org/ válido segundo os padrões W3C]. Tão importante quanto a validação do código é garantir a compatibilidade _Cross-Browser_.
 
-Mesmo sabendo dos bugs e problemas do IE6, ele ainda é o navegador padrão de uma parcela significativa dos usuários brasileiros e nosso principal público (dados de maio de 2010). Dito isso é necessário se certificar de que TODAS as partes do site funcionam da mesma forma para os seguintes navegadores:
+Mesmo sabendo dos bugs e problemas do IE6, ele ainda é o navegador padrão de uma parcela significativa dos usuários brasileiros (dados de maio de 2010). Dito isso é necessário se certificar de que TODAS as partes do site funcionem da mesma forma para os seguintes navegadores:
 
     * IE6, IE7 e IE8;
     * Firefox 3.5 +;
     * Safari (última versão estável, nada de _beta_);
     * Google Chrome (última versão estável, nada de _beta_);
 
-
 Garantindo essa compatibilidade é bem provável que ele tenha um ótimo desempenho no Opera e outros.
 
 == Doctype ==
 
-Como padrão deve-se utilizar XHTML 1.0 Strict.
+Muito se fala sobre o [http://dev.w3.org/html5/spec/Overview.html HTML5] mas com as espectativas do _Final Draft_ para *2010* e da versão final para *[http://ishtml5readyyet.com/ 2022]* , recomendamos utilizar XHTML 1.0 Transitional.
 
-{{{<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">}}}
+{{{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">}}}
 
 -----------------------------------------------------------------------------------------
 
@@ -96,4 +73,4 @@ Não atribuir estilos a IDs e sim Classes
 -----------------------------------------------------------------------------------------
 = Javascript =
 
-Para a padronização dos Javascript, seguir as recomendações de: 	[http://code.google.com/p/less-is-more/wiki/PadraoClassesJavascriptLIM PadraoClassesJavascriptLIM]
+Para a padronização dos Javascript, seguir as recomendações de: [http://code.google.com/p/less-is-more/wiki/PadraoClassesJavascriptLIM PadraoClassesJavascriptLIM]
