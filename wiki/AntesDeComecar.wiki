@@ -44,25 +44,6 @@ Não importa qual a linguagem em que se esteja desenvolvendo uma correta indenta
 
 ----------------------------------------------------------------------------------------
 
-= HTML =
-
-Todo o código HTML deve ser testado e estar 100% [http://validator.w3.org/ válido segundo os padrões W3C]. Tão importante quanto a validação do código é garantir a compatibilidade _Cross-Browser_.
-
-Mesmo sabendo dos bugs e problemas do IE6, ele ainda é o navegador padrão de uma parcela significativa dos usuários brasileiros (dados de maio de 2010). Dito isso é necessário se certificar de que TODAS as partes do site funcionem da mesma forma para os seguintes navegadores:
-
-    * IE6, IE7 e IE8;
-    * Firefox 3.5 +;
-    * Safari (última versão estável, nada de _beta_);
-    * Google Chrome (última versão estável, nada de _beta_);
-
-Garantindo essa compatibilidade é bem provável que ele tenha um ótimo desempenho no Opera e outros.
-
-== Doctype ==
-
-Muito se fala sobre o [http://dev.w3.org/html5/spec/Overview.html HTML5] mas com as espectativas do _Final Draft_ para *2010* e da versão final para *[http://ishtml5readyyet.com/ 2022]* , recomendamos utilizar XHTML 1.0 Transitional.
-
-{{{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">}}}
-
 -----------------------------------------------------------------------------------------
 
 = CSS =
