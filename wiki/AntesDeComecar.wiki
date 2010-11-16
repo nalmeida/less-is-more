@@ -1,7 +1,5 @@
 #summary Instruções básicas para qualquer projeto LIM
 
-#sidebar
-
 = Introdução =
 
 A idéia básica deste framework é servir de base de desenvolvimento para projetos web. O foco principal é na programação Client Side mas com algumas pitadas de funções úteis Server Side.
