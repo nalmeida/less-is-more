@@ -30,6 +30,21 @@ As tags HTML nunca devem ser usadas para aplicar a apresentação, tais como: co
 
 === Títulos e sub-títulos ===
 
+Os {{{hn}}} representam a estrutura de títulos de uma página onde o {{{h1}}} é o título principal e os demais {{{h2, h3}}} sub-títulos. Devemos sempre manter a hierarquia de headings:
+{{{
+h1
+|__h2
+|   |__h3
+|   |__h3
+|__h2
+|
+|__ h2
+|   |__h3
+|       |__h4
+|
+|__...
+}}}
+
 === Imagens ===
 
 
