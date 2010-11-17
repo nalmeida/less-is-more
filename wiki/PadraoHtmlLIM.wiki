@@ -34,9 +34,10 @@ h1
 |
 |__...
 }}}
+ * Toda página deve ter o seu próprio {{{h1}}} com o título.
  * Todas as imagens devem ter o atributo {{{alt}}} preenchido corretamente;
  * Não usar as propriedades {{{width}}} e {{{height}}} para imagens;
- * 
+ * Todas as páginas devem ter a tag {{{title}}} customizadas;
 
 == Microformats == 
 http://en.wikipedia.org/wiki/Microformat
