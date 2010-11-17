@@ -18,7 +18,7 @@ Garantindo essa compatibilidade é bem provável que ele tenha um ótimo desempe
 {{{
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 }}}
- * Programar o site de forma [http://pt.wikipedia.org/wiki/Tableless "Tableless"];
+ * Programar o site de forma [http://pt.wikipedia.org/wiki/Tableless "Tableless"]. Tabelas devem ser usadas para apresentar dados tabulares e só!
  * Escrever um [http://www.kadunew.com/blog/xhtml/a-importancia-do-html-semantico código HTML semântico];
  * Os {{{hn}}} (títulos) devem seguir a hierarquia de headings:
 {{{
@@ -34,16 +34,13 @@ h1
 |
 |__...
 }}}
-
-=== Imagens ===
-
-
-
-== Tableless ==
-
-Pode paracer óbvio mas todo 
+ * Todas as imagens devem ter o atributo {{{alt}}} preenchido corretamente;
+ * Não usar as propriedades {{{width}}} e {{{height}}} para imagens;
+ * 
 
 == Microformats == 
 http://en.wikipedia.org/wiki/Microformat
 
 == O que NÃO fazer ==
+ * Nunca misturar a camada de apresentação com a camada de conteúdo. Toda a formatação e estilização do código deve ser feito via CSS.
+ * Não utilizar _styles inline_. Ex.: {{{style="background:red;"}}};
