@@ -40,17 +40,3 @@ Correto (.NET C#): {{{<%// Comentário%>}}}
 = Identação =
 
 Não importa qual a linguagem em que se esteja desenvolvendo uma correta indentação é obrigatória para o entendimento do código. Os editores devem estar configurados para que cada *TAB corresponda a 4 espaços*. Importante: Para a identação do código, não se deve usar espaços. Uma página HTML pode ficar até 40% mais pesada só por conta desses espaços.
-
-
-----------------------------------------------------------------------------------------
-
------------------------------------------------------------------------------------------
-
-= CSS =
-TODO
-Não atribuir estilos a IDs e sim Classes
-
------------------------------------------------------------------------------------------
-= Javascript =
-
-Para a padronização dos Javascript, seguir as recomendações de: [http://code.google.com/p/less-is-more/wiki/PadraoClassesJavascriptLIM PadraoClassesJavascriptLIM]
