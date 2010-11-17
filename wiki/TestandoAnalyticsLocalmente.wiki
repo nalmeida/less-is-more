@@ -1,4 +1,5 @@
 #summary Como testar localmente o Google Analytics sem fazer as requisições para o servidor
+#sidebar TabelaDeConteudos
 
 = Introdução =
 TODO: Excrever os motivos de ter um JS só para testes locais
