@@ -1,3 +1,4 @@
 #summary Variáveis de ambiente disponíveis
+#sidebar TabelaDeConteudos
 
 TODO
