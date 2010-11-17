@@ -20,6 +20,7 @@ Garantindo essa compatibilidade é bem provável que ele tenha um ótimo desempe
 }}}
  * Programar o site de forma [http://pt.wikipedia.org/wiki/Tableless "Tableless"]. Tabelas devem ser usadas para apresentar dados tabulares e só!
  * Escrever um [http://www.kadunew.com/blog/xhtml/a-importancia-do-html-semantico código HTML semântico];
+ * Os atributos HTML devem usar aspas dúplas {{{"}}} (usar aspas simples para o Javascript). Ex.: {{{<div id="teste" />}}}
  * Todas as páginas devem ter a tag {{{title}}} customizadas;
  * Os {{{hn}}} (títulos) devem seguir a hierarquia de headings:
 {{{
