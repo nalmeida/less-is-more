@@ -43,9 +43,6 @@ h1
 <input type="text" id="stNome" name="stNome" />
 }}}
 
-== Microformats == 
-http://en.wikipedia.org/wiki/Microformat
-
 == O que NÃO fazer ==
  * Nunca misturar a camada de apresentação com a camada de conteúdo. Toda a formatação e estilização do código deve ser feito via CSS.
  * Não utilizar _styles inline_. Ex.: {{{style="background:red;"}}};
