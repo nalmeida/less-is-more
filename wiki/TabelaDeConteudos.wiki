@@ -1,6 +1,6 @@
 #summary Tabela com todos os conteúdos da Wiki
 
- * [AntesDeComecar Informações funcamentais]
+ * *[AntesDeComecar Informações indispensaveis]*
  * Padrões de desenvolvimento LIM
   * [PadraoHtmlLIM  HTML]
   * [PadraoCssLIM CSS]
