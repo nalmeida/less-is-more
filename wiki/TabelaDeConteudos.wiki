@@ -5,5 +5,13 @@
   * [PadraoHtmlLIM  HTML]
   * [PadraoCssLIM CSS]
   * [PadraoClassesJavascriptLIM Classes Javascript]
+ * Trabalnahdo com .NET
+  * MasterPages
+  * [AspContentPlaceholders Content Place Holders]
+  * [VariaveisDeAmbiente  Variáveis de ambiente]
+  * Minify
+ * Performance
+ * Dicas
+  * [TestandoAnalyticsLocalmente Testando Analytics localmente]
  * [TODO Todo list]
  
