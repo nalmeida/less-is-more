@@ -1,3 +1,4 @@
 #summary O que são e como usar os Content Placeholders do ASP
+#sidebar TabelaDeConteudos
 
 TODO
