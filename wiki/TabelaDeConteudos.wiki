@@ -1,7 +1,9 @@
 #summary Tabela com todos os conteúdos da Wiki
 
- * [AntesDeComecar Informações básicas antes de começar o projeto]
- * [PadraoHtmlLIM  Padrões de desenvolvimento HTML LIM]
- * [PadraoCssLIM Padrões de desenvolvimento CSS LIM]
- * [PadraoClassesJavascriptLIM  Padrões de desenvolvimento Classes JavascriptCSS LIM]
+ * [AntesDeComecar Informações funcamentais]
+ * Padrões de desenvolvimento LIM
+  * [PadraoHtmlLIM  HTML]
+  * [PadraoCssLIM CSS]
+  * [PadraoClassesJavascriptLIM Classes Javascript]
+ * [TODO Todo list]
  
