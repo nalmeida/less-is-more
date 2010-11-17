@@ -13,26 +13,14 @@ Mesmo sabendo dos bugs e problemas do IE6, ele ainda é o navegador padrão de u
 
 Garantindo essa compatibilidade é bem provável que ele tenha um ótimo desempenho no Opera e outros.
 
-= Doctype =
-
-Muito se fala sobre o [http://dev.w3.org/html5/spec/Overview.html HTML5] mas com as espectativas do _Final Draft_ para *2010* e da versão final para *[http://ishtml5readyyet.com/ 2022]* , recomendamos utilizar XHTML 1.0 Transitional.
-
+== Padrões HTML ==
+ * Muito se fala sobre o [http://dev.w3.org/html5/spec/Overview.html HTML5] mas com as espectativas do _Final Draft_ para *2010* e da versão final para *[http://ishtml5readyyet.com/ 2022]* , recomendamos utilizar *Doctype XHTML 1.0 Transitional*;
 {{{
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 }}}
-
-= Uso semântico das tags HTML =
-
-Escrever um código HTML semântico significa, basicamente, usar as tags corretas para as informações que se deseja apresentar. O objetivo do SEO é ajudar os motores de busca entender melhor o conteúdo de uma página e classificá-la melhor. 
-
-== Estrutura das página ==
-Uma página consiste em um título, um ou mais subtítulos e conteúdo. Este conteúdo pode conter parágrafos, listas, citações, imagens e tabelas. Todos estes tipos de informação têm sua própria marca, que são os elementos HTML.
-
-As tags HTML nunca devem ser usadas para aplicar a apresentação, tais como: cor da fonte, tamanho da fonte, alinhamento e por aí vai. Isso tudo é trabalho do CSS.
-
-=== Títulos e sub-títulos ===
-
-Os {{{hn}}} representam a estrutura de títulos de uma página onde o {{{h1}}} é o título principal e os demais {{{h2, h3}}} sub-títulos. Devemos sempre manter a hierarquia de headings:
+ * Programar o site de forma [http://pt.wikipedia.org/wiki/Tableless "Tableless"];
+ * Escrever um [http://www.kadunew.com/blog/xhtml/a-importancia-do-html-semantico código HTML semântico];
+ * Os {{{hn}}} (títulos) devem seguir a hierarquia de headings:
 {{{
 h1
 |__h2
