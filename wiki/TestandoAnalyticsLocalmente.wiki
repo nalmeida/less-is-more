@@ -2,11 +2,21 @@
 #sidebar TabelaDeConteudos
 
 = Introdução =
+Para facilitar a verificação da implementação das _marcações_ do Google Analytics, desenvolvemos uma técnica simples que consiste em:
+ * Verificar se o site está rodando "localmente" ({{{http://localhost/...}}} ou {{{http://ENDERECO_IP}}}) usando as VariaveisDeAmbiente;
+ * Em caso positivo, criar um objeto Javascript que "imita" os principais métodos da Classe real do Google Analytics;
+ * Exibir um {{{console.info}}} das informações que seriam enviadas;
 
+*Vantagens:*
+ * Não é necessário estar conectado a internet;
+ * É independente do carregamento do Javascript do Google Analytics;
+ * Não envia dados para o servidor do Google. Isso previne aumentar enquanto se está desenvolvendo o site;
+ * Dispensa o uso de programas do tipo _HTTP Sniffer_ ([https://addons.mozilla.org/en-US/firefox/addon/6647/ HTTPFox], [http://www.fiddler2.com/fiddler2/ Fiddler], etc) para verificar o que está sendo enviado.
 
-== Definição de Síncrono e Assíncrono ==
-TODO
+*Desvantagens:*
+ * Só funciona em navegadores que possuem a classe "{{{console}}}".
 
+*Leia mais sobre [http://pt.wikipedia.org/wiki/Comunica%C3%A7%C3%A3o_s%C3%ADncrona síncrono e assíncrono]*
 
 == Google Analytics Síncrono ou Assíncrono? ==
 
