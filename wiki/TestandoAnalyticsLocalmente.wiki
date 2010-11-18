@@ -34,7 +34,7 @@ O código de controle assíncrono está agora disponível para todos os usuário
 
 = Teste local do método assíncrono (_novo_) =
 
-O código abaixo é usado a para testar localmente as chamadas do Google Analytics *assíncrono*. É basicamente a criação de um objeto com métodos que "imitam" os do Analytics só que, ao invés de mandar os dados para o Google, exibem um {{{console.info}}} do que _seria_ enviado. Deve ser colocado dentro do {{{<head>}}}.
+O código abaixo é usado a para testar localmente as chamadas do Google Analytics *assíncrono*. É basicamente a criação de um objeto com métodos que "imitam" os do Analytics só que, ao invés de mandar os dados para o Google, exibem um {{{console.info}}} do que _seria_ enviado. Deve ser colocado *dentro do {{{<head>}}}*.
 
 {{{
 <% if(Common.Util.isLocal){ %>
@@ -67,7 +67,7 @@ O código abaixo é usado a para testar localmente as chamadas do Google Analyti
 
 = Teste local do método síncrono (_antigo_) =
 
-O código abaixo é usado a para testar localmente as chamadas do Google Analytics *ssíncrono*. É basicamente a criação de um objeto com métodos que "imitam" os do Analytics só que, ao invés de mandar os dados para o Google, exibem um {{{console.info}}} do que _seria_ enviado. Deve ser colocado antes do {{{</body>}}}.
+O código abaixo é usado a para testar localmente as chamadas do Google Analytics *ssíncrono*. É basicamente a criação de um objeto com métodos que "imitam" os do Analytics só que, ao invés de mandar os dados para o Google, exibem um {{{console.info}}} do que _seria_ enviado. Deve ser colocado *antes do {{{</body>}}}*.
 
 {{{
 <% if(Common.Util.isLocal){ %>
