@@ -2,7 +2,7 @@
 #sidebar TabelaDeConteudos
 
 = Introdução =
-TODO: Excrever os motivos de ter um JS só para testes locais
+
 
 == Definição de Síncrono e Assíncrono ==
 TODO
@@ -23,7 +23,9 @@ As vantagens para o uso deste novo código de coleta de dados são:
 O código de controle assíncrono está agora disponível para todos os usuários do Google Analytics. O uso do novo código de monitoramento é opcional: o código do Google Analytics existente continuará a trabalhar como está. Mas para melhorar seus tempos de carga e afinar a precisão dos dados do Google Analytics esta nova forma de coleta é a ideal.
 
 = Teste local do método assíncrono (_novo_) =
-TODO: Descrever a técnica
+
+O código abaixo é usado a para testar localmente as chamadas do Google Analytics *assíncrono*. É basicamente a criação de um objeto com métodos que "imitam" os do Analytics só que, ao invés de mandar os dados para o Google, exibem um {{{console.info}}} do que _seria_ enviado. Deve ser colocado dentro do {{{<head>}}}.
+
 {{{
 <% if(Common.Util.isLocal){ %>
 <script type="text/javascript">
@@ -54,7 +56,9 @@ TODO: Descrever a técnica
 }}}
 
 = Teste local do método síncrono (_antigo_) =
-TODO: Descrever a técnica
+
+O código abaixo é usado a para testar localmente as chamadas do Google Analytics *ssíncrono*. É basicamente a criação de um objeto com métodos que "imitam" os do Analytics só que, ao invés de mandar os dados para o Google, exibem um {{{console.info}}} do que _seria_ enviado. Deve ser colocado antes do {{{</body>}}}.
+
 {{{
 <% if(Common.Util.isLocal){ %>
 <script type="text/javascript">
