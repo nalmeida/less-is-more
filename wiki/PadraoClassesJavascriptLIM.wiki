@@ -59,6 +59,9 @@ var newTest = new Test();
  * @author Autor 2 ...
  * @version 0.0.0
  * @requires NomeDasOutrasClassesNecessaria1 NomeDasOutrasClassesNecessaria2
+ * @example:
+   var example = new Example();
+   ...
 */
 
 if(!window['lim']){
