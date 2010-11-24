@@ -10,7 +10,7 @@ Todos os caminhos de arquivos JS, CSS, IMG, SWFs, etc *devem* utilizar as variá
 == Endereço da raíz (root) do site ==
 {{{<%=Common.Util.Root%>}}} = "http://localhost/"
 
-*Endereço da raíz do servidor de "assets"*
+==Endereço da raíz do servidor de "assets"==
 
 "Assets" é tudo que define as características visuais do site e é "fixo" (jpg, gif, png, swf, xml, css, js, etc que são parte da estrutura do site). Pode pareceer redundande mas *não é*. Sua principal função é ser o "root" dos assets quando se usa uma  [ http://en.wikipedia.org/wiki/Content_delivery_network CDN].
 
