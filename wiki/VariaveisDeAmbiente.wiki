@@ -1,7 +1,7 @@
 #summary Variáveis de ambiente disponíveis
 #sidebar TabelaDeConteudos
 
- = Introdução = 
+=Introdução = 
 
 Todo projeto LIM possui um pacote de utilidades do servidor. Entre elas estão as Variáveis de Ambiente que, basicamente, retornam dados "estáticos" que estão definidos nas classes {{{Commom.Util}}}
 
