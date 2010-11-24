@@ -8,7 +8,7 @@ Todo projeto LIM possui um pacote de utilidades do servidor. Entre elas estão a
 Todos os caminhos de arquivos JS, CSS, IMG, SWFs, etc *devem* utilizar as variáves de ambiente.
 
 == Endereço da raíz (root) do site ==
-{{{<%=Common.Util.Root%>}}} = "http://localhost/"
+{{{<%=Common.Util.Root%>}}} = {{{http://localhost/}}}
 
 ==Endereço da raíz do servidor de "assets"==
 
@@ -16,7 +16,7 @@ Todos os caminhos de arquivos JS, CSS, IMG, SWFs, etc *devem* utilizar as variá
 
 Definido no Web.Config, chave ROOT-ASSETS, se não existir usa Config.Util.Root.
 
-{{{<%=Common.Util.AssetsRoot%>}}} = "http://localhost/"
+{{{<%=Common.Util.AssetsRoot%>}}} = {{{http://localhost/}}}
 
 
 ==Endereço da raíz do servidor de "uploads"==
@@ -25,34 +25,34 @@ São "assets" criados por um sistema ou admin -- dinâmicos e variáveis por amb
 
 Definido no Web.Config, chave ROOT-UPLOADS, se não existir usa Config.Util.AssetsRoot.
 
-{{{<%=Common.Util.UploadsRoot%>}}} = "http://localhost/"
+{{{<%=Common.Util.UploadsRoot%>}}} = {{{http://localhost/}}}
 
 
 ==Endereço da raíz dos assets globais==
 
-{{{<%=Common.Util.GlobalPath%>}}} = "http://localhost/locales/global/"
+{{{<%=Common.Util.GlobalPath%>}}} = {{{http://localhost/locales/global/}}}
 
 ==Endereço da raíz dos assets da língua atual==
 
-{{{<%=Common.Util.LanguagePath%>}}} = "http://localhost/locales/pt-BR/"
+{{{<%=Common.Util.LanguagePath%>}}} = {{{http://localhost/locales/pt-BR/}}}
 
 
 ==Endereço da raíz dos assets dinâmicos ("uploads") globais==
 
-{{{<%=Common.Util.GlobalUploadPath%>}}} = "http://localhost/locales/global/uploads/"
+{{{<%=Common.Util.GlobalUploadPath%>}}} = {{{http://localhost/locales/global/uploads/}}}
 
 
 ==Endereço da raíz dos assets dinâmicos ("uploads") da língua atual==
 
-{{{<%=Common.Util.LanguageUploadPath%>}}} = "http://localhost/locales/pt-BR/uploads/"
+{{{<%=Common.Util.LanguageUploadPath%>}}} = {{{http://localhost/locales/pt-BR/uploads/}}}
 
 ==Língua atual (a princípio é "pt-BR" hard)==
 
-{{{<%=Common.Util.Language%>}}} = "pt-BR"
+{{{<%=Common.Util.Language%>}}} = {{{pt-BR}}}
 
 ==Título do site==
 
-{{{<%=Common.Config.Title%>}}} = " - ##PAGE_TITLE##"
+{{{<%=Common.Config.Title%>}}} = {{{ - ##PAGE_TITLE##}}}
 
 ==Bypass cache==
 
@@ -65,6 +65,6 @@ Bypass cache? "False"
 
 Versão atual dos arquivos JS, CSS, imagens, etc. O valor é colocado "hard" dentro do arquivo. Sempre que precisar subir para produção uma versão atual do CSS, JS, etc deve-se alterar o valor de Version seguindo o seguinte padrão: major.minor[.build[.revision]] ([http://en.wikipedia.org/wiki/Software_versioning saiba mais sobre como criar um núnero de versão correto aqui]).
 
-{{{<%=Common.Util.Version%>}}} = "1.0.0"
+{{{<%=Common.Util.Version%>}}} = {{{1.0.0}}}
 
 Classes se encontram em \App_Code\common\Config.cs e \App_Code\common\Util.cs
