@@ -1,1 +1,0 @@
-{'now':'<%=DateTime.Now%>', 'qs':'<%=Request.QueryString%>', 'po':'<%=Request.Form%>'}
