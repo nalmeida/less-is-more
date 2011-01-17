@@ -13,8 +13,6 @@
 	<link rel="shortcut icon" href="<%=Common.Util.GlobalPath%>img/favicon.ico" />
 	<link rel="stylesheet" type="text/css" href="<%=Common.Util.Root%>minify.aspx?reset.css&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>" media="screen" />
 	
-	<%=Minify.Minifyzer.WriteTag("GaleraDoHino") %>
-	
 	<% 
 		//
 		// ====================== IMPORTANTE =======================
@@ -27,9 +25,9 @@
 		//
 	%>
 
-	
-	<% if(Common.Util.isLocal){ %>
 	<script type="text/javascript">
+		<% if(Common.Util.isLocal){ %>
+		/* Common.Util.isLocal */
 		var _gaq = {
 			push: function(p_arr) {
 				var arr = p_arr;
@@ -38,9 +36,14 @@
 				arr = arr.join('\',\'');
 				if(window['console']) console.info('_gaq.push([\'' + func + '\',\'' + arr + '\']);');
 			}				
-		}
-	</script>
-	<% } else { %>
+		};
+		<% } %>
+		var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', '##CODE##']);
+			_gaq.push(['_trackPageview','<asp:contentplaceholder id="cphCustomAnalytics" runat="server" ></asp:contentplaceholder>']);
+	</script>	
+	
+	<% if(!Common.Util.isLocal){ %>
 	<script type="text/javascript">
 		(function() {
 			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -49,11 +52,6 @@
 		})();
 	</script>
 	<% } %>
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', '##CODE##']);
-		_gaq.push(['_trackPageview','<asp:contentplaceholder id="cphCustomAnalytics" runat="server" ></asp:contentplaceholder>']);
-	</script>
 	
 	<% // carrega o jquery do servidor do google, se nãoo der certo, carrega local %>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
@@ -76,9 +74,6 @@
 	</script>
 	<asp:contentplaceholder id="cphCustomHeaderIE6" runat="server" />
 	<% } %>
-    <%=Singleton<Common.Minify>.Instancia.Execute("jquery.js|lim.analytics.js", null, "")%>
-    ----------- <br /><br /><br /><br /><br /><br />
-    <%=Singleton<Common.Minify>.Instancia.Execute("flash-structure.css|reset.css", null, "")%>
 </head>
 
 <body>
