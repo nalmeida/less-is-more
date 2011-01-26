@@ -16,7 +16,7 @@ if(!window['lim']){
 		// Example with all possible options
 
 		// SHARE TO TWITTER
-		lim.share.run('twitter', {msg: 'message here'});
+		lim.share.run('twitter', {url: 'http://www.site.com/', msg: 'message here'});
 		
 		// SHARE TO FACEBOOK
 		// (IMPORTANT! Facebook users title and description metatags for texts and link rel="image_src"
@@ -33,11 +33,21 @@ if(!window['lim']){
 		_types: [],
 		_callback: null,
 		address: {
-			facebook: 'http://www.facebook.com/sharer.php?u={url}&t={title}',
-			twitter: 'http://twitter.com/home/?status={msg}',
-			orkut: 'http://promote.orkut.com/preview?nt=orkut.com&tt={title}&du={url}&cn={msg}&tn={thumb}'
+			facebook	: 'http://www.facebook.com/sharer.php?u={url}&t={title}',
+			twitter		: 'http://twitter.com/share/?url={url}&text={msg}',
+			orkut		: 'http://promote.orkut.com/preview?nt=orkut.com&tt={title}&du={url}&cn={msg}&tn={thumb}',
+			delicious	: 'http://www.delicious.com/save?url={url}&title={title}&notes={msg}',
+			buzz		: 'http://www.google.com/buzz/post?message={msg}&url={url}&imageurl={thumb}'
 		},
 		rules: {
+			buzz: function(p_address, p_data){
+				switch(true){
+					case (!p_data):
+						throw new Error('[ERROR] lim.share buzz: data object is required.');
+						return false;
+				}
+				return true;
+			},
 			facebook: function(p_address, p_data){
 				switch(true){
 					case (!p_data):
@@ -68,8 +78,22 @@ if(!window['lim']){
 					case (!p_data):
 						throw new Error('[ERROR] lim.share twitter: data object is required.');
 						return false;
-					case (!p_data.msg):
-						throw new Error('[ERROR] lim.share facebook: status (data.msg) is required.');
+					case (!p_data.url):
+						throw new Error('[ERROR] lim.share twitter: status (data.url) is required.');
+						return false;
+				}
+				return true;
+			},
+			delicious: function(p_address, p_data){
+				switch(true){
+					case (!p_data):
+						throw new Error('[ERROR] lim.share delicious: data object is required.');
+						return false;
+					case (!p_data.url):
+						throw new Error('[ERROR] lim.share delicious: link URL (data.url) is required.');
+						return false;
+					case (!p_data.title):
+						throw new Error('[ERROR] lim.share delicious: title (data.title) is required.');
 						return false;
 				}
 				return true;
@@ -104,9 +128,9 @@ if(!window['lim']){
 			var address = this.address[p_type];
 			for(var n in p_data){
 				regexp = new RegExp('\\{'+n+'\\}', 'g');
-				address = address.replace(regexp, encodeURIComponent(p_data[n]));
+				address = address.replace(regexp, encodeURIComponent(p_data[n] || ''));
 			}
-			address = address.replace(/\{.*?\}/g, '')
+			address = address.replace(/\{.*?\}/g, '');
 
 			if(typeof(this.rules[p_type]) == 'function' && !this.rules[p_type](address, p_data)){
 				return false;
