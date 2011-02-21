@@ -3,6 +3,7 @@
  * @author Eduardo Ottaviani
  * @usage 
 	var suggestion = new lim.Suggestion({
+		max		:4,
 		target	:'#my-input-text',
 		list	:'#list',
 		
@@ -111,9 +112,10 @@
 					merge = options.merge,
 					array = to_object( options.array, data ),
 					html = '',
-					o = {};
+					o = {},
+					max = options.max && options.max < array.length ? options.max : array.length;
 					
-						for(var i = 0; i < array.length; i++){
+						for(var i = 0; i < max; i++){
 								for( var key in merge ){
 									o[key] = to_object( merge[key], array[i] ); 
 								}
