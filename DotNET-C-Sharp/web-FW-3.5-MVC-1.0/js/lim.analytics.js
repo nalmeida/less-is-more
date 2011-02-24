@@ -9,7 +9,7 @@ if(!window['lim']){
 	 * Classe para chamar marcações do Google Analytics para versão ASSÍNCRONA
 	 * @author Nicholas Almeida
 	 * @since 19:18 13/8/2009
-	 * @see Para testar em localhost com o analytics "real", colocar _pageTracker.push(['_setDomainName', "none"]);
+	 * @see Para testar em localhost com o analytics "real", colocar _gaq.push(['_setDomainName', "none"]);
 	 */
 	scope.Analytics = function () {
 		
@@ -17,8 +17,10 @@ if(!window['lim']){
 		 * Private
 		 */
 		var _timeout = 250;
-		var _pageTracker = window['_gaq'] || [];
-	
+		this._getGaq = function(){
+			return window['_gaq'] || [];
+		};
+		
 		this.gotoPage = function(url, target){
 			target = target || '_self';
 			switch(target){
@@ -31,13 +33,15 @@ if(!window['lim']){
 					window.open(url, target);
 					break;
 			}
-		}
+		};
 	
 		/**
-		 * Atribui valor para _pageTracker
+		 * Atribui valor para _getGaq()
 		 */
 		this.setTracker = function(trackerFunction) {
-			_pageTracker =  typeof(trackerFunction) == 'function' ? trackerFunction : window[trackerFunction];
+			this._getGaq = function() {
+				return trackerFunction;
+			};
 		};
 	
 		/**
@@ -45,7 +49,7 @@ if(!window['lim']){
 		 * @param {string} str String da marcação desejada
 		 */
 		this.track = function(str) {
-			_pageTracker.push(['_trackPageview', str]);
+			this._getGaq().push(['_trackPageview', str]);
 		};
 	
 		/**
@@ -87,7 +91,7 @@ if(!window['lim']){
 				if((optional_value && isNaN(optional_value)) || optional_value === true) {
 					throw new Error('[ERROR] lim.analytics.trackEvent: optional_value must be a number.');
 				} else {
-					_pageTracker.push(['_trackEvent', category, action, optional_label, optional_value]);
+					this._getGaq().push(['_trackEvent', category, action, optional_label, optional_value]);
 				}
 			}
 		};
@@ -142,12 +146,12 @@ if(!window['lim']){
 		 * @param {string} str String da marcação desejada
 		 */
 		this.setVar = function(str) {
-			_pageTracker.push(['_setVar', str]);
+			this._getGaq().push(['_setVar', str]);
 		};
 	};
 	
 	// constants
-	scope.Analytics.VERSION = '1.0.1';
+	scope.Analytics.VERSION = '1.1.0';
 	
 	// Instancia pre gerada
 	scope.analytics = new scope.Analytics();
