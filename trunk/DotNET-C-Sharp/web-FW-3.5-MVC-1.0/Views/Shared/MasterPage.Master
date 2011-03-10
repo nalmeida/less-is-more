@@ -63,7 +63,7 @@
 
 	<asp:contentplaceholder id="cphCustomHeader" runat="server" />
 	
-	<% if(Common.Browser.Is("IE", "6")) {// IE6 Only%>
+	<% if(Common.Browser.Is("ie", "6")) {// IE6 Only%>
 	<script type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?DD_belatedPNG.js&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>"></script>
 	<script type="text/javascript">
 	    //<![CDATA[
