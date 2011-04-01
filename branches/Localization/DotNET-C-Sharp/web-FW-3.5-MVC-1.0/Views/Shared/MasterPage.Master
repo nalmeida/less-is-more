@@ -1,0 +1,545 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-BR">
+<head>
+	<%="<title>"+ Common.Config.Title +"</title>"%>
+	<%="<meta name=\"description\" content=\"" + Common.Config.Description + "\" />"%>
+	<%="<meta name=\"keywords\" content=\"" + Common.Config.Keywords + "\" />"%>
+	
+	<meta name="copyright" content="F.biz" />
+	<meta name="author" content="F.biz - http://www.fbiz.com.br/" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="INDEX, FOLLOW" />
+
+	<link rel="shortcut icon" href="<%=Common.Util.GlobalPath%>img/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="<%=Common.Util.Root%>minify.aspx?reset.css&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>" media="screen" />
+	
+	<% 
+		//
+		// ====================== IMPORTANTE =======================
+		//
+		// Não usar a tag original do Analytics que, normalmente, é passada por BI. Só trocar o ##CODE## pelo "UA-XXXXXXX-X" que é enviado.
+		//
+		// APAGAR ESSE COMENTÁRIO AO COLOCAR O CÓDIGO CORRETO.
+		//
+		// =========================================================
+		//
+	%>
+
+	<script type="text/javascript">
+		<% if(Common.Util.isLocal){ %>
+		/* Common.Util.isLocal */
+		var _gaq = {
+			push: function(p_arr) {
+				var arr = p_arr;
+				var func = arr[0];
+				arr.shift();
+				arr = arr.join('\',\'');
+				if(window['console']) console.info('_gaq.push([\'' + func + '\',\'' + arr + '\']);');
+			}				
+		};
+		<% } %>
+		var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', '##CODE##']);
+			_gaq.push(['_trackPageview','<asp:contentplaceholder id="cphCustomAnalytics" runat="server" ></asp:contentplaceholder>']);
+	</script>	
+	
+	<% if(!Common.Util.isLocal){ %>
+	<script type="text/javascript">
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+	<% } %>
+	
+	<% // carrega o jquery do servidor do google, se nãoo der certo, carrega local %>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+	<script type="text/javascript">
+	//<![CDATA[
+		if(!window['jQuery']) document.write('<scr'+'ipt type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?jquery.js"><\/scr'+'ipt>');
+	//]]>
+	</script>
+
+	<asp:contentplaceholder id="cphCustomHeader" runat="server" />
+	
+	<% if(Common.Browser.Is("ie", "6")) {// IE6 Only%>
+	<script type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?DD_belatedPNG.js&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>"></script>
+	<script type="text/javascript">
+	    //<![CDATA[
+	    $(document).ready(function() {
+	        DD_belatedPNG.fix('.pngFix');
+	    })
+	    //]]>
+	</script>
+	<asp:contentplaceholder id="cphCustomHeaderIE6" runat="server" />
+	<% } %>
+</head>
+
+<body>
+
+	<div>
+	<!--
+
+	ooooo           oooooooooooo    ooooo          .o.                                          .o. 
+	`888'           `888'     `8    `888'         .888.                                         888 
+	 888             888             888         .8"888.                                        888 
+	 888             888oooo8        888        .8' `888.                                       Y8P 
+	 888             888    "        888       .88ooo8888.                                      `8' 
+	 888       o     888       o     888      .8'     `888.                                     .o. 
+	o888ooooood8    o888ooooood8    o888o    o88o     o8888o   ANTES DE PERGUNTAR PRO CARNEIRO  Y8P 
+
+	E DEPOIS ME APAGUE!
+	-->
+		<style type="text/css">
+			body{
+				padding:10px;
+			}
+			body, h1, h2, h3, p{
+				font-family: Arial, Verdana, "Trebuchet MS";
+				font-size:13px;
+				color: #818285;
+			}
+			h1, h2, h3{
+				color: #000000;
+			}
+			h1{
+				padding-bottom:5px;
+				border-bottom: 1px solid #818285;
+				font-size:22px;
+				margin-bottom:20px;
+			}
+			h2{
+				margin-top:20px;
+				font-size:19px;
+			}
+			h3, h4{
+				font-size:13px;
+				margin-bottom:2px;
+			}
+			p{
+				margin-top:0;
+			}
+			strong{color:#5E5F62;}
+			code{ color: #D66B00; white-space:pre-wrap; }
+				code strong{color:#BF6000;}
+			.response{
+				color: #2A7B32;
+			}
+				.response strong {color: #205F28;}
+			.collapseContainer{
+				min-width:500px;
+				max-width:850px;
+			}
+				.collapse{
+					padding:10px;
+				}
+			.warn,
+			.warn *{
+				color:red;
+			}
+			ul{
+				margin:0 0;
+			}
+				li{
+					margin:10px 0;
+				}
+					li p{
+						margin:0;
+					}
+		</style>
+
+		<h1>
+			<%=Common.Config.H1%>
+		</h1>
+		<div class="collapseContainer">
+			<p>
+				O objetivo do módulo padrão é facilitar e padronizar o passo inicial de um projeto garantindo a qualidade com ferramentas e organização pré-definidas.
+			</p>
+			<p class="warn">
+				<strong>Utilize <a href="https://spreadsheets.google.com/ccc?key=0AkNYIOYSXshBcEhVX3lhakJxbmhKdmlRY3A0NkRURUE&amp;hl=en&amp;authkey=CIOn5OII#gid=0" target="_blank" class="warn">este checklist</a> para evitar o esquecimento de detalhes na entrega de um projeto.</strong>
+			</p>
+		</div>
+		<div class="collapseContainer">
+			<h2>Métodos do servidor</h2>
+			<div class="collapse">
+				<p>
+					Na pasta App_Code/Common.Interface existem algumas classes úteis:
+				</p>
+				<ul>
+					<li>
+						<h3>Common.Browser</h3>
+						<p>
+							Compara e verifica qual browser está sendo usado através do user agent. A sigla do browser por enquanto é definida dentro da classe (na construtora), assim como a lógica para verificação da versão.
+						</p>
+						<h4>Common.Browser.Is</h4>
+						<p>
+							<code>Common.Browser.Is("ie")</code>: <%=Common.Browser.Is("ie")%> - Verifica se é Internet Explorer (independente da versão)<br />
+							<code>Common.Browser.Is("ie", "6")</code>: <%=Common.Browser.Is("ie", "6")%> - Verifica se é Internet Explorer 6<br />
+							<code>Common.Browser.Is("ie", ">=6")</code>: <%=Common.Browser.Is("ie", ">=6")%> - Verifica se é maior-igual ao Internet Explorer 6<br />
+							<code>Common.Browser.Is("ie", "&gt;6")</code>: <%=Common.Browser.Is("ie", ">6")%> - Verifica se é maior ao Internet Explorer 6<br />
+							<code>Common.Browser.Is("ie", "&lt;6")</code>: <%=Common.Browser.Is("ie", "<6")%> - Verifica se é menor ao Internet Explorer 6<br />
+							<code>Common.Browser.Is("ie", "&lt;=6")</code>: <%=Common.Browser.Is("ie", "<=6")%> - Verifica se é menor-igual ao Internet Explorer 6
+						</p>
+						<p>
+							Exemplos:<br />
+							<code>Common.Browser.Is("safari")</code>: <%=Common.Browser.Is("safari")%><br />
+							<code>Common.Browser.Is("firefox")</code>: <%=Common.Browser.Is("firefox")%><br />
+							<code>Common.Browser.Is("opera")</code>: <%=Common.Browser.Is("opera")%><br />
+							<code>Common.Browser.Is("chrome")</code>: <%=Common.Browser.Is("chrome")%><br />
+							<code>Common.Browser.Is("google-chrome")</code>: <%=Common.Browser.Is("google-chrome")%><br />
+							<code>Common.Browser.Is("ipad")</code>: <%=Common.Browser.Is("ipad")%><br />
+							<code>Common.Browser.Is("iphone")</code>: <%=Common.Browser.Is("iphone")%>
+						</p>
+						<h4>Common.Browser.IsAny</h4>
+						<p>O método "IsAny", que verifica se é qualquer dos browsers listados. O método de chamada dos browsers é o mesmo do método Is, porém separando os parâmetros por espaço:</p>
+						<p>
+							<code>Common.Browser.IsAny("safari", "firefox >=3.6", "chrome 6")</code>: <%=Common.Browser.IsAny("safari", "firefox >=3.6", "chrome 6")%><br />
+						</p>
+					</li>
+					<li>
+						<h3>Common.Util.TransformXML</h3>
+						<p>
+							O método transformXML carrega o XML e aplica a folha de estilo (XSL). Também pode receber parametros para serem usados no XSL.
+						</p>
+						<p>
+							Atualmente as variáveis "Root", "LanguagePath" e "GlobalPath" já são passadas para qualquer XSL como <code>$root</code>, <code>$languagePath</code> e <code>$globalPath</code>.
+						</p>
+						<p>Ex. de aplicação:</p>
+<code>Common.Util.TransformXML("teste.xml", "estilo.xsl", new String[][] {
+	new String[]{"filtro-bairro", "", "itaim"},
+	new String[]{"filtro-cidade", "", "sp"}
+})</code>
+					</li>
+				</ul>
+			</div>
+			<h2>Variáveis do servidor</h2>
+			<div class="collapse">
+				<p>
+					<strong>Sempre</strong> use as variáveis do servidor para chamar as páginas.<br />
+					<strong class="warn">NUNCA utilize caminhos relativos ou absolutos escritos "na mão"</strong>.
+				</p>
+
+				<ul>
+					<li>
+						<h3>Endereço da raíz do site</h3>
+						<p>
+							<code>&lt;%=Common.Util.Root%&gt;</code> = "<span class="response"><%=Common.Util.Root%></span>"
+						</p>
+					</li>
+					<li>
+						<h3>Endereço da raíz do servidor de "assets"</h3>
+						<p>
+							"Assets" é tudo que define as características visuais do site e é "fixo" (jpg, gif, png, swf, xml, css, js, etc que são parte da estrutura do site).
+						</p>
+						<p>
+							<em>Definido no <strong>Web.Config</strong>, chave <code>ROOT-ASSETS</code>, se não existir usa <code>Config.Util.Root</code>.</em>
+						</p>
+						<p>
+							<code>&lt;%=Common.Util.AssetsRoot%&gt;</code> = "<span class="response"><%=Common.Util.AssetsRoot%></span>"
+						</p>
+					</li>
+					<li>
+						<h3>Endereço da raíz do servidor de "uploads"</h3>
+						<p>
+							 São "assets" criados por um sistema ou admin -- dinâmicos e variáveis por ambiente como imagens de um blog.
+						</p>
+						<p>
+							<em>Definido no <strong>Web.Config</strong>, chave <code>ROOT-UPLOADS</code>, se não existir usa <code>Config.Util.AssetsRoot</code>.</em>
+						</p>
+						<p>
+							<code>&lt;%=Common.Util.UploadsRoot%&gt;</code> = "<span class="response"><%=Common.Util.UploadsRoot%></span>"
+						</p>
+					</li>
+					<li>
+						<h3>Endereço da raíz dos assets globais</h3>
+						<p>
+							<code>&lt;%=Common.Util.GlobalPath%&gt;</code> = "<span class="response"><%=Common.Util.GlobalPath%></span>"
+						</p>
+					</li>
+					<li>
+						<h3>Endereço da raíz dos assets da língua atual</h3>
+						<p>
+							<code>&lt;%=Common.Util.LanguagePath%&gt;</code> = "<span class="response"><%=Common.Util.LanguagePath%></span>"
+						</p>
+					</li>
+					<li>
+						<h3>Endereço da raíz dos assets dinâmicos ("uploads") globais</h3>
+						<p>
+							<code>&lt;%=Common.Util.GlobalUploadPath%&gt;</code> = "<span class="response"><%=Common.Util.GlobalUploadPath%></span>"
+						</p>
+					</li>
+					<li>
+						<h3>Endereço da raíz dos assets dinâmicos ("uploads") da língua atual</h3>
+						<p>
+							<code>&lt;%=Common.Util.LanguageUploadPath%&gt;</code> = "<span class="response"><%=Common.Util.LanguageUploadPath%></span>"
+						</p>
+					</li>
+					<li>
+						<h3>Língua atual (a princípio é "pt-BR" hard)</h3>
+						<p>
+							<code>&lt;%=Common.Util.Language%&gt;</code> = "<span class="response"><%=Common.Util.Language%></span>"
+						</p>
+					</li>
+					<li>
+						<h3>Título da Página (SEO)</h3>
+						<p>
+							<em>Configurados no XML em App_Data/seo.xml</em>
+						</p>
+						<p>
+							<code>&lt;%=Common.Config.Title%&gt;</code> = "<span class="response"><%=Common.Config.Title%></span>"
+						</p>
+					</li>
+					<li>
+						<h3>H1 da Página (SEO)</h3>
+						<p>
+							<em>Configurados no XML em App_Data/seo.xml</em>
+						</p>
+						<p>
+							<code>&lt;%=Common.Config.H1%&gt;</code> = "<span class="response"><%=Common.Config.H1%></span>"
+						</p>
+					</li>
+					<li>
+						<h3>Bypass cache</h3>
+						<p>
+							"Debug mode" (minify é ignorada)<br />
+							<code>&lt;%=Common.Util.Bpc%&gt;</code> =  "<span class="response"><%=Common.Util.Bpc%></span>"<br />
+							Bypass cache? "<span class="response"><%=(Common.Util.Bpc != null)%></span>"
+						</p>
+					</li>
+					<li>
+						<h3>Versão</h3>
+						<p>
+							Versão atual dos arquivos JS, CSS, imagens, etc. O valor é colocado "hard" dentro do arquivo. Sempre que precisar subir para produção uma versão atual do CSS, JS, etc deve-se alterar o valor de Version <strong>seguindo o seguinte padrão: major.minor[.build[.revision]]</strong> <a href="http://en.wikipedia.org/wiki/Software_versioning" target="_blank">(saiba mais sobre como criar um núnero de versão correto aqui)</a>.
+						</p>
+						<p>
+							<code>&lt;%=Common.Util.Version%&gt;</code> = "<span class="response"><%=Common.Util.Version%></span>"
+						</p>
+						<p>
+							<em>Classes se encontram em \App_Code\common\Config.cs e \App_Code\common\Util.cs</em>
+						</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="collapseContainer">
+			<h2>minify.aspx</h2>
+			<div class="collapse">
+				<p>
+					<strong>Todos os JS e CSS</strong> devem passar pela "<strong><%=Common.Util.Root%>minify.aspx</strong>". Ela remove tabs e comentários, concatena arquivos em uma única requisição, mantém o cache e retorna na compactação GZIP.
+				</p>
+				<h3>Usando a minify.aspx</h3>
+				<p>
+					Para chamar um arquivo, passe os arquivos via querystring separados por pipeline (" <strong>|</strong> "). Exemplo com CSS:<br />
+					<code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;<strong>&lt;%=Common.Util.Root%&gt;minify.aspx?reset.css</strong>&quot; media=&quot;screen&quot; /&gt;</code>
+				</p>
+				<p>
+					No browser, a linha acima aparecerá da seguinte forma: <br />
+					"<code class="response">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;<strong><%=Common.Util.Root%>minify.aspx?reset.css</strong>&quot; media=&quot;screen&quot; /&gt;</code>"
+				</p>
+
+				<h3>Chamando um arquivo específico da language</h3>
+				<p>
+					Caso queira chamar um css da língua atual, separe o arquivo da língua usando a vírgula (" <strong>,</strong> "):<br />
+					"<code>(...)minify.aspx?reset.css|<strong>reset.css,&lt;%=Common.Util.Language%&gt;</strong>|estilo2.css(...)</code>"
+				</p>
+				<p>
+					No browser, a linha acima aparecerá da seguinte forma: <br />
+					"<code class="response">(...)minify.aspx?reset.css|<strong>reset.css,<%=Common.Util.Language%></strong>|estilo2.css(...)</code>"
+				</p>
+				<h3>Cache</h3>
+				<p>
+					Para desabilitar o CACHE do <strong>CSS</strong>, passe o parâmetro via querystring <code>bpc=1</code>.<br />
+					"<code>(...)minify.aspx?reset.css&amp;<strong>bpc=&lt;%=Common.Util.Bpc%&gt;</strong>(...)</code>"
+				</p>
+				<p>
+					No browser, a linha acima aparecerá da seguinte forma: <br />
+					"<code class="response">(...)minify.aspx?reset.css&amp;<strong>bpc=<%=Common.Util.Bpc%></strong>(...)</code>"
+				</p>
+				<p>
+					Este parâmetro pode ser passado direto na página (no caso, a default.aspx):<br />
+					"<%=Common.Util.Root%>default.aspx?bpc=1"
+				</p>
+				<p>
+					Para forçar o carregamento das imagens do css deve-se passar o parâmetro <code>v=VERSÃO</code>.
+					Este &quot;v&quot; será concatenado a todas as imagens de dentro dos CSS's.
+					Ex.:
+					"<code>background:url($root/locales/global/img/px.gif?v=<%=Common.Util.Version%>) 0 0 no-repeat;</code>"
+				</p>
+				<h3>"Variáveis" no CSS</h3>
+				<p>
+					É possível criar "variáveis" nos CSS. A minify já faz o parse das sequintes variáveis:
+				</p>
+				<ul>
+					<li> <code>$root/</code> por <code>&lt;%=Common.Util.AssetsRoot%&gt;</code>; </li>
+					<li> <code>$global/</code> por <code>&lt;%=Common.Util.GlobalPath%&gt;</code>; </li>
+					<li> <code>$language/</code> por <code>&lt;%=Common.Util.LanguagePath%&gt;</code>; </li>
+					<li> <code>$upload-root/</code> por <code>&lt;%=Common.Util.UploadsRoot%&gt;</code>; </li>
+					<li> <code>$upload-global/</code> por <code>&lt;%=Common.Util.GlobalUploadPath%&gt;</code>; </li>
+					<li> <code>$upload-language/</code> por <code>&lt;%=Common.Util.LanguageUploadPath%&gt;</code>; </li>
+				</ul>
+				<p>
+					Além destas variáveis, é possível customizar:
+					<code>$NOME_DA_VARIAVEL{VALOR_DA_VARIAVEL}</code> e na classe esperada, escreva <code>$NOME_DA_VARIAVEL</code>. Ex.:<br />
+					<code><strong>$fc</strong>{
+   overflow:hidden;
+   zoom:1;
+}
+.classe{
+   <strong>$fc</strong>
+}
+</code>
+					A sting que "define" as variáveis são excluídas do CSS no momento que a minify dá saída no arquivo.
+				</p>
+			</div>
+		</div>
+
+		<div class="collapseContainer">
+			<h2>MasterPage</h2>
+			<div class="collapse">
+				<p>
+					Todo o conteúdo padrão para as páginas estão no arquivo "<%=Common.Util.Root%>/MarterPage.master" <br />
+					Este arquivo servirá de modelo para as páginas internas.
+				</p>
+				<p>
+					Para criar um conteúdo variável, na MarterPage.master, crie a tag, que poderá ter um conteúdo "padrão":<br />
+<code>&lt;asp:contentplaceholder id=&quot;cphID_CONTENT_PLACE_HOLDER&quot; runat=&quot;server&quot; &gt;
+	código padrão (se houver)
+&lt;/asp:contentplaceholder&gt;
+</code><br />
+				</p>
+				<p>
+					No arquivo da página (no caso, a default.aspx), coloque a tag:<br />
+<code>&lt;asp:content contentplaceholderid=&quot;cphID_CONTENT_PLACE_HOLDER&quot; runat=&quot;server&quot;&gt;
+	código que entrará no lugar da tag
+&lt;/asp:content&gt;
+</code>
+				</p>
+				<h3>Exemplos</h3>
+				<div>
+					Substituindo na default.aspx:<br />
+					<asp:contentplaceholder id="cphMainContent" runat="server" >Usar &lt;asp:content contentplaceholderid=&quot;cphMainContent&quot; runat=&quot;server&quot;&gt; no aspx</asp:contentplaceholder>
+				</div>
+				<div>
+					Sem substituir na default.aspx:<br />
+					<asp:contentplaceholder id="cphContent" runat="server" ><strong>Este conteúdo vem do arquivo MasterPage.master</strong></asp:contentplaceholder>
+				</div>
+				<p>
+					<strong>PS:</strong> Quando for colocar uma tag asp (ex: &lt;%=Variavel  %&gt;) dentro do conteúdo default de um 
+					contentplaceholder usar o "#" no lugar do "=" (ex: &lt;%#Variavel  %&gt;) , senão o conteúdo não será substituído nas páginas filhas.
+				</p>
+			</div>
+		</div>
+		<div class="collapseContainer">
+			<h2>Bibliotecas externas</h2>
+			<div class="collapse">
+				<p>
+					As seguintes bibliotecas de javascript que estão disponíveis neste módulo padrão são externas e públicas. Os nomes, versões e referência:
+				</p>
+				<ul>
+					<li>
+						<p>
+							<strong>swfObject 2.2</strong>: <br />
+							<a href="http://code.google.com/p/swfobject/wiki/documentation" target="_blank">
+								http://code.google.com/p/swfobject/wiki/documentation
+							</a>
+						</p>
+					</li>
+					<li>
+						<p>
+							<strong>jQuery 1.4.3</strong>: <br />
+							<a href="http://docs.jquery.com/Main_Page" target="_blank">
+								http://docs.jquery.com/Main_Page
+							</a>
+						</p>
+					</li>
+					<li>
+						<p>
+							<strong>DD_belatedPNG</strong>: <br />
+							<a href="http://www.dillerdesign.com/experiment/DD_belatedPNG/" target="_blank">
+								http://www.dillerdesign.com/experiment/DD_belatedPNG/
+							</a>
+						</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="collapseContainer">
+			<script type="text/javascript" src="<%=Common.Util.Root%>minify.aspx?swfobject.js|lim.flash.js&amp;bpc=<%=Common.Util.Bpc%>&amp;v=<%=Common.Util.Version%>"></script>
+
+			<h2>fake_flash e fake_image</h2>
+			<div class="collapse">
+				<p>
+					Para imagens ou flashs dinâmicos ou até mesmo para marcação enquanto não existir a versão final:
+				</p>
+				<ul>
+					<li>
+						<p>
+							<strong>fake_image</strong> <br />
+							(<a href="<%=Common.Util.GlobalPath%>img/fake_image.aspx"><%=Common.Util.GlobalPath%>img/fake_image.aspx</a>):
+						</p>
+						<p>
+							Ao criar a imagem, é necessário passar os parâmetros <code>width</code> e <code>height</code> para o fake_image.aspx. é possível passar <code>color</code> com o valor hexadecimal da cor.
+						</p>
+						<p>
+							<img src="<%=Common.Util.GlobalPath%>img/fake_image.aspx?width=240&amp;height=120" alt="" />
+						</p>
+					</li>
+					<li>
+						<p>
+							<strong>fake_flash</strong> <br />
+							(<a href="<%=Common.Util.GlobalPath%>swf/fake_flash.swf"><%=Common.Util.GlobalPath%>swf/fake_flash.swf</a>):
+						</p>
+						<p>
+							Ao escrever ou redimensionar o flash o tamanho será atualizado. Não é necessário passar parâmetros adicionais.<br />
+						</p>
+						<p>Necessita da:</p>
+						<ul>
+							<li><%=Common.Util.Root%>js/swfobject.js</li>
+							<li><%=Common.Util.Root%>js/lim.flash.js</li>
+						</ul>
+
+						<div id="flashHolder">
+							Esse conteúdo só é exibido se o usuário não tiver o Flashplayer instalado!
+						</div>
+
+						<script type="text/javascript">
+							<% // Simples %>
+							// lim.flash.add('<%=Common.Util.GlobalPath%>swf/fake_flash.swf', '#flashHolder', '100%', 120);
+
+							(function(){
+								<% // Completa %>
+								function onFlashAdded(data) {
+									data.ref;
+									data.id;
+									data.success;
+								}
+								var extra = {
+									flashvars:{
+										bpc: '<%=Common.Util.Bpc%>',
+										root: '<%=Common.Util.GlobalPath%>swf/'
+									},
+									expressInstall: '<%=Common.Util.GlobalPath%>swf/expressInstall.swf',
+									attributes: {
+										bgcolor: '#000000'
+									},
+									<% /*
+									param: {
+										wmode:'transparent'
+									},
+									*/ %>
+									onComplete: onFlashAdded
+								};
+								lim.flash.add('<%=Common.Util.GlobalPath%>swf/fake_flash.swf', '#flashHolder', '100%', 120, extra);
+							})();
+						</script>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	<!-- ME APAGUE! -->
+	</div>
+</body>
+</html>

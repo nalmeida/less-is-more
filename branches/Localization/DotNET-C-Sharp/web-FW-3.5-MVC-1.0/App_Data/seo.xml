@@ -1,0 +1,32 @@
+<?xml version="1.0" standalone="yes"?>
+<SEO>
+  <pages>
+    <url>/</url>
+    <h1>H1 Módulo Padrão C# 16.2 MVC - utf-8</h1>
+    <description>Modulo Padrão description</description>
+    <keywords>Módulo Padrão keyword</keywords>
+    <title>Módulo Padrão C# 16.2 MVC - utf-8</title>
+    <frequency>3</frequency>
+    <priority>2</priority>
+  </pages>
+  <pages>
+    <url>/teste/</url>
+    <h1>H1 teste</h1>
+    <description>Modulo Padrão description</description>
+    <keywords>Módulo Padrão keyword</keywords>
+    <title>teste</title>
+    <frequency>3</frequency>
+    <priority>2</priority>
+  </pages>
+<!--
+  <pages>
+    <url>/fale/</url>
+    <h1>Fale Conosco</h1>
+    <description>Fale Conosco</description>
+    <keywords>Fale Conosco</keywords>
+    <title>Fale Conosco</title>
+    <frequency>3</frequency>
+    <priority>2</priority>
+  </pages>  
+-->
+</SEO>

@@ -1,0 +1,502 @@
+/* general stuff */
+p{
+	padding: 0px;
+	line-height:1.5em;
+	margin: 0 0 12px;
+}
+ol{ list-style-type: lower-roman;}
+dt{
+	font-weight: bold;
+	text-decoration: underline;
+	margin: 5px 0;
+}
+	dd{
+		padding:5px 0 10px 10px;
+		margin:0 0 0 10px;
+	}
+
+
+
+/* ----------------------------
+		LAYOUT
+------------------------------- */
+/*top bar*/
+#top {
+	height: auto;
+	background: #545552;
+	background: rgba(0, 0, 0, 0.6);
+}
+	.saudacao {
+		text-align:right;
+		color:#fff;
+		padding:5px;
+	}
+
+/*header (site title)*/
+#header { height: 54px;padding-left: 50px; overflow:hidden; margin:10px 0;}
+	
+	#header h1 {
+		margin-top: 11px;
+		font-size: 200%;
+	}
+
+/*content holder*/
+#content_wrapper {
+	padding:20px 20px 10px;
+}
+	.primary_content {	
+		margin: 0px;
+		padding:20px 30px 20px 20px;
+		overflow:hidden;
+		min-height:400px;
+		background:#fff;
+		overflow:hidden;
+		zoom:1;
+	}
+	.primary_content h1,
+	.primary_content h2{ border-bottom: 3px solid #DBDBDB; }
+	
+
+/* ----------------------------
+		PRIMARY CONTENT (headings e listas)
+------------------------------- */
+.primary_content h1, #modal h1 {
+	font-size: 2em;
+	padding-bottom: 10px;
+}
+
+.primary_content h2, #modal h2 {
+	font-size: 1.5em;
+	margin:5px 0 10px 0;
+	padding:5px 0;
+}
+
+.primary_content h3, #modal h3 {
+	font-size: 1.25em;
+	font-weight: bold;
+	margin:5px 0 10px 0;
+	padding:5px 0;
+}
+.primary_content h4 , #modal h4 {
+	font-size: 1.05em;
+	margin:10px 0;
+	text-transform: uppercase;
+	padding: 0px;
+}
+.primary_content h5, #modal h5 {
+	font-size: 1.05em;
+	margin-bottom: 15px;
+	text-transform: uppercase;
+	padding: 0px;
+}
+.primary_content h6 {
+	font-size: 1em;
+	margin-bottom: 15px;
+	text-transform: uppercase;
+}
+.primary_content ol {
+	padding-left: 20px;
+	list-style-type: decimal;
+	margin: 7px;
+}
+
+.primary_content ul {
+	list-style-type: disc;
+	padding-left: 20px;
+	margin:7px 7px 12px 7px;
+}
+	.primary_content li { margin:7px 0; }
+
+
+/* ----------------------------
+		SIDEBAR-VERTICAL
+------------------------------- */
+#main-nav {
+	float:left;
+	width: 206px;
+	padding: 0;
+	margin: 0 0 0 15px;
+	font-family: Helvetica, Arial, sans-serif;
+}
+	#main-nav a {
+		text-decoration:none;
+	}
+
+	#main-nav li {
+		list-style: none;
+		padding-bottom: 10px;
+		text-align: right;
+	}
+
+		#main-nav li a.nav-top-item {
+			background-color:#E9E8E5;
+			background-position: right center;
+			padding: 10px 15px 10px 0;
+			height: 13px; 
+			color: #3f3f3d;
+			font-size: 14px;
+			cursor: pointer;
+			display: block;
+			text-decoration: none;
+		}
+
+		#main-nav li a.current {
+			background-color:#fff;
+			color: #333;
+			font-weight: bold;
+		}
+				
+		#main-nav li a.current:hover {
+			color: #333;
+		}
+
+		#main-nav ul {
+			padding: 0;
+			font-size: 12px;
+			margin: 0;
+		}
+
+			#main-nav ul li {
+				list-style: none;
+				margin: 0;
+				text-align: right;
+				padding: 0;
+			}
+
+				#main-nav ul li a {
+					padding: 8px 15px;
+					display: block;
+					color: #3F3F3D;
+					font-size: 13px;
+					line-height: 1.2em;
+				}
+
+				#main-nav ul li a:hover,
+				#main-nav ul li a.current,
+				#main-nav ul li a.current:hover {
+					color: #3F3F3D;
+					text-decoration:underline;
+				}
+
+				#main-nav ul li a.current {
+					background: transparent url($global/img/menu-current-arrow.gif) right center no-repeat !important;
+				}
+
+
+/* ----------------------------
+		FOOTER
+------------------------------- */
+#footer {
+	margin-top:10px;
+	padding: 10px 0;
+	font-size: 10px;
+}
+
+/* ----------------------------
+		NOTIFICATIONS
+------------------------------- */
+.success, .fail, .information, .attention {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	padding:10px 10px 10px 10px;
+	font-size: 13px;
+	height: 30px;
+	font-weight: bold;
+	line-height: 30px;
+}
+.success{
+	background-color: #D5FFCF;
+	border: 1px solid #97FF88;
+	color: #009900;
+}
+.fail {
+	background-color: #FFCFCF;
+	border: 1px solid #FF9595;
+	color: #CC3300;
+}
+.information {
+	background-color: #DCE3FF;
+	border: 1px solid #93A8FF;
+	color: #0033FF;
+}
+.attention {
+	background-color: #FFFBCC;
+	border: 1px solid #FFF35E;
+	color: #C69E00;
+}
+
+.close-notification{
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	cursor: pointer;
+}
+
+/* ----------------------------
+		BUTTON
+------------------------------- */
+.button {
+	display: inline-block;
+	background: #808080 top left repeat-x !important;
+	padding: 4px 7px 4px 7px !important;
+	color: #fff;
+	font-size: 11px;
+	cursor: pointer;
+}
+.button:hover { text-decoration: underline; }
+.button:active { padding: 5px 7px 3px 7px !important; }
+
+button.aproved {background:#00aa00 !important;}
+button.reproved {background:#e60000 !important;}
+button.pendent {background:#bfbf00 !important;}
+
+
+a.remove-link { color: #bb0000; }
+a.remove-link:hover { color: #000; }
+/* ----------------------------
+		TABLES
+------------------------------- */
+table {
+	font: 12px/24px Verdana, Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+	border: none;
+}
+
+	th {
+		text-align: left;
+		padding: 5px;
+		font-weight:bold;
+		text-transform: uppercase;
+	}
+		td {
+			text-align: left;
+			padding: 3px;
+		}
+
+/* ----------------------------
+		TABS
+------------------------------- */
+.tabs {
+	font-size: 100%;
+	margin: 0;
+}
+	.tabs h3 { margin-bottom: 10px;}
+
+	ul.paginator {
+		padding:4px 0 0 0;
+		margin: 0px;
+	}
+	ul.tabsNavigation{
+		margin:0 0 -1px !important;
+		position:relative;
+		z-index:3;
+	}
+		ul.tabsNavigation li,
+		ul.paginator li {
+			list-style: none;
+			padding: 0px;
+			height:100%;
+			margin: 0;
+			#margin-right: 1ex !important;
+		}
+
+		.tabsNavigation li, .tabsNavigation li a, ul.paginator li, ul.paginator li a {
+			display:inline-block;
+			*display:inline;
+			*zoom:1;
+		}
+		.tabs .tabContent {
+			min-height: 200px;
+			padding: 20px;
+			margin-bottom: 20px;
+		}
+
+		.tabsNavigation li.active a { color: #333333;}
+		.tabsNavigation li a , ul.paginator li a{
+			color: #7E7E7E;
+			text-decoration:none !important;
+		}
+
+		ul.paginator li,
+		ul.tabsNavigation li,
+		.tabContent{
+			border: 1px solid #EAEAEA;
+		}
+		ul.tabsNavigation li.active{
+			border-bottom:1px solid #fff;
+		}
+		
+		.tabsNavigation a,
+		ul.paginator li a {
+			text-decoration: none;
+			padding: 8px;
+			font-weight: bold;
+			text-transform: uppercase;
+			font-size: 12px;
+		}
+
+/* ----------------------------
+		FORMS
+------------------------------- */
+.small { width: 15%; }
+.medium { width: 35%; }
+.large { width: 75%; }
+.full { width: 98%; }
+
+form label{
+	font-weight: bold;
+	margin:12px 0;
+	display: block;
+}
+
+form p{
+	padding: 0px;
+	margin: 0px;
+}
+
+form .input {
+	margin:0 10px 0 0;
+	padding: 7px;
+}
+form select {
+	padding: 0px;
+	margin: 0px;
+}
+
+form .button {
+	font-weight: bold;
+	margin:7px 0;
+	padding:5px 10px;
+}
+
+form .checkbox {
+	padding: 0px;
+	height: 15px;
+	width: 18px;
+}
+form label.checkbox{
+	font-weight:normal;
+	margin:0;
+	display:inline;
+}
+
+form .select {
+	width: 20%;
+	padding: 2px;
+	margin: 0px;
+}
+form .radio {
+	height: 15px;
+	width: 15px;
+	padding: 0px;
+}
+.styled_textarea {
+	padding: 3px;
+	margin-bottom: 10px;
+}
+
+.primary_content .paginator {
+	list-style : none;
+	display : block;
+	width:100%;
+	margin:10px 0;
+	padding:8px 0 0 0;
+} 
+
+.paginator li { display : inline; } 
+	.paginator li a { padding:4px 7px; } 
+
+/* ----------------------------
+		MODAL DIALOG
+------------------------------- */
+#modal h1	{
+	font-size: 18px;
+	padding:5px 0 10px 0;
+	margin:5px 0;
+	text-transform: uppercase;
+	letter-spacing: -1px;
+}
+#modal { padding: 0px; }
+#modal p {
+	font-size: 13px;
+}
+#modal hr { color: #D4D0C8; }
+#modal .delete-link { font-size: 11px; }
+
+/* tables */
+table.tablesorter {
+	font-size: 13px;
+	width: 100%;
+	text-align: left;
+	border-collapse:collapse;
+	margin:10px 0 25px 0;
+}
+	table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+		font-size: 8pt;
+		padding: 4px;
+	}
+	table.tablesorter thead tr .header { cursor: pointer; }
+	table.tablesorter td,
+	table.tablesorter th {
+		border: 1px solid #EAEAEA;
+	}
+	table.tablesorter tbody td {
+		padding: 4px;
+		vertical-align: top;
+	}
+	tr.even { background-color: #EAEAEA; }
+
+/* ----------------------------
+		MAIN NAVIGATION
+------------------------------- */
+#nav {
+	height: 30px;
+	padding-left: 50px;
+}
+	#nav li {
+		padding:0 16px;
+		margin: 0px;
+		float: left;
+		height: 30px;
+		line-height: 30px;
+		position:relative;
+		margin-right:7px;
+	}
+		/*	class "active" is used to highlight the current/active link */
+		#nav li.active, #nav li:hover {
+			margin-top: 0px;
+		}
+
+	#nav a {
+		text-transform: uppercase;
+		font-size: 14px;
+		font-weight: bold;
+		text-decoration: none;
+		letter-spacing:-1px;
+	}
+	
+	/*	class "active" is used to highlight the current/active link */
+	#nav a.active { text-decoration: none; }
+	
+	#nav a:hover	{text-decoration:underline;}
+
+/* ----------------------------
+		SUB NAVIGATION
+------------------------------- */
+#subnav {
+	clear: both;
+	padding:10px 0 10px 50px;
+	overflow:hidden;
+	zoom:1;
+	min-height:10px;
+}
+	#subnav li	{ float: left;line-height: 30px; }
+	#subnav a  { font-size: 13px;padding:5px 8px; margin-right:5px; text-decoration: none; }
+	
+	/*	class "active" is used to highlight the current/active link */
+	#subnav a.active  {font-weight: bold;}
