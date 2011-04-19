@@ -1,0 +1,35 @@
+/*Geral*/
+body{font-family: Arial, Helvetica, sans-serif;font-size:.8em;color:#ffffff;}
+body{background:#610000;text-align:center; margin:0;}
+img{border: 0px;}
+p, h1, h3, h2, h4, h5{margin:5px 0;}
+p{padding:0 0 0 3px;}
+h1{font-size:.8em; font-weight:bold;color:#ff9c00;background:#610000;text-align:center;padding:4px 0;margin:0;}
+h3{font-size:.8em; font-weight:bold;color:#610000;background:#ff9c00;text-align:left;padding-left:10px;margin-top:0}
+h4{font-size:.8em; font-weight:bold;color:#ff9c00;text-align:left;padding-left:10px}
+.und{text-decoration:underline;}
+.feedback{color:#ff9c00;}
+/*links*/
+a {text-decoration:none;color:#610000;text-decoration:none;}
+a.menu{text-decoration:none;color:#ffffff;text-decoration:none;}
+a.footer{text-decoration:none;color:#ffffff;text-decoration:underline;}
+a.text{text-decoration:none;color:#ffffff;text-decoration:underline;}
+/*Alinhamentos*/
+.ac{text-align:center;}
+.al{text-align:left;}
+.ar{text-align:right;}
+.am{vertical-align:middle;}
+.at{vertical-align:text-top;}
+.cb{clear:both;}
+/*Margins*/
+.mg5{margin:5px;}
+.mg0{margin:0;}
+.mt0{margin-top:0;}
+.mb0{margin-bottom:0;}
+/*Geral*/
+div.imgFoto{text-align:center;}
+#principal{text-align:left;amrgin:0;}
+#rodape{margin:0;text-align:left;}
+#btOk{background:url(../img/px.gif) #610000;border:0px none #610000;}
+/*form*/
+input.txtData{line-height:1.8em;font-size:.9em;height:1.8em;-wap-input-format:"NN\\/NN\\/NNNN";}
