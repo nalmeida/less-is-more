@@ -1,268 +1,136 @@
-//<%@ WebHandler Language="C#" Class="Common.Minify" %>
-//uncomment this line above if you want to use as a standalone file. also rename it as minify.ashx and place it at root folder
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Web;
-using System.IO;
+using System.Web.Caching;
 using System.Text;
-using System.Text.RegularExpressions;
+using Common.Minifyzer;
 
-/* 
-Minify
+namespace Common{
+	public static class Minify {
+	
+		private static HttpContext context = HttpContext.Current;
+		private static List<FileGroup> groups;
 
-@author Marcelo Miranda Carneiro - mail: mcarneiro@gmail.com. Thanks to Leandro Ribeiro and Nicholas Almeida.
-* updated Regis Bittencourt - changed into a http handler .net class. 
-@since 04/01/2008
-@version 2.0.2
-@usage
-	<code>
-		// just call the Javascript file or CSS file as parameters:
-		<script type="text/javascript" src="minify.aspx?file1.js|file2.js"><\/script>
-		<style type="text/css" src="minify.aspx?file1.css|file2.css"></style>
-		// to call a specific language css
+		public static void Register(string File) {
+			Register(File, File);
+		}
+		public static void Register(string Key, string File) {
+			Register(Key, File, null);
+		}
+		public static void Register(string Key, string File, string BaseFolder) {
+			if (context.Cache[Key] == null) {
+				IFile MinifiedFile = CreateFile(File, BaseFolder, Key);
+				context.Cache.Insert(Key, MinifiedFile, MinifiedFile.FileCacheDependency);
+			}
+		}
+	
+	
+		public static void Add(string GroupId, string FileId) {
+			CreateGroup(GroupId, FileId);
+		}
+	
+	
+		public static string Write(String GroupId) {
+			return Write(GroupId, context);
+		}
+		public static string Write(String GroupId, HttpContext context) {
+
+			FileGroup group = GetGroupById(GroupId);
+			String FileDates = "";
+			StringBuilder sbGroupContent = new StringBuilder();
+			IFile ifile;
 		
-		<style type="text/css" src="minify.aspx?file1.css|file2.css,pt-BR"></style>
-		// CSSs that will load:
-		// <root>/locales/global/css/file1.css
-		// <root>/locales/pt-BR/css/file2.css
-	</code>
-*/
-
-
-namespace Common
-{
-	public class Minify : IHttpHandler
-	{
-
-		private HttpServerUtility _server;
-		public HttpServerUtility Server
-		{
-			get { return _server; }
-			set { _server = value; }
-		}
-
-
-		private HttpRequest _request;
-		public HttpRequest Request
-		{
-			get { return _request; }
-			set { _request = value; }
-		}
-
-
-		private HttpResponse _response;
-		public HttpResponse Response
-		{
-			get { return _response; }
-			set { _response = value; }
-		}
-
-		public void DoCache(HttpContext context, DateTime lastModifiedUnc)
-		{
-			try
-			{
-				string sDtModHdr = Request.Headers.Get("If-Modified-Since");
-				// does header contain If-Modified-Since?
-				if (!string.IsNullOrEmpty(sDtModHdr))
-				{
-
-					sDtModHdr = sDtModHdr.Split(';')[0];
-					// convert to UNC date
-					DateTime dtModHdrUnc = Convert.ToDateTime(sDtModHdr).ToUniversalTime();
-					dtModHdrUnc = dtModHdrUnc.AddMilliseconds(dtModHdrUnc.Millisecond * -1);
-					lastModifiedUnc = lastModifiedUnc.ToUniversalTime();
-					lastModifiedUnc = lastModifiedUnc.AddMilliseconds(lastModifiedUnc.Millisecond * -1);
-
-					// if it was within the last month, return 304 and exit
-					if (DateTime.Compare(
-						new DateTime(
-						dtModHdrUnc.Year,
-						dtModHdrUnc.Month,
-						dtModHdrUnc.Day,
-						dtModHdrUnc.Hour,
-						dtModHdrUnc.Minute,
-						dtModHdrUnc.Second),
-						new DateTime(
-						lastModifiedUnc.Year,
-						lastModifiedUnc.Month,
-						lastModifiedUnc.Day,
-						lastModifiedUnc.Hour,
-						lastModifiedUnc.Minute,
-						lastModifiedUnc.Second)) == 0)
-					{
-						Response.StatusCode = 304;
-						Response.StatusDescription = "Not Modified";
-						Response.CacheControl = "public";
-						Response.End();
+			if(group != null){
+				List<IFile> GroupItens = group.FilesList[GroupId];
+				sbGroupContent.Append(group.Content.CustomHeader());
+				foreach (IFile item in GroupItens) {
+					FileDates += "\n /* " + item.Id + " | " + item.LastModified + " */ \n";
+					if (context.Cache[item.Id] != null) {
+						sbGroupContent.Append(item.Content);
+					} else {
+						Register(item.Id, item.Name);
+						ifile = (IFile)context.Cache[item.Id];
+						sbGroupContent.Append(ifile.Content);
 					}
 				}
-				Response.Cache.SetLastModified(lastModifiedUnc);
-				Response.CacheControl = "public";
+			}else if(context.Cache[GroupId] != null){ // GroupId is FileId
+				ifile = (IFile)context.Cache[GroupId];
+				FileDates += "\n /* " + GroupId + " | " + ifile.LastModified + " */ \n";
+				sbGroupContent.Append(ifile.Content);
+			}else{
+				throw new Exception("Group or File not registered: "+GroupId);
 			}
-			catch
-			{ }
+
+			sbGroupContent.Insert(0, FileDates);
+			return sbGroupContent.ToString();
 		}
+	
+		public static string WriteTag(String GroupId) {
+			String Response = "";
 
-		public void ProcessRequest(HttpContext context)
-		{
-			Request = context.Request;
-			Response = context.Response;
-			Server = context.Server;
-
-
-			// READING FILES
-			StringBuilder sbToStrip = new StringBuilder();
-			bool isScript = false;
-
-            string arquivos = Request.QueryString[0];
-
-            string[] vtArquivo = arquivos.Split(Convert.ToChar("|"));
-
-			Encoding utf8 = Encoding.GetEncoding("utf-8");
-			StreamReader srArquivo;
-			DateTime lastModifiedFileGlobal = DateTime.MinValue;
-
-			string filePath;
-			DateTime fileLastModified;
-            
-            string extension = Path.GetExtension(Server.MapPath("~") + "\\" + vtArquivo[0].Replace("/", "\\").ToLower());
-
-			if (extension == ".css")
-			{
-				foreach (string stNomeArquivo in vtArquivo)
-				{
-					Response.ContentType = "text/css";
-					// set folder and file name
-					string file;
-					string folder;
-					if (stNomeArquivo.Contains(","))
-					{
-						string[] fileFolder = stNomeArquivo.Split(',');
-						file = fileFolder[0];
-						folder = fileFolder[1];
-					}
-					else
-					{
-						file = stNomeArquivo;
-						folder = "global";
-					}
-
-					if (string.IsNullOrEmpty(folder))
-						continue;
-
-					filePath = Server.MapPath("locales/" + folder + "/css/") + file;
-
-					fileLastModified = File.GetLastWriteTime(filePath);
-					lastModifiedFileGlobal = fileLastModified > lastModifiedFileGlobal ? fileLastModified : lastModifiedFileGlobal;
-
-					if (Path.GetExtension(filePath) == ".css")
-					{
-						try
-						{
-							srArquivo = new StreamReader(filePath, utf8);
-							sbToStrip.Append(Environment.NewLine);
-							sbToStrip.Append("/*************** File loaded successfully: \"" + file + "\" / \"" + folder + "\" ***************/");
-							sbToStrip.Append(Environment.NewLine);
-							sbToStrip.Append(Environment.NewLine);
-							sbToStrip.Append(srArquivo.ReadToEnd());
-							sbToStrip.Append(Environment.NewLine);
-							srArquivo.Close();
-						}
-						catch
-						{
-							sbToStrip.Append("/* ERROR:  Missing file " + file + " */");
-						}
-					}
-				}
+			FileGroup group = GetGroupById(GroupId);
+			if(group != null) {
+				Response = String.Format(group.Tag, Common.Util.Root + "minify.aspx?" + GroupId);
+			} else if (context.Cache[GroupId] != null) {
+				IFile TagFile = (IFile)context.Cache[GroupId];
+				Response = String.Format(TagFile.Tag, Common.Util.Root + "minify.aspx?" + GroupId);
+			}else{
+				throw new Exception("Group or File not registered: "+GroupId);
 			}
-			if (extension == ".js")
-			{
-				Response.ContentType = "text/javascript";
-				isScript = true;
-				foreach (string stNomeArquivo in vtArquivo)
-				{
-					filePath = Server.MapPath("js/") + stNomeArquivo;
-
-					fileLastModified = File.GetLastWriteTime(filePath);
-					lastModifiedFileGlobal = fileLastModified > lastModifiedFileGlobal ? fileLastModified : lastModifiedFileGlobal;
-
-					if (Path.GetExtension(filePath) == ".js")
-					{					
-						srArquivo = new StreamReader(filePath, utf8);
-						sbToStrip.Append(srArquivo.ReadToEnd());
-						sbToStrip.Append(Environment.NewLine);
-						srArquivo.Close();
-					}
-				}
-			}
-
-			//DO REPLACEMENT
-			string stContent = sbToStrip.ToString();
-
-			// CSS
-			if (extension == ".css")
-			{
-				// replaces
-				stContent = stContent.Replace("$root/", Util.AssetsRoot); 
-				stContent = stContent.Replace("$global/", Util.GlobalPath);
-				stContent = stContent.Replace("$language/", Util.LanguagePath);
-				stContent = stContent.Replace("$upload-root/", Util.UploadsRoot); 
-				stContent = stContent.Replace("$upload-global/", Util.GlobalUploadPath);
-				stContent = stContent.Replace("$upload-language/", Util.LanguageUploadPath);
-
-				Dictionary<string, string> dicVariables = new Dictionary<string, string>();
-
-				const string varRegEx = @"\$(?<varname>[^{}$]*){(?<varvalue>[^}$]*)}";
-				const RegexOptions varRegExOptions = RegexOptions.Singleline | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace;
-
-				MatchCollection variables = Regex.Matches(stContent, varRegEx, varRegExOptions); //finds all variables in the css document
-				foreach (Match match in variables)
-				{
-					dicVariables.Add(match.Groups["varname"].Value.Trim(), match.Groups["varvalue"].Value.Trim());  //stores it in a dictionary for a later use
-				}
-				stContent = Regex.Replace(stContent, varRegEx + @"[^\r\n]*[\r\n]", string.Empty, varRegExOptions); // removes all variables to clean the css
-
-				foreach (string varname in dicVariables.Keys)
-				{
-					stContent = stContent.Replace("$" + varname, dicVariables[varname]);  //replaces each variable with its value
-				}
-
-				if (Request.QueryString["v"] != null)
-				{
-					stContent = Regex.Replace(stContent, "url\\((.[^\\)]*\\?.*)\\)", "url($1&v=" + Request.QueryString["v"] + ")"); // replace all images paths with a query adding the &v=version 
-					stContent = Regex.Replace(stContent, "url\\((.[^\\)\\?]*)\\)", "url($1?v=" + Request.QueryString["v"] + ")"); // replace all images paths adding the ?v=version 
-				}
-			}
-
-
-			// CACHE
-			if (string.IsNullOrEmpty(Util.Bpc))
-			{
-				DoCache(context, lastModifiedFileGlobal);
-			}
-
-			// GZIP ENCODE
-			Util.GZipEncodePage();
-
-			//OUTPUT
-			Response.Write("/**\n * @author "+Common.Config.AuthorName+" - "+Common.Config.AuthorAddress+"\n */\n");
-			//Append Global variables
-			if(isScript){
-				Response.Write("\nvar $root = \"" + Util.Root + "\";");
-				Response.Write("\nvar $languagePath = \"" + Util.LanguagePath + "\";");
-				Response.Write("\nvar $globalPath = \"" + Util.GlobalPath + "\";\n");
-			}
-			Response.Write(stContent);
+			return Response;
 		}
-
-		public bool IsReusable
-		{
-			get
-			{
-				return true;
+	
+		private static FileGroup CreateGroup(string Id, string File){
+			if(groups == null){
+				groups = new List<FileGroup>();
 			}
+		
+			IFile cache = (IFile)context.Cache[File];
+			if(cache == null){
+				throw new Exception("Erro ao adicionar arquivo ao grupo: "+File+" não está registrado.");
+			}
+			IContent content = ContentFactory.CreateContent(cache.Name);
+		
+			foreach (FileGroup item in groups) {
+				if(item.Content.Type == content.Type){
+					item.Add(Id, File);
+					return item;
+				}
+			}
+			FileGroup group = new FileGroup();
+			group.Add(Id, File);
+			groups.Add(group);
+			return group;
+		} 
+		public static FileGroup GetGroupById(string Id){
+			foreach (FileGroup item in groups) {
+				if(item.FilesList.ContainsKey(Id)){
+					return item;
+				}
+			}
+			return null;
+		} 
+		public static string getGroupContentType(string GroupId) {
+			FileGroup group = GetGroupById(GroupId);
+			return group != null ? group.Content.Type : null;
 		}
-
+		public static string getFileContentType(string GroupId) {
+			IFile file = (IFile)context.Cache[GroupId];
+			return file != null ? ContentFactory.CreateContent(file.Name).Type : null;
+		}
+	
+		private static IFile CreateFile(string File, string Key) {
+			return CreateFile(File, null, Key);
+		}
+		private static IFile CreateFile(string File, string BaseFolder, string Key) {
+			IFile mFile = FileFactory.CreateFile(File);
+			if(BaseFolder != null){
+				mFile.LoadFile(File, BaseFolder, Key);
+			}else{
+				mFile.LoadFile(File, Key);
+			}
+			mFile.Filter();
+			return mFile;
+		}
 	}
 }

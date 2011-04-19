@@ -5,7 +5,7 @@
 	<add key="Title" value="titulo" />
 	<add key="Language" value="pt-BR" />
 	<add key="MailHost" value="10.2.0.10"/>
-	<add key="Sql" value="Data Source=FDES\SQL2000;Initial Catalog=COLOQUE_O_BANCO;User Id=sa;Password=159753;" />
+	<add key="Sql" value="Data Source=[SOURCE];Initial Catalog=[COLOQUE_O_BANCO];User Id=[USER];Password=[PASSWORD];" />
   </appSettings>
   <system.web>
     <compilation defaultLanguage="c#"  debug="true"  />

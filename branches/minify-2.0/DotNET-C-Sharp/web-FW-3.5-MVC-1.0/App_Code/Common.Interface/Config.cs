@@ -60,6 +60,14 @@ namespace Common
 			}
 		}
 
+		public static string Copyright
+		{
+			get
+			{
+				return "";
+			}
+		}
+		
 		public static string AuthorName
 		{
 			get

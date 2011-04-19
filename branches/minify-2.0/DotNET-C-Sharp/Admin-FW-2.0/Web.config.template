@@ -5,11 +5,6 @@
     <add key="dummy" value="0"/>
   </appSettings>
 
-  <connectionStrings>
-    <remove name="Sql" />
-    <add    name="Sql" providerName="System.Data.SqlClient" connectionString="Data Source=FDES\SQL2000;Initial Catalog=;User Id=sa;Password=159753;" />
-  </connectionStrings>
-
   <system.net>
     <mailSettings>
       <smtp>
