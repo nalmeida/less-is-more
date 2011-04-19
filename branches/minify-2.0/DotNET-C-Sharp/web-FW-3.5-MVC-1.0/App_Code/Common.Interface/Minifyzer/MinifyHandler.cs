@@ -18,18 +18,18 @@ namespace Common.Minifyzer {
 			
 			if (Minify.GetGroupById(GroupId) != null) {
 				
-				contentType = Minify.getGroupContentType(GroupId);
+				contentType = Minify.GetGroupContentType(GroupId);
 				if(!string.IsNullOrEmpty(contentType)){
 					context.Response.ContentType = contentType;
 				}
-				context.Response.Write(Minify.Write(GroupId, context));
+				context.Response.Write(Minify.GetCode(GroupId, context));
 
 			} else {
-				contentType = Minify.getFileContentType(GroupId);
+				contentType = Minify.GetFileContentType(GroupId);
 				if(!string.IsNullOrEmpty(contentType)){
 					context.Response.ContentType = contentType;
 				}
-				context.Response.Write(Minify.Write(GroupId, context));
+				context.Response.Write(Minify.GetCode(GroupId, context));
 			}
 		}
 

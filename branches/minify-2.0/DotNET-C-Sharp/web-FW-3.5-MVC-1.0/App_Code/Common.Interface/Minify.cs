@@ -11,32 +11,59 @@ namespace Common{
 		private static HttpContext context = HttpContext.Current;
 		private static List<FileGroup> groups;
 
+		/**
+		 * Register a file to be loaded, parsed and cached
+		 */
 		public static void Register(string File) {
 			Register(File, File);
 		}
 		public static void Register(string Key, string File) {
 			Register(Key, File, null);
 		}
-		public static void Register(string Key, string File, string BaseFolder) {
-			if (context.Cache[Key] == null) {
-				IFile MinifiedFile = CreateFile(File, BaseFolder, Key);
+		public static void Register(string Key, string File, string Url) {
+			IFile MinifiedFile = (IFile)context.Cache[Key];
+			if (MinifiedFile == null || MinifiedFile.Name != File) {
+				MinifiedFile = CreateFile(File, Url, Key);
 				context.Cache.Insert(Key, MinifiedFile, MinifiedFile.FileCacheDependency);
 			}
 		}
 	
-	
-		public static void Add(string GroupId, string FileId) {
-			CreateGroup(GroupId, FileId);
+		/**
+		 * Group files do groups
+		 */
+		public static FileGroup Add(string GroupId, string FileId) {
+			if(groups == null){
+				groups = new List<FileGroup>();
+			}
+		
+			IFile cache = (IFile)context.Cache[FileId];
+			if(cache == null){
+				throw new Exception("Erro ao adicionar arquivo ao grupo: "+FileId+" não está registrado.");
+			}
+			IContent content = ContentFactory.CreateContent(cache.Name);
+		
+			foreach (FileGroup item in groups) {
+				if(item.Content.Type == content.Type){
+					item.Add(GroupId, FileId);
+					return item;
+				}
+			}
+			FileGroup group = new FileGroup();
+			group.Add(GroupId, FileId);
+			groups.Add(group);
+			return group;
 		}
 	
-	
-		public static string Write(String GroupId) {
-			return Write(GroupId, context);
+		/**
+		 * Get content of group or file as string 
+		 */
+		public static string GetCode(string GroupId) {
+			return GetCode(GroupId, context);
 		}
-		public static string Write(String GroupId, HttpContext context) {
+		public static string GetCode(string GroupId, HttpContext context) {
 
 			FileGroup group = GetGroupById(GroupId);
-			String FileDates = "";
+			string FileDates = "";
 			StringBuilder sbGroupContent = new StringBuilder();
 			IFile ifile;
 		
@@ -55,53 +82,42 @@ namespace Common{
 				}
 			}else if(context.Cache[GroupId] != null){ // GroupId is FileId
 				ifile = (IFile)context.Cache[GroupId];
-				FileDates += "\n /* " + GroupId + " | " + ifile.LastModified + " */ \n";
+				FileDates = "";
 				sbGroupContent.Append(ifile.Content);
 			}else{
-				throw new Exception("Group or File not registered: "+GroupId);
+				throw new Exception("Grupo ou Arquivo não registrado: "+GroupId);
 			}
 
 			sbGroupContent.Insert(0, FileDates);
 			return sbGroupContent.ToString();
 		}
 	
-		public static string WriteTag(String GroupId) {
-			String Response = "";
+		/**
+		 * Get a html tag calling the handler (group or File id)
+		 */
+		public static string GetTag(string GroupId) {
+			string Response = "";
 
 			FileGroup group = GetGroupById(GroupId);
+			// TODO: try to get minify.aspx from web.config
 			if(group != null) {
-				Response = String.Format(group.Tag, Common.Util.Root + "minify.aspx?" + GroupId);
+				Response = string.Format(group.Tag, Common.Util.Root + "minify.aspx?" + GroupId);
 			} else if (context.Cache[GroupId] != null) {
 				IFile TagFile = (IFile)context.Cache[GroupId];
-				Response = String.Format(TagFile.Tag, Common.Util.Root + "minify.aspx?" + GroupId);
+				Response = string.Format(TagFile.Tag, Common.Util.Root + "minify.aspx?" + GroupId);
 			}else{
-				throw new Exception("Group or File not registered: "+GroupId);
+				throw new Exception("Grupo ou Arquivo não registrado: "+GroupId);
 			}
 			return Response;
 		}
+		
+		public static void WriteTag(string GroupId){
+			HttpContext.Current.Response.Write(GetTag(GroupId));
+		}
+		public static void Write(string GroupId){
+			HttpContext.Current.Response.Write(GetCode(GroupId));
+		}
 	
-		private static FileGroup CreateGroup(string Id, string File){
-			if(groups == null){
-				groups = new List<FileGroup>();
-			}
-		
-			IFile cache = (IFile)context.Cache[File];
-			if(cache == null){
-				throw new Exception("Erro ao adicionar arquivo ao grupo: "+File+" não está registrado.");
-			}
-			IContent content = ContentFactory.CreateContent(cache.Name);
-		
-			foreach (FileGroup item in groups) {
-				if(item.Content.Type == content.Type){
-					item.Add(Id, File);
-					return item;
-				}
-			}
-			FileGroup group = new FileGroup();
-			group.Add(Id, File);
-			groups.Add(group);
-			return group;
-		} 
 		public static FileGroup GetGroupById(string Id){
 			foreach (FileGroup item in groups) {
 				if(item.FilesList.ContainsKey(Id)){
@@ -110,11 +126,11 @@ namespace Common{
 			}
 			return null;
 		} 
-		public static string getGroupContentType(string GroupId) {
+		public static string GetGroupContentType(string GroupId) {
 			FileGroup group = GetGroupById(GroupId);
 			return group != null ? group.Content.Type : null;
 		}
-		public static string getFileContentType(string GroupId) {
+		public static string GetFileContentType(string GroupId) {
 			IFile file = (IFile)context.Cache[GroupId];
 			return file != null ? ContentFactory.CreateContent(file.Name).Type : null;
 		}
@@ -122,13 +138,9 @@ namespace Common{
 		private static IFile CreateFile(string File, string Key) {
 			return CreateFile(File, null, Key);
 		}
-		private static IFile CreateFile(string File, string BaseFolder, string Key) {
+		private static IFile CreateFile(string File, string Url, string Key) {
 			IFile mFile = FileFactory.CreateFile(File);
-			if(BaseFolder != null){
-				mFile.LoadFile(File, BaseFolder, Key);
-			}else{
-				mFile.LoadFile(File, Key);
-			}
+			mFile.LoadFile(File, Url, Key);
 			mFile.Filter();
 			return mFile;
 		}

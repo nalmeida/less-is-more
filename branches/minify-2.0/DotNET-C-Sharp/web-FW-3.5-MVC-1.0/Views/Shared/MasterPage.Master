@@ -10,7 +10,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="INDEX, FOLLOW" />
 
-	<%=Common.Minify.WriteTag("StructureCSS")%>
+	<%Common.Minify.WriteTag("StructureCSS");%>
 	<link rel="shortcut icon" href="<%=Common.Util.GlobalPath%>img/favicon.ico" />
 	<asp:contentplaceholder id="cphTrackValue" runat="server" />
 	<%Html.RenderPartial("Tracker", new { value = ViewData["TrackValue"] });%>
