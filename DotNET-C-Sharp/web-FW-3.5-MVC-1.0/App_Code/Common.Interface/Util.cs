@@ -154,6 +154,9 @@ namespace Common
 		}
 		
 		public static string HttpPost(string uri) {
+			return HttpPost(uri, 8000);
+		}
+		public static string HttpPost(string uri, int Timeout) {
 			HttpWebRequest webRequest;
 			StreamReader cStream = null;
 			try {
@@ -163,7 +166,7 @@ namespace Common
 				webRequest.ContentType = "application/x-www-form-urlencoded";
 				webRequest.Method = "GET";
 		
-				webRequest.Timeout = 8000;
+				webRequest.Timeout = Timeout;
 		
 				using (HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse()) {
 					if (webResponse == null) {
@@ -173,7 +176,7 @@ namespace Common
 					return cStream.ReadToEnd();
 				}
 			} catch (Exception) {
-				throw;
+				return "";
 			}
 		}
 		

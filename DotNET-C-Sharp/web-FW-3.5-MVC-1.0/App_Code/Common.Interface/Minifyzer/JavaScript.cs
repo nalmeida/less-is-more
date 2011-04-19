@@ -17,6 +17,7 @@ namespace Common.Minifyzer {
 		public string Content { get; set; }
 		public HttpContext context { get { return HttpContext.Current; } }
 		public string BaseFolder { get; set; }
+		public string Url { get; set; }
 		public CacheDependency FileCacheDependency { get; set; }
 		public DateTime LastModified { get; set; }
 
@@ -36,30 +37,33 @@ namespace Common.Minifyzer {
 			ReadFile();
 		}
 
-		public void LoadFile(string file, string FilePath, string id) {
-			
-			if (FilePath.ToLower().StartsWith("http://") || FilePath.ToLower().StartsWith("https://")) {
-				BaseFolder = FilePath;
-			} else {
-				BaseFolder = context.Server.MapPath(FilePath);
-			}
-
+		public void LoadFile(string file, string UrlPath, string id) {
+			Url = UrlPath;
 			LoadFile(file, id);
 		}
 
 		public void Filter() {
-			Content = "\n\n /* " + Name + " | " + LastModified + " */ \n\n" + Content;
+			Content = "\n\n /* " + Id + " | " + LastModified + " */ \n\n" + Content;
 		}
 
 		private void ReadFile() {
-
-			if (BaseFolder.ToLower().StartsWith("http://") || BaseFolder.ToLower().StartsWith("https://")) {
-				Content = Common.Util.HttpPost(BaseFolder + Name);
+			if (!string.IsNullOrEmpty(Url)) {
+				Content = Common.Util.HttpPost(Url, 2000);
+				if(string.IsNullOrEmpty(Content)){
+					ReadLocalFile();
+				}
 			} else {
-				FileCacheDependency = new CacheDependency(BaseFolder + Name);
+				ReadLocalFile();
+			}
+		}
+		private void ReadLocalFile(){
+			FileCacheDependency = new CacheDependency(BaseFolder + Name);
+			try{
 				using (StreamReader srContent = new StreamReader(BaseFolder + Name, Encoding.GetEncoding("utf-8"))) {
 					Content = srContent.ReadToEnd();
 				}
+			}catch(Exception ex){
+				Content = "/* ERROR: Não foi possível encontrar \""+Id+"\" */\n";
 			}
 		}
 	}
