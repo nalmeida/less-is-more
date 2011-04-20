@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Caching;
+using System.Web.Configuration;
+using System.Configuration;
 using System.Text;
 using Common.Minifyzer;
 
@@ -10,6 +12,7 @@ namespace Common{
 	
 		private static HttpContext context = HttpContext.Current;
 		private static List<FileGroup> groups;
+		private static string HandlerPath;
 
 		/**
 		 * Register a file to be loaded, parsed and cached
@@ -99,25 +102,73 @@ namespace Common{
 			string Response = "";
 
 			FileGroup group = GetGroupById(GroupId);
-			// TODO: try to get minify.aspx from web.config
+			
 			if(group != null) {
-				Response = string.Format(group.Tag, Common.Util.Root + "minify.aspx?" + GroupId);
+				Response = IsDebug() ?
+					GetDebugTag(group.FilesList[GroupId]) : 
+					string.Format(group.Tag, Common.Util.Root + GetHandlerPath() + "?" + GroupId);
 			} else if (context.Cache[GroupId] != null) {
 				IFile TagFile = (IFile)context.Cache[GroupId];
-				Response = string.Format(TagFile.Tag, Common.Util.Root + "minify.aspx?" + GroupId);
+				Response = IsDebug() ? 
+					GetDebugTag(TagFile) :
+					string.Format(TagFile.Tag, Common.Util.Root + GetHandlerPath() + "?" + GroupId);
 			}else{
 				throw new Exception("Grupo ou Arquivo não registrado: "+GroupId);
 			}
+			HttpHandlersSection handlers = (HttpHandlersSection)ConfigurationManager.GetSection("system.web/httpHandlers");
+			
 			return Response;
 		}
 		
+		/**
+		 * Write tag or code on the current context (wrapper)
+		 */
 		public static void WriteTag(string GroupId){
 			HttpContext.Current.Response.Write(GetTag(GroupId));
 		}
 		public static void Write(string GroupId){
 			HttpContext.Current.Response.Write(GetCode(GroupId));
 		}
+		
+		/**
+		 * Get Tag without minify management (for debugging purpose)
+		 */
+		public static string GetDebugTag(List<IFile> list){
+			string Response = "";
+			foreach(IFile item in list){
+				Response += GetDebugTag(item);
+			}
+			return Response;
+		}
+		public static string GetDebugTag(IFile file){
+			return string.Format(file.Tag, file.GetVirtualPath());
+		}
 	
+
+		/**
+		 * Create File based on the file name
+		 */
+		private static IFile CreateFile(string File, string Key) {
+			return CreateFile(File, null, Key);
+		}
+		private static IFile CreateFile(string File, string Url, string Key) {
+			IFile mFile = FileFactory.CreateFile(File);
+			mFile.LoadFile(File, Url, Key);
+			mFile.Filter();
+			return mFile;
+		}
+		
+		/**
+		 * debug getter
+		 */
+		public static bool IsDebug(){
+			// TODO: mecanism with token via querystring
+			return ConfigurationManager.AppSettings["MinifyDebug"] == "true";
+		}
+		
+		/**
+		 * Groups Getters By Id
+		 */
 		public static FileGroup GetGroupById(string Id){
 			foreach (FileGroup item in groups) {
 				if(item.FilesList.ContainsKey(Id)){
@@ -134,15 +185,17 @@ namespace Common{
 			IFile file = (IFile)context.Cache[GroupId];
 			return file != null ? ContentFactory.CreateContent(file.Name).Type : null;
 		}
-	
-		private static IFile CreateFile(string File, string Key) {
-			return CreateFile(File, null, Key);
-		}
-		private static IFile CreateFile(string File, string Url, string Key) {
-			IFile mFile = FileFactory.CreateFile(File);
-			mFile.LoadFile(File, Url, Key);
-			mFile.Filter();
-			return mFile;
+		public static string GetHandlerPath(){
+			if(string.IsNullOrEmpty(HandlerPath)){
+				HttpHandlersSection handlers = (HttpHandlersSection)ConfigurationManager.GetSection("system.web/httpHandlers");
+				foreach(HttpHandlerAction handler in handlers.Handlers){
+					if(handler.Type == typeof(MinifyHandler).FullName){
+						HandlerPath = handler.Path;
+						break;
+					}
+				}
+			}
+			return HandlerPath;
 		}
 	}
 }

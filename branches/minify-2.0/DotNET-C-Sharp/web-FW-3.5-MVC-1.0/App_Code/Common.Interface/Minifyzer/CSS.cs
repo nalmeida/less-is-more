@@ -16,7 +16,8 @@ namespace Common.Minifyzer {
 		public string PhisicalFolder { get; set; }
 		public string Content { get; set; }
 		public HttpContext context { get { return HttpContext.Current; } }
-		public string BaseFolder { get; set; }
+		public string BaseFolderRoot { get; set; }
+		public string BaseFolderAsset { get; set; }
 		public string Url { get; set; }
 		public CacheDependency FileCacheDependency { get; set; }
 		public DateTime LastModified { get; set; }
@@ -26,8 +27,9 @@ namespace Common.Minifyzer {
 		}
 
 		public void LoadFile(string file, string id) {
-			if (string.IsNullOrEmpty(BaseFolder)) {
-				BaseFolder = context.Server.MapPath(context.Request.ApplicationPath) + "/locales/global/css/";
+			if (string.IsNullOrEmpty(BaseFolderRoot)) {
+				BaseFolderAsset = "locales/global/css/";
+				BaseFolderRoot = context.Server.MapPath(context.Request.ApplicationPath) + "/";
 			}
 			Name = file;
 			Id = id;
@@ -38,6 +40,14 @@ namespace Common.Minifyzer {
 			LoadFile(file, id);
 		}
 
+		public string GetVirtualPath(){
+			// TODO: Get global / languagePath
+			return Url != null ? Url : Common.Util.Root + BaseFolderAsset + Name;
+		}
+		public string GetPhysicalPath(){
+			return Url != null ? Url : BaseFolderRoot + BaseFolderAsset + Name;
+		}
+		
 		public void Filter() {
 			
 			Content = "\n\n /* " + Name + " | " + LastModified + " */ \n\n" + Content;
@@ -81,8 +91,8 @@ namespace Common.Minifyzer {
 			}
 		}
 		private void ReadLocalFile(){
-			FileCacheDependency = new CacheDependency(BaseFolder + Name);
-			using (StreamReader srContent = new StreamReader(BaseFolder + Name, Encoding.GetEncoding("utf-8"))) {
+			FileCacheDependency = new CacheDependency(BaseFolderRoot + BaseFolderAsset + Name);
+			using (StreamReader srContent = new StreamReader(BaseFolderRoot + BaseFolderAsset + Name, Encoding.GetEncoding("utf-8"))) {
 				Content = srContent.ReadToEnd();
 			}
 		}
