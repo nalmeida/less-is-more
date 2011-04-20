@@ -23,7 +23,8 @@
 		<section name="dataConfiguration" type="Microsoft.Practices.EnterpriseLibrary.Data.Configuration.DatabaseSettings, Microsoft.Practices.EnterpriseLibrary.Data"/>
 	</configSections>
 	<appSettings>
-	<add key="MinifyEncryptKey" value="Nanicolina"/>
+		<add key="MinifyEncryptKey" value="Nanicolina"/>
+		<add key="MinifyDebug" value="false"/>
 		<!-- 
 			HARD PATHS
 		-->
