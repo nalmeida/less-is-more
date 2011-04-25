@@ -41,4 +41,5 @@ As propriedades `Common.Config.Title`, `Common.Config.Description`, `Common.Conf
 }}}
 
 No caso da aplicação "http://localhost/application/" o `title` seria "Módulo Padrão C# 16.2 MVC - utf-8".
+
 Em "http://localhost/application/teste.aspx", o `title` seria "Teste".
