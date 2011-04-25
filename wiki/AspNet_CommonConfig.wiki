@@ -1,6 +1,6 @@
 #summary Variáveis de ambiente disponíveis
 
-=Variáveis de Ambiente - Common.Config.\*= 
+=Variáveis de Ambiente - Common.Config.`*`= 
 
 Este é um conjunto de propriedades que definem os dados do projeto como Nome do Autor, Copyright, Título da Página, Keywords, Description, etc.
 
