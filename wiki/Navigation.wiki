@@ -5,7 +5,7 @@
 		* [Develop_HTML HTML]
 		* [Develop_CSS CSS]
 		* [Develop_JS Javascript]
-	* Javascript
+	* [Js Javascript]
 		* [TestandoAnalyticsLocalmente Teste local do Analytics]
 	* [AspNet ASP.NET]
 		* [AspNet_CommonUtil Variáveis de ambiente]
@@ -14,4 +14,5 @@
 		* [AspNet_CommonUtilTransformXML TransformXML (XML + XSLT)]
 		* [AspNet_Minify Minify]
 		* [AspNet_MasterPages Master Pages]
+		* [AspNet_FakeImage fake_image.aspx]
 	* [Bookmarks]
