@@ -1,0 +1,8 @@
+#summary Padrões de marcação CSS para projetos LIM
+
+=Padrões de desenvolvimento do CSS=
+
+	* Nomenclatura das classes separadas por hífen `-`;
+	* IDs utilizam [http://pt.wikipedia.org/wiki/CamelCase CamelCase];
+	* Todos os estilos são definidos em arquivos CSS externos;
+	* CSS identado

@@ -1,3 +1,0 @@
-#summary O que são e como usar os Content Placeholders do ASP
-
-TODO

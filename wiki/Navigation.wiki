@@ -2,13 +2,14 @@
 
 	* *[Intro Introdução]*
 	* Padrões de desenvolvimento LIM
-		* [PadraoHtmlLIM  HTML]
-		* [PadraoCssLIM CSS]
-		* [PadraoClassesJavascriptLIM Classes Javascript]
+		* [Develop_HTML HTML]
+		* [Develop_CSS CSS]
+		* [Develop_JS Javascript]
 	* Javascript
-		* [TestandoAnalyticsLocalmente Testando Analytics localmente]
+		* [TestandoAnalyticsLocalmente Teste local do Analytics]
 	* ASP.NET
-		* MasterPages
-			* [AspContentPlaceholders Content Place Holders]
-		* [AspNet_ServerVariables Variáveis de ambiente]
+		* Variáveis de ambiente
+			* [AspNet_CommonUtil Útil]
+			* [AspNet_CommonConfig Dados do projeto + SEO.xml]
 		* [AspNet_Minify Minify]
+	* [Bookmarks]

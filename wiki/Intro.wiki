@@ -1,10 +1,10 @@
 #summary Instruções básicas para qualquer projeto LIM
 
-= Introdução =
+=Introdução=
 
-A idéia básica deste framework é servir de base de desenvolvimento para projetos web. O foco principal é a programação Client Side com alguns recursos Server Side.
+A idéia básica do framework é servir de base de desenvolvimento para projetos web. O foco principal é a programação _Client Side_ com alguns recursos _Server Side_.
 
-Inicialmente ele está pronto, testado e funcionando para ASP .NET C# mas pode (e deve) ser reescrito para outras linguagens.
+Inicialmente ele está pronto, testado e funcionando para ASP.NET C# mas pode (e deve) ser reescrito para outras linguagens.
 
 As principais motivações para a criação deste framework são:
 
@@ -15,36 +15,15 @@ As principais motivações para a criação deste framework são:
 
 -----------------------------------------------------------------------------------------
 
-= Práticas Gerais = 
+==Suporte==
 
-== Encoding dos arquivos texto ==
+Framework testado nos browsers:
 
-Todo os arquivos da LIM estão e DEVEM ser salvos como *UTF-8*, portanto, configure corretamete o seu editor!
+	* IE7+;
+	* Firefox 3.5+;
+	* Safari (última versão estável);
+	* Google Chrome (última versão estável);
 
------------------------------------------------------------------------------------------
+==Encoding==
 
-== Legibilidade e compreensão _versus_ peso dos arquivos ==
-
-Não existe a necessidade de comprimir HTML, CSS ou Javascript manualmente pois a LIM utiliza processos do lado do servidor que comprimem automaticamente (GZip) estes arquivos.
-
-Recomendamos ainda o uso de comentários no HTML, CSS e JS apenas onde necessário. Os comentários HTML devem sempre ser feitos como comentário da linguagem nativa.
-
-Ao invés de:
-
-{{{
-	<!-- Comentário -->
-}}}
-
-Usar (exemplo no .NET C#):
-
-{{{
-	<%// Comentário%>
-}}}
-
------------------------------------------------------------------------------------------
-
-== Identação ==
-
-A indentação é obrigatória para o endendimento do código em qualquer linguagem.
-
-Importante: Para a identação do código, *não utilizar espaços*. Uma página HTML pode ficar até 40% mais pesada só por conta deles.
+Todo os arquivos da LIM estão salvos e pré-configurados em *UTF-8*.
