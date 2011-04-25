@@ -1,0 +1,11 @@
+#summary Índice da seção ASP.NET
+
+=Less Is More versão ASP.NET=
+
+A LIM para ASP.NET roda em cima do [http://www.asp.net/mvc ASP.NET MVC]. Além disso existem alguns recursos que podem ser úteis:
+
+	* [AspNet_CommonUtil Variáveis de ambiente] - Algumas variáveis úteis para facilitar o desenvolvimento client side;
+	* [AspNet_CommonConfig Dados do projeto + SEO.xml] - Classe para facilitar a inserção / manutenção de dados customizados por página;
+	* [AspNet_CommonBrowser Browser Detector] - Classe para facilitar a identificação do Browser atual e sua versão;
+	* [AspNet_CommonUtilTransformXML TransformXML (XML + XSLT)] - Classe para facilitar o processo de transformação de XML;
+	* [AspNet_Minify Minify] - Classe para economizar requisições de CSS e JS;
