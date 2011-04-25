@@ -1,5 +1,4 @@
 #summary Padrões de desenvolvimento de Classes Javascript para a LIM
-#sidebar TabelaDeConteudos
 
 = Introdução = 
 Para a construção de Classes para LIM, é necessário seguir alguns padrões clássicos de desenvolvimento e boas práticas:

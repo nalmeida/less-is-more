@@ -1,5 +1,4 @@
 #summary Como testar localmente o Google Analytics sem fazer as requisições para o servidor
-#sidebar TabelaDeConteudos
 
 = Introdução =
 Para facilitar a verificação da implementação das _marcações_ do Google Analytics, desenvolvemos uma técnica simples que consiste em:

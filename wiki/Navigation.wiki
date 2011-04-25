@@ -1,17 +1,14 @@
 #summary Tabela com todos os conteúdos da Wiki
 
- * *[intro_antes-de-comecar Informações indispensaveis]*
- * Padrões de desenvolvimento LIM
-  * [PadraoHtmlLIM  HTML]
-  * [PadraoCssLIM CSS]
-  * [PadraoClassesJavascriptLIM Classes Javascript]
- * Trabalnahdo com .NET
-  * MasterPages
-  * [AspContentPlaceholders Content Place Holders]
-  * [VariaveisDeAmbiente  Variáveis de ambiente]
-  * Minify
- * Performance
- * Dicas
-  * [TestandoAnalyticsLocalmente Testando Analytics localmente]
- * [TODO Todo list]
- 
+	* *[Intro Introdução]*
+	* Padrões de desenvolvimento LIM
+		* [PadraoHtmlLIM  HTML]
+		* [PadraoCssLIM CSS]
+		* [PadraoClassesJavascriptLIM Classes Javascript]
+	* Javascript
+		* [TestandoAnalyticsLocalmente Testando Analytics localmente]
+	* ASP.NET
+		* MasterPages
+			* [AspContentPlaceholders Content Place Holders]
+		* [AspNet_ServerVariables Variáveis de ambiente]
+		* [AspNet_Minify Minify]

@@ -1,5 +1,5 @@
 #summary Padrões de marcação HTML para projetos LIM
-#sidebar TabelaDeConteudos
+
 =Introdução=
 
 Todo o código HTML deve ser testado e estar 100% [http://validator.w3.org/ válido segundo os padrões W3C]. Tão importante quanto a validação do código é garantir a compatibilidade _Cross-Browser_.

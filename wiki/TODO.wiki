@@ -1,5 +1,4 @@
 #summary Todo list
-#sidebar TabelaDeConteudos
 
 = TODO =
  * lim.video com a possibilidade de usar a tag nativa do HTML (com handlers de complete, init, etc);
