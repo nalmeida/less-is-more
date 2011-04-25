@@ -4,7 +4,7 @@
 
 Todo projeto LIM possui um pacote de "utilidades" do servidor. Entre elas estão as Variáveis de Ambiente que são acessíveis através da classe estática `Commom.Util`.
 
-Esta classe se encontra em \App\_Code\Common.Interface\Util.cs.
+Esta classe se encontra em \App`_`Code\Common.Interface\Util.cs.
 
 Todos os caminhos de arquivos JS, CSS, IMG, SWFs, etc. ou mesmo links de navegações internos *devem* utilizar estas variáves.
 

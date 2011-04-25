@@ -8,8 +8,9 @@
 	* Javascript
 		* [TestandoAnalyticsLocalmente Teste local do Analytics]
 	* ASP.NET
-		* Variáveis de ambiente
-			* [AspNet_CommonUtil Útil]
-			* [AspNet_CommonConfig Dados do projeto + SEO.xml]
+		* [AspNet_CommonUtil Variáveis de ambiente]
+		* [AspNet_CommonConfig Dados do projeto + SEO.xml]
+		* [AspNet_CommonBrowser Browser Detector]
+		* [AspNet_CommonUtilTransformXML TransformXML (XML + XSLT)]
 		* [AspNet_Minify Minify]
 	* [Bookmarks]

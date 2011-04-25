@@ -1,10 +1,10 @@
-#summary Variáveis de ambiente disponíveis
+#summary Variáveis de ambiente para dados do projeto
 
 =Variáveis de Ambiente - Common.Config.`*`= 
 
 Este é um conjunto de propriedades que definem os dados do projeto como Nome do Autor, Copyright, Título da Página, Keywords, Description, etc.
 
-A classe se encontra em \App\_Code\Common.Interface\Config.cs.
+A classe se encontra em \App`_`Code\Common.Interface\Config.cs.
 
 Nesta classe as propriedades `Common.Config.Copyright`, `Common.Config.AuthorName`, `Common.Config.AuthorAddress`, `Common.Config.CompanyName` são estáticos e servem apenas para centralizar os dados.
 
@@ -12,7 +12,7 @@ Já o `Common.Config.Title`, `Common.Config.Description`, `Common.Config.Keyword
 
 ==seo.xml==
 
-As tags `title`, `h1`, `meta description`, e `meta keywords` das páginas a podem ser dinâmicos, buscando dados do arquivo encontrado em /App\_Code/seo.xml.
+As tags `title`, `h1`, `meta description`, e `meta keywords` das páginas a podem ser dinâmicos, buscando dados do arquivo encontrado em /App`_`Code/seo.xml.
 
 As propriedades `Common.Config.Title`, `Common.Config.Description`, `Common.Config.Keywords`,  `Common.Config.H1`, buscam os dados do xml baseados na url atual. No caso abaixo:
 
