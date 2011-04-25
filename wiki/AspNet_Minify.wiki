@@ -1,4 +1,4 @@
-##summary Classe para concatenar e compactar JS e CSS
+#summary Classe para concatenar e compactar JS e CSS
 
 =`Common.Minify`=
 

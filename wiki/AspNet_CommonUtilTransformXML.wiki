@@ -1,4 +1,4 @@
-@summary Classe para aplicar transformação XSLT em um XML e guardar em cache.
+#summary Classe para aplicar transformação XSLT em um XML e guardar em cache.
 
 =`Common.Util.TransformXML` - Classe para transformação de XML utilizando XSLT=
 
