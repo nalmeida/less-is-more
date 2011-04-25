@@ -18,7 +18,7 @@ Para criar um conteúdo variável, crie uma tag seguindo a lógica abaixo:
 </asp:contentplaceholder>
 }}}
 
-	*Importante* Caso exista a necessidade de utilizar uma tag asp (ex: `<%=Variavel %>`) dentro do conteúdo default de um contentplaceholder usar o "`#`" no lugar do "`=`" (ex: `<%#Variavel %>`) , senão o conteúdo não será substituído nas páginas filhas.
+<font color="#E9E9E9">Caso exista a necessidade de utilizar uma tag asp (ex: `<%=Variavel %>`) dentro do conteúdo default de um contentplaceholder usar o "`#`" no lugar do "`=`" (ex: `<%#Variavel %>`) , senão o conteúdo não será substituído nas páginas filhas.</font>
 
 No arquivo da página (na default.aspx, por exemplo), coloque a diretiva:
 {{{
