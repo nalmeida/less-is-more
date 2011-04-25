@@ -1,6 +1,6 @@
 #summary Variáveis de ambiente disponíveis
 
-=Variáveis de Ambiente - Common.Util.\*= 
+=Variáveis de Ambiente - Common.Util.`*`= 
 
 Todo projeto LIM possui um pacote de "utilidades" do servidor. Entre elas estão as Variáveis de Ambiente que são acessíveis através da classe estática `Commom.Util`.
 
