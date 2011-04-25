@@ -115,7 +115,6 @@ namespace Common{
 			}else{
 				throw new Exception("Grupo ou Arquivo não registrado: "+GroupId);
 			}
-			HttpHandlersSection handlers = (HttpHandlersSection)ConfigurationManager.GetSection("system.web/httpHandlers");
 			
 			return Response;
 		}
