@@ -3,12 +3,12 @@
 =`Common.Minify`=
 
 O objetivo da Minify é compactar e reduzir a quantidade de requisições reunindo as chamadas dos arquivos JS ou CSS.
-Além disso, ela também possui alguns recursos que [AspNet_Minify#Minify_e_CSS ajudam na construção de um CSS].
+Além disso, ela também possui alguns recursos que ajudam na construção de um CSS ([AspNet_Minify#Minify_e_CSS]).
 
 O processo de uso da classe é dividido em 2 (ou 3) partes:
 
-	* Registre os arquivos no arquivo `App_Code/Global.asax.cs`;
-	* Crie os grupos (opcional) no arquivo `App_Code/Global.asax.cs`;
+	* Registre os arquivos em *`App_Code/Global.asax.cs`*;
+	* Crie os grupos (opcional) em *`App_Code/Global.asax.cs`*;
 	* Insira a tag ou conteúdo na página final;
 	
 ==1. Registro dos arquivos==
@@ -21,7 +21,7 @@ Existem 2 formas de registrar um arquivo:
 
 ===Registrando um arquivo local===
 
-Os arquivos locais são buscados dentro da pasta `~/js/` ou `~/locales/global/css/`:
+Os arquivos locais são buscados dentro da pasta *`~/js/`* ou *`~/locales/global/css/`*:
 {{{
 <% Common.Minify.Register("JQuery", "jquery.js"); %> // será referenciado no futuro como "JQuery"
 }}}
@@ -39,8 +39,6 @@ Existe um shortcut que atribue o nome do arquivo para o registro:
 <% Common.Minify.Register("jQuery", "jquery.js", "http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"); %>
 }}}
 Caso o arquivo na CDN do google não esteja acessível, carrega o local.
-
-Para isso existe o método `Common.Minify.Register` que pode ser usado da seguinte forma:
 
 
 ==2. Grupos==
@@ -64,7 +62,7 @@ Para criar um grupo:
 	Common.Minify.Add("Structure", "core");
 %>
 }}}
-Neste caso o grupo "Structure" contém os arquivos `jQuery`, `teste.js` e `core`.
+Neste caso o grupo "Structure" contém os arquivos *`jQuery`*, *`teste.js`* e *`core`*.
 
 *Importante*: Apenas arquivos do mesmo tipo podem fazer parte de um grupo.
 
@@ -78,48 +76,48 @@ Os métodos `Common.Minify.WriteTag` são encarregados de inserir a tag html do 
 
 Ao escrever o código abaixo na aplicação "http://localhost/application/":
 {{{
-	<%
-		// registra os arquivos
-		Common.Minify.Register("jQuery", "jquery.js", "http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js");
-		Common.Minify.Register("teste.js");
-		Common.Minify.Register("core", "core/teste.js");
+<%
+	// registra os arquivos
+	Common.Minify.Register("jQuery", "jquery.js", "http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js");
+	Common.Minify.Register("teste.js");
+	Common.Minify.Register("core", "core/teste.js");
 
-		// adiciona ao grupo
-		Common.Minify.Add("Structure", "jQuery");
-		Common.Minify.Add("Structure", "teste.js"); // "teste.js" é o id gerado pelo shortcut
-		Common.Minify.Add("Structure", "core");
-		
-		// escreve a tag
-		Common.Minify.WriteTag("Structure");
-	%>
+	// adiciona ao grupo
+	Common.Minify.Add("Structure", "jQuery");
+	Common.Minify.Add("Structure", "teste.js"); // "teste.js" é o id gerado pelo shortcut
+	Common.Minify.Add("Structure", "core");
+	
+	// escreve a tag
+	Common.Minify.WriteTag("Structure");
+%>
 }}}
 
-Resultará na tag abaixo, com o conteúdo de `jquery.js` + `teste.js` + `core/teste.js`.
+Resultará na tag abaixo, com o conteúdo de *`jquery.js`* + *`teste.js`* + *`core/teste.js`*.
 {{{
 <script type="text/javascript" src="http://localhost/application/minify.aspx?Structure"></script>
 }}}
 
-Além do método `WriteTag`, existe também o `GetTag`, que apenas retorna a string do resultado.
+Além do método *`WriteTag`*, existe também o *`GetTag`*, que apenas retorna a string do resultado.
 
 ===Inserção do conteúdo===
 
 Caso seja necessário, é possível inserir o conteúdo de um JS ou CSS na página através do comando `Common.Minify.Write`:
 
 {{{
-	<%
-		// registra os arquivos
-		Common.Minify.Register("jQuery", "jquery.js", "http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js");
-		Common.Minify.Register("teste.js");
-		Common.Minify.Register("core", "core/teste.js");
+<%
+	// registra os arquivos
+	Common.Minify.Register("jQuery", "jquery.js", "http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js");
+	Common.Minify.Register("teste.js");
+	Common.Minify.Register("core", "core/teste.js");
 
-		// adiciona ao grupo
-		Common.Minify.Add("Structure", "jQuery");
-		Common.Minify.Add("Structure", "teste.js"); // "teste.js" é o id gerado pelo shortcut
-		Common.Minify.Add("Structure", "core");
-		
-		// escreve a tag
-		Common.Minify.Write("Structure");
-	%>
+	// adiciona ao grupo
+	Common.Minify.Add("Structure", "jQuery");
+	Common.Minify.Add("Structure", "teste.js"); // "teste.js" é o id gerado pelo shortcut
+	Common.Minify.Add("Structure", "core");
+	
+	// escreve a tag
+	Common.Minify.Write("Structure");
+%>
 }}}
 Resulta em:
 {{{
@@ -153,9 +151,11 @@ Common.Util.GlobalPath;
 
 Para arquivos CSS, além de concatenar, comprimir e guardar no cache do servidor, existem algumas palavras-chave que a minify substitui pelas variáveis de ambiente:
 
-"`$root/`" por `Common.Util.AssetsRoot`;
-"`$global/`" por `Common.Util.GlobalPath`;
-"`$language/`" por `Common.Util.LanguagePath`;
+{{{
+"$root/" por Common.Util.AssetsRoot;
+"$global/" por Common.Util.GlobalPath;
+"$language/" por Common.Util.LanguagePath;
+}}}
 
 Além disto é possível criar suas próprias variáveis dentro de um CSS:
 {{{
