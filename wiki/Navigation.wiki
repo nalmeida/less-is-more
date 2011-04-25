@@ -13,4 +13,5 @@
 		* [AspNet_CommonBrowser Browser Detector]
 		* [AspNet_CommonUtilTransformXML TransformXML (XML + XSLT)]
 		* [AspNet_Minify Minify]
+		* [AspNet_MasterPages Master Pages]
 	* [Bookmarks]

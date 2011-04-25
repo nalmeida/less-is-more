@@ -9,3 +9,4 @@ A LIM para ASP.NET roda em cima do [http://www.asp.net/mvc ASP.NET MVC]. Além d
 	* [AspNet_CommonBrowser Browser Detector] - Classe para facilitar a identificação do Browser atual e sua versão;
 	* [AspNet_CommonUtilTransformXML TransformXML (XML + XSLT)] - Classe para facilitar o processo de transformação de XML;
 	* [AspNet_Minify Minify] - Classe para economizar requisições de CSS e JS;
+	* [AspNet_MasterPages Master Pages] - Método utilizado na LIM em alternativa ao "include";
