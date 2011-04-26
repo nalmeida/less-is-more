@@ -10,7 +10,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="INDEX, FOLLOW" />
 
-	<%Common.Minify.WriteTag("StructureCSS");%>
 	<link rel="shortcut icon" href="<%=Common.Util.GlobalPath%>img/favicon.ico" />
 	<asp:contentplaceholder id="cphTrackValue" runat="server" />
 	<%Html.RenderPartial("Tracker", new { value = ViewData["TrackValue"] });%>
@@ -20,5 +19,24 @@
 </head>
 <body>
 	<asp:contentplaceholder id="cphContent" runat="server"  />
+	<br />
+	<%
+		Common.Minify
+			.Clear()
+			.Add(Common.Util.GlobalPath+"css/reset.css")
+		//	.Add(Common.Util.GlobalPath+"css/teste.css")
+			.Add("http://interface.aceite.fbiz.com.br/testes-css/css/reset.css")
+			.Write();
+	%>
+	<br />
+	<%=Cache.Count%>
+	
+	<%
+		Common.Minify
+			.Clear()
+			.Add("~/js/lib/jquery-1.4.3.js")
+			.Add("~/js/lib/swfobject-2.2.js")
+			.Write();
+	%>
 </body>
 </html>
