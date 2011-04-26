@@ -8,6 +8,7 @@ using System.Configuration;
 using System.Text;
 using Common.Minifyzer;
 using Common.Minifyzer.Abstracts;
+using Common.Minifyzer.Interfaces;
 
 namespace Common.Minifyzer{
 
