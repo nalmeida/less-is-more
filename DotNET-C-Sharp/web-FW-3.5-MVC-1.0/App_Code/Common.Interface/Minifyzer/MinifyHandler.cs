@@ -10,28 +10,41 @@ namespace Common.Minifyzer {
 		public bool IsReusable {
 			get { return true; }
 		}
-
-		public void ProcessRequest(HttpContext context) {
-			String GroupId = context.Request.QueryString[0].Split('|')[0]; 
-			string contentType;
-			Util.GZipEncodePage();
-			
-			if (Minify.GetGroupById(GroupId) != null) {
-				
-				contentType = Minify.GetGroupContentType(GroupId);
-				if(!string.IsNullOrEmpty(contentType)){
-					context.Response.ContentType = contentType;
-				}
-				context.Response.Write(Minify.GetCode(GroupId, context));
-
-			} else {
-				contentType = Minify.GetFileContentType(GroupId);
-				if(!string.IsNullOrEmpty(contentType)){
-					context.Response.ContentType = contentType;
-				}
-				context.Response.Write(Minify.GetCode(GroupId, context));
-			}
+		public HttpContext Context {
+			get; set;
 		}
 
+		public void ProcessRequest(HttpContext context) {
+			// Context = context;
+			// String Id = Context.Request.QueryString[0].Split('|')[0]; 
+			// FileGroup Group;
+			// IFile File;
+			// 
+			// // Cache.Run(Context);
+			// Util.GZipEncodePage();
+			// //fileLastModified = File.GetLastWriteTime(filePath);
+			// //lastModifiedFileGlobal = fileLastModified > lastModifiedFileGlobal ? fileLastModified : lastModifiedFileGlobal;
+			// 
+			// Group = Minify.GetGroupById(Id);
+			// if (Group != null) {
+			// 	WriteGroupContent(Id);
+			// } else {
+			// 	File = Minify.GetFileById(Id);
+			// 	WriteFileContent(Id);
+			// }
+		}
+
+		// private void WriteContent(string GroupId, string ContentType){
+		// 	if(!string.IsNullOrEmpty(ContentType)){
+		// 		Context.Response.ContentType = ContentType;
+		// 	}
+		// 	Context.Response.Write(Minify.GetCode(GroupId, Context));
+		// }
+		// private void WriteGroupContent(string GroupId){
+		// 	WriteContent(GroupId, Minify.GetGroupContentType(GroupId));
+		// }
+		// private void WriteFileContent(string GroupId){
+		// 	WriteContent(GroupId, Minify.GetFileContentType(GroupId));
+		// }
 	}
 }
