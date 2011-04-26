@@ -6,6 +6,7 @@ using System.Text;
 using System.IO;
 using System.Text.RegularExpressions;
 using Common.Minifyzer.Abstracts;
+using Common.Minifyzer.Interfaces;
 
 namespace Common.Minifyzer {
 	
