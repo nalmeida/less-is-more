@@ -8,34 +8,34 @@ using System.Xml;
 
 namespace Common
 {
-    public class Sitemap : IHttpHandler
-    {
-        public void ProcessRequest(HttpContext context)
-        {
-            XmlTextWriter xmlWriter = new XmlTextWriter(context.Response.OutputStream, System.Text.Encoding.UTF8) { Formatting = Formatting.Indented };
+	public class Sitemap : IHttpHandler
+	{
+		public void ProcessRequest(HttpContext context)
+		{
+			XmlTextWriter xmlWriter = new XmlTextWriter(context.Response.OutputStream, System.Text.Encoding.UTF8) { Formatting = Formatting.Indented };
 
-            xmlWriter.WriteStartDocument();
-            xmlWriter.WriteStartElement("urlset");
-            xmlWriter.WriteAttributeString("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9");
-            xmlWriter.WriteAttributeString("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-            xmlWriter.WriteAttributeString("xsi:schemaLocation", @"http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd");
-
-
-            xmlWriter.WriteEndElement();//urlset
-
-            context.Response.ContentType = "text/xml";
-            xmlWriter.Flush();
-        }
+			xmlWriter.WriteStartDocument();
+			xmlWriter.WriteStartElement("urlset");
+			xmlWriter.WriteAttributeString("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9");
+			xmlWriter.WriteAttributeString("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+			xmlWriter.WriteAttributeString("xsi:schemaLocation", @"http://www.sitemaps.org/schemas/sitemap/0.9
+			http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd");
 
 
-        public bool IsReusable
-        {
-            get
-            {
-                return true;
-            }
-        }
+			xmlWriter.WriteEndElement();//urlset
 
-    }
+			context.Response.ContentType = "text/xml";
+			xmlWriter.Flush();
+		}
+
+
+		public bool IsReusable
+		{
+			get
+			{
+				return true;
+			}
+		}
+
+	}
 }

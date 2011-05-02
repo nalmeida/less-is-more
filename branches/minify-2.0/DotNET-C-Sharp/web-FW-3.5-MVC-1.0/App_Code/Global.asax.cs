@@ -14,7 +14,7 @@ public class MvcApplication : System.Web.HttpApplication {
 	public static void RegisterRoutes(RouteCollection routes) {
 		
 		routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-		routes.IgnoreRoute(Common.Minify.GetHandlerPath());
+		routes.IgnoreRoute("{*allassets}", new {allassets=@".*\.(js|css)(/.*)?"});
 		routes.IgnoreRoute("fakeimage.aspx");
 		routes.IgnoreRoute("sitemap.xml");
 

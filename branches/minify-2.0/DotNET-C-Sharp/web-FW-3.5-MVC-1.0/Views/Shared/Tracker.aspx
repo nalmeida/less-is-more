@@ -10,7 +10,7 @@
 	//
 %>
 <script type="text/javascript">
-	<% if(Common.Util.isLocal){ %>
+	<% if(Util.isLocal){ %>
 	var _gaq = {
 		push: function(p_arr) {
 			var arr = p_arr;
@@ -28,7 +28,7 @@
 		_gaq.push(['_trackPageview','<%=ViewData["TrackValue"]%>']);
 </script>	
 
-<% if(!Common.Util.isLocal){ %>
+<% if(!Util.isLocal){ %>
 <script type="text/javascript">
 	(function() {
 		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

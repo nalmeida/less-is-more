@@ -6,46 +6,30 @@ using System.Web.Caching;
 using System.Web.Configuration;
 using System.Configuration;
 using System.Text;
-using Common.Minifyzer;
+using CombineAndMinify;
 
 namespace Common{
 	public static class Minify {
 	
 		// STATIC STUFF
-		private static string HandlerPath;
-		private static Common.Minifyzer.Minify singleInst;
-		private static Common.Minifyzer.Minify single {
+		private static CombineAndMinify.StandAlone singleInst;
+		private static CombineAndMinify.StandAlone single {
 			get {
 				if(singleInst == null){
-					singleInst = new Common.Minifyzer.Minify();
+					singleInst = new CombineAndMinify.StandAlone();
 				}
 				return singleInst;
 			}
 		}
-		public static string GetHandlerPath(){
-			if(string.IsNullOrEmpty(HandlerPath)){
-				HttpHandlersSection handlers = (HttpHandlersSection)ConfigurationManager.GetSection("system.web/httpHandlers");
-				foreach(HttpHandlerAction handler in handlers.Handlers){
-					if(handler.Type == typeof(MinifyHandler).FullName){
-						HandlerPath = handler.Path;
-						break;
-					}
-				}
-			}
-			return HandlerPath;
-		}
 		
-		public static Common.Minifyzer.Minify Clear(){
+		public static CombineAndMinify.StandAlone Clear(){
 			return single.Clear();
 		}
-		public static Common.Minifyzer.Minify Add(string File){
+		public static CombineAndMinify.StandAlone Add(string File){
 			return single.Add(File);
 		}
-		public static Common.Minifyzer.Minify Write(){
+		public static CombineAndMinify.StandAlone Write(){
 			return single.Write();
-		}
-		public static Common.Minifyzer.Minify Tag(){
-			return single.Tag();
 		}
 		
 	}
