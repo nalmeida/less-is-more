@@ -21,17 +21,32 @@
 			</sectionGroup>
 		</sectionGroup>
 		<section name="dataConfiguration" type="Microsoft.Practices.EnterpriseLibrary.Data.Configuration.DatabaseSettings, Microsoft.Practices.EnterpriseLibrary.Data"/>
+		<section name="combineAndMinify" type="CombineAndMinify.ConfigSection"/>
 	</configSections>
+	
+	<!-- combine and minify config (for runat=server mode) -->
+	<combineAndMinify active="Always" 
+		combineJavaScriptFiles="PerGroup" 
+		minifyJavaScript="true" 
+
+		combineCSSFiles="PerGroup"
+		minifyCSS="true"
+		
+		removeWhitespace="false" 
+		
+		preloadAllImages="false" 
+		insertVersionIdInImageUrls="true" 
+
+		headCaching="PerPage" />
+		
 	<appSettings>
-		<add key="MinifyEncryptKey" value="Nanicolina"/>
-		<add key="MinifyDebug" value="false"/>
 		<!-- 
 			HARD PATHS
 		-->
-		<!-- override Common.Util.GlobalPath and Common.Util.LanguagePath "root", if null, uses Common.Util.Root -->
+		<!-- override Util.GlobalPath and Util.LanguagePath "root", if null, uses Util.Root -->
 		<!-- <add key="ROOT-ASSETS" value="http://ROOT-ASSETS/"/>  -->
 
-		<!-- override Common.Util.GlobalUploadPath and Common.Util.LanguageUploadPath "root", if null, uses Common.Util.AssetsRoot -->
+		<!-- override Util.GlobalUploadPath and Util.LanguageUploadPath "root", if null, uses Util.AssetsRoot -->
 		<!-- <add key="ROOT-UPLOADS" value="http://ROOT-UPLOADS/"/> -->
 	</appSettings>
 
@@ -83,12 +98,18 @@
 					<add namespace="System.Web.Routing"/>
 					<add namespace="System.Linq"/>
 					<add namespace="System.Collections.Generic"/>
+					<add namespace="Common"/>
 				</namespaces>
 			</pages>
 			<httpHandlers>
-				<add path="minify.aspx" type="Common.Minifyzer.MinifyHandler" verb="*"/>
+				<!-- Combine and Minify HTTPHandlers -->
+				<add path="*.js" type="CombineAndMinify.HttpHandler" verb="*"/>
+				<add path="*.css" type="CombineAndMinify.HttpHandler" verb="*"/>
+				<add path="*.gif,*.png,*.jpg" type="CombineAndMinify.HttpHandler" verb="*"/>
+
 				<add path="sitemap.xml" type="Common.Sitemap" verb="*"/>
 				<add path="locales/global/img/fake_image.aspx" type="Common.FakeImage" verb="*"/>
+				
 				<remove verb="*" path="*.asmx"/>
 				<add verb="*" path="*.asmx" validate="false" type="System.Web.Script.Services.ScriptHandlerFactory, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
 				<add verb="*" path="*_AppService.axd" validate="false" type="System.Web.Script.Services.ScriptHandlerFactory, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>

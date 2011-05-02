@@ -123,8 +123,8 @@ namespace Common
 		public static bool isLocal {
 			get {
 				Regex reg = new Regex(@"\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b");
-				string siteDomain = reg.Match(Common.Util.Root).ToString();
-				return siteDomain == "" ? true : !Common.Util.Root.Contains(".") ;
+				string siteDomain = reg.Match(Util.Root).ToString();
+				return siteDomain == "" ? true : !Util.Root.Contains(".") ;
 			}
 		}
 

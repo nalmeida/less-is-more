@@ -49,7 +49,7 @@
 		não existe.
 	</p>
 	<p>
-		Verifique se foi digitada corretamente ou vá para a <a href="<%=Common.Util.Root%>">home</a>.
+		Verifique se foi digitada corretamente ou vá para a <a href="<%=Util.Root%>">home</a>.
 	</p>
 </body>
 </html>
