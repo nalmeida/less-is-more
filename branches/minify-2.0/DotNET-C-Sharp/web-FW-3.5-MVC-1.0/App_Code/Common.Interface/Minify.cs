@@ -31,6 +31,14 @@ namespace Common{
 		public static CombineAndMinify.StandAlone Write(){
 			return single.Write();
 		}
+		public static string GetImagePath(string File){
+			return single.GetImagePath(File);
+		}
+		public static bool IsDebug{
+			get {
+				return single.IsDebug;
+			}
+		}
 		
 	}
 }

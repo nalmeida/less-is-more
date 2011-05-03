@@ -11,11 +11,9 @@
 	<meta name="robots" content="INDEX, FOLLOW" />
 
 	<link rel="shortcut icon" href="<%=Util.GlobalPath%>img/favicon.ico" />
-	
-	
+
 	<!--<magic runat="server">-->
 	<link rel="stylesheet" href="<%=Util.GlobalPath%>css/reset.css" type="text/css" />
-	<link rel="stylesheet" href="<%=Util.GlobalPath%>css/teste.css" type="text/css" />
 	<!--</magic>-->
 
 	<asp:contentplaceholder id="cphTrackValue" runat="server" />
@@ -26,48 +24,5 @@
 </head>
 <body>
 	<asp:contentplaceholder id="cphContent" runat="server"  />
-	<br />
-	<%
-		// Minify
-		// 	.Add(Util.GlobalPath+"css/reset.css")
-		// 	.Add(Util.GlobalPath+"css/teste.css")
-		// 	.Write();
-	%>
-	<br />
-	<%
-		// Minify
-		// 	.Add(Util.AssetsRoot+"js/lib/jquery-1.4.3.js")
-		// 	.Add(Util.AssetsRoot+"js/lib/swfobject-2.2.js")
-		// 	.Write();
-	%>
-	<br />
-	<%
-		CombineAndMinify.StandAlone cm = new CombineAndMinify.StandAlone();
-	%>
-	<%=cm.GetImagePath(Util.GlobalPath+"img/picture.png")%>
-	<br />
-	<img src="<%=cm.GetImagePath(Util.GlobalPath+"img/picture.png")%>" alt="" title="" />
-	<br />
-	<br />
-	<%=cm.GetJSPath(new List<string>(){
-		Util.Root+"js/lib/jquery-1.4.3.js",
-		Util.Root+"js/lib/swfobject-2.2.js"
-	})%>
-	<br />
-	<%=cm.GetCSSPath(Util.GlobalPath+"css/reset.css")%>
-	
-	<br />
-	<%
-		List<string> teste = new List<string>(){"teste1", "teste2"};
-		foreach(string text in teste){
-			Response.Write(text);
-		}
-	%>
-	
-	<!--<magic runat="server">-->
-		<script src="<%=Util.Root%>js/lib/jquery-1.4.3.js" type="text/javascript"></script>
-		<script src="<%=Util.Root%>js/lib/swfobject-2.2.js" type="text/javascript"></script>
-	<!--</magic>-->
-
 </body>
 </html>
