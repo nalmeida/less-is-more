@@ -17,7 +17,7 @@
 	<!--</magic>-->
 
 	<asp:contentplaceholder id="cphTrackValue" runat="server" />
-	<%Html.RenderPartial("Tracker", new { value = ViewData["TrackValue"] });%>
+	<%Html.RenderPartial("Tracker");%>
 	
 	<asp:contentplaceholder id="cphCustomHeader" runat="server" />
 	
