@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Web;
 using System.Text.RegularExpressions;
 using System.Web.UI;
+using Common;
 
 namespace CombineAndMinify
 {
@@ -89,6 +90,7 @@ namespace CombineAndMinify
 			UrlProcessor urlProcessor, 
 			List<string> totalFileNames)
 		{
+			// TODO: verifica se o arquivo é local ou em outro server e usa o web service;
 			string urlsHash = UrlsHash(fileUrls);
 
 			// Store the urls of the files, so GetContentVersion can retrieve
@@ -211,7 +213,7 @@ namespace CombineAndMinify
 		private static string CombinedFileUrl(
 			string urlsHash, string versionId, FileTypeUtilities.FileType fileType, UrlProcessor urlProcessor)
 		{
-			string url = "/" + urlsHash + FileTypeUtilities.FileTypeToExtension(fileType);
+			string url = Util.Root + urlsHash + FileTypeUtilities.FileTypeToExtension(fileType);
 
 			return urlProcessor.ProcessedUrl(url, FileTypeUtilities.FuzzyFileType.CssOrJavaScript, false, null, versionId);
 		}
