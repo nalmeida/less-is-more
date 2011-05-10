@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="config.asp-net-mvc">
+	<echo>[asp-net-mvc.xml] Declare vars</echo>
+	
+	<!-- paths -->
+	<var name="dir.server" value="${dir.src}/asp-net" />
+	<var name="dir.html" value="${dir.front}/${mod.html-type}" />
+	
+	<!-- replacelist -->
+	<var name="str.replace-list" value="
+		html.template,
+		html-head.template,
+		cmd.title,
+		cmd.description,
+		cmd.keywords,
+		cmd.copyright,
+		cmd.author,
+		cmd.favicon,
+		cmd.tracker,
+		cmd.custom-header,
+		cmd.content,
+		cmd.footer,
+		config.pageNamespaces
+	" />
+	
+	<!-- modules -->
+	<var name="mod.server-list" value="${mod.server-list},minify,mvc-1.0" />
+	
+</project>

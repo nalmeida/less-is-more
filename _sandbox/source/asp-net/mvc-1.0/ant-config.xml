@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="config.asp-net-mvc.mvc-1.0">
+	<echo>[ant-config] Declare module vars (config.asp-net-mvc.mvc-1.0)</echo>
+	
+	<!-- project variables (workaround to use with CDATA - PROPERTY NAME CAN'T REPEAT IN OTHERS PROJECT FILES) -->
+	<property name="prop.cmd.title"><![CDATA[<%=Config.Title%>]]></property>
+	<property name="prop.cmd.description"><![CDATA[<%=Common.Config.Description%>]]></property>
+	<property name="prop.cmd.keywords"><![CDATA[<%=Common.Config.Keywords%>]]></property>
+	<property name="prop.cmd.copyright"><![CDATA[<%=Common.Config.AuthorName%>]]></property>
+	<property name="prop.cmd.author"><![CDATA[<%=Common.Config.AuthorName%>]]></property>
+	<property name="prop.cmd.favicon"><![CDATA[<%=Util.GlobalPath%>img/favicon.ico]]></property>
+	<property name="prop.cmd.tracker">
+		<![CDATA[
+	<asp:contentplaceholder id="cphTrackValue" runat="server" />
+	<%Html.RenderPartial("Tracker");%>
+		]]>
+	</property>
+	<property name="prop.cmd.custom-header">
+		<![CDATA[
+	<!--<magic runat="server">-->
+	<link rel="stylesheet" href="<%=Util.GlobalPath%>css/reset.css" type="text/css" />
+	<!--</magic>-->
+	<asp:contentplaceholder id="cphCustomHeader" runat="server" />
+		]]>
+	</property>
+	<property name="prop.cmd.content">
+		<![CDATA[
+	<asp:contentplaceholder id="cphContent" runat="server"  />
+		]]>
+	</property>
+	
+	<!-- variables (evaluating properties) -->
+	<var name="cmd.title" value="${prop.cmd.title}" />
+	<var name="cmd.description" value="${prop.cmd.description}" />
+	<var name="cmd.keywords" value="${prop.cmd.keywords}" />
+	<var name="cmd.copyright" value="${prop.cmd.copyright}" />
+	<var name="cmd.author" value="${prop.cmd.author}" />
+	<var name="cmd.favicon" value="${prop.cmd.favicon}" />
+	<var name="cmd.tracker" value="${prop.cmd.tracker}" />
+	<var name="cmd.custom-header" value="${prop.cmd.custom-header}" />
+	<var name="cmd.content" value="${prop.cmd.content}" />
+	<var name="cmd.footer" value="${cmd.footer}" />
+	
+</project>

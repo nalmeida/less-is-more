@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="config.asp-net-mvc.core">
+	<echo>[ant-config] Declare module vars (config.asp-net-mvc.core)</echo>
+	
+	<!-- project variables (workaround to use with CDATA - PROPERTY NAME CAN'T REPEAT IN OTHERS PROJECT FILES) -->
+	<property name="prop.config.pageNamespaces"><![CDATA[<add namespace="Common"/>]]></property>
+	
+	<!-- variables (evaluating properties) -->
+	<var name="config.pageNamespaces" value="${prop.config.pageNamespaces}" />
+	
+</project>

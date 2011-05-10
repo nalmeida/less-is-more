@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="config.flash">
+	<echo>[flash.xml] Declare vars</echo>
+	
+	<var name="mod.css-list" value="${mod.css-list},flash-site.css" />
+	<var name="mod.js-list" value="${mod.js-list},**/swfobject*" />
+</project>
