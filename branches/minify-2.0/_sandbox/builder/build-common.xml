@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="builder.common">
+	<echo>[build-common.xml] Declare</echo>
+	
+	<!-- load modules config files -->
+	<for list="${mod.server-list}" param="module">
+		<sequential>
+			<available file="${dir.server}/@{module}/${file.property-name}" type="file" property="file-@{module}" />
+			<if>
+				<equals arg1="${file-@{module}}" arg2="true" />
+				<then>
+					<echo>[build-common.xml] Loading module properties: ${dir.server}/@{module}/${file.property-name}</echo>
+					<import file="${dir.server}/@{module}/${file.property-name}"/>
+				</then>
+			</if>
+		</sequential>
+	</for>
+	
+	<target name="clean" description="guarantee that destination directory does not exists">
+		<echo>[build-common.xml] Delete ${dir.destination}</echo>
+		<delete dir="${dir.destination}" />
+	</target>
+
+	<target name="create-base" depends="clean" description="create destination directory">
+		<echo>[build-common.xml] Create new directory: ${dir.destination}</echo>
+		<mkdir dir="${dir.destination}" />
+	</target>
+	
+	<target name="base-copy-directories" description="copy directories to destination (core)" >
+		<echo>[build-common.xml] Copy modules listed on "mod.server-list" to "${dir.destination}"</echo>
+		<echo>${mod.server-list}</echo>
+		<for list="${mod.server-list}" param="module">
+			<sequential>
+				<echo>@{module}</echo>
+				<copy todir="${dir.destination}">
+					<fileset dir="${dir.server}/@{module}/" excludes="ant-config.xml"/>
+				</copy>
+			</sequential>
+		</for>
+
+		<copy todir="${dir.assets}/css">
+			<fileset dir="${dir.css}/" includes="${mod.css-list}" />
+		</copy>
+
+		<copy todir="${dir.script-assets}/js">
+			<fileset dir="${dir.js}/" includes="${mod.js-list}" />
+		</copy>
+		
+	</target>
+	
+	<target name="base-get-templates">
+		<echo>[build-common.xml] Get templates from files (index.html and head.html)</echo>
+		<loadfile property="html.template">
+			<file file="${dir.html}/index.html" />
+		</loadfile>
+		<loadfile property="html-head.template">
+			<file file="${dir.html}/head.html" />
+		</loadfile>
+	</target>
+	
+	<target name="base-replace-texts" description="replaces texts based on the str.replace-list array">
+		<echo>[build-common.xml] Replace HTML wildcards based on "str.replace-list"</echo>
+		
+		<for list="${str.replace-list}" param="item">
+			<sequential>
+				<propertyregex property="curr-item" override="yes" input="@{item}" regexp="(?:^\s+|)(.*?)(?:\s+$|)" replace="\1"/>
+				<propertycopy override="yes" name="curr-item-cp" from="${curr-item}" />
+				<echo>  Replacing item: "${curr-item}"</echo>
+				<replace dir="${dir.destination}/" token="@${curr-item}@" value="${curr-item-cp}" />
+			</sequential>
+		</for>
+	</target>
+	
+	<target name="post.replace-texts" description="erase all unused wildcards">
+		<replaceregexp match="@[\w-\.]+?@" replace="" byline="yes" flags="g" >
+			<fileset dir="${dir.destination}" />
+		</replaceregexp>
+		<replaceregexp match="([\r\n]\t\t[\r\n])" replace="" flags="g" >
+			<fileset dir="${dir.destination}" />
+		</replaceregexp>
+		<replaceregexp match="\$\{[\w\.\-\_]+\}" replace="" flags="g" >
+			<fileset dir="${dir.destination}" />
+		</replaceregexp>
+	</target>
+	
+	<!-- per project -->
+	<target name="copy-directories" description="copy directories to destination" />
+	<target name="get-templates" description="get templates to be used as wildcards" />
+	<target name="replace-texts" description="replaces wildcards for final values" />
+	
+	<target name="init" description="build project"
+		depends="
+			create-base,
+			base-copy-directories,
+			copy-directories,
+			base-get-templates,
+			get-templates,
+			base-replace-texts,
+			replace-texts,
+			post.replace-texts
+		"
+	/>
+</project>
