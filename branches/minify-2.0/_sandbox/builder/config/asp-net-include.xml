@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="config.asp-net-mvc">
+	<echo>[asp-net-mvc.xml] Declare vars</echo>
+	
+	<import file="asp-net-mvc.xml" />
+	
+	<!-- modules -->
+	<var name="mod.server-list" value="${base.mod.server-list},minify,site-include" />
+	
+</project>

@@ -4,7 +4,7 @@
 	<!-- 
 		To call predefined languages / configuration files, define the variable:
 		
-		ant -Dmod.name=[TEMPLATE_NAME]
+		ant -Dconfig.name=[TEMPLATE_NAME]
 		
 		Then, the files will be called as:
 		
@@ -13,7 +13,7 @@
 		
 		OR it will accept a "array" of config files that will be executed in order:
 		
-		ant -Dmod.name=[TEMPLATE_NAME1],[TEMPLATE_NAME2],[TEMPLATE_NAME3]...
+		ant -Dconfig.name=[TEMPLATE_NAME1],[TEMPLATE_NAME2],[TEMPLATE_NAME3]...
 		
 		config/[TEMPLATE_NAME1].xml
 		config/[TEMPLATE_NAME2].xml
@@ -34,15 +34,15 @@
 	<import file="${dir.classpath}/config/common.xml" />
 
 	<!-- load config file -->
-	<for list="${mod.name}" param="curr.mod.name">
+	<for list="${config.name}" param="curr.config.name">
 		<sequential>
-			<property name="config.@{curr.mod.name}" value="${dir.classpath}/config/@{curr.mod.name}.xml" />
-			<available property="has.config.@{curr.mod.name}" file="${config.@{curr.mod.name}}" />
+			<property name="config.@{curr.config.name}" value="${dir.classpath}/config/@{curr.config.name}.xml" />
+			<available property="has.config.@{curr.config.name}" file="${config.@{curr.config.name}}" />
 			<if>
-				<equals arg1="${has.config.@{curr.mod.name}}" arg2="true" />
+				<equals arg1="${has.config.@{curr.config.name}}" arg2="true" />
 				<then>
-					<echo>[build.xml] Import config file: "${config.@{curr.mod.name}}"</echo>
-					<import file="${config.@{curr.mod.name}}" />
+					<echo>[build.xml] Import config file: "${config.@{curr.config.name}}"</echo>
+					<import file="${config.@{curr.config.name}}" />
 				</then>
 			</if>
 		</sequential>
@@ -54,7 +54,7 @@
 			<if>
 				<equals arg1="${has.config.@{curr.custom-config}}" arg2="true" />
 				<then>
-					<echo>[build.xml] Import custom config file: "${config.@{curr.mod.name}}"</echo>
+					<echo>[build.xml] Import custom config file: "${config.@{curr.config.name}}"</echo>
 					<import file="${config.@{curr.custom-config}}" />
 				</then>
 			</if>
@@ -62,15 +62,15 @@
 	</for>
 	
 	<!-- load builders -->
-	<for list="${mod.name}" param="curr.mod.name">
+	<for list="${config.name}" param="curr.config.name">
 		<sequential>
-			<property name="build.@{curr.mod.name}" value="${dir.classpath}/build-${mod.name}.xml" />
-			<available property="has.build.@{curr.mod.name}" file="${build.@{curr.mod.name}}" />
+			<property name="build.@{curr.config.name}" value="${dir.classpath}/build-${config.name}.xml" />
+			<available property="has.build.@{curr.config.name}" file="${build.@{curr.config.name}}" />
 			<if>
-				<equals arg1="${has.build.@{curr.mod.name}}" arg2="true" />
+				<equals arg1="${has.build.@{curr.config.name}}" arg2="true" />
 				<then>
-					<echo>[build.xml] Import build file: "${build.@{curr.mod.name}}"</echo>
-					<import file="${build.@{curr.mod.name}}" />
+					<echo>[build.xml] Import build file: "${build.@{curr.config.name}}"</echo>
+					<import file="${build.@{curr.config.name}}" />
 				</then>
 			</if>
 		</sequential>

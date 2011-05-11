@@ -4,12 +4,12 @@
 	
 	<!-- paths -->
 	<var name="dir.server" value="${dir.src}/asp-net" />
-	<var name="dir.html" value="${dir.front}/${mod.html-type}" />
 	
 	<!-- replacelist -->
 	<var name="str.replace-list" value="
 		html.template,
-		html-head.template,
+		cmd.pre-head,
+		cmd.html-head,
 		cmd.title,
 		cmd.description,
 		cmd.keywords,
@@ -20,10 +20,21 @@
 		cmd.custom-header,
 		cmd.content,
 		cmd.footer,
-		config.pageNamespaces
+		config.section-group,
+		config.configuration,
+		config.app-setting,
+		config.assembly,
+		config.page-attributes,
+		config.page-controls,
+		config.page-namespaces,
+		config.http-handlers,
+		config.http-modules,
+		config.web-server-modules,
+		config.web-server-handlers,
+		str.ua-code
 	" />
 	
 	<!-- modules -->
-	<var name="mod.server-list" value="${mod.server-list},minify,mvc-1.0" />
+	<var name="mod.server-list" value="${mod.server-list},minify,site-mvc-1.0" />
 	
 </project>

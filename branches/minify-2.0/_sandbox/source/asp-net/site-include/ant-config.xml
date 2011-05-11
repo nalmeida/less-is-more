@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="config.asp-net.site-mvc-1.0">
+	<echo>[ant-config.xml] Declare module vars (config.asp-net.site-mvc-1.0)</echo>
+	
+	<property name="cmd.title"><![CDATA[<%=Config.Title%>]]></property>
+	<property name="cmd.description"><![CDATA[<%=Common.Config.Description%>]]></property>
+	<property name="cmd.keywords"><![CDATA[<%=Common.Config.Keywords%>]]></property>
+	<property name="cmd.copyright"><![CDATA[<%=Common.Config.AuthorName%>]]></property>
+	<property name="cmd.author"><![CDATA[<%=Common.Config.AuthorName%>]]></property>
+	<property name="cmd.favicon"><![CDATA[<%=Util.GlobalPath%>img/favicon.ico]]></property>
+	<property name="cmd.pre-head"><![CDATA[
+<%@ Register TagPrefix="uc" TagName="html_head" Src="~/inc/html-head.ascx" %>
+<%@ Register TagPrefix="uc" TagName="header" Src="~/inc/header.ascx" %>
+<%@ Register TagPrefix="uc" TagName="footer" Src="~/inc/footer.ascx" %>
+<%@ Register TagPrefix="uc" TagName="scripts" Src="~/inc/scripts.ascx" %>]]></property>
+
+	<property name="cmd.html-head"><![CDATA[
+<uc:html_head id="html_head" runat="server" />
+]]></property>
+	<property name="cmd.content"><![CDATA[
+	<form action="">
+		<uc:header id="header" runat="server" />
+		<uc:footer id="footer" runat="server" />
+	</form>
+]]></property>
+	<property name="cmd.footer"><![CDATA[
+	<uc:scripts id="scripts" runat="server" />
+]]></property>
+	<property name="str.ua-code" value="##UA-CODE##" />
+	
+</project>
