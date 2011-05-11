@@ -19,10 +19,6 @@ namespace Common
 	 */
 	public static partial class Config
 	{
-		private static VO.Seo getSeo()
-        {
-            return Singleton<BL.Seo>.Instancia.Obter();
-		}
 		/**
 		 * Common.Config.Title
 		 * @return String the project title name
@@ -35,28 +31,28 @@ namespace Common
 		{
 			get
 			{
-				return getSeo().Title;
+				return "@str.title@";
 			}
 		}
 		public static string Description
 		{
 			get
 			{
-				return getSeo().Description;
+				return "@str.description@";
 			}
 		}
 		public static string Keywords
 		{
 			get
 			{
-				return getSeo().Keywords;
+				return "@str.keywords@";
 			}
 		}
 		public static string H1
 		{
 			get
 			{
-				return getSeo().H1;
+				return "@str.h1@";
 			}
 		}
 
@@ -64,7 +60,7 @@ namespace Common
 		{
 			get
 			{
-				return "";
+				return "@str.copyright@";
 			}
 		}
 		
@@ -72,7 +68,7 @@ namespace Common
 		{
 			get
 			{
-				return "";
+				return "@str.author-name@";
 			}
 		}
 
@@ -80,7 +76,7 @@ namespace Common
 		{
 			get
 			{
-				return "";
+				return "@str.author-address@";
 			}
 		}
 
@@ -88,19 +84,8 @@ namespace Common
 		{
 			get
 			{
-				return "";
+				return "@str.company-name@";
 			}
-		}
-
-		private static string RetornarConfig(string config)
-		{
-			string configvalue = ConfigurationManager.AppSettings.Get(config);
-			if (string.IsNullOrEmpty(config))
-			{
-				throw new ConfigurationErrorsException("A chave " + config + " não está definida. " +
-				"No Web.Config, crie dentro de AppSetings a chave " + config);
-			}
-			return configvalue;
 		}
 	}
 }

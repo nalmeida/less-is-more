@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="config.asp-net.minify">
+	<echo>[ant-config.xml] Declare module vars (config.asp-net.minify)</echo>
+	
+	<!--
+		Web.config properties (use var to concat with previous modules properties)
+	-->
+	
+	<!-- project variables (workaround to use with CDATA - PROPERTY NAME CAN'T REPEAT IN OTHERS PROJECT FILES) -->
+	<property name="prop-min.config.section-group"><![CDATA[
+		<section name="combineAndMinify" type="CombineAndMinify.ConfigSection"/>]]></property>
+	<property name="prop-min.config.configuration"><![CDATA[
+	<combineAndMinify active="Always" 
+		combineJavaScriptFiles="PerGroup" 
+		minifyJavaScript="true" 
+
+		combineCSSFiles="PerGroup"
+		minifyCSS="true"
+
+		insertVersionIdInImageUrls="true" 
+
+		headCaching="PerPage">
+<!--
+		Add subdomains to improve loading performance (same machine as this site)
+		<cookielessDomains>
+			<add domain="http://s1.site/" />
+			<add domain="http://s2.site/" />
+			<add domain="http://s3.site/" />
+		</cookielessDomains>
+-->
+	</combineAndMinify>]]></property>
+	<property name="prop-min.config.http-handlers"><![CDATA[
+				<add path="*.js" type="CombineAndMinify.HttpHandler" verb="*"/>
+				<add path="*.css" type="CombineAndMinify.HttpHandler" verb="*"/>
+				<add path="*.gif,*.png,*.jpg" type="CombineAndMinify.HttpHandler" verb="*"/>]]></property>
+	
+	<!-- variables (evaluating properties) -->
+	<var name="config.section-group" value="${config.section-group} ${prop-min.config.section-group}" />
+	<var name="config.configuration" value="${config.configuration} ${prop-min.config.configuration}" />
+	<var name="config.http-handlers" value="${config.http-handlers} ${prop-min.config.http-handlers}" />
+	
+</project>

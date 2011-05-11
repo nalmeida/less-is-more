@@ -2,19 +2,26 @@
 <project name="config.common">
 	<echo>[common.xml] Declare vars</echo>
 	
+	<!-- properties to concat data via command line -->
+	<property name="mod.add-server" value="" />
+	<property name="mod.add-js" value="" />
+	<property name="mod.add-css" value="" />
+	<property name="config.add" value="" />
+
 	<!-- module data (per project) -->
-	<property name="mod.name" value="asp-net-mvc" />
+	<property name="config.name" value="asp-net-mvc,${config.add}" />
 	<property name="mod.html-type" value="xhtml1" />
-	<property name="mod.css-list" value="reset.css" />
-	<property name="mod.js-list" value="**/jquery**" />
-	<property name="mod.server-list" value="core" />
+	<property name="mod.css-list" value="reset.css,${mod.add-css}" />
+	<property name="mod.js-list" value="**/jquery**,${mod.add-js}" />
+	<property name="base.mod.server-list" value="core,${mod.add-server}" />
+	<property name="mod.server-list" value="${base.mod.server-list}" />
 
 	<!-- util paths -->
 	<property name="dir.destination" value="${basedir}/destination" />
 	<property name="dir.src" value="${basedir}/source" />
 	<property name="dir.server" value="${dir.src}" />
-	<property name="dir.html" value="${dir.front}/${mod.html-type}" />
 	<property name="dir.front" value="${dir.src}/front-end" />
+	<property name="dir.html" value="${dir.front}/${mod.html-type}" />
 	<property name="dir.css" value="${dir.front}/css" />
 	<property name="dir.js" value="${dir.front}/js" />
 	<property name="dir.assets" value="${dir.destination}/assets" />
@@ -22,7 +29,7 @@
 	
 	<!-- files -->
 	<property name="file.property-name" value="ant-config.xml" />
-	<property name="mod.name" value="" />
+	<property name="config.name" value="" />
 	<property name="file.custom-config" value="" />
 	<property name="file.custom-build" value="" />
 	

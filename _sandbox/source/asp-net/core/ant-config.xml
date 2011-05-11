@@ -1,11 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="config.asp-net-mvc.core">
-	<echo>[ant-config] Declare module vars (config.asp-net-mvc.core)</echo>
+<project name="config.asp-net.core">
+	<echo>[ant-config.xml] Declare module vars (config.asp-net.core)</echo>
 	
-	<!-- project variables (workaround to use with CDATA - PROPERTY NAME CAN'T REPEAT IN OTHERS PROJECT FILES) -->
-	<property name="prop.config.pageNamespaces"><![CDATA[<add namespace="Common"/>]]></property>
+	<!--
+		Web.config properties (using properties considering that "core" will ALWAYS run before other modules)
+	-->
+	<property name="config.section-group" value="" />
+	<property name="config.configuration" value="" />
+	<property name="config.app-setting"><![CDATA[
+		<!-- 
+			HARD PATHS
+		-->
+		<!-- override Util.GlobalPath and Util.LanguagePath "root", if null, uses Util.Root -->
+		<!-- <add key="ROOT-ASSETS" value="http://ROOT-ASSETS/"/> -->
+
+		<!-- override Util.GlobalUploadPath and Util.LanguageUploadPath "root", if null, uses Util.AssetsRoot -->
+		<!-- <add key="ROOT-UPLOADS" value="http://ROOT-UPLOADS/"/> -->]]></property>
+	<property name="config.assembly" value="" />
+	<property name="config.page-attributes" value="" />
+	<property name="config.page-controls" value="" />
+	<property name="config.page-namespaces"><![CDATA[
+					<add namespace="Common"/>]]></property>
+	<property name="config.http-handlers"><![CDATA[
+				<add path="sitemap.xml" type="Common.Sitemap" verb="*"/>
+				<add path="locales/global/img/fake_image.aspx" type="Common.FakeImage" verb="*"/>
+		]]>
+	</property>
+	<property name="config.http-modules" value="" />
+	<property name="config.web-server-modules" value="" />
+	<property name="config.web-server-handlers" value="" />
 	
-	<!-- variables (evaluating properties) -->
-	<var name="config.pageNamespaces" value="${prop.config.pageNamespaces}" />
 	
 </project>
