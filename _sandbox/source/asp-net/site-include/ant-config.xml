@@ -14,18 +14,14 @@
 <%@ Register TagPrefix="uc" TagName="footer" Src="~/inc/footer.ascx" %>
 <%@ Register TagPrefix="uc" TagName="scripts" Src="~/inc/scripts.ascx" %>]]></property>
 
-	<property name="cmd.html-head"><![CDATA[
-<uc:html_head id="html_head" runat="server" />
-]]></property>
+	<property name="cmd.html-head"><![CDATA[	<uc:html_head id="html_head" runat="server" />]]></property>
 	<property name="cmd.content"><![CDATA[
 	<form action="">
 		<uc:header id="header" runat="server" />
 		<uc:footer id="footer" runat="server" />
 	</form>
 ]]></property>
-	<property name="cmd.footer"><![CDATA[
-	<uc:scripts id="scripts" runat="server" />
-]]></property>
+	<property name="cmd.footer"><![CDATA[	<uc:scripts id="scripts" runat="server" />]]></property>
 	<property name="str.ua-code" value="##UA-CODE##" />
 	
 </project>

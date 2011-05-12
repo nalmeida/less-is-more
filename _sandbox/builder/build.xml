@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="lessIsMore" default="build" basedir="../">
+	
+	<!-- 
+		To call predefined configuration files (files inside config directory), define the variable:
+		
+		prompt$ ant -Dconfig.name=[TEMPLATE_NAME]
+		
+		Then, the files will be called as:
+		
+		config/[TEMPLATE_NAME].xml
+		
+		It will accept "array" of config files that will be executed in order:
+		
+		prompt$ ant -Dconfig.name=[TEMPLATE_NAME1],[TEMPLATE_NAME2],[TEMPLATE_NAME3]...
+		
+		config/[TEMPLATE_NAME1].xml
+		config/[TEMPLATE_NAME2].xml
+		config/[TEMPLATE_NAME3].xml
+		(...)
+		
+		Example:
+		prompt$ ant -Dconfig.name=asp-net-mvc,flash
+		
+		******************
+		
+		You can load a xml file too using:
+		prompt$ ant -Dconfig.file=file-name.xml
+		
+		******************
+		
+		Or both:
+		prompt$ ant -Dconfig.name=asp-net-mvc,flash -Dconfig.file=file-name.xml
+		
+		The loading order will always be:
+		config/common.xml
+		config/[config.name]
+		config/[config.file]
+ 	-->
+	<echo>$${ant.library.dir} = ${ant.library.dir}</echo>
+	<property name="dir.classpath" value="${basedir}/builder" />
+	
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="${dir.classpath}/lib/ant-contrib-1.0b3.jar"/>
+		</classpath>
+	</taskdef>
+	
+	<import file="${dir.classpath}/config/common.xml" />
+
+	<!-- load config file (based on name) -->
+	<for list="${config.name}" param="curr.config.name">
+		<sequential>
+			<property name="config.@{curr.config.name}" value="${dir.classpath}/config/@{curr.config.name}.xml" />
+			<available property="has.config.@{curr.config.name}" file="${config.@{curr.config.name}}" />
+			<if>
+				<equals arg1="${has.config.@{curr.config.name}}" arg2="true" />
+				<then>
+					<echo>[build.xml] Import config file: "${config.@{curr.config.name}}"</echo>
+					<import file="${config.@{curr.config.name}}" />
+				</then>
+			</if>
+		</sequential>
+	</for>
+	<!-- load custom config file (based on file path) -->
+	<for list="${file.custom-config}" param="curr.custom-config">
+		<sequential>
+			<property name="config.@{curr.custom-config}" value="@{curr.custom-config}" />
+			<available property="has.config.@{curr.custom-config}" file="${config.@{curr.custom-config}}" />
+			<if>
+				<equals arg1="${has.config.@{curr.custom-config}}" arg2="true" />
+				<then>
+					<echo>[build.xml] Import custom config file: "${config.@{curr.config.name}}"</echo>
+					<import file="${config.@{curr.custom-config}}" />
+				</then>
+			</if>
+		</sequential>
+	</for>
+	
+	<!-- get html templates -->
+	<echo>Get templates from files (index.html and head.html)</echo>
+	<loadfile property="html.template">
+		<file file="${dir.html}/index.html" />
+	</loadfile>
+	<loadfile property="html-head.template">
+		<file file="${dir.html}/head.html" />
+	</loadfile>
+	
+	<!-- load modules config files -->
+	<for list="${mod.server-list}" param="module">
+		<sequential>
+			<available file="${dir.server}/@{module}/${file.property-name}" type="file" property="file-@{module}" />
+			<if>
+				<equals arg1="${file-@{module}}" arg2="true" />
+				<then>
+					<echo>Loading module properties: ${dir.server}/@{module}/${file.property-name}</echo>
+					
+					<var name="file.curr-mod-config" value="${dir.server}/@{module}/${file.property-name}" />
+					
+					<!-- get replace list -->
+<!--
+					<loadfile property="str.config-content-@{module}">
+						<file file="${file.curr-mod-config}" />
+					</loadfile>
+					<propertyregex property="str.curr-group"
+						input="${str.config-content-@{module}}"
+						regexp="(?:property|var)\s+name=&quot;(?!tmp)(.*?)&quot;"
+						casesensitive="false"
+						select="\1,\2,\3,\4,\5,\6" />
+					<propertyregex property="str.curr-file"
+						input="${str.config-content-@{module}}"
+						regexp="(?:property|var)\s+name=&quot;(?!tmp)(.*?)&quot;"
+						casesensitive="false"
+						replace="" />
+					
+					<script language="javascript" manager="bsf">
+						<classpath> 
+							<fileset dir="${dir.classpath}/lib" includes="*.jar" /> 
+						</classpath>
+						<![CDATA[ 
+						echo = lessIsMore.createTask("echo"); 
+						var teste = "teste,2,3,4";
+						teste = teste.match(/,/g).join(" / ");
+						echo.setMessage(teste); 
+						echo.perform(); 
+						]]>
+					</script>
+					
+					<echo>>>>>>>>> teste: ${str.curr-group}</echo>
+					<echo>>>>>>>>> ${file.curr-mod-config}</echo>
+					<echo>>>>>>>>> ${str.curr-file}</echo>
+-->
+					<import file="${file.curr-mod-config}"/>
+				</then>
+			</if>
+		</sequential>
+	</for>
+	
+	<!-- remove directory if it already exists -->
+	<target name="clean" description="guarantee that destination directory does not exists">
+		<echo>Delete ${dir.destination}</echo>
+		<delete dir="${dir.destination}" />
+	</target>
+	<!-- create directory -->
+	<target name="create-base" depends="clean" description="create destination directory">
+		<echo>Create new directory: ${dir.destination}</echo>
+		<mkdir dir="${dir.destination}" />
+	</target>
+	
+	<!-- copy all base directories -->
+	<target name="base-copy-directories" description="copy directories to destination (core)" >
+		<echo>Copy modules listed on "mod.server-list" to "${dir.destination}"</echo>
+		
+		<!-- copy modules folders -->
+		<for list="${mod.server-list}" param="module">
+			<sequential>
+				<echo>@{module}</echo>
+				<copy todir="${dir.destination}" overwrite="true">
+					<fileset dir="${dir.server}/@{module}/" excludes="${file.property-name}"/>
+				</copy>
+			</sequential>
+		</for>
+
+		
+		<if> <!-- copy css folder -->
+			<equals arg1="${config.no-css}" arg2="" />
+			<then>
+				<copy todir="${dir.assets}/css" overwrite="true">
+					<fileset dir="${dir.css}/" includes="${mod.css-list}" />
+				</copy>
+			</then>
+		</if>
+		
+		<if> <!-- copy js folder -->
+			<equals arg1="${config.no-js}" arg2="" />
+			<then>
+				<copy todir="${dir.script-assets}/js" overwrite="true">
+					<fileset dir="${dir.js}/" includes="${mod.js-list}" />
+				</copy>
+			</then>
+		</if>
+	</target>
+	
+	<!-- replace texts based on str.replace-list -->
+	<target name="base-replace-texts" description="replaces texts based on the str.replace-list array">
+		<echo>Replace HTML wildcards based on "str.replace-list"</echo>
+		
+		
+		<for list="${str.replace-list}" param="item">
+			<sequential>
+				<propertyregex property="curr-item" override="yes" input="@{item}" regexp="(?:^\s+|)(.*?)(?:\s+$|)" replace="\1"/>
+				<var name="curr-item-cp" value="" />
+				<propertycopy override="yes" name="curr-item-cp" from="${curr-item}" silent="true" />
+				<if>
+					<equals arg1="${curr-item-cp}" arg2="" />
+					<else>
+						<echo>  Replacing item: "${curr-item}"</echo>
+						<replace dir="${dir.destination}/" token="@${curr-item}@" value="${curr-item-cp}" />
+					</else>
+				</if>
+			</sequential>
+		</for>
+	</target>
+	
+	<!-- exclude all unused wildcards -->
+	<target name="post.replace-texts" description="erase all unused wildcards">
+		<replaceregexp match="@[\w-\.]+?@" replace="" byline="yes" flags="g" >
+			<fileset dir="${dir.destination}" />
+		</replaceregexp>
+		<replaceregexp match="([\r\n]\t\t[\r\n])" replace="" flags="g" >
+			<fileset dir="${dir.destination}" includes="*.aspx,**/*.aspx" />
+		</replaceregexp>
+	</target>
+	
+	<!-- for extension -->
+	<target name="copy-directories" description="copy directories to destination" />
+	<target name="get-templates" description="get templates to be used as wildcards" />
+	<target name="replace-texts" description="replaces wildcards for final values" />
+	
+	<!-- constructor -->
+	<target name="build" depends="
+		create-base,
+		base-copy-directories,
+		copy-directories,
+		get-templates,
+		base-replace-texts,
+		replace-texts,
+		post.replace-texts
+	">
+		<echo>[build.xml] Build complete in ${dir.destination}</echo>
+	</target>
+	
+</project>
+
+
+
