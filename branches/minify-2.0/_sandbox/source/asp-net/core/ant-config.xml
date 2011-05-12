@@ -5,9 +5,9 @@
 	<!--
 		Web.config properties (using properties considering that "core" will ALWAYS run before other modules)
 	-->
-	<property name="config.section-group" value="" />
-	<property name="config.configuration" value="" />
-	<property name="config.app-setting"><![CDATA[
+	<property name="r.config.section-group" value="" />
+	<property name="r.config.configuration" value="" />
+	<property name="r.config.app-setting"><![CDATA[
 		<!-- 
 			HARD PATHS
 		-->
@@ -16,19 +16,19 @@
 
 		<!-- override Util.GlobalUploadPath and Util.LanguageUploadPath "root", if null, uses Util.AssetsRoot -->
 		<!-- <add key="ROOT-UPLOADS" value="http://ROOT-UPLOADS/"/> -->]]></property>
-	<property name="config.assembly" value="" />
-	<property name="config.page-attributes" value="" />
-	<property name="config.page-controls" value="" />
-	<property name="config.page-namespaces"><![CDATA[
+	<property name="r.config.assembly" value="" />
+	<property name="r.config.page-attributes" value="" />
+	<property name="r.config.page-controls" value="" />
+	<property name="r.config.page-namespaces"><![CDATA[
 					<add namespace="Common"/>]]></property>
-	<property name="config.http-handlers"><![CDATA[
+	<property name="r.config.http-handlers"><![CDATA[
 				<add path="sitemap.xml" type="Common.Sitemap" verb="*"/>
 				<add path="locales/global/img/fake_image.aspx" type="Common.FakeImage" verb="*"/>
 		]]>
 	</property>
-	<property name="config.http-modules" value="" />
-	<property name="config.web-server-modules" value="" />
-	<property name="config.web-server-handlers" value="" />
+	<property name="r.config.http-modules" value="" />
+	<property name="r.config.web-server-modules" value="" />
+	<property name="r.config.web-server-handlers" value="" />
 	
 	
 </project>

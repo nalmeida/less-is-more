@@ -5,36 +5,7 @@
 	<!-- paths -->
 	<var name="dir.server" value="${dir.src}/asp-net" />
 	
-	<!-- replacelist -->
-	<var name="str.replace-list" value="
-		html.template,
-		cmd.pre-head,
-		cmd.html-head,
-		cmd.title,
-		cmd.description,
-		cmd.keywords,
-		cmd.copyright,
-		cmd.author,
-		cmd.favicon,
-		cmd.tracker,
-		cmd.custom-header,
-		cmd.content,
-		cmd.footer,
-		config.section-group,
-		config.configuration,
-		config.app-setting,
-		config.assembly,
-		config.page-attributes,
-		config.page-controls,
-		config.page-namespaces,
-		config.http-handlers,
-		config.http-modules,
-		config.web-server-modules,
-		config.web-server-handlers,
-		str.ua-code
-	" />
-	
 	<!-- modules -->
-	<var name="mod.server-list" value="${mod.server-list},minify,site-mvc-1.0" />
+	<var name="mod.server-list" value="${base.mod.server-list},minify,site-mvc-1.0" />
 	
 </project>

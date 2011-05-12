@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="lessIsMore" default="build" basedir="../">
+<project name="lessIsMore" default="build" basedir="..">
 	
 	<!-- 
 		To call predefined configuration files (files inside config directory), define the variable:
@@ -37,7 +37,6 @@
 		config/[config.name]
 		config/[config.file]
  	-->
-	<echo>$${ant.library.dir} = ${ant.library.dir}</echo>
 	<property name="dir.classpath" value="${basedir}/builder" />
 	
 	<taskdef resource="net/sf/antcontrib/antlib.xml">
@@ -59,30 +58,38 @@
 					<echo>[build.xml] Import config file: "${config.@{curr.config.name}}"</echo>
 					<import file="${config.@{curr.config.name}}" />
 				</then>
+				<else>
+					<echo>[build.xml] Config file not found: "${config.@{curr.config.name}}".</echo>
+					<echo>            Remember config.name must be the name of a file inside ${basedir}/builder/config/ without the extension.</echo>
+				</else>
 			</if>
 		</sequential>
 	</for>
 	<!-- load custom config file (based on file path) -->
 	<for list="${file.custom-config}" param="curr.custom-config">
 		<sequential>
-			<property name="config.@{curr.custom-config}" value="@{curr.custom-config}" />
+			<propertyregex property="config.@{curr.custom-config}" input="@{curr.custom-config}" regexp="~/" replace="${basedir}/" override="true" />
 			<available property="has.config.@{curr.custom-config}" file="${config.@{curr.custom-config}}" />
 			<if>
 				<equals arg1="${has.config.@{curr.custom-config}}" arg2="true" />
 				<then>
-					<echo>[build.xml] Import custom config file: "${config.@{curr.config.name}}"</echo>
+					<echo>[build.xml] Import custom config file: "${config.@{curr.custom-config}}"</echo> 
 					<import file="${config.@{curr.custom-config}}" />
 				</then>
+				<else>
+					<echo>[build.xml] Custom config file not found: "${config.@{curr.custom-config}}".</echo> 
+					<echo>            Remember config.file must be a absolute path file or you can use "~/" to place the root folder.</echo>
+				</else>
 			</if>
 		</sequential>
 	</for>
 	
 	<!-- get html templates -->
-	<echo>Get templates from files (index.html and head.html)</echo>
-	<loadfile property="html.template">
+	<echo>Get templates from HTML files (index.html and head.html)</echo>
+	<loadfile property="r.html.template">
 		<file file="${dir.html}/index.html" />
 	</loadfile>
-	<loadfile property="html-head.template">
+	<loadfile property="r.html-head.template">
 		<file file="${dir.html}/head.html" />
 	</loadfile>
 	
@@ -95,41 +102,57 @@
 				<then>
 					<echo>Loading module properties: ${dir.server}/@{module}/${file.property-name}</echo>
 					
+					<var name="str.curr-module" value="@{module}" />
 					<var name="file.curr-mod-config" value="${dir.server}/@{module}/${file.property-name}" />
-					
-					<!-- get replace list -->
-<!--
-					<loadfile property="str.config-content-@{module}">
-						<file file="${file.curr-mod-config}" />
-					</loadfile>
-					<propertyregex property="str.curr-group"
-						input="${str.config-content-@{module}}"
-						regexp="(?:property|var)\s+name=&quot;(?!tmp)(.*?)&quot;"
-						casesensitive="false"
-						select="\1,\2,\3,\4,\5,\6" />
-					<propertyregex property="str.curr-file"
-						input="${str.config-content-@{module}}"
-						regexp="(?:property|var)\s+name=&quot;(?!tmp)(.*?)&quot;"
-						casesensitive="false"
-						replace="" />
 					
 					<script language="javascript" manager="bsf">
 						<classpath> 
 							<fileset dir="${dir.classpath}/lib" includes="*.jar" /> 
 						</classpath>
 						<![CDATA[ 
-						echo = lessIsMore.createTask("echo"); 
-						var teste = "teste,2,3,4";
-						teste = teste.match(/,/g).join(" / ");
-						echo.setMessage(teste); 
-						echo.perform(); 
+						importClass(java.io.File);
+						
+						var loadTask = project.createTask("loadfile"),
+							fileToLoad = project.createTask("file"),
+							currentModule = project.getProperty("str.curr-module"),
+							currentFile = project.getProperty("file.curr-mod-config"),
+							currentContentName = "str.config-content-"+currentModule,
+							currentContent = null,
+							propMatches = [],
+							currentList = project.getProperty("str.replace-list").split(","),
+							propIndex = -1,
+							indexOf = function(p_array, p_obj, p_start){
+								for (var i = (p_start || 0); i < p_array.length; i++) {
+									if (p_array[i] == p_obj) { return i; }
+								}
+								return -1;
+							};
+					    
+						loadTask.setProperty(currentContentName);
+						loadTask.setSrcFile(new File(currentFile));
+						loadTask.perform();
+						
+						currentContent = project.getProperty(currentContentName);
+						
+						propMatches = currentContent.match(/(?:property|var)\s+name="(?!tmp)(.*?)"/g) || [];
+						
+						for(var i=0, len = propMatches.length; i<len; i++){
+							propMatches[i] = propMatches[i].replace(/(?:property|var)\s+name="(r\..*?)"/, '$1');
+						}
+						
+						for(var i=0, len=currentList.length; i < len; i++){
+							propIndex = indexOf(propMatches, currentList[i]);
+							if(propIndex >= 0){
+								propMatches.splice(propIndex, 1);
+							}
+						}
+						
+						// workaround creating a lot of unique properties and concat all using antcollab
+						project.setProperty("prop."+currentContentName, propMatches.join(','));
 						]]>
 					</script>
+					<var name="str.replace-list" value="${str.replace-list},${prop.str.config-content-@{module}}" />
 					
-					<echo>>>>>>>>> teste: ${str.curr-group}</echo>
-					<echo>>>>>>>>> ${file.curr-mod-config}</echo>
-					<echo>>>>>>>>> ${str.curr-file}</echo>
--->
 					<import file="${file.curr-mod-config}"/>
 				</then>
 			</if>
@@ -138,12 +161,10 @@
 	
 	<!-- remove directory if it already exists -->
 	<target name="clean" description="guarantee that destination directory does not exists">
-		<echo>Delete ${dir.destination}</echo>
 		<delete dir="${dir.destination}" />
 	</target>
 	<!-- create directory -->
 	<target name="create-base" depends="clean" description="create destination directory">
-		<echo>Create new directory: ${dir.destination}</echo>
 		<mkdir dir="${dir.destination}" />
 	</target>
 	
@@ -154,7 +175,7 @@
 		<!-- copy modules folders -->
 		<for list="${mod.server-list}" param="module">
 			<sequential>
-				<echo>@{module}</echo>
+				<echo>&gt;&gt; copying module: "@{module}"</echo>
 				<copy todir="${dir.destination}" overwrite="true">
 					<fileset dir="${dir.server}/@{module}/" excludes="${file.property-name}"/>
 				</copy>
@@ -185,17 +206,17 @@
 	<target name="base-replace-texts" description="replaces texts based on the str.replace-list array">
 		<echo>Replace HTML wildcards based on "str.replace-list"</echo>
 		
-		
 		<for list="${str.replace-list}" param="item">
 			<sequential>
 				<propertyregex property="curr-item" override="yes" input="@{item}" regexp="(?:^\s+|)(.*?)(?:\s+$|)" replace="\1"/>
+				<propertyregex property="curr-wildcard" override="yes" input="${curr-item}" regexp="^r\." replace=""/>
 				<var name="curr-item-cp" value="" />
 				<propertycopy override="yes" name="curr-item-cp" from="${curr-item}" silent="true" />
 				<if>
 					<equals arg1="${curr-item-cp}" arg2="" />
 					<else>
-						<echo>  Replacing item: "${curr-item}"</echo>
-						<replace dir="${dir.destination}/" token="@${curr-item}@" value="${curr-item-cp}" />
+						<echo>  Replacing item: "${curr-wildcard}"</echo>
+						<replace dir="${dir.destination}/" token="@${curr-wildcard}@" value="${curr-item-cp}" />
 					</else>
 				</if>
 			</sequential>
@@ -227,7 +248,7 @@
 		replace-texts,
 		post.replace-texts
 	">
-		<echo>[build.xml] Build complete in ${dir.destination}</echo>
+		<echo>[build.xml] Build complete at ${dir.destination}</echo>
 	</target>
 	
 </project>

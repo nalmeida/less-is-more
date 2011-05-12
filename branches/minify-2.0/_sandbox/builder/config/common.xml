@@ -2,29 +2,30 @@
 <project name="config.common">
 	<echo>[common.xml] Declare vars</echo>
 	
-	<!-- properties to use via command line -->
-	<property name="mod.add-server" value="" />
-	<property name="mod.add-js" value="" />
-	<property name="mod.add-css" value="" />
-	<property name="config.add" value="" />
-	<property name="config.file" value="" />
-	<property name="config.no-css" value="" />
-	<property name="config.no-js" value="" />
-	<property name="config.name" value="asp-net-mvc,${config.add}" />
-	<property name="mod.html-type" value="xhtml1" />
+	<!-- properties shortcuts to use via command line -->
+	<property name="output" value="${basedir}/destination" /> <!-- sets the destination path (must be absolute path) -->
+	<property name="mod.add-server" value="" /> <!-- add "server" modules to the default selection ("core") -->
+	<property name="mod.add-js" value="" /> <!-- add (concat) js to the default selection ("**/jquery**") -->
+	<property name="mod.add-css" value="" /> <!-- add (concat) css to the default selection ("reset.css") -->
+	<property name="config.add" value="" /> <!-- add (concat) config files to the default selection ("asp-net-mvc") -->
+	<property name="config.file" value="" /> <!-- custom config file -->
+	<property name="config.no-css" value="" /> <!-- avoid copying css -->
+	<property name="config.no-js" value="" /> <!-- avoid copying js -->
+	<property name="config.name" value="asp-net-mvc,${config.add}" /> <!-- sets the base config file (will overwrite "asp-net-mvc") -->
+	<property name="html-type" value="xhtml1" /> <!-- sets html type (based on the folders at source/front-end/) -->
 
 	<!-- module data (per project) -->
-	<property name="mod.css-list" value="reset.css,${mod.add-css}" />
-	<property name="mod.js-list" value="**/jquery**,${mod.add-js}" />
-	<property name="base.mod.server-list" value="core,${mod.add-server}" />
-	<property name="mod.server-list" value="${base.mod.server-list}" />
+	<property name="mod.css-list" value="reset.css,${mod.add-css}" /> <!-- sets the CSS list (ovewrite "reset.css") -->
+	<property name="mod.js-list" value="**/jquery**,${mod.add-js}" /> <!-- sets the javascript list (ovewrite "**/jquery**") -->
+	<property name="base.mod.server-list" value="core,${mod.add-server}" /> <!-- sets base "server" modules list (overwrite "core") -->
+	<property name="mod.server-list" value="${base.mod.server-list}" /> <!-- sets the "server" modules list (overwrite "core") -->
 
 	<!-- util paths -->
-	<property name="dir.destination" value="${basedir}/destination" />
+	<property name="dir.destination" value="${output}" />
 	<property name="dir.src" value="${basedir}/source" />
 	<property name="dir.server" value="${dir.src}" />
 	<property name="dir.front" value="${dir.src}/front-end" />
-	<property name="dir.html" value="${dir.front}/${mod.html-type}" />
+	<property name="dir.html" value="${dir.front}/${html-type}" />
 	<property name="dir.css" value="${dir.front}/css" />
 	<property name="dir.js" value="${dir.front}/js" />
 	<property name="dir.assets" value="${dir.destination}/assets" />
@@ -35,7 +36,7 @@
 	<property name="file.custom-config" value="${config.file}" />
 	
 	<!-- replaceList -->
-	<property name="str.replace-list" value="" />
+	<var name="str.replace-list" value="r.html.template, r.html.template" />
 	
 </project>
 

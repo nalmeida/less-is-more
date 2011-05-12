@@ -2,7 +2,8 @@
 <project name="config.asp-net-mvc">
 	<echo>[asp-net-mvc.xml] Declare vars</echo>
 	
-	<import file="asp-net-mvc.xml" />
+	<!-- paths -->
+	<var name="dir.server" value="${dir.src}/asp-net" />
 	
 	<!-- modules -->
 	<var name="mod.server-list" value="${base.mod.server-list},minify,site-include" />

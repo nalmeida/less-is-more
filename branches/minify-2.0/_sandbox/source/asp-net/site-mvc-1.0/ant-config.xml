@@ -2,23 +2,23 @@
 <project name="config.asp-net.site-mvc-1.0">
 	<echo>[ant-config.xml] Declare module vars (config.asp-net.site-mvc-1.0)</echo>
 	
-	<property name="cmd.title"><![CDATA[<%=Config.Title%>]]></property>
-	<property name="cmd.description"><![CDATA[<%=Common.Config.Description%>]]></property>
-	<property name="cmd.keywords"><![CDATA[<%=Common.Config.Keywords%>]]></property>
-	<property name="cmd.copyright"><![CDATA[<%=Common.Config.AuthorName%>]]></property>
-	<property name="cmd.author"><![CDATA[<%=Common.Config.AuthorName%>]]></property>
-	<property name="cmd.favicon"><![CDATA[<%=Util.GlobalPath%>img/favicon.ico]]></property>
-	<property name="cmd.tracker"><![CDATA[
+	<property name="r.cmd.title"><![CDATA[<%=Config.Title%>]]></property>
+	<property name="r.cmd.description"><![CDATA[<%=Common.Config.Description%>]]></property>
+	<property name="r.cmd.keywords"><![CDATA[<%=Common.Config.Keywords%>]]></property>
+	<property name="r.cmd.copyright"><![CDATA[<%=Common.Config.AuthorName%>]]></property>
+	<property name="r.cmd.author"><![CDATA[<%=Common.Config.AuthorName%>]]></property>
+	<property name="r.cmd.favicon"><![CDATA[<%=Util.GlobalPath%>img/favicon.ico]]></property>
+	<property name="r.cmd.tracker"><![CDATA[
 	<asp:contentplaceholder id="cphTrackValue" runat="server" />
 	<%Html.RenderPartial("Tracker");%>]]></property>
-	<property name="cmd.html-head" value="${html-head.template}" />
-	<property name="cmd.custom-header"><![CDATA[
+	<property name="r.cmd.html-head" value="${r.html-head.template}" />
+	<property name="r.cmd.custom-header"><![CDATA[
 	<link rel="stylesheet" href="<%=Util.GlobalPath%>css/reset.css" type="text/css" />
 	<asp:contentplaceholder id="cphCustomHeader" runat="server" />]]></property>
-	<property name="cmd.content"><![CDATA[
+	<property name="r.cmd.content"><![CDATA[
 	<asp:contentplaceholder id="cphContent" runat="server"  />]]></property>
-	<property name="str.ua-code" value="##UA-CODE##" />
-	<property name="cmd.track-value" ><![CDATA[<%=ViewData["TrackValue"]%>]]></property>
+	<property name="r.str.ua-code" value="##UA-CODE##" />
+	<property name="r.cmd.track-value" ><![CDATA[<%=ViewData["TrackValue"]%>]]></property>
 	
 	<!-- Web.config stuff -->
 
@@ -50,12 +50,12 @@ userControlBaseType="System.Web.Mvc.ViewUserControl, System.Web.Mvc, Version=1.0
 			<add name="UrlRoutingHandler" preCondition="integratedMode" verb="*" path="UrlRouting.axd" type="System.Web.HttpForbiddenHandler, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>]]></property>
 	
 	<!-- variables (evaluating properties) -->
-	<var name="config.assembly" value="${config.assembly} ${tmp-mvc.config.assembly}" />
-	<var name="config.page-attributes" value="${config.page-attributes} ${tmp-mvc.config.page-attributes}" />
-	<var name="config.page-namespaces" value="${config.page-namespaces} ${tmp-mvc.config.page-namespaces}" />
-	<var name="config.http-handlers" value="${config.http-handlers} ${tmp-mvc.config.http-handlers}" />
-	<var name="config.http-modules" value="${config.http-modules} ${tmp-mvc.config.http-modules}" />
-	<var name="config.web-server-modules" value="${config.web-server-modules} ${tmp-mvc.config.web-server-modules}" />
-	<var name="config.web-server-handlers" value="${config.web-server-handlers} ${tmp-mvc.config.web-server-handlers}" />
+	<var name="r.config.assembly" value="${r.config.assembly} ${tmp-mvc.config.assembly}" />
+	<var name="r.config.page-attributes" value="${r.config.page-attributes} ${tmp-mvc.config.page-attributes}" />
+	<var name="r.config.page-namespaces" value="${r.config.page-namespaces} ${tmp-mvc.config.page-namespaces}" />
+	<var name="r.config.http-handlers" value="${r.config.http-handlers} ${tmp-mvc.config.http-handlers}" />
+	<var name="r.config.http-modules" value="${r.config.http-modules} ${tmp-mvc.config.http-modules}" />
+	<var name="r.config.web-server-modules" value="${r.config.web-server-modules} ${tmp-mvc.config.web-server-modules}" />
+	<var name="r.config.web-server-handlers" value="${r.config.web-server-handlers} ${tmp-mvc.config.web-server-handlers}" />
 	
 </project>

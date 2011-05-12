@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="config.plain-html">
-	<echo>[flash.xml] Declare vars</echo>
+	<echo>[plain-html.xml] Declare vars</echo>
 	
 	<var name="dir.server" value="${dir.src}/plain-html" />
-	<var name="str.replace-list" value="
-		html.template,
-		cmd.pre-head,
-		cmd.html-head,
-		cmd.title,
-		cmd.description,
-		cmd.keywords,
-		cmd.copyright,
-		cmd.author,
-		cmd.favicon,
-		cmd.tracker,
-		cmd.custom-header,
-		cmd.content,
-		cmd.footer,
-		str.ua-code
-	" />
 
 </project>
