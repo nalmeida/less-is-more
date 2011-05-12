@@ -12,7 +12,7 @@
 	<property name="config.no-css" value="" /> <!-- avoid copying css -->
 	<property name="config.no-js" value="" /> <!-- avoid copying js -->
 	<property name="config.name" value="asp-net-mvc,${config.add}" /> <!-- sets the base config file (will overwrite "asp-net-mvc") -->
-	<property name="html-type" value="xhtml1" /> <!-- sets html type (based on the folders at source/front-end/) -->
+	<property name="html-type" value="xhtml" /> <!-- sets html type (based on the folders at source/front-end/) -->
 
 	<!-- module data (per project) -->
 	<property name="mod.css-list" value="reset.css,${mod.add-css}" /> <!-- sets the CSS list (ovewrite "reset.css") -->
@@ -36,7 +36,14 @@
 	<property name="file.custom-config" value="${config.file}" />
 	
 	<!-- replaceList -->
-	<var name="str.replace-list" value="r.html.template, r.html.template" />
+	<var name="str.replace-list" value="r.html.template,r.html-head.template" />
+	
+	<propertyregex
+		property="str.assets-root"
+		override="yes"
+		input="${dir.assets}"
+		regexp="${dir.destination}/"
+		replace="@str.assets-root@" />
 	
 </project>
 

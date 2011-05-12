@@ -12,14 +12,19 @@
 	<asp:contentplaceholder id="cphTrackValue" runat="server" />
 	<%Html.RenderPartial("Tracker");%>]]></property>
 	<property name="r.cmd.html-head" value="${r.html-head.template}" />
-	<property name="r.cmd.custom-header"><![CDATA[
-	<link rel="stylesheet" href="<%=Util.GlobalPath%>css/reset.css" type="text/css" />
+
+	<property name="r.cmd.custom-header" value="" />
+	<property name="tmp-mvc.cmd.custom-header" ><![CDATA[
+	<link rel="stylesheet" href="${str.assets-root}/css/reset.css@str.assets-root-close@" type="text/css" />
+	${r.cmd.custom-header}
 	<asp:contentplaceholder id="cphCustomHeader" runat="server" />]]></property>
-	<property name="r.cmd.content"><![CDATA[
-	<asp:contentplaceholder id="cphContent" runat="server"  />]]></property>
+	<var name="r.cmd.custom-header" value="${tmp-mvc.cmd.custom-header}"/>
+
+	<property name="r.cmd.content"><![CDATA[	<asp:contentplaceholder id="cphContent" runat="server"  />]]></property>
 	<property name="r.str.ua-code" value="##UA-CODE##" />
 	<property name="r.cmd.track-value" ><![CDATA[<%=ViewData["TrackValue"]%>]]></property>
-	
+	<property name="r.str.assets-root"><![CDATA[<%=Util.Root%>]]></property>
+
 	<!-- Web.config stuff -->
 
 	<!-- workaround to use with CDATA - PROPERTY NAME CAN'T REPEAT IN OTHERS PROJECT FILES -->

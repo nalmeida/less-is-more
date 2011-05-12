@@ -4,4 +4,10 @@
 	
 	<var name="dir.server" value="${dir.src}/plain-html" />
 
+	<property name="r.cmd.custom-header" value="" />
+	<property name="tmp-mvc.cmd.custom-header" ><![CDATA[
+	<link rel="stylesheet" href="${str.assets-root}/css/reset.css" type="text/css" />
+	${r.cmd.custom-header}]]></property>
+	<var name="r.cmd.custom-header" value="${tmp-mvc.cmd.custom-header}"/>
+
 </project>
