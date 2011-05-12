@@ -2,15 +2,18 @@
 <project name="config.common">
 	<echo>[common.xml] Declare vars</echo>
 	
-	<!-- properties to concat data via command line -->
+	<!-- properties to use via command line -->
 	<property name="mod.add-server" value="" />
 	<property name="mod.add-js" value="" />
 	<property name="mod.add-css" value="" />
 	<property name="config.add" value="" />
-
-	<!-- module data (per project) -->
+	<property name="config.file" value="" />
+	<property name="config.no-css" value="" />
+	<property name="config.no-js" value="" />
 	<property name="config.name" value="asp-net-mvc,${config.add}" />
 	<property name="mod.html-type" value="xhtml1" />
+
+	<!-- module data (per project) -->
 	<property name="mod.css-list" value="reset.css,${mod.add-css}" />
 	<property name="mod.js-list" value="**/jquery**,${mod.add-js}" />
 	<property name="base.mod.server-list" value="core,${mod.add-server}" />
@@ -29,9 +32,7 @@
 	
 	<!-- files -->
 	<property name="file.property-name" value="ant-config.xml" />
-	<property name="config.name" value="" />
-	<property name="file.custom-config" value="" />
-	<property name="file.custom-build" value="" />
+	<property name="file.custom-config" value="${config.file}" />
 	
 	<!-- replaceList -->
 	<property name="str.replace-list" value="" />
