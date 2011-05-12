@@ -35,8 +35,8 @@
 				<add path="*.gif,*.png,*.jpg" type="CombineAndMinify.HttpHandler" verb="*"/>]]></property>
 	
 	<!-- variables (evaluating properties) -->
-	<var name="config.section-group" value="${config.section-group} ${tmp-min.config.section-group}" />
-	<var name="config.configuration" value="${config.configuration} ${tmp-min.config.configuration}" />
-	<var name="config.http-handlers" value="${config.http-handlers} ${tmp-min.config.http-handlers}" />
+	<var name="r.config.section-group" value="${r.config.section-group} ${tmp-min.config.section-group}" />
+	<var name="r.config.configuration" value="${r.config.configuration} ${tmp-min.config.configuration}" />
+	<var name="r.config.http-handlers" value="${r.config.http-handlers} ${tmp-min.config.http-handlers}" />
 	
 </project>

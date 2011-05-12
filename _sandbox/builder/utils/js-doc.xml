@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="jsdoc" default="build" basedir=".">
+	
+	<property name="task" value="echo" />
+	<property name="v" value="false" />
+	
+	<target name="build">
+		<script language="javascript" manager="bsf">
+			<classpath> 
+				<fileset dir="lib" includes="*.jar" /> 
+			</classpath>
+			<![CDATA[ 
+			var echo = project.createTask("echo"),
+				verbose = project.getProperty("v") == "true",
+				task = project.createTask(project.getProperty("task")),
+				methods = [],
+				props = [],
+				itemType = "";
+			
+			for(var n in task){
+				itemType = typeof(task[n]);
+				itemType = itemType.slice(0,1).toUpperCase() + itemType.slice(1);
+				(typeof(task[n]) === "function" ? methods : props).push(
+					itemType+" : " + n + (verbose ?
+						" -- "+String(task[n])
+							.replace(/[\n\r\t]+/g, '')
+							.replace(/.*?\{(.*?)\}.*/g, '$1')
+							.replace(/(\/\*|\*\/)/g, '')
+					: "\"")
+				);
+			}
+			methods.sort();
+			props.sort();
+			
+			if(task){
+				echo.setMessage(
+					task + 
+					"["+project.getProperty("task")+"] \n\nMethod List\n  " +
+					methods.join("\n  ") + "\n "+
+					"\n\nProperty List\n  " +
+					props.join("\n  ")
+				);
+			}else{
+				echo.setMessage("There is no task with the name \""+project.getProperty("task")+"\". Maybe a DataType? ");
+			}
+
+			echo.perform(); 
+			]]>
+		</script>
+	</target>
+	
+</project>
+
+
+

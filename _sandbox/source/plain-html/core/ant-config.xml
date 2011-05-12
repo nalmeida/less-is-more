@@ -2,11 +2,12 @@
 <project name="config.asp-net.site-mvc-1.0">
 	<echo>[ant-config.xml] Declare module vars (config.asp-net.site-mvc-1.0)</echo>
 	
-	<property name="cmd.tracker"><![CDATA[
+	<property name="r.cmd.title">Título</property>
+	<property name="r.cmd.tracker"><![CDATA[
 	<script type="text/javascript">
 		alert(123)
 	</script>	
 	]]></property>
-	<property name="cmd.html-head" value="${html-head.template}" />
+	<property name="r.cmd.html-head" value="${r.html-head.template}" />
 	
 </project>
