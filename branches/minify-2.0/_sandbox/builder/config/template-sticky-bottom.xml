@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="config.template-sticky-bottom">
+	<echo>[template-sticky-bottom.xml] Declare vars</echo>
+	
+	<if>
+		<equals arg1="${config.name}" arg2="template-sticky-bottom" />
+		<then>
+			<fail message="[WARNING] Templates must be added to complement modules. Ex.: ant -Dconfig.name=asp-ner-include,template-sticky-bottom." />
+		</then>
+	</if>
+	
+	<loadfile property="tmp-sticky.html.template" srcfile="${dir.html}/templates/sticky-bottom.html" />
+	
+	<propertyregex
+		property="r.html.template"
+		override="yes"
+		input="${r.html.template}"
+		regexp="@cmd\.content@"
+		replace="${tmp-sticky.html.template}" />
+
+	<var name="mod.css-list" value="${mod.css-list},**/sticky-bottom.css" />
+	
+	<property name="tmp-sticky.cmd.custom-header"><![CDATA[
+	<link rel="stylesheet" href="${str.assets-root}/css/templates/sticky-bottom.css@str.assets-root-close@" />]]></property>
+
+	<property name="r.cmd.custom-header" value="" />
+	<var name="r.cmd.custom-header" value="${r.cmd.custom-header} ${tmp-sticky.cmd.custom-header}" />
+	<var name="str.replace-list" value="${str.replace-list},r.cmd.custom-header" />
+	
+
+</project>

@@ -37,6 +37,7 @@
 		config/[config.name]
 		config/[config.file]
  	-->
+
 	<property name="dir.classpath" value="${basedir}/builder" />
 	
 	<taskdef resource="net/sf/antcontrib/antlib.xml">
@@ -46,6 +47,11 @@
 	</taskdef>
 	
 	<import file="${dir.classpath}/config/common.xml" />
+
+	<!-- get html templates -->
+	<echo>Get templates from HTML files (index.html and head.html)</echo>
+	<loadfile property="r.html.template" srcFile="${dir.html}/index.html" />
+	<loadfile property="r.html-head.template" srcFile="${dir.html}/head.html" />
 
 	<!-- load config file (based on name) -->
 	<for list="${config.name}" param="curr.config.name">
@@ -83,15 +89,6 @@
 			</if>
 		</sequential>
 	</for>
-	
-	<!-- get html templates -->
-	<echo>Get templates from HTML files (index.html and head.html)</echo>
-	<loadfile property="r.html.template">
-		<file file="${dir.html}/index.html" />
-	</loadfile>
-	<loadfile property="r.html-head.template">
-		<file file="${dir.html}/head.html" />
-	</loadfile>
 	
 	<!-- load modules config files -->
 	<for list="${mod.server-list}" param="module">

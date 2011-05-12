@@ -3,10 +3,10 @@
 	<echo>[ant-config.xml] Declare module vars (config.asp-net.site-mvc-1.0)</echo>
 	
 	<property name="r.cmd.title"><![CDATA[<%=Config.Title%>]]></property>
-	<property name="r.cmd.description"><![CDATA[<%=Common.Config.Description%>]]></property>
-	<property name="r.cmd.keywords"><![CDATA[<%=Common.Config.Keywords%>]]></property>
-	<property name="r.cmd.copyright"><![CDATA[<%=Common.Config.AuthorName%>]]></property>
-	<property name="r.cmd.author"><![CDATA[<%=Common.Config.AuthorName%>]]></property>
+	<property name="r.cmd.description"><![CDATA[<%=Config.Description%>]]></property>
+	<property name="r.cmd.keywords"><![CDATA[<%=Config.Keywords%>]]></property>
+	<property name="r.cmd.copyright"><![CDATA[<%=Config.AuthorName%>]]></property>
+	<property name="r.cmd.author"><![CDATA[<%=Config.AuthorName%>]]></property>
 	<property name="r.cmd.favicon"><![CDATA[<%=Util.GlobalPath%>img/favicon.ico]]></property>
 	<property name="r.cmd.pre-head"><![CDATA[
 <%@ Register TagPrefix="uc" TagName="html_head" Src="~/inc/html-head.ascx" %>
@@ -15,6 +15,11 @@
 <%@ Register TagPrefix="uc" TagName="scripts" Src="~/inc/scripts.ascx" %>]]></property>
 
 	<property name="r.cmd.html-head"><![CDATA[	<uc:html_head id="html_head" runat="server" />]]></property>
+	<property name="r.cmd.html-head"><![CDATA[	<uc:html_head id="html_head" runat="server" />]]></property>
+	
+	<property name="r.cmd.custom-include-header" ><![CDATA[	<link rel="stylesheet" href="${str.assets-root}/css/reset.css@str.assets-root-close@" type="text/css" />${r.cmd.custom-header}]]></property>
+	<var name="r.cmd.custom-header" value="" />
+	
 	<property name="r.cmd.content"><![CDATA[
 	<form action="">
 		<uc:header id="header" runat="server" />
@@ -23,5 +28,6 @@
 ]]></property>
 	<property name="r.cmd.footer"><![CDATA[	<uc:scripts id="scripts" runat="server" />]]></property>
 	<property name="r.str.ua-code" value="##UA-CODE##" />
+	<property name="r.str.assets-root"><![CDATA[<%=Util.Root%>]]></property>
 	
 </project>
