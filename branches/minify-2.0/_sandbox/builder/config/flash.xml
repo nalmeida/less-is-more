@@ -4,4 +4,12 @@
 	
 	<var name="mod.css-list" value="${mod.css-list},flash-site.css" />
 	<var name="mod.js-list" value="${mod.js-list},**/swfobject*" />
+	
+	<property name="tmp-flash.cmd.custom-header"><![CDATA[
+	<link rel="stylesheet" href="${str.assets-root}/css/flash-site.css@str.assets-root-close@" />]]></property>
+
+	<property name="r.cmd.custom-header" value="" />
+	<var name="r.cmd.custom-header" value="${r.cmd.custom-header} ${tmp-flash.cmd.custom-header}" />
+	
+	
 </project>
