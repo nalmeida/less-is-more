@@ -6,6 +6,6 @@
 	<var name="dir.server" value="${dir.src}/asp-net" />
 	
 	<!-- modules -->
-	<var name="mod.server-list" value="${base.mod.server-list},minify,site-include" />
+	<var name="mod.server-list" value="${mod.server-list},minify,site-include" />
 	
 </project>

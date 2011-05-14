@@ -72,7 +72,7 @@
 		</sequential>
 	</for>
 	<!-- load custom config file (based on file path) -->
-	<for list="${file.custom-config}" param="curr.custom-config">
+	<for list="${config.file}" param="curr.custom-config">
 		<sequential>
 			<propertyregex property="config.@{curr.custom-config}" input="@{curr.custom-config}" regexp="~/" replace="${basedir}/" override="true" />
 			<available property="has.config.@{curr.custom-config}" file="${config.@{curr.custom-config}}" />
