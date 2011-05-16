@@ -30,7 +30,7 @@ namespace CombineAndMinify {
 			);
 			CurrentList = new Hashtable(); 
 			Tags = new Hashtable();
-
+			Clear();
 			// Register tags
 			Tags.Add(FileTypeUtilities.FileType.CSS, "<link rel=\"stylesheet\" type=\"text/css\" href=\"{0}\" />");
 			Tags.Add(FileTypeUtilities.FileType.JavaScript, "<script type=\"text/javascript\" src=\"{0}\" ></script>");
@@ -41,6 +41,7 @@ namespace CombineAndMinify {
 			return this;
 		}
 		public StandAlone Add(string File){
+			
 	
 			// Add to current list
 			FileTypeUtilities.FileType type = FileTypeUtilities.FileTypeOfUrl(File);
