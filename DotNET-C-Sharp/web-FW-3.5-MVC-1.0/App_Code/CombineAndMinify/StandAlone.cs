@@ -11,12 +11,20 @@ namespace CombineAndMinify {
 		private Hashtable Tags; // FileTypeUtilities.FileType, string
 		private Hashtable CurrentList; // FileTypeUtilities.FileType, string
 		
-		private HttpContext context;
+		private HttpContext _context;
+		private HttpContext context {
+			get {
+				if(_context != HttpContext.Current){
+					_context = HttpContext.Current;
+				}
+				return _context;
+			}
+		}
 		private ConfigSection cs;
 		private UrlProcessor urlProcessor;
 		
 		public StandAlone(){
-			context = HttpContext.Current;
+			
 			cs = ConfigSection.CurrentConfigSection();
 			urlProcessor = new UrlProcessor(
 				cs.CookielessDomains,
@@ -30,7 +38,7 @@ namespace CombineAndMinify {
 			);
 			CurrentList = new Hashtable(); 
 			Tags = new Hashtable();
-			Clear();
+
 			// Register tags
 			Tags.Add(FileTypeUtilities.FileType.CSS, "<link rel=\"stylesheet\" type=\"text/css\" href=\"{0}\" />");
 			Tags.Add(FileTypeUtilities.FileType.JavaScript, "<script type=\"text/javascript\" src=\"{0}\" ></script>");
@@ -68,7 +76,6 @@ namespace CombineAndMinify {
 		 * Get the html tag
 		 */
 		public string GetTag() {
-			
 			List<string> tags = new List<string>();
 			foreach(DictionaryEntry item in CurrentList){
 				if(Tags.ContainsKey(item.Key)){
@@ -94,7 +101,7 @@ namespace CombineAndMinify {
 					}
 				}
 			}
-			
+
 			return string.Join("\n", tags.ToArray());
 		}
 
