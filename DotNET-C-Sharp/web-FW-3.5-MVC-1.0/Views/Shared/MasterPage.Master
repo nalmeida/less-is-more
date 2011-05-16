@@ -24,5 +24,12 @@
 </head>
 <body>
 	<asp:contentplaceholder id="cphContent" runat="server"  />
+<%
+	Common.Minify
+		.Add(Common.Util.GlobalPath+"css/reset.css")
+	//	.Add(Common.Util.GlobalPath+"css/teste.css")
+		.Add("http://interface.aceite.fbiz.com.br/testes-css/css/reset.css")
+		.Write();
+%>
 </body>
 </html>
