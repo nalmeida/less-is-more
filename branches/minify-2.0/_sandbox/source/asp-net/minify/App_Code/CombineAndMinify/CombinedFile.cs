@@ -325,7 +325,7 @@ namespace CombineAndMinify
 						{
 							if (minifyJavaScript)
 							{
-								cacheElement.CombinedFileContent = JavaScriptCompressor.Compress(combinedContent);
+								cacheElement.CombinedFileContent = JavaScriptCompressor.Compress(combinedContent, true, false, false, false, -1, Encoding.UTF8, null);
 							}
 						}
 						else
@@ -336,7 +336,7 @@ namespace CombineAndMinify
 							}
 						}
 					}
-					else
+					else if(processingJavaScriptFile)
 					{
 						// The string contains non-Ascii characters. 
 						// So use Jsmin rather than the YUI compressor.
@@ -382,7 +382,7 @@ namespace CombineAndMinify
 		/// <returns></returns>
 		private static bool HasNonAsciiChars(string s)
 		{
-			Regex regexHasNonAsciiChars = new Regex(@"[^\u0000-\u007F]");
+			Regex regexHasNonAsciiChars = new Regex(@"[^\u0000-\u007FáàãâäéèêëíìîïóòõôöúùûüçÁÀÃÂÄÉÈÊËÍÌÎÏÓÒÕÔÖÚÙÛÜÇñÑ]");
 			bool hasNonAsciiChars = regexHasNonAsciiChars.IsMatch(s);
 
 			return hasNonAsciiChars;

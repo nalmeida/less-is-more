@@ -325,7 +325,7 @@ namespace CombineAndMinify
 						{
 							if (minifyJavaScript)
 							{
-								cacheElement.CombinedFileContent = JavaScriptCompressor.Compress(combinedContent);
+								cacheElement.CombinedFileContent = JavaScriptCompressor.Compress(combinedContent, true, false, false, false, -1, Encoding.UTF8, null);
 							}
 						}
 						else
