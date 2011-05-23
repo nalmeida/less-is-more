@@ -11,12 +11,20 @@ namespace CombineAndMinify {
 		private Hashtable Tags; // FileTypeUtilities.FileType, string
 		private Hashtable CurrentList; // FileTypeUtilities.FileType, string
 		
-		private HttpContext context;
+		private HttpContext _context;
+		private HttpContext context {
+			get {
+				if(_context != HttpContext.Current){
+					_context = HttpContext.Current;
+				}
+				return _context;
+			}
+		}
 		private ConfigSection cs;
 		private UrlProcessor urlProcessor;
 		
 		public StandAlone(){
-			context = HttpContext.Current;
+			
 			cs = ConfigSection.CurrentConfigSection();
 			urlProcessor = new UrlProcessor(
 				cs.CookielessDomains,
@@ -41,6 +49,7 @@ namespace CombineAndMinify {
 			return this;
 		}
 		public StandAlone Add(string File){
+			
 	
 			// Add to current list
 			FileTypeUtilities.FileType type = FileTypeUtilities.FileTypeOfUrl(File);
@@ -67,7 +76,6 @@ namespace CombineAndMinify {
 		 * Get the html tag
 		 */
 		public string GetTag() {
-			
 			List<string> tags = new List<string>();
 			foreach(DictionaryEntry item in CurrentList){
 				if(Tags.ContainsKey(item.Key)){
@@ -93,7 +101,7 @@ namespace CombineAndMinify {
 					}
 				}
 			}
-			
+
 			return string.Join("\n", tags.ToArray());
 		}
 
@@ -101,7 +109,8 @@ namespace CombineAndMinify {
 		 * Write tag or code on the current context (wrapper)
 		 */
 		public StandAlone Write(){
-			context.Response.Write(GetTag());
+			string cont = GetTag();
+			context.Response.Write(cont);
 			CurrentList.Clear();
 			return this;
 		}

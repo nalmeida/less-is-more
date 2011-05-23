@@ -109,7 +109,8 @@ namespace CombineAndMinify {
 		 * Write tag or code on the current context (wrapper)
 		 */
 		public StandAlone Write(){
-			context.Response.Write(GetTag());
+			string cont = GetTag();
+			context.Response.Write(cont);
 			CurrentList.Clear();
 			return this;
 		}
