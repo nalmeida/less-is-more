@@ -77,7 +77,9 @@ namespace CombineAndMinify {
 		 */
 		public string GetTag() {
 			List<string> tags = new List<string>();
-			foreach(DictionaryEntry item in CurrentList){
+			Hashtable currList = (Hashtable)CurrentList.Clone();
+			
+			foreach(DictionaryEntry item in currList){
 				if(Tags.ContainsKey(item.Key)){
 					if(IsDebug){
 						foreach(string listItem in (List<string>)item.Value){
