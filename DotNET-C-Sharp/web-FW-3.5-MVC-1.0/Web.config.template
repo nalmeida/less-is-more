@@ -168,6 +168,11 @@
 			<add name="ScriptResource" preCondition="integratedMode" verb="GET,HEAD" path="ScriptResource.axd" type="System.Web.Handlers.ScriptResourceHandler, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
 			<add name="MvcHttpHandler" preCondition="integratedMode" verb="*" path="*.mvc" type="System.Web.Mvc.MvcHttpHandler, System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
 			<add name="UrlRoutingHandler" preCondition="integratedMode" verb="*" path="UrlRouting.axd" type="System.Web.HttpForbiddenHandler, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+
+			<!-- CombineAndMinify HTTPHandlers -->
+			<add name="js" preCondition="integratedMode" path="*.js" type="CombineAndMinify.HttpHandler" verb="*"/>
+			<add name="css" preCondition="integratedMode" path="*.css" type="CombineAndMinify.HttpHandler" verb="*"/>
+			<add name="imagem" preCondition="integratedMode" path="*.gif,*.png,*.jpg" type="CombineAndMinify.HttpHandler" verb="*"/>
 		</handlers>
 	</system.webServer>
 </configuration>
