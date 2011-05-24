@@ -34,9 +34,16 @@
 				<add path="*.css" type="CombineAndMinify.HttpHandler" verb="*"/>
 				<add path="*.gif,*.png,*.jpg" type="CombineAndMinify.HttpHandler" verb="*"/>]]></property>
 	
+	<property name="tmp-min.config.web-server-handlers"><![CDATA[
+			<add name="js" preCondition="integratedMode" path="*.js" type="CombineAndMinify.HttpHandler" verb="*"/>
+			<add name="css" preCondition="integratedMode" path="*.css" type="CombineAndMinify.HttpHandler" verb="*"/>
+			<add name="imagem" preCondition="integratedMode" path="*.gif,*.png,*.jpg" type="CombineAndMinify.HttpHandler" verb="*"/>]]></property>
+	
+	
 	<!-- variables (evaluating properties) -->
 	<var name="r.config.section-group" value="${r.config.section-group} ${tmp-min.config.section-group}" />
 	<var name="r.config.configuration" value="${r.config.configuration} ${tmp-min.config.configuration}" />
 	<var name="r.config.http-handlers" value="${r.config.http-handlers} ${tmp-min.config.http-handlers}" />
+	<var name="r.config.web-server-handlers" value="${r.config.web-server-handlers} ${tmp-min.config.web-server-handlers}" />
 	
 </project>
