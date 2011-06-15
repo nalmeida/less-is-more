@@ -11,7 +11,7 @@ require_once(CONTROLLER_PATH . "Controller.php");
 
 $app =& App::getInstance();
 
-$controller = $app->processRequest(BASEPATH)->getController();
+$controller = $app->processRequest(BASEPATH, basename(__FILE__))->getController();
 
 if(!$controller){
 	$app->getDefaultView();
