@@ -98,7 +98,7 @@ class Util {
 	}
 	
 	public function root(){
-		return rtrim($this->protocol() . "://" . $this->_host . $this->port()) . "/";
+		return rtrim($this->protocol() . "://" . $this->_host . $this->port()) . BASEPATH . "/";
 	}
 	
 	public function globalPath(){
