@@ -1,6 +1,7 @@
 <?php
 define("SLASH", PHP_OS == 'WINNT' || PHP_OS=='WIN32' ? '\\' : '/' );
 define("ROOT_PATH", dirname(__FILE__).SLASH);
+define("BASEPATH", rtrim(str_ireplace(basename(__FILE__), '', $_SERVER['SCRIPT_NAME']), '/'));
 
 require_once(ROOT_PATH . "library/Constants.php");
 require_once(ROOT_PATH . "library/Config.php");
@@ -10,7 +11,7 @@ require_once(CONTROLLER_PATH . "Controller.php");
 
 $app =& App::getInstance();
 
-$controller = $app->processRequest()->getController();
+$controller = $app->processRequest(BASEPATH)->getController();
 
 if(!$controller){
 	$app->getDefaultView();

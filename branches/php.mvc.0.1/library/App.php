@@ -32,8 +32,8 @@ class App {
 		return self::$instance;
 	}
 	
-	public function processRequest(){
-		$this->parsedURL = parse_url($_SERVER["REQUEST_URI"]);
+	public function processRequest($basepath){
+		$this->parsedURL = parse_url(str_ireplace($basepath, '', $_SERVER["REQUEST_URI"]));
 		
 		$this->route = explode("/", trim($this->parsedURL["path"], "/"));
 		$this->route[0] = $this->route[0] == "" ? $this->config["default-controller"] : $this->route[0];
