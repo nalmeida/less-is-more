@@ -58,24 +58,7 @@ class Controller{
 	protected function _parseView($content){
 		$this->viewDictionary = array();
 		preg_replace_callback(self::regexTag, array(&$this, "_createContent"), $content);
-		switch(preg_last_error()){
-			case PREG_INTERNAL_ERROR:
-				echo "PREG_INTERNAL_ERROR";
-			break;
-			case PREG_BACKTRACK_LIMIT_ERROR:
-				echo "PREG_BACKTRACK_LIMIT_ERROR";
-			break;
-			case PREG_RECURSION_LIMIT_ERROR:
-				echo "PREG_RECURSION_LIMIT_ERROR";
-			break;
-			case PREG_BAD_UTF8_ERROR:
-				echo "PREG_BAD_UTF8_ERROR";
-			break;
-			case PREG_BAD_UTF8_OFFSET_ERROR:
-				echo "PREG_BAD_UTF8_OFFSET_ERROR";
-			break;
-			default:;
-		}
+	
 	}
 	
 	protected function _parseMasterPage($content){
