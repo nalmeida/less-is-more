@@ -50,7 +50,7 @@ class Util {
 	}
 	
 	public function port() {
-		return ($_SERVER["SERVER_PORT"] == "80") ? "" : (":" + $_SERVER["SERVER_PORT"]);
+		return ($_SERVER["SERVER_PORT"] == "80") ? "" : (":" . $_SERVER["SERVER_PORT"]);
 	}
 	
 	public function protocol() {
