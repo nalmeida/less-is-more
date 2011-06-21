@@ -6,7 +6,7 @@ $config = array(
 	
 	"root-uploads"			=> "",
 	
-	"assets-folder"			=> "assets/",
+	"assets-folder"			=> "locales/",
 	
 	"uploads-folder"		=> "uploads/",
 	
