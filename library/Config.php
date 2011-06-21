@@ -2,6 +2,8 @@
 
 $config = array(
 	
+	"root-script"			=> "index.php",
+	
 	"root-assets"			=> "",
 	
 	"root-uploads"			=> "",

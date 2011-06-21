@@ -37,7 +37,10 @@ class CombineCss
 		$output = '';
 		
 		for ($i=0; $i < $length; $i++) {
-			$output .= file_get_contents($this->util->globalPath().'css/'.$files[$i]);
+			if($stream = fopen($this->util->globalPath().'css/'.$files[$i], 'r')){
+				$output .= stream_get_contents($stream);
+				fclose($stream);
+			}
 		}
 		
 		echo self::_parseCSS($output);
