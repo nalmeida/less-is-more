@@ -11,8 +11,8 @@
 		<meta name="robots" content="INDEX, FOLLOW" />
 
 		<link rel="shortcut icon" href="img/favicon.ico" />
-		<link rel="stylesheet" type="text/css" href="<?php echo $this->util->globalPath() ?>css/reset.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="<?php echo $this->util->globalPath() ?>css/structure.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="<?php echo $this->util->root() ?>parsed-css/reset.css|flash-structure.css" media="screen" />
+		
 	</head>
 	<body>
 		<lim:content>Master</lim:content>

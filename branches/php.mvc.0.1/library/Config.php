@@ -6,6 +6,10 @@ $config = array(
 	
 	"root-uploads"			=> "",
 	
+	"assets-folder"			=> "assets/",
+	
+	"uploads-folder"		=> "uploads/",
+	
 	"default-controller"	=> "home",
 	
 	"default-action"		=> "index",
