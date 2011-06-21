@@ -61,21 +61,8 @@ textarea{
 	background:url($root/locales/global/img/px.gif) 0 0 no-repeat;
 	
 	Use "$global/" para identificar a pasta global do site. Ex.:
-	background:url($global/img/px.gif) 0 0 no-repeat;
+	background:url($globalPath/img/px.gif) 0 0 no-repeat;
 	
 	Use "$language/" para identificar a pasta local (pt-BR, en-US, etc.) atual do site. Ex.:
-	background:url($language/img/px.gif) 0 0 no-repeat;
-	
-	É possivel criar "variáveis" no CSS:
-	
-	$colorError{red}
-	$attrFC{
-		overflow:hidden;
-		zoom:1;
-	}
-	
-	h1{
-		color:$colorError;
-		$attrFC
-	}
+	background:url($languagePath/img/px.gif) 0 0 no-repeat;	
 */
