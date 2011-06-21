@@ -7,12 +7,11 @@ class Controller{
 	protected $queryString,
 		$masterPage,
 		$config,
-		$util;
+		$util,
+		$regexTag;
 		
 	private 
 		$viewDictionary;
-	
-	const regexTag = "#<lim:([^>]*)?>(.+)?</lim:\\1>#si";
 	
 	function Controller($queryString = '') {
 		global $config;
@@ -23,6 +22,7 @@ class Controller{
 		
 		parse_str($queryString, $this->queryString);
 		
+		$this->regexTag = "#<lim:([^>]*)?>(.+)?</lim:\\1>#si";
 		$this->masterPage = $config["default-master-page"];
 		$this->config = $config;
 	}
@@ -42,7 +42,6 @@ class Controller{
 	
 	private function _createContent($maches){
 		$this->viewDictionary[$maches[1]] = $maches[2];
-		// echo "maches[1] = $maches[1] => maches[2] =$maches[2]";
 	}
 	
 	private function _replaceContent($maches){
@@ -57,12 +56,12 @@ class Controller{
 	
 	protected function _parseView($content){
 		$this->viewDictionary = array();
-		preg_replace_callback(self::regexTag, array(&$this, "_createContent"), $content);
+		preg_replace_callback($this->regexTag, array(&$this, "_createContent"), $content);
 	
 	}
 	
 	protected function _parseMasterPage($content){
-		return preg_replace_callback(self::regexTag, array(&$this, "_replaceContent"), $content);
+		return preg_replace_callback($this->regexTag, array(&$this, "_replaceContent"), $content);
 	}
 	
 	protected function _getMasterPage($content){

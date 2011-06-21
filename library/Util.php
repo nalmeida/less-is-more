@@ -25,8 +25,8 @@ class Util {
 		self::language("pt-BR");
 		self::host($_SERVER["SERVER_NAME"]);
 		
-		self::assetsRoot($config["root-assets"] ? $config["root-assets"] : self::root() . "locales/");
-		self::uploadRoot($config["root-uploads"] ? $config["root-uploads"] : self::assetsRoot() . "uploads/");
+		self::assetsRoot($config["root-assets"] ? $config["root-assets"] : self::root() . $config["assets-folder"]);
+		self::uploadRoot($config["root-uploads"] ? $config["root-uploads"] : self::assetsRoot() . $config["uploads-folder"]);
 		self::globalUploadPath(self::uploadRoot() . 'global/');
 		self::languageUploadPath(self::uploadRoot() . self::language() . '/' );
 	}
