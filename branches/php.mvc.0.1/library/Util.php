@@ -17,11 +17,12 @@ class Util {
 		$_uploadRoot,
 		$_globalUploadPath,
 		$_languageUploadPath,
-		$rawUrl;
+		$_rootScript;
 	
 	private function Util(){
 		global $config;
 		
+		$this->_rootScript = $config["root-script"];
 		self::language("pt-BR");
 		self::host($_SERVER["SERVER_NAME"]);
 		
@@ -98,8 +99,13 @@ class Util {
 	}
 	
 	public function root(){
-		return rtrim($this->protocol() . "://" . $this->_host . $this->port()) . BASEPATH . "/";
+		return rtrim($this->protocol() . "://" . $this->_host . $this->port(), "/") . BASEPATH . "/";
 	}
+	
+	public function appRoot($path = '') {
+		return rtrim(self::root() . $this->_rootScript, "/") . "/";
+	}
+	
 	
 	public function globalPath(){
 		return self::assetsRoot() . "global/";
