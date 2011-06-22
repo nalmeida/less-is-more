@@ -17,4 +17,12 @@ if ($library_dir){
 
 require_once(CONTROLLER_PATH . "Controller.php");
 
-require_once("init".EXT);
+$app =& App::getInstance();
+
+$controller = $app->processRequest(BASEPATH, $basename)->getController();
+
+if(!$controller){
+	$app->getDefaultView();
+}else{
+	$app->getAction($controller);
+}
