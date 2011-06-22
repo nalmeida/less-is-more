@@ -20,7 +20,7 @@ class App {
 		global $config;
 		
 		$this->config = $config;
-		$this->combineCss =& CombineCss::getInstance();
+		//$this->combineCss =& CombineCss::getInstance();
 	}
 	
 	public static function getInstance() {
@@ -47,13 +47,7 @@ class App {
 	}
 	
 	public function getController(){
-		$parsedCss = array();
-		if($this->route[0] == 'parsed-css'){
-			$parsedCss = array_merge(array(), $this->route);
-			array_shift($parsedCss);
-			$this->combineCss->getCss($parsedCss[0], $this->parsedURL["query"]);
-			
-		}else if(file_exists($this->classPath)){
+		if(file_exists($this->classPath)){
 			require($this->classPath);
 			return new $this->className($this->parsedURL["query"]);
 		}
