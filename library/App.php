@@ -72,7 +72,7 @@ class App {
 		$this->route[1] = ($this->route[1]) ? $this->route[1] : $this->config["default-action"];
 		
 		$gerericController = new Controller($this->parsedURL["query"]);
-		$gerericController->renderView(implode("/", $this->route));
+		$gerericController->renderView(implode(SLASH, $this->route));
 	}
 	
 	public function __clone(){ trigger_error('Clone is not allowed.', E_USER_ERROR); }
