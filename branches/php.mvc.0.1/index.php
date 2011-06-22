@@ -4,6 +4,8 @@ define("ROOT_PATH", dirname(__FILE__).SLASH);
 define("EXT", ".php");
 define("BASEPATH", rtrim(str_ireplace(basename(__FILE__), '', $_SERVER['SCRIPT_NAME']), '/'));
 
+$basename = basename(__FILE__);
+
 $library_dir = @ dir(ROOT_PATH . SLASH . 'library' . SLASH);
 if ($library_dir){
 	while(($libraryFile = $library_dir->read()) !== false) {
