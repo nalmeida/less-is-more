@@ -1,4 +1,5 @@
 <?php
+
 define("SLASH", PHP_OS == 'WINNT' || PHP_OS=='WIN32' ? '\\' : '/' );
 define("ROOT_PATH", dirname(__FILE__).SLASH);
 define("EXT", ".php");
@@ -13,6 +14,8 @@ if ($library_dir){
 	}
 }
 
-require_once(CONTROLLER_PATH . "Controller.php");
+$path = ltrim($_SERVER['PATH_INFO'], '/');
 
-require_once("init".EXT);
+$combineCss =& CombineCss::getInstance();
+
+echo $combineCss->getCss($path);
