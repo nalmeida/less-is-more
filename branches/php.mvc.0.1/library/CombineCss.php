@@ -39,8 +39,11 @@ class CombineCss
 		for ($i=0; $i < $length; $i++) {
 			if(preg_match('#\.css$#', $files[$i])){
 				if($stream = fopen($this->util->globalPath().'css/'.$files[$i], 'r')){
-					$output .= stream_get_contents($stream);
+					$content = stream_get_contents($stream);
 					fclose($stream);
+					$output .= (pack("CCC",0xef,0xbb,0xbf) === substr($content, 0, 3))
+						? substr($content, 3)
+						: $content;
 				}
 			}
 		}
