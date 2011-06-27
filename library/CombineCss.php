@@ -45,6 +45,10 @@ class CombineCss
 			}
 		}
 		
+		if(substr($output, 0, 3) == pack('CCC', 239, 187, 191)) {
+			 $output = substr($output, 3);
+		}
+		
 		echo self::_parseCSS($output);
 		exit();
 	}
