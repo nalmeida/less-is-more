@@ -8,6 +8,7 @@ class Controller{
 		$masterPage,
 		$config,
 		$util,
+		$commom,
 		$regexTag;
 		
 	private 
@@ -19,6 +20,7 @@ class Controller{
 		$this->viewDictionary = array();
 		
 		$this->util =& Util::getInstance();
+		$this->commom =& Commom::getInstance();
 		
 		parse_str($queryString, $this->queryString);
 		
@@ -71,9 +73,13 @@ class Controller{
 	private function _loadContent($path){
 		if(file_exists($path)){
 			ob_start();
-				include($path);
+				if ((bool) @ini_get('short_open_tag') === false && $config['use-short-tags'] == true) {
+					echo eval('?>'.preg_replace("/;*\s*\?>/", "; ?>", str_replace('<?=', '<?php echo ', file_get_contents($path))));
+				} else {
+					include($path);
+				}
 				$fileContent = ob_get_contents();
-			ob_clean();
+			ob_end_clean();
 		}else{
 			$this->_trigger404($path);
 		}

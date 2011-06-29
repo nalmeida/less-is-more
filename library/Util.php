@@ -13,10 +13,9 @@ class Util {
 		$_port,
 		$_host,
 		$_language,
-		$_assetsRoot,
+		$_assets,
+		$_minify,
 		$_uploadRoot,
-		$_globalUploadPath,
-		$_languageUploadPath,
 		$_rootScript;
 	
 	private function Util(){
@@ -26,10 +25,9 @@ class Util {
 		self::language("pt-BR");
 		self::host($_SERVER["SERVER_NAME"]);
 		
-		self::assetsRoot($config["root-assets"] ? $config["root-assets"] : self::root() . $config["assets-folder"]);
-		self::uploadRoot($config["root-uploads"] ? $config["root-uploads"] : self::assetsRoot() . $config["uploads-folder"]);
-		self::globalUploadPath(self::uploadRoot() . 'global/');
-		self::languageUploadPath(self::uploadRoot() . self::language() . '/' );
+		self::assets(self::root() . $config["root-assets"]);
+		self::minify(self::root() . "minify.php/");
+		self::uploadRoot(self::assets() . $config["root-uploads"]);
 	}
 	
 	public static function getInstance() {
@@ -66,27 +64,19 @@ class Util {
 		}
 	}
 	
-	public function globalUploadPath($path = '') {
+	public function assets($path = '') {
 		if($path){
-			$this->_globalUploadPath = $path;
+			$this->_assets = $path;
 		}else{
-			return $this->_globalUploadPath;
+			return $this->_assets;
 		}
 	}
 	
-	public function languageUploadPath($path = '') {
+	public function minify($path = '') {
 		if($path){
-			$this->_languageUploadPath = $path;
+			$this->_minify = $path;
 		}else{
-			return $this->_languageUploadPath;
-		}
-	}
-	
-	public function assetsRoot($path = '') {
-		if($path){
-			$this->_assetsRoot = $path;
-		}else{
-			return $this->_assetsRoot;
+			return $this->_minify;
 		}
 	}
 	
@@ -104,15 +94,6 @@ class Util {
 	
 	public function appRoot($path = '') {
 		return rtrim(self::root() . $this->_rootScript, "/") . "/";
-	}
-	
-	
-	public function globalPath(){
-		return self::assetsRoot() . "global/";
-	}
-	
-	public function languagePath(){
-		return self::assetsRoot() . self::language(). "/";
 	}
 	
 	public function rawURL(){
