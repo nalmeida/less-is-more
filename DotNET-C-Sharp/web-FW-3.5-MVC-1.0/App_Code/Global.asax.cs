@@ -31,24 +31,9 @@ public class MvcApplication : System.Web.HttpApplication
         );
 
     }
-    public static void RegisterFiles()
-    {
-        
-        Minify.Minifyzer.Register("JQuery", "jquery.js");
-        Minify.Minifyzer.Register("SwfObject", "swfobject.js");
-        Minify.Minifyzer.Register("FlashStructure", "flash-structure.css");
-        Minify.Minifyzer.Register("Reset", "reset.css");
-        Minify.Minifyzer.Register("TerraJS", "capa.js", "http://s1.trrsf.com.br/metrics/js/br/");
-
-         
-        Minify.Minifyzer.Add("GaleraDoHino", "JQuery");
-        Minify.Minifyzer.Add("GaleraDoHino", "SwfObject");
-        Minify.Minifyzer.Add("GaleraDoHino", "TerraJS");
-    }
 
     protected void Application_Start()
     {
         RegisterRoutes(RouteTable.Routes);
-        RegisterFiles();
     }
 }
