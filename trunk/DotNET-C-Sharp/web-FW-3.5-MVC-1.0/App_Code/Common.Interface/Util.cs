@@ -49,6 +49,13 @@ namespace Common
 			}
 			return "/";
 		}
+		public static string NoSlash(string value)
+		{
+			if(value.Length > 0){
+				return (value[value.Length - 1].ToString() == "/" ? value.Substring(0, value.Length - 1) : value);
+			}
+			return value;
+		}
 
 		/**
 		 * @return String the project root path
