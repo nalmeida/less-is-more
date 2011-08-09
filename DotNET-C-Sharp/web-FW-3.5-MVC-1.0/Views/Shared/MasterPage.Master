@@ -38,6 +38,7 @@
 	<asp:contentplaceholder id="cphCustomHeader" runat="server" />
 </head>
 <body class="<%=Browser.getCSSClassName()%>">
+	<p><%=Config.H1%></p>
 	<asp:contentplaceholder id="cphContent" runat="server" />
 	<asp:contentplaceholder id="cphScripts" runat="server" />
 </body>

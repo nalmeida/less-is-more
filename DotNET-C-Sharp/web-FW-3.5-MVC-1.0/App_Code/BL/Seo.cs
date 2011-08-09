@@ -3,6 +3,7 @@ using System.Web;
 using System.Data;
 using System.Collections.Generic;
 using System.IO;
+using Common;
 using T = VO.Seo;
 
 
@@ -34,8 +35,15 @@ namespace BL
 			{
 				DataRow[] seo = ds.Tables["pages"].Select("url = '" + url + "'");
 
-				if (seo.Length == 0)
+				if (seo.Length == 0){ //TODO: deixar mais elegante
+					seo = ds.Tables["pages"].Select("url = '" + Util.NoSlash(url) + "'");
+				}
+				if (seo.Length == 0){
+					seo = ds.Tables["pages"].Select("url = '" + Util.Slash(url) + "'");
+				}
+				if (seo.Length == 0){
 					seo = ds.Tables["pages"].Select("url = '/'");
+				}
 
 				foreach (DataRow row in seo)
 				{
@@ -52,7 +60,7 @@ namespace BL
 
 		public T Obter()
 		{
-			return Obter(Common.Util.Slash(Common.Util.RawPath));
+			return Obter(Common.Util.RawPath);
 		}
 	   
 
@@ -76,7 +84,7 @@ namespace BL
 						return true;
 				}
 				else
-					return false;				 
+					return false;
 			}
 			catch
 			{

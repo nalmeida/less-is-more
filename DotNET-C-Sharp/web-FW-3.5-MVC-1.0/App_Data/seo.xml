@@ -10,7 +10,7 @@
 		<priority>2</priority>
 	</pages>
 	<pages>
-		<url>/teste/</url>
+		<url>/teste</url>
 		<h1>H1 teste</h1>
 		<description>Modulo Padrão description</description>
 		<keywords>Módulo Padrão keyword</keywords>
