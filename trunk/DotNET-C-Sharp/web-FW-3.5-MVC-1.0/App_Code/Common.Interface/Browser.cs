@@ -174,6 +174,15 @@ namespace Common{
 			return "";
 		}
 
+		/**
+		 * Writes a css class-name to be used for cross-browser styles. Ex.: "msie msie6"
+		 */
+		public static String getCSSClassName(){
+			String[] ver = getVersion().Split(new char[] {'.'});
+			String browserName = getName();
+			return browserName+" "+browserName+""+ver[0];
+		}
+		
 		private static void write(String value){
 			HttpContext.Current.Response.Write(value+"<br />");
 		}

@@ -23,20 +23,25 @@
 		<section name="dataConfiguration" type="Microsoft.Practices.EnterpriseLibrary.Data.Configuration.DatabaseSettings, Microsoft.Practices.EnterpriseLibrary.Data"/>
 	</configSections>
 	<appSettings>
-    <add key="MinifyEncryptKey" value="Nanicolina"/>
 		<!-- 
 			HARD PATHS
 		-->
-		<!-- override Common.Util.GlobalPath and Common.Util.LanguagePath "root", if null, uses Common.Util.Root -->
+		<!-- override Common.Util.AssetsRoot -->
 		<!-- <add key="ROOT-ASSETS" value="http://ROOT-ASSETS/"/>  -->
 
-		<!-- override Common.Util.GlobalUploadPath and Common.Util.LanguageUploadPath "root", if null, uses Common.Util.AssetsRoot -->
+		<!-- override Common.Util.AssetsRoot for upload assets -->
 		<!-- <add key="ROOT-UPLOADS" value="http://ROOT-UPLOADS/"/> -->
+
+		<add key="ASSETS-FOLDER" value=""/> <!-- if null or empty, "assets" is used -->
+		<add key="CURRENT-VERSION" value=""/>
+		<add key="IS-LOCAL" value=""/>
+		<add key="BPC" value=""/>
+
 	</appSettings>
 
   <connectionStrings>
     <remove name="Sql" />
-    <add    name="Sql" providerName="System.Data.SqlClient" connectionString="Data Source=FDES\SQL2005;Initial Catalog=;User Id=sa;Password=159753;" />
+    <add    name="Sql" providerName="System.Data.SqlClient" connectionString="Data Source=[SOURCE];Initial Catalog=;User Id=[USER];Password=[PASSWORD];" />
   </connectionStrings>
   <dataConfiguration defaultDatabase="Sql"/>
 
@@ -60,7 +65,7 @@
   <system.net>
 	<mailSettings>
 		<smtp>
-			<network host="172.16.18.4"/>
+			<network host="127.0.0.1"/>
 		</smtp>
 	</mailSettings>
   </system.net>
@@ -82,10 +87,11 @@
           <add namespace="System.Web.Routing"/>
           <add namespace="System.Linq"/>
           <add namespace="System.Collections.Generic"/>
+          <add namespace="Common"/>
         </namespaces>
       </pages>
       <httpHandlers>
-        <add path="minify.aspx" type="Common.Minify" verb="*"/>
+        <add path="assets/minify.aspx" type="Common.MinifyHandler" verb="*"/>
         <add path="sitemap.xml" type="Common.Sitemap" verb="*"/>
         <add path="locales/global/img/fake_image.aspx" type="Common.FakeImage" verb="*"/>
         <remove verb="*" path="*.asmx"/>
@@ -139,6 +145,8 @@
 			<add name="ScriptResource" preCondition="integratedMode" verb="GET,HEAD" path="ScriptResource.axd" type="System.Web.Handlers.ScriptResourceHandler, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
 			<add name="MvcHttpHandler" preCondition="integratedMode" verb="*" path="*.mvc" type="System.Web.Mvc.MvcHttpHandler, System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
 			<add name="UrlRoutingHandler" preCondition="integratedMode" verb="*" path="UrlRouting.axd" type="System.Web.HttpForbiddenHandler, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+			<add name="minify" preCondition="integratedMode" path="assets/minify.aspx" type="Common.MinifyHandler" verb="*"/>
+
 		</handlers>
 	</system.webServer>
 </configuration>

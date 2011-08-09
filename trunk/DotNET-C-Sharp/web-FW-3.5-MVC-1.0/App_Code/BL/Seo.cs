@@ -52,42 +52,42 @@ namespace BL
 
 		public T Obter()
 		{
-			return Obter(Common.Util.RawUrl);
+			return Obter(Common.Util.Slash(Common.Util.RawPath));
 		}
-       
+	   
 
 		private bool PopulaDataSet()
 		{
 
-            try
-            {
-                //tenta carregar o objeto de SEO primeiramente do cache
-                if (HttpContext.Current.Cache["SEO"] != null)
-                {
-                    ds = (DataSet)HttpContext.Current.Cache["SEO"];
-                    return true;
-                }
-                else if (File.Exists(HttpContext.Current.Server.MapPath("~/App_Data/seo.xml")))
-                {
-                        ds = new DataSet();
-                        ds.ReadXml(HttpContext.Current.Server.MapPath("~/App_Data/seo.xml"));
-                        //grava os dados em cache, que expira quando há alterações no arquivo
-                        HttpContext.Current.Cache.Add("SEO", ds, new System.Web.Caching.CacheDependency(HttpContext.Current.Server.MapPath("~/App_Data/seo.xml")), System.Web.Caching.Cache.NoAbsoluteExpiration, System.Web.Caching.Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.Normal, null);
-                        return true;
-                }
-                else
-                    return false;                
-            }
-            catch
-            {
-                return false;
-            }
+			try
+			{
+				//tenta carregar o objeto de SEO primeiramente do cache
+				if (HttpContext.Current.Cache["SEO"] != null)
+				{
+					ds = (DataSet)HttpContext.Current.Cache["SEO"];
+					return true;
+				}
+				else if (File.Exists(HttpContext.Current.Server.MapPath("~/App_Data/seo.xml")))
+				{
+						ds = new DataSet();
+						ds.ReadXml(HttpContext.Current.Server.MapPath("~/App_Data/seo.xml"));
+						//grava os dados em cache, que expira quando há alterações no arquivo
+						HttpContext.Current.Cache.Add("SEO", ds, new System.Web.Caching.CacheDependency(HttpContext.Current.Server.MapPath("~/App_Data/seo.xml")), System.Web.Caching.Cache.NoAbsoluteExpiration, System.Web.Caching.Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.Normal, null);
+						return true;
+				}
+				else
+					return false;				 
+			}
+			catch
+			{
+				return false;
+			}
 
 		}
-    
-        internal void LoadMetaTags()
-        {
- 	        throw new NotImplementedException();
-        }
-    }
+	
+		internal void LoadMetaTags()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
