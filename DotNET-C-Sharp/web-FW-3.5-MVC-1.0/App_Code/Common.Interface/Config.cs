@@ -20,8 +20,8 @@ namespace Common
 	public static partial class Config
 	{
 		private static VO.Seo getSeo()
-        {
-            return Singleton<BL.Seo>.Instancia.Obter();
+		{
+			return Singleton<BL.Seo>.Instancia.Obter();
 		}
 		/**
 		 * Common.Config.Title
@@ -84,23 +84,23 @@ namespace Common
 			}
 		}
 
-        public static string MinifyEncryptKey
-        {
-            get 
-            {
-                return RetornarConfig("MinifyEncryptKey");
-            }
-        }
+		public static string MinifyEncryptKey
+		{
+			get 
+			{
+				return RetornarConfig("MinifyEncryptKey");
+			}
+		}
 
-        private static string RetornarConfig(string config)
-        {
-            string configvalue = ConfigurationManager.AppSettings.Get(config);
-            if (string.IsNullOrEmpty(config))
-            {
-                throw new ConfigurationErrorsException("A chave " + config + " não está definida. " +
-                "No Web.Config, crie dentro de AppSetings a chave " + config);
-            }
-            return configvalue;
-        }
+		private static string RetornarConfig(string config)
+		{
+			string configvalue = ConfigurationManager.AppSettings.Get(config);
+			if (string.IsNullOrEmpty(config))
+			{
+				throw new ConfigurationErrorsException("A chave " + config + " não está definida. " +
+				"No Web.Config, crie dentro de AppSetings a chave " + config);
+			}
+			return configvalue;
+		}
 	}
 }

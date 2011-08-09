@@ -11,29 +11,28 @@ using System.Web.Routing;
 
 public class MvcApplication : System.Web.HttpApplication
 {
-    public static void RegisterRoutes(RouteCollection routes)
-    {
-        routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-        routes.IgnoreRoute("minify.aspx");
-        routes.IgnoreRoute("fakeimage.aspx");
-        routes.IgnoreRoute("sitemap.xml");
-        routes.IgnoreRoute("alphaminify.aspx");
-        
+	public static void RegisterRoutes(RouteCollection routes)
+	{
+		routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+		routes.IgnoreRoute("assets/minify.aspx");
+		routes.IgnoreRoute("fakeimage.aspx");
+		routes.IgnoreRoute("sitemap.xml");
+		
 
-        /* Novas páginas aqui */
+		/* Novas páginas aqui */
 
-        /* Fim das páginas novas */
+		/* Fim das páginas novas */
 
-        routes.MapRoute(
-            "Default",                                              // Route name
-            "{controller}/{action}/{id}",                           // URL with parameters
-            new { controller = "Default", action = "Index", id = "" }  // Parameter defaults
-        );
+		routes.MapRoute(
+			"Default",													// Route name
+			"{controller}/{action}/{id}",								// URL with parameters
+			new { controller = "Default", action = "Index", id = "" }  // Parameter defaults
+		);
 
-    }
+	}
 
-    protected void Application_Start()
-    {
-        RegisterRoutes(RouteTable.Routes);
-    }
+	protected void Application_Start()
+	{
+		RegisterRoutes(RouteTable.Routes);
+	}
 }

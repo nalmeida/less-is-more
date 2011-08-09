@@ -6,12 +6,12 @@ using System.Web.Mvc;
 
 namespace Controllers
 {
-    [HandleError]
-    public class DefaultController : Controller
-    {
-        public ActionResult Index()
-        {
-            return View();   
-        }
-    }
+	[HandleError]
+	public class DefaultController : Controller
+	{
+		public ActionResult Index()
+		{
+			return View();	 
+		}
+	}
 }

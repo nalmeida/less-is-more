@@ -53,10 +53,10 @@ namespace Common
 
 		private Color stringToColor(string paramValue)
 		{
-		    int red = System.Int32.Parse(paramValue.Substring(0, (2) - (0)), System.Globalization.NumberStyles.AllowHexSpecifier);
-   			int green = System.Int32.Parse(paramValue.Substring(2, (4) - (2)), System.Globalization.NumberStyles.AllowHexSpecifier);
-   			int blue = System.Int32.Parse(paramValue.Substring(4, (6) - (4)), System.Globalization.NumberStyles.AllowHexSpecifier);
-		    return Color.FromArgb(red, green, blue);
+			int red = System.Int32.Parse(paramValue.Substring(0, (2) - (0)), System.Globalization.NumberStyles.AllowHexSpecifier);
+			int green = System.Int32.Parse(paramValue.Substring(2, (4) - (2)), System.Globalization.NumberStyles.AllowHexSpecifier);
+			int blue = System.Int32.Parse(paramValue.Substring(4, (6) - (4)), System.Globalization.NumberStyles.AllowHexSpecifier);
+			return Color.FromArgb(red, green, blue);
 		}
 
 		public void ProcessRequest(HttpContext context)
@@ -64,63 +64,62 @@ namespace Common
 			Request = context.Request;
 			Response = context.Response;
 			Server = context.Server;
-    
-   			string qQuad = Request.QueryString["quad"];
-   			string qWidth = Request.QueryString["width"];
-   			string qHeight = Request.QueryString["height"];
-   			string qColor = Request.QueryString["color"];
-    
-   			if (!(qQuad == null || qQuad == string.Empty))
+
+			string qQuad = Request.QueryString["quad"];
+			string qWidth = Request.QueryString["width"];
+			string qHeight = Request.QueryString["height"];
+			string qColor = Request.QueryString["color"];
+
+			if (!(qQuad == null || qQuad == string.Empty))
 			{
-       			qWidth = qQuad;
-       			qHeight = qQuad;
-   			}
-   			else 
+				qWidth = qQuad;
+				qHeight = qQuad;
+			}
+			else 
 			{
-       			if (qWidth == null || qWidth == string.Empty) 
+				if (qWidth == null || qWidth == string.Empty) 
 				{
-           			qWidth = "100";
-       			}
-		        
-       			if (qHeight == null || qHeight == string.Empty) 
+					qWidth = "100";
+				}
+		    
+				if (qHeight == null || qHeight == string.Empty) 
 				{
-           			qHeight = "100";
-       			}
-   			}
-    
-   			if (qColor == null || qColor == string.Empty || qColor.Length != 6) 
+					qHeight = "100";
+				}
+			}
+
+			if (qColor == null || qColor == string.Empty || qColor.Length != 6) 
 			{
-       			qColor = "E4E4E4";
-   			}
-    
-   			int letterWidth = 5;
-   			int letterHeight = 9;
-   			int fontSize = 9;
-    
-   			int width = Convert.ToInt32(qWidth);
-   			int height = Convert.ToInt32(qHeight);
-    
-		    Bitmap oBitmap = new Bitmap(width, height);
-    
-   			Graphics oGraphic = Graphics.FromImage(oBitmap);
-    
-   			string sText = width + "x" + height;
-   			string sFont = "Courier";
-   			Color ccolor = stringToColor(qColor);
-    
-   			SolidBrush oBrush = new SolidBrush(ccolor);
-   			SolidBrush oBrushWrite = new SolidBrush(Color.Black);
-    
-   			oGraphic.FillRectangle(oBrush, 0, 0, width, height);
-    
-   			Font oFont = new Font(sFont, fontSize, FontStyle.Regular, GraphicsUnit.Pixel);
-   			PointF oPoint = new PointF((int.Parse(qWidth) / 2) - ((sText.Length * letterWidth) / 2), (int.Parse(qHeight) / 2) - (letterHeight / 2));
-    
-   			oGraphic.DrawString(sText, oFont, oBrushWrite, oPoint);
-    
-   			Response.ContentType = "image/jpeg";
-   			oBitmap.Save(Response.OutputStream, ImageFormat.Jpeg);
-    
+				qColor = "E4E4E4";
+			}
+
+			int letterWidth = 5;
+			int letterHeight = 9;
+			int fontSize = 9;
+
+			int width = Convert.ToInt32(qWidth);
+			int height = Convert.ToInt32(qHeight);
+
+			Bitmap oBitmap = new Bitmap(width, height);
+
+			Graphics oGraphic = Graphics.FromImage(oBitmap);
+
+			string sText = width + "x" + height;
+			string sFont = "Courier";
+			Color ccolor = stringToColor(qColor);
+
+			SolidBrush oBrush = new SolidBrush(ccolor);
+			SolidBrush oBrushWrite = new SolidBrush(Color.Black);
+
+			oGraphic.FillRectangle(oBrush, 0, 0, width, height);
+
+			Font oFont = new Font(sFont, fontSize, FontStyle.Regular, GraphicsUnit.Pixel);
+			PointF oPoint = new PointF((int.Parse(qWidth) / 2) - ((sText.Length * letterWidth) / 2), (int.Parse(qHeight) / 2) - (letterHeight / 2));
+
+			oGraphic.DrawString(sText, oFont, oBrushWrite, oPoint);
+
+			Response.ContentType = "image/jpeg";
+			oBitmap.Save(Response.OutputStream, ImageFormat.Jpeg);
 		}
 		
 		public bool IsReusable
